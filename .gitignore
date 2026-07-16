@@ -1,6 +1,9 @@
 # Temporary working files — never committed
 _temp/
 
+# Plans (work-in-progress, not official docs)
+docs/plans/
+
 # OS
 .DS_Store
 Thumbs.db
