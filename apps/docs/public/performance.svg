@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1494px" height="813px" viewBox="0 0 1494 813" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Artboard</title>
+    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect fill="#FFFFFF" x="0" y="0" width="1494" height="813"></rect>
+        <rect id="Rectangle" fill="#878787" x="95" y="284" width="283" height="104"></rect>
+        <rect id="Rectangle-Copy" fill="#CECECE" x="378" y="284" width="322" height="104"></rect>
+        <rect id="Rectangle-Copy-2" fill="#0055FF" x="700" y="284" width="322" height="104"></rect>
+        <rect id="Rectangle-Copy-3" fill="#00C6FF" x="1022" y="284" width="322" height="104"></rect>
+        <text id="Server-side-optimiza" font-family="-apple-system, BlinkMacSystemFont" font-size="24" font-weight="400" fill="#000000">
+            <tspan x="252" y="197">Server-side optimizations</tspan>
+        </text>
+        <text id="The-strategy-of-web" font-family="-apple-system, BlinkMacSystemFont" font-size="36" font-weight="400" fill="#000000">
+            <tspan x="454" y="98">The strategy of web performance</tspan>
+        </text>
+        <text id="Frontend-optimizatio" font-family="-apple-system, BlinkMacSystemFont" font-size="24" font-weight="400" fill="#000000">
+            <tspan x="921" y="197">Frontend optimizations</tspan>
+        </text>
+        <text id="Servers" font-family="-apple-system, BlinkMacSystemFont" font-size="24" font-weight="400" fill="#000000">
+            <tspan x="198" y="253">Servers</tspan>
+        </text>
+        <text id="Backend" font-family="-apple-system, BlinkMacSystemFont" font-size="24" font-weight="400" fill="#000000">
+            <tspan x="495" y="253">Backend</tspan>
+        </text>
+        <text id="Resources" font-family="-apple-system, BlinkMacSystemFont" font-size="24" font-weight="400" fill="#000000">
+            <tspan x="817" y="253">Resources</tspan>
+        </text>
+        <text id="Rendering" font-family="-apple-system, BlinkMacSystemFont" font-size="24" font-weight="400" fill="#000000">
+            <tspan x="1139" y="253">Rendering</tspan>
+        </text>
+        <text id="0ms" font-family="-apple-system, BlinkMacSystemFont" font-size="36" font-weight="400" fill="#000000">
+            <tspan x="61" y="459">0ms</tspan>
+        </text>
+        <text id="497ms" font-family="-apple-system, BlinkMacSystemFont" font-size="36" font-weight="400" fill="#000000">
+            <tspan x="1296" y="450">497ms</tspan>
+        </text>
+        <text id="45,70ms" font-family="-apple-system, BlinkMacSystemFont" font-size="16" font-weight="400" fill="#000000">
+            <tspan x="700" y="431">45,70ms</tspan>
+        </text>
+        <text id="300ms" font-family="-apple-system, BlinkMacSystemFont" font-size="16" font-weight="400" fill="#000000">
+            <tspan x="973" y="431">300ms</tspan>
+        </text>
+        <text id="First-Content-Paint" font-family="-apple-system, BlinkMacSystemFont" font-size="16" font-weight="400" fill="#000000" fill-opacity="0.531960227">
+            <tspan x="1030" y="321">First</tspan>
+            <tspan x="1030" y="342">Content</tspan>
+            <tspan x="1030" y="363">Paint</tspan>
+        </text>
+        <text id="Caching-Compression" font-family="-apple-system, BlinkMacSystemFont" font-size="16" font-weight="400" fill="#000000">
+            <tspan x="94" y="504">Caching</tspan>
+            <tspan x="94" y="525">Compression</tspan>
+            <tspan x="94" y="546">Load balancing</tspan>
+        </text>
+        <text id="Database-optimizatio" font-family="-apple-system, BlinkMacSystemFont" font-size="16" font-weight="400" fill="#000000">
+            <tspan x="378" y="504">Database optimizations</tspan>
+            <tspan x="378" y="525">API optimizations</tspan>
+            <tspan x="378" y="546">Asynchronous Processing</tspan>
+            <tspan x="378" y="567">Code optimization</tspan>
+            <tspan x="378" y="588">Caching</tspan>
+        </text>
+        <text id="Resources-required-S" font-family="-apple-system, BlinkMacSystemFont" font-size="16" font-weight="400" fill="#000000">
+            <tspan x="700" y="504">Resources required</tspan>
+            <tspan x="700" y="525">Small bundling</tspan>
+            <tspan x="700" y="546">Reduce hits to the server</tspan>
+            <tspan x="700" y="567">Reduce file sizes</tspan>
+            <tspan x="700" y="588">Optimize images</tspan>
+            <tspan x="700" y="609">Compression</tspan>
+        </text>
+        <text id="Avoid-re-renders-Fun" font-family="-apple-system, BlinkMacSystemFont" font-size="16" font-weight="400" fill="#000000">
+            <tspan x="1022" y="504">Avoid re-renders</tspan>
+            <tspan x="1022" y="525">Functional CSS</tspan>
+            <tspan x="1022" y="546">Load resources when viewed</tspan>
+        </text>
+        <text id="First-Full-Render" font-family="-apple-system, BlinkMacSystemFont" font-size="16" font-weight="400" fill="#000000" fill-opacity="0.531960227">
+            <tspan x="1307.544" y="321">First</tspan>
+            <tspan x="1314.072" y="342">Full</tspan>
+            <tspan x="1289.016" y="363">Render</tspan>
+        </text>
+        <path id="Line" d="M1273,441 L1282,445.5 L1273,450 L1273,446 L147,446 L147,445 L1273,445 L1273,441 Z" fill="#FFFFFF" fill-rule="nonzero"></path>
+        <rect id="Rectangle" fill="#F9F9F9" x="741.410256" y="631" width="240.179487" height="116"></rect>
+        <rect id="Rectangle-Copy-4" fill="#FFC1C1" x="1104.41026" y="631" width="240.179487" height="116"></rect>
+        <rect id="Rectangle-Copy-4" fill="#B01A1A" x="1113.58974" y="640" width="40" height="20"></rect>
+        <rect id="Rectangle-Copy-6" fill="#B01A1A" x="1113.58974" y="665" width="168" height="41"></rect>
+        <rect id="Rectangle-Copy-7" fill="#B01A1A" x="1289.58974" y="665" width="46" height="82"></rect>
+        <rect id="Rectangle-Copy-8" fill="#B01A1A" x="1113.58974" y="715" width="46" height="32"></rect>
+        <rect id="Rectangle-Copy-9" fill="#B01A1A" x="1235.58974" y="715" width="46" height="32"></rect>
+        <rect id="Rectangle-Copy-10" fill="#B01A1A" x="1174.58974" y="715" width="46" height="32"></rect>
+        <rect id="Rectangle-Copy-5" fill="#B01A1A" x="1243.58974" y="640" width="92" height="7"></rect>
+        <text id="We-only-see-a-white" font-family="-apple-system, BlinkMacSystemFont" font-size="16" font-weight="400" fill="#FFFFFF">
+            <tspan x="734" y="771">We only see a white page</tspan>
+        </text>
+        <text id="We-see-some-content" font-family="-apple-system, BlinkMacSystemFont" font-size="16" font-weight="400" fill="#FFFFFF">
+            <tspan x="1154" y="771">We see some content</tspan>
+        </text>
+    </g>
+</svg>

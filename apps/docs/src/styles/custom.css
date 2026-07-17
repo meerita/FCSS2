@@ -1,0 +1,9 @@
+/** @format */
+
+.c-color-red-on-hover:hover {
+  color: red;
+}
+
+.c-kerning {
+  letter-spacing: -0.015em;
+}
