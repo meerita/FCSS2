@@ -19,7 +19,8 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@fcss/spec": ["packages/spec/src/index.ts"]
+      "@fcss/spec": ["packages/spec/src/index.ts"],
+      "@fcss/language-service": ["packages/language-service/src/index.ts"]
     }
   }
 }

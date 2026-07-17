@@ -187,7 +187,7 @@ export function activate(context: vscode.ExtensionContext): void {
   refreshActive();
 
   // Manifest watch and reload
-  const stopWatch = watchManifest(manifestPath, (newEntries) => {
+  const stopWatch = watchManifest(manifestPath, (newEntries: ManifestEntry[]) => {
     entries = newEntries;
     index = createManifestIndex(newEntries);
     if (statusBarItem) {
