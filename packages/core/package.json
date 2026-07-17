@@ -4,7 +4,13 @@
   "private": false,
   "type": "module",
   "description": "Functional CSS utility library — full set, framework-agnostic, purge-ready",
-  "keywords": ["css", "utility", "functional-css", "fcss", "purge"],
+  "keywords": [
+    "css",
+    "utility",
+    "functional-css",
+    "fcss",
+    "purge"
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -40,7 +46,9 @@
     "README.md",
     "LICENSE"
   ],
-  "sideEffects": ["dist/**/*.css"],
+  "sideEffects": [
+    "dist/**/*.css"
+  ],
   "scripts": {
     "generate": "tsc -p tsconfig.scripts.json && node dist/scripts/generate.js",
     "build": "tsc --build && pnpm run generate",

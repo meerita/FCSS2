@@ -93,9 +93,9 @@ describe('manifest loading', () => {
       cwd: tmpDir,
     });
 
-    await expect(
-      postcss([plugin]).process(css, { from: undefined }),
-    ).rejects.toThrow(/Cannot load manifest/);
+    await expect(postcss([plugin]).process(css, { from: undefined })).rejects.toThrow(
+      /Cannot load manifest/,
+    );
   });
 });
 
@@ -194,9 +194,13 @@ describe('safelist', () => {
     if (!entry || !unused) return;
 
     const css = `${unused.selector} { display: none }`;
-    const result = await processWithPlugin(css, { 'empty.html': '<div></div>' }, {
-      exact: [unused.className],
-    });
+    const result = await processWithPlugin(
+      css,
+      { 'empty.html': '<div></div>' },
+      {
+        exact: [unused.className],
+      },
+    );
 
     expect(result).toContain(unused.selector);
   });
@@ -210,9 +214,13 @@ describe('safelist', () => {
     const firstTwo = displayEntries.slice(0, 2);
     const css = firstTwo.map((e) => `${e.selector} { display: flex }`).join('\n');
 
-    const result = await processWithPlugin(css, { 'empty.html': '<div></div>' }, {
-      patterns: [/^display--/],
-    });
+    const result = await processWithPlugin(
+      css,
+      { 'empty.html': '<div></div>' },
+      {
+        patterns: [/^display--/],
+      },
+    );
 
     for (const entry of firstTwo) {
       expect(result).toContain(entry.selector);
@@ -254,9 +262,7 @@ describe('purge report', () => {
     });
 
     // Should not throw
-    await expect(
-      postcss([plugin]).process(css, { from: undefined }),
-    ).resolves.toBeDefined();
+    await expect(postcss([plugin]).process(css, { from: undefined })).resolves.toBeDefined();
   });
 });
 

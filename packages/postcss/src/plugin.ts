@@ -46,9 +46,7 @@ function loadManifest(manifestPath: string): ManifestEntry[] {
   try {
     parsed = JSON.parse(raw);
   } catch (err) {
-    throw new Error(
-      `[@fcss/postcss] Invalid JSON in manifest "${manifestPath}": ${String(err)}.`,
-    );
+    throw new Error(`[@fcss/postcss] Invalid JSON in manifest "${manifestPath}": ${String(err)}.`);
   }
 
   if (!Array.isArray(parsed)) {
@@ -187,11 +185,7 @@ const fcssPostcss: PluginCreator<FcssPostcssOptions> = (options?: FcssPostcssOpt
         };
 
         if (report === 'json' && options.reportPath) {
-          fs.writeFileSync(
-            options.reportPath,
-            JSON.stringify(purgeReport, null, 2) + '\n',
-            'utf8',
-          );
+          fs.writeFileSync(options.reportPath, JSON.stringify(purgeReport, null, 2) + '\n', 'utf8');
         } else {
           const reductionPct =
             sourceSizeBytes > 0
