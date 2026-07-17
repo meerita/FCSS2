@@ -13,10 +13,14 @@
   },
   "scripts": {
     "build": "tsc --build",
-    "typecheck": "tsc --noEmit",
-    "test": "vitest run --passWithNoTests"
+    "typecheck": "tsc -b --pretty false",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "fast-glob": "^3.3.3"
   },
   "devDependencies": {
+    "@types/node": "^22.0.0",
     "typescript": "catalog:",
     "vitest": "catalog:"
   }

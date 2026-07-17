@@ -78,6 +78,16 @@ importers:
         specifier: 5.1.6
         version: 5.1.6
 
+  examples/vanilla:
+    dependencies:
+      '@fcss/core':
+        specifier: workspace:*
+        version: link:../../packages/core
+    devDependencies:
+      vitest:
+        specifier: 'catalog:'
+        version: 4.1.10(@types/node@22.20.1)(vite@6.4.3(@types/node@22.20.1))
+
   packages/angular:
     devDependencies:
       typescript:
@@ -97,7 +107,20 @@ importers:
         version: 4.1.10(@types/node@22.20.1)(vite@6.4.3(@types/node@22.20.1))
 
   packages/core:
+    dependencies:
+      '@fcss/spec':
+        specifier: workspace:*
+        version: link:../spec
     devDependencies:
+      '@fcss/generator':
+        specifier: workspace:*
+        version: link:../generator
+      '@types/node':
+        specifier: ^22.0.0
+        version: 22.20.1
+      postcss:
+        specifier: ^8.4.0
+        version: 8.5.19
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
@@ -155,7 +178,20 @@ importers:
         version: 4.1.10(@types/node@22.20.1)(vite@6.4.3(@types/node@22.20.1))
 
   packages/postcss:
+    dependencies:
+      '@fcss/scanner':
+        specifier: workspace:*
+        version: link:../scanner
+      postcss:
+        specifier: ^8.4.0
+        version: 8.5.19
     devDependencies:
+      '@fcss/core':
+        specifier: workspace:*
+        version: link:../core
+      '@types/node':
+        specifier: ^22.0.0
+        version: 22.20.1
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
@@ -164,7 +200,14 @@ importers:
         version: 4.1.10(@types/node@22.20.1)(vite@6.4.3(@types/node@22.20.1))
 
   packages/scanner:
+    dependencies:
+      fast-glob:
+        specifier: ^3.3.3
+        version: 3.3.3
     devDependencies:
+      '@types/node':
+        specifier: ^22.0.0
+        version: 22.20.1
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
@@ -3834,7 +3877,7 @@ snapshots:
       eslint: 8.45.0
       eslint-import-resolver-node: 0.3.10
       eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.64.0(eslint@9.39.5)(typescript@5.9.3))(eslint@8.45.0))(eslint@8.45.0)
-      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@5.62.0(eslint@8.45.0)(typescript@5.1.6))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.64.0(eslint@9.39.5)(typescript@5.9.3))(eslint@8.45.0))(eslint@8.45.0))(eslint@8.45.0)
+      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@5.62.0(eslint@8.45.0)(typescript@5.1.6))(eslint-import-resolver-typescript@3.10.1)(eslint@8.45.0)
       eslint-plugin-jsx-a11y: 6.10.2(eslint@8.45.0)
       eslint-plugin-react: 7.37.5(eslint@8.45.0)
       eslint-plugin-react-hooks: 5.0.0-canary-7118f5dd7-20230705(eslint@8.45.0)
@@ -3864,7 +3907,7 @@ snapshots:
       tinyglobby: 0.2.17
       unrs-resolver: 1.12.2
     optionalDependencies:
-      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@5.62.0(eslint@8.45.0)(typescript@5.1.6))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.64.0(eslint@9.39.5)(typescript@5.9.3))(eslint@8.45.0))(eslint@8.45.0))(eslint@8.45.0)
+      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@5.62.0(eslint@8.45.0)(typescript@5.1.6))(eslint-import-resolver-typescript@3.10.1)(eslint@8.45.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -3879,7 +3922,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-import@2.32.0(@typescript-eslint/parser@5.62.0(eslint@8.45.0)(typescript@5.1.6))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.64.0(eslint@9.39.5)(typescript@5.9.3))(eslint@8.45.0))(eslint@8.45.0))(eslint@8.45.0):
+  eslint-plugin-import@2.32.0(@typescript-eslint/parser@5.62.0(eslint@8.45.0)(typescript@5.1.6))(eslint-import-resolver-typescript@3.10.1)(eslint@8.45.0):
     dependencies:
       '@rtsao/scc': 1.1.0
       array-includes: 3.1.9

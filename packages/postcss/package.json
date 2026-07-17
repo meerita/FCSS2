@@ -12,10 +12,16 @@
   },
   "scripts": {
     "build": "tsc --build",
-    "typecheck": "tsc --noEmit",
-    "test": "vitest run --passWithNoTests"
+    "typecheck": "tsc -b --pretty false",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@fcss/scanner": "workspace:*",
+    "postcss": "^8.4.0"
   },
   "devDependencies": {
+    "@fcss/core": "workspace:*",
+    "@types/node": "^22.0.0",
     "typescript": "catalog:",
     "vitest": "catalog:"
   }
