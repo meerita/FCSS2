@@ -8,16 +8,16 @@ FCSS is framework-agnostic. The core package is plain generated CSS. Framework i
 npm install @fcss/core
 ```
 
-Import the full CSS set in your entry point or HTML file:
-
-```html
-<link rel="stylesheet" href="node_modules/@fcss/core/fcss.css" />
-```
-
-Or via a bundler:
+Import the full CSS set. If you are using a bundler (Vite, Parcel, webpack):
 
 ```js
 import '@fcss/core/fcss.css';
+```
+
+If you have no build step, use the CDN:
+
+```html
+<link rel="stylesheet" href="https://unpkg.com/@fcss/core/fcss.css" />
 ```
 
 For production, run the CLI purge step to strip unused classes:
@@ -135,7 +135,7 @@ npm install @fcss/core
 ```json
 // angular.json — inside your project's architect.build.options
 {
-  "styles": ["node_modules/@fcss/core/fcss.css", "src/styles.css"]
+  "styles": ["@fcss/core/fcss.css", "src/styles.css"]
 }
 ```
 
