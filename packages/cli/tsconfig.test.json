@@ -1,12 +1,12 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "dist",
-    "rootDir": "src",
+    "outDir": "dist-test",
+    "rootDir": ".",
     "lib": ["ES2022"],
     "types": ["node"],
-    "composite": true
+    "noEmit": true
   },
-  "include": ["src"],
+  "include": ["src", "tests"],
   "references": [{ "path": "../spec" }, { "path": "../generator" }, { "path": "../scanner" }]
 }

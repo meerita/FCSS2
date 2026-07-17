@@ -4,7 +4,8 @@
     "outDir": "dist",
     "rootDir": "src",
     "lib": ["ES2022"],
-    "types": ["node"]
+    "types": ["node"],
+    "composite": true
   },
   "include": ["src"],
   "references": [{ "path": "../spec" }]

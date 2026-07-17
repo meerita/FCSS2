@@ -141,6 +141,21 @@ Select the changed packages and the bump type. The changeset file is committed w
 - Every new utility must have a semantic test verifying the generated selector.
 - Tests must not use mocks for CSS output — assert against real generated strings.
 
+## Security notes
+
+### Config file execution
+
+`fcss.config.ts` (or `.js`/`.mjs`) is executed as JavaScript at CLI runtime via dynamic
+`import()`. This is analogous to `vite.config.ts` or `postcss.config.js`. Key facts:
+
+- The config path is always resolved from the project root (`process.cwd()`), never from
+  user-supplied runtime input.
+- TypeScript config files (`.ts`) are loaded via [`jiti`](https://github.com/unjs/jiti),
+  which uses esbuild to transform the source and then dynamically imports the result. No
+  `eval()` of arbitrary strings is used at any step.
+- Never load config from untrusted sources, CI artifact uploads, or paths provided by
+  end-users at runtime.
+
 ## Code of Conduct
 
 See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
