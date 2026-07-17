@@ -3,7 +3,9 @@
 // @layer tools
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 
-import { glob } from 'fast-glob';
+import fastGlob from 'fast-glob';
+
+const { glob } = fastGlob;
 
 export interface DiscoverOptions {
   patterns: string[];

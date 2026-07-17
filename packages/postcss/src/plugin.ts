@@ -56,8 +56,22 @@ function loadManifest(manifestPath: string): ManifestEntry[] {
   return parsed as ManifestEntry[];
 }
 
+// Minifiers often strip quotes from attribute selectors: [attr='val'] → [attr=val].
+// Store both forms so the lookup succeeds on minified CSS.
+function normalizeAttrSelector(selector: string): string {
+  return selector.replace(/\[([^\]=\s]+)='([^'\]]+)'\]/g, '[$1=$2]');
+}
+
 function buildSelectorMap(manifest: ManifestEntry[]): Map<string, string> {
-  return new Map(manifest.map((e) => [e.selector, e.className]));
+  const map = new Map<string, string>();
+  for (const e of manifest) {
+    map.set(e.selector, e.className);
+    const normalized = normalizeAttrSelector(e.selector);
+    if (normalized !== e.selector) {
+      map.set(normalized, e.className);
+    }
+  }
+  return map;
 }
 
 function collectAnimationNames(decl: Declaration): string[] {
@@ -120,24 +134,42 @@ const fcssPostcss: PluginCreator<FcssPostcssOptions> = (options?: FcssPostcssOpt
       const rulesToRemove: Rule[] = [];
 
       root.walkRules((rule) => {
-        const selector = rule.selector;
-        const className = selectorMap.get(selector);
+        // rule.selectors splits comma-separated selectors into individual entries.
+        // This handles cssnano mergeRules output like ".a:hover,.b:hover{...}".
+        const individualSelectors = rule.selectors;
+        const fcssInRule = individualSelectors.filter((sel) => selectorMap.has(sel));
 
-        if (className === undefined) {
-          return;
+        if (fcssInRule.length === 0) {
+          return; // No FCSS selectors — leave untouched (base CSS, :root, etc.)
         }
 
-        totalSelectors++;
+        const nonFcssInRule = individualSelectors.filter((sel) => !selectorMap.has(sel));
+        const usedFcss: string[] = [];
 
-        if (usedClasses.has(className)) {
-          retainedSelectors++;
+        for (const sel of fcssInRule) {
+          totalSelectors++;
+          const className = selectorMap.get(sel)!;
+          if (usedClasses.has(className)) {
+            usedFcss.push(sel);
+            retainedSelectors++;
+          } else {
+            removedSelectors++;
+          }
+        }
+
+        const keepSelectors = [...usedFcss, ...nonFcssInRule];
+
+        if (keepSelectors.length === 0) {
+          rulesToRemove.push(rule);
+        } else if (keepSelectors.length < individualSelectors.length) {
+          rule.selectors = keepSelectors;
+        }
+
+        if (keepSelectors.length > 0) {
           rule.walkDecls((decl) => {
             for (const name of collectAnimationNames(decl)) usedAnimations.add(name);
             void collectVarReferences(decl);
           });
-        } else {
-          removedSelectors++;
-          rulesToRemove.push(rule);
         }
       });
 

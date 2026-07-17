@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "FcssNgAdd",
+  "title": "FCSS ng-add schematic",
+  "type": "object",
+  "properties": {
+    "project": {
+      "type": "string",
+      "description": "Name of the Angular project to configure. Defaults to the first application project in angular.json.",
+      "$default": {
+        "$source": "projectName"
+      }
+    },
+    "skipInstall": {
+      "type": "boolean",
+      "description": "Skip running the package manager install after updating package.json.",
+      "default": false
+    }
+  },
+  "additionalProperties": false
+}

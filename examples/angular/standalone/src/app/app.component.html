@@ -1,0 +1,40 @@
+<div data-testid="app-root" class="display--flex flex-direction--column padding--24 gap--16">
+  <h1 data-testid="app-title" class="font-size--2rem font-weight--700 margin--0">
+    FCSS Angular
+  </h1>
+
+  <div
+    data-testid="card"
+    class="border--1px padding--16 border-radius--4px"
+    style="border-color: var(--fcss-color-muted)"
+  >
+    <h2 data-testid="card-title" class="font-size--1.25rem font-weight--600 margin-bottom--8">
+      FCSS Card
+    </h2>
+
+    <p
+      data-testid="card-body"
+      [class.display--none]="!isExpanded"
+      class="margin--0"
+    >
+      This content uses FCSS utility classes including ARIA state and ngClass bindings.
+    </p>
+
+    <div [ngClass]="{'display--block': isExpanded, 'display--none': !isExpanded}">
+      <p class="color--var(--fcss-color-muted) margin--0 padding-top--8">Expanded content visible.</p>
+    </div>
+
+    <button
+      data-testid="card-button"
+      [attr.aria-expanded]="isExpanded"
+      class="margin-top--12 padding-top--8 padding-bottom--8 padding-left--16 padding-right--16 cursor--pointer"
+      (click)="toggle()"
+    >
+      {{ isExpanded ? 'Collapse' : 'Expand' }}
+    </button>
+  </div>
+
+  <p data-testid="fcss-info" class="font-size--0.875rem color--var(--fcss-color-muted)">
+    FCSS utility classes are purged at build time — only classes used in templates are retained.
+  </p>
+</div>

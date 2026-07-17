@@ -7,6 +7,7 @@ packages:
   - 'apps/*'
   - 'packages/*'
   - 'examples/*'
+  - 'examples/angular/*'
 
 catalog:
   typescript: ^5.5.0
