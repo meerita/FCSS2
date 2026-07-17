@@ -49,7 +49,9 @@ describe('buildResponsiveClassName', () => {
   });
 
   it('handles lg breakpoint', () => {
-    expect(buildResponsiveClassName('lg', 'flex-direction', 'column')).toBe('lg-flex-direction--column');
+    expect(buildResponsiveClassName('lg', 'flex-direction', 'column')).toBe(
+      'lg-flex-direction--column',
+    );
   });
 
   it('handles xl breakpoint', () => {
@@ -67,7 +69,9 @@ describe('buildPseudoClassName', () => {
   });
 
   it('handles focus pseudo', () => {
-    expect(buildPseudoClassName('background-color', 'blue', 'focus')).toBe('background-color--blue:focus');
+    expect(buildPseudoClassName('background-color', 'blue', 'focus')).toBe(
+      'background-color--blue:focus',
+    );
   });
 
   it('handles checked pseudo', () => {
@@ -75,7 +79,9 @@ describe('buildPseudoClassName', () => {
   });
 
   it('handles hyphenated pseudo', () => {
-    expect(buildPseudoClassName('display', 'flex', 'first-child')).toBe('display--flex:first-child');
+    expect(buildPseudoClassName('display', 'flex', 'first-child')).toBe(
+      'display--flex:first-child',
+    );
   });
 });
 

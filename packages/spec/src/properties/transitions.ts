@@ -10,7 +10,10 @@ import { FCSS_TIMING_FUNCTIONS } from '../values/timing-functions.js';
 const TRANSITION_PROPERTY_VALUES = [
   { classValue: 'none', cssValue: 'none' },
   { classValue: 'all', cssValue: 'all' },
-  { classValue: 'colors', cssValue: 'color, background-color, border-color, text-decoration-color, fill, stroke' },
+  {
+    classValue: 'colors',
+    cssValue: 'color, background-color, border-color, text-decoration-color, fill, stroke',
+  },
   { classValue: 'opacity', cssValue: 'opacity' },
   { classValue: 'shadow', cssValue: 'box-shadow' },
   { classValue: 'transform', cssValue: 'transform' },

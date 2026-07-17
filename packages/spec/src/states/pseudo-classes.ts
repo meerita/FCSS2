@@ -44,12 +44,30 @@ export const FCSS_PSEUDO_CLASSES: readonly FcssPseudoClassDefinition[] = [
 
 // Convenience subsets for property definitions.
 export const PC_INTERACTION: string[] = ['hover', 'focus', 'focus-within', 'active'];
-export const PC_WITH_LINK: string[] = ['hover', 'focus', 'focus-within', 'active', 'visited', 'link'];
+export const PC_WITH_LINK: string[] = [
+  'hover',
+  'focus',
+  'focus-within',
+  'active',
+  'visited',
+  'link',
+];
 export const PC_FORM: string[] = [
-  'hover', 'focus', 'active',
-  'enabled', 'disabled', 'checked', 'indeterminate',
-  'required', 'optional', 'valid', 'invalid',
-  'in-range', 'out-of-range', 'read-only', 'read-write',
+  'hover',
+  'focus',
+  'active',
+  'enabled',
+  'disabled',
+  'checked',
+  'indeterminate',
+  'required',
+  'optional',
+  'valid',
+  'invalid',
+  'in-range',
+  'out-of-range',
+  'read-only',
+  'read-write',
 ];
 export const PC_ALL: string[] = FCSS_PSEUDO_CLASSES.map((pc) => pc.name);
 export const PC_NONE: string[] = [];

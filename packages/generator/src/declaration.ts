@@ -18,7 +18,7 @@ function resolveCssValue(value: string, numericBehavior: FcssNumericBehavior | u
   if (value.endsWith('%')) return value;
 
   const num = parseFloat(value);
-  if (isNaN(num) || value !== String(num) && value !== `-${Math.abs(num)}`) {
+  if (isNaN(num) || (value !== String(num) && value !== `-${Math.abs(num)}`)) {
     // Non-numeric keyword (e.g. 'auto') — use as-is regardless of numericBehavior
     if (!/^-?(\d+\.?\d*|\.\d+)$/.test(value)) return value;
   }

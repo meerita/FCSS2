@@ -16,7 +16,8 @@ export const GENERATED_CONTENT_PROPERTIES: readonly FcssPropertyDefinition[] = [
     supportsResponsive: false,
     supportedPseudoClasses: PC_NONE,
     supportedAriaStates: [],
-    notes: 'The content property accepts strings, counter(), attr(), url(), and combinatorial values that cannot be expressed as a single FCSS class value; define content rules in project c- CSS instead',
+    notes:
+      'The content property accepts strings, counter(), attr(), url(), and combinatorial values that cannot be expressed as a single FCSS class value; define content rules in project c- CSS instead',
   },
   {
     property: 'quotes',
@@ -27,6 +28,7 @@ export const GENERATED_CONTENT_PROPERTIES: readonly FcssPropertyDefinition[] = [
     supportsResponsive: false,
     supportedPseudoClasses: PC_NONE,
     supportedAriaStates: [],
-    notes: 'The quotes property requires multi-value string pairs (\'"" ""\' etc.) that cannot be expressed as a single FCSS class value; define quotes rules in project c- CSS instead',
+    notes:
+      'The quotes property requires multi-value string pairs (\'"" ""\' etc.) that cannot be expressed as a single FCSS class value; define quotes rules in project c- CSS instead',
   },
 ];

@@ -5,8 +5,8 @@
 
 export function minifyCss(css: string): string {
   return css
-    .replace(/\/\*[\s\S]*?\*\//g, '')    // strip block comments
-    .replace(/\s*([{}:;,])\s*/g, '$1')   // remove spaces around punctuation
-    .replace(/\s+/g, ' ')                 // collapse remaining whitespace
+    .replace(/\/\*[\s\S]*?\*\//g, '') // strip block comments
+    .replace(/\s*([{}:;,])\s*/g, '$1') // remove spaces around punctuation
+    .replace(/\s+/g, ' ') // collapse remaining whitespace
     .trim();
 }

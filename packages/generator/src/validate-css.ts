@@ -5,7 +5,15 @@
 
 import postcss from 'postcss';
 
-const FORBIDDEN_PATTERNS = [':has(', ':is(', ':where(', '@layer', '@container', 'oklch(', 'color-mix('];
+const FORBIDDEN_PATTERNS = [
+  ':has(',
+  ':is(',
+  ':where(',
+  '@layer',
+  '@container',
+  'oklch(',
+  'color-mix(',
+];
 
 export function validateCss(css: string, label = 'CSS'): void {
   // Check for forbidden modern patterns before parsing

@@ -3,7 +3,12 @@
 // @layer domain
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 
-export type { FcssPropertyDefinition, FcssValueDefinition, FcssPropertyStatus, FcssNumericBehavior } from './types.js';
+export type {
+  FcssPropertyDefinition,
+  FcssValueDefinition,
+  FcssPropertyStatus,
+  FcssNumericBehavior,
+} from './types.js';
 export { validatePropertyDefinition } from './validate.js';
 
 // States

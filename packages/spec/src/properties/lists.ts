@@ -48,9 +48,7 @@ export const LISTS_PROPERTIES: readonly FcssPropertyDefinition[] = [
     category: 'lists',
     specification: 'CSS2.1',
     status: 'preset-only',
-    values: [
-      { classValue: 'none', cssValue: 'none' },
-    ],
+    values: [{ classValue: 'none', cssValue: 'none' }],
     supportsResponsive: false,
     supportedPseudoClasses: PC_NONE,
     supportedAriaStates: [],

@@ -24,15 +24,15 @@ describe('buildSelector', () => {
   });
 
   it('builds an ARIA attribute selector', () => {
-    expect(buildSelector('display--block:aria-expanded:true', undefined, 'aria-expanded', 'true')).toBe(
-      ".display--block\\:aria-expanded\\:true[aria-expanded='true']",
-    );
+    expect(
+      buildSelector('display--block:aria-expanded:true', undefined, 'aria-expanded', 'true'),
+    ).toBe(".display--block\\:aria-expanded\\:true[aria-expanded='true']");
   });
 
   it('builds an ARIA false selector', () => {
-    expect(buildSelector('display--none:aria-expanded:false', undefined, 'aria-expanded', 'false')).toBe(
-      ".display--none\\:aria-expanded\\:false[aria-expanded='false']",
-    );
+    expect(
+      buildSelector('display--none:aria-expanded:false', undefined, 'aria-expanded', 'false'),
+    ).toBe(".display--none\\:aria-expanded\\:false[aria-expanded='false']");
   });
 
   it('ARIA takes priority over pseudo when both provided', () => {
@@ -49,7 +49,9 @@ describe('buildSelector', () => {
   });
 
   it('builds responsive pseudo selector', () => {
-    expect(buildSelector('md-color--primary:hover', 'hover')).toBe('.md-color--primary\\:hover:hover');
+    expect(buildSelector('md-color--primary:hover', 'hover')).toBe(
+      '.md-color--primary\\:hover:hover',
+    );
   });
 
   it('builds responsive ARIA selector', () => {

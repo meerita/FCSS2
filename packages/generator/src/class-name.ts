@@ -7,7 +7,11 @@ export function buildBaseClassName(property: string, classValue: string): string
   return `${property}--${classValue}`;
 }
 
-export function buildResponsiveClassName(breakpoint: string, property: string, classValue: string): string {
+export function buildResponsiveClassName(
+  breakpoint: string,
+  property: string,
+  classValue: string,
+): string {
   return `${breakpoint}-${property}--${classValue}`;
 }
 

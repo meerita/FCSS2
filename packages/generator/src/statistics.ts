@@ -22,7 +22,10 @@ export interface FcssStatistics {
   gzipBytes: number;
 }
 
-export async function buildStatistics(result: GenerateResult, bundles: BundleOutput): Promise<FcssStatistics> {
+export async function buildStatistics(
+  result: GenerateResult,
+  bundles: BundleOutput,
+): Promise<FcssStatistics> {
   let baseUtilities = 0;
   let pseudoUtilities = 0;
   let ariaUtilities = 0;

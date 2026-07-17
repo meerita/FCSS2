@@ -151,9 +151,7 @@ export const TYPOGRAPHY_PROPERTIES: readonly FcssPropertyDefinition[] = [
     category: 'typography',
     specification: 'CSS2.1',
     status: 'supported',
-    values: [
-      { classValue: 'normal', cssValue: 'normal' },
-    ],
+    values: [{ classValue: 'normal', cssValue: 'normal' }],
     supportsResponsive: true,
     supportedPseudoClasses: PC_NONE,
     supportedAriaStates: ARIA,
@@ -164,9 +162,7 @@ export const TYPOGRAPHY_PROPERTIES: readonly FcssPropertyDefinition[] = [
     category: 'typography',
     specification: 'CSS2.1',
     status: 'supported',
-    values: [
-      { classValue: 'normal', cssValue: 'normal' },
-    ],
+    values: [{ classValue: 'normal', cssValue: 'normal' }],
     supportsResponsive: true,
     supportedPseudoClasses: PC_NONE,
     supportedAriaStates: ARIA,
@@ -251,9 +247,7 @@ export const TYPOGRAPHY_PROPERTIES: readonly FcssPropertyDefinition[] = [
     category: 'typography',
     specification: 'CSS Text Decoration Level 3',
     status: 'preset-only',
-    values: [
-      { classValue: 'currentColor', cssValue: 'currentColor' },
-    ],
+    values: [{ classValue: 'currentColor', cssValue: 'currentColor' }],
     supportsResponsive: false,
     supportedPseudoClasses: PC_WITH_LINK,
     supportedAriaStates: ARIA,
@@ -371,7 +365,8 @@ export const TYPOGRAPHY_PROPERTIES: readonly FcssPropertyDefinition[] = [
     supportsResponsive: false,
     supportedPseudoClasses: PC_NONE,
     supportedAriaStates: [],
-    notes: 'CSS Fonts Level 3 feature; supported in modern browsers but outside the base CSS3 profile',
+    notes:
+      'CSS Fonts Level 3 feature; supported in modern browsers but outside the base CSS3 profile',
   },
   {
     property: 'font-optical-sizing',
@@ -403,7 +398,8 @@ export const TYPOGRAPHY_PROPERTIES: readonly FcssPropertyDefinition[] = [
     supportsResponsive: false,
     supportedPseudoClasses: PC_NONE,
     supportedAriaStates: [],
-    notes: 'CSS Fonts Level 3 longhand for font-variant; use font-variant for the CSS3 shorthand equivalent',
+    notes:
+      'CSS Fonts Level 3 longhand for font-variant; use font-variant for the CSS3 shorthand equivalent',
   },
   {
     property: 'hanging-punctuation',

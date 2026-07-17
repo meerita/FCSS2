@@ -9,9 +9,7 @@ import { SUPPORTED_ARIA_STATES } from '../states/aria.js';
 
 const ARIA = SUPPORTED_ARIA_STATES;
 
-const GRID_LINE_VALUES = [
-  { classValue: 'auto', cssValue: 'auto' },
-];
+const GRID_LINE_VALUES = [{ classValue: 'auto', cssValue: 'auto' }];
 
 const GRID_TRACK_PRESETS = [
   { classValue: 'none', cssValue: 'none' },
@@ -32,10 +30,7 @@ export const GRID_PROPERTIES: readonly FcssPropertyDefinition[] = [
     category: 'grid',
     specification: 'CSS Grid Layout Level 1',
     status: 'preset-only',
-    values: [
-      ...GRID_TRACK_PRESETS,
-      { classValue: 'subgrid', cssValue: 'subgrid' },
-    ],
+    values: [...GRID_TRACK_PRESETS, { classValue: 'subgrid', cssValue: 'subgrid' }],
     supportsResponsive: true,
     supportedPseudoClasses: PC_NONE,
     supportedAriaStates: ARIA,

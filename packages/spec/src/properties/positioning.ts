@@ -9,9 +9,7 @@ import { SUPPORTED_ARIA_STATES } from '../states/aria.js';
 
 const ARIA = SUPPORTED_ARIA_STATES;
 
-const INSET_VALUES = [
-  { classValue: 'auto', cssValue: 'auto' },
-];
+const INSET_VALUES = [{ classValue: 'auto', cssValue: 'auto' }];
 
 export const POSITIONING_PROPERTIES: readonly FcssPropertyDefinition[] = [
   {
@@ -79,9 +77,7 @@ export const POSITIONING_PROPERTIES: readonly FcssPropertyDefinition[] = [
     category: 'positioning',
     specification: 'CSS2.1',
     status: 'supported',
-    values: [
-      { classValue: 'auto', cssValue: 'auto' },
-    ],
+    values: [{ classValue: 'auto', cssValue: 'auto' }],
     supportsResponsive: false,
     supportedPseudoClasses: PC_INTERACTION,
     supportedAriaStates: ARIA,

@@ -15,9 +15,7 @@ export const BACKGROUND_PROPERTIES: readonly FcssPropertyDefinition[] = [
     category: 'background',
     specification: 'CSS Backgrounds and Borders Level 3',
     status: 'preset-only',
-    values: [
-      { classValue: 'none', cssValue: 'none' },
-    ],
+    values: [{ classValue: 'none', cssValue: 'none' }],
     supportsResponsive: true,
     supportedPseudoClasses: PC_INTERACTION,
     supportedAriaStates: ARIA,

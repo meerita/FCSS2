@@ -10,9 +10,7 @@ import { FCSS_COLOR_VALUES } from '../values/colors.js';
 
 const ARIA = SUPPORTED_ARIA_STATES;
 
-const MARGIN_KEYWORDS = [
-  { classValue: 'auto', cssValue: 'auto' },
-];
+const MARGIN_KEYWORDS = [{ classValue: 'auto', cssValue: 'auto' }];
 
 const BORDER_STYLE_VALUES = [
   { classValue: 'none', cssValue: 'none' },
@@ -36,9 +34,18 @@ const BORDER_WIDTH_KEYWORDS = [
 const BOX_SHADOW_PRESETS = [
   { classValue: 'none', cssValue: 'none' },
   { classValue: 'sm', cssValue: '0 1px 2px 0 rgb(0 0 0 / 0.05)' },
-  { classValue: 'md', cssValue: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)' },
-  { classValue: 'lg', cssValue: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)' },
-  { classValue: 'xl', cssValue: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)' },
+  {
+    classValue: 'md',
+    cssValue: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+  },
+  {
+    classValue: 'lg',
+    cssValue: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
+  },
+  {
+    classValue: 'xl',
+    cssValue: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
+  },
   { classValue: 'inner', cssValue: 'inset 0 2px 4px 0 rgb(0 0 0 / 0.05)' },
 ];
 
@@ -363,9 +370,7 @@ export const BOX_MODEL_PROPERTIES: readonly FcssPropertyDefinition[] = [
     category: 'box-model',
     specification: 'CSS Backgrounds and Borders Level 3',
     status: 'supported',
-    values: [
-      { classValue: 'full', cssValue: '9999px' },
-    ],
+    values: [{ classValue: 'full', cssValue: '9999px' }],
     supportsResponsive: true,
     supportedPseudoClasses: PC_INTERACTION,
     supportedAriaStates: ARIA,
@@ -393,7 +398,8 @@ export const BOX_MODEL_PROPERTIES: readonly FcssPropertyDefinition[] = [
     supportedPseudoClasses: PC_NONE,
     supportedAriaStates: [],
     numericBehavior: 'length-percentage',
-    notes: 'CSS Logical Properties — outside the CSS3 profile; use margin-top/margin-bottom for the CSS3 equivalent',
+    notes:
+      'CSS Logical Properties — outside the CSS3 profile; use margin-top/margin-bottom for the CSS3 equivalent',
   },
   {
     property: 'margin-block-start',
@@ -405,7 +411,8 @@ export const BOX_MODEL_PROPERTIES: readonly FcssPropertyDefinition[] = [
     supportedPseudoClasses: PC_NONE,
     supportedAriaStates: [],
     numericBehavior: 'length-percentage',
-    notes: 'CSS Logical Properties — outside the CSS3 profile; use margin-top for the CSS3 equivalent',
+    notes:
+      'CSS Logical Properties — outside the CSS3 profile; use margin-top for the CSS3 equivalent',
   },
   {
     property: 'margin-block-end',
@@ -417,7 +424,8 @@ export const BOX_MODEL_PROPERTIES: readonly FcssPropertyDefinition[] = [
     supportedPseudoClasses: PC_NONE,
     supportedAriaStates: [],
     numericBehavior: 'length-percentage',
-    notes: 'CSS Logical Properties — outside the CSS3 profile; use margin-bottom for the CSS3 equivalent',
+    notes:
+      'CSS Logical Properties — outside the CSS3 profile; use margin-bottom for the CSS3 equivalent',
   },
   {
     property: 'margin-inline',
@@ -429,7 +437,8 @@ export const BOX_MODEL_PROPERTIES: readonly FcssPropertyDefinition[] = [
     supportedPseudoClasses: PC_NONE,
     supportedAriaStates: [],
     numericBehavior: 'length-percentage',
-    notes: 'CSS Logical Properties — outside the CSS3 profile; use margin-left/margin-right for the CSS3 equivalent',
+    notes:
+      'CSS Logical Properties — outside the CSS3 profile; use margin-left/margin-right for the CSS3 equivalent',
   },
   {
     property: 'margin-inline-start',
@@ -465,7 +474,8 @@ export const BOX_MODEL_PROPERTIES: readonly FcssPropertyDefinition[] = [
     supportedPseudoClasses: PC_NONE,
     supportedAriaStates: [],
     numericBehavior: 'length-percentage',
-    notes: 'CSS Logical Properties — outside the CSS3 profile; use padding-top/padding-bottom for the CSS3 equivalent',
+    notes:
+      'CSS Logical Properties — outside the CSS3 profile; use padding-top/padding-bottom for the CSS3 equivalent',
   },
   {
     property: 'padding-inline',
@@ -477,7 +487,8 @@ export const BOX_MODEL_PROPERTIES: readonly FcssPropertyDefinition[] = [
     supportedPseudoClasses: PC_NONE,
     supportedAriaStates: [],
     numericBehavior: 'length-percentage',
-    notes: 'CSS Logical Properties — outside the CSS3 profile; use padding-left/padding-right for the CSS3 equivalent',
+    notes:
+      'CSS Logical Properties — outside the CSS3 profile; use padding-left/padding-right for the CSS3 equivalent',
   },
   {
     property: 'padding-inline-start',
@@ -501,6 +512,7 @@ export const BOX_MODEL_PROPERTIES: readonly FcssPropertyDefinition[] = [
     supportedPseudoClasses: PC_NONE,
     supportedAriaStates: [],
     numericBehavior: 'length-percentage',
-    notes: 'CSS Logical Properties — outside the CSS3 profile; use padding-right for LTR equivalent',
+    notes:
+      'CSS Logical Properties — outside the CSS3 profile; use padding-right for LTR equivalent',
   },
 ];

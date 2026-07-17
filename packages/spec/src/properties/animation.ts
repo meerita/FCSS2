@@ -44,7 +44,8 @@ export const ANIMATION_PROPERTIES: readonly FcssPropertyDefinition[] = [
     supportsResponsive: false,
     supportedPseudoClasses: PC_NONE,
     supportedAriaStates: [],
-    notes: 'Animation names reference @keyframes defined in project c- CSS; cannot be enumerated as utility class values',
+    notes:
+      'Animation names reference @keyframes defined in project c- CSS; cannot be enumerated as utility class values',
   },
   {
     property: 'animation-duration',

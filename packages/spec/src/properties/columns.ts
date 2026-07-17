@@ -43,9 +43,7 @@ export const COLUMNS_PROPERTIES: readonly FcssPropertyDefinition[] = [
     category: 'columns',
     specification: 'CSS Multi-column Layout Level 1',
     status: 'supported',
-    values: [
-      { classValue: 'auto', cssValue: 'auto' },
-    ],
+    values: [{ classValue: 'auto', cssValue: 'auto' }],
     supportsResponsive: true,
     supportedPseudoClasses: PC_NONE,
     supportedAriaStates: [],
@@ -91,9 +89,7 @@ export const COLUMNS_PROPERTIES: readonly FcssPropertyDefinition[] = [
     category: 'columns',
     specification: 'CSS Multi-column Layout Level 1',
     status: 'preset-only',
-    values: [
-      { classValue: 'none', cssValue: 'none' },
-    ],
+    values: [{ classValue: 'none', cssValue: 'none' }],
     supportsResponsive: false,
     supportedPseudoClasses: PC_NONE,
     supportedAriaStates: [],

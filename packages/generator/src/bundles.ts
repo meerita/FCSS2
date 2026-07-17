@@ -99,11 +99,26 @@ export function buildBundles(result: GenerateResult): BundleOutput {
   const utilitiesCss = buildFile(baseRules);
   const pseudoCss = buildFile(pseudoRules);
   const ariaCss = buildFile(ariaRules);
-  const smCss = buildResponsiveFile(smRules, responsiveMediaQueries.get('sm') ?? '@media (min-width: 576px)');
-  const mdCss = buildResponsiveFile(mdRules, responsiveMediaQueries.get('md') ?? '@media (min-width: 768px)');
-  const lgCss = buildResponsiveFile(lgRules, responsiveMediaQueries.get('lg') ?? '@media (min-width: 992px)');
-  const xlCss = buildResponsiveFile(xlRules, responsiveMediaQueries.get('xl') ?? '@media (min-width: 1200px)');
-  const xxlCss = buildResponsiveFile(xxlRules, responsiveMediaQueries.get('xxl') ?? '@media (min-width: 1400px)');
+  const smCss = buildResponsiveFile(
+    smRules,
+    responsiveMediaQueries.get('sm') ?? '@media (min-width: 576px)',
+  );
+  const mdCss = buildResponsiveFile(
+    mdRules,
+    responsiveMediaQueries.get('md') ?? '@media (min-width: 768px)',
+  );
+  const lgCss = buildResponsiveFile(
+    lgRules,
+    responsiveMediaQueries.get('lg') ?? '@media (min-width: 992px)',
+  );
+  const xlCss = buildResponsiveFile(
+    xlRules,
+    responsiveMediaQueries.get('xl') ?? '@media (min-width: 1200px)',
+  );
+  const xxlCss = buildResponsiveFile(
+    xxlRules,
+    responsiveMediaQueries.get('xxl') ?? '@media (min-width: 1400px)',
+  );
 
   const fullCss = [utilitiesCss, pseudoCss, ariaCss, smCss, mdCss, lgCss, xlCss, xxlCss].join('');
 

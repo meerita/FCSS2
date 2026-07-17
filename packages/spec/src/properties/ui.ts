@@ -118,10 +118,7 @@ export const UI_PROPERTIES: readonly FcssPropertyDefinition[] = [
     category: 'ui',
     specification: 'CSS Basic User Interface Level 3',
     status: 'supported',
-    values: [
-      { classValue: 'auto', cssValue: 'auto' },
-      ...FCSS_COLOR_VALUES,
-    ],
+    values: [{ classValue: 'auto', cssValue: 'auto' }, ...FCSS_COLOR_VALUES],
     supportsResponsive: false,
     supportedPseudoClasses: PC_FORM,
     supportedAriaStates: ARIA,
@@ -156,10 +153,7 @@ export const UI_PROPERTIES: readonly FcssPropertyDefinition[] = [
     category: 'ui',
     specification: 'CSS Basic User Interface Level 3',
     status: 'supported',
-    values: [
-      { classValue: 'invert', cssValue: 'invert' },
-      ...FCSS_COLOR_VALUES,
-    ],
+    values: [{ classValue: 'invert', cssValue: 'invert' }, ...FCSS_COLOR_VALUES],
     supportsResponsive: false,
     supportedPseudoClasses: PC_INTERACTION,
     supportedAriaStates: ARIA,
@@ -189,7 +183,8 @@ export const UI_PROPERTIES: readonly FcssPropertyDefinition[] = [
     supportsResponsive: false,
     supportedPseudoClasses: PC_NONE,
     supportedAriaStates: [],
-    notes: 'CSS Images Level 3 — limited and inconsistent browser support; outside core CSS3 profile',
+    notes:
+      'CSS Images Level 3 — limited and inconsistent browser support; outside core CSS3 profile',
   },
   {
     property: 'image-orientation',

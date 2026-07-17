@@ -24,7 +24,10 @@ describe('generate() — basic output', () => {
     // Spot-check first, middle, and last 10 rules — avoids iterating all rules at once.
     const sample = [
       ...result.rules.slice(0, 10),
-      ...result.rules.slice(Math.floor(result.rules.length / 2), Math.floor(result.rules.length / 2) + 10),
+      ...result.rules.slice(
+        Math.floor(result.rules.length / 2),
+        Math.floor(result.rules.length / 2) + 10,
+      ),
       ...result.rules.slice(-10),
     ];
     for (const rule of sample) {
@@ -51,8 +54,8 @@ describe('generate() — specific utilities', () => {
 
   it('includes display--block:aria-expanded:true with correct selector', () => {
     const result = generate();
-    const rule = result.rules.find((r) =>
-      r.selector.includes("[aria-expanded='true']") && r.selector.includes('display'),
+    const rule = result.rules.find(
+      (r) => r.selector.includes("[aria-expanded='true']") && r.selector.includes('display'),
     );
     expect(rule).toBeDefined();
     expect(rule?.selector).toContain("[aria-expanded='true']");

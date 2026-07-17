@@ -102,7 +102,8 @@ export const OVERFLOW_PROPERTIES: readonly FcssPropertyDefinition[] = [
     supportsResponsive: false,
     supportedPseudoClasses: PC_NONE,
     supportedAriaStates: [],
-    notes: 'CSS Logical Properties — outside the CSS3 profile; use overflow-y for the CSS3 equivalent in horizontal writing modes',
+    notes:
+      'CSS Logical Properties — outside the CSS3 profile; use overflow-y for the CSS3 equivalent in horizontal writing modes',
   },
   {
     property: 'overflow-inline',
@@ -118,6 +119,7 @@ export const OVERFLOW_PROPERTIES: readonly FcssPropertyDefinition[] = [
     supportsResponsive: false,
     supportedPseudoClasses: PC_NONE,
     supportedAriaStates: [],
-    notes: 'CSS Logical Properties — outside the CSS3 profile; use overflow-x for the CSS3 equivalent in horizontal writing modes',
+    notes:
+      'CSS Logical Properties — outside the CSS3 profile; use overflow-x for the CSS3 equivalent in horizontal writing modes',
   },
 ];

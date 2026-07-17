@@ -4,19 +4,10 @@
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 
 export type FcssPropertyStatus =
-  | 'supported'
-  | 'preset-only'
-  | 'custom-only'
-  | 'deprecated'
-  | 'experimental';
+  'supported' | 'preset-only' | 'custom-only' | 'deprecated' | 'experimental';
 
 export type FcssNumericBehavior =
-  | 'integer'
-  | 'positive-integer'
-  | 'number'
-  | 'length'
-  | 'percentage'
-  | 'length-percentage';
+  'integer' | 'positive-integer' | 'number' | 'length' | 'percentage' | 'length-percentage';
 
 export interface FcssValueDefinition {
   readonly classValue: string;

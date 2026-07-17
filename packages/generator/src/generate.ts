@@ -43,14 +43,16 @@ const INTEGER_SCALE: FcssValueDefinition[] = [
   -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 20, 24,
 ].map((n) => ({ classValue: String(n), cssValue: String(n) }));
 
-const POSITIVE_INTEGER_SCALE: FcssValueDefinition[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12].map((n) => ({
-  classValue: String(n),
-  cssValue: String(n),
-}));
+const POSITIVE_INTEGER_SCALE: FcssValueDefinition[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12].map(
+  (n) => ({
+    classValue: String(n),
+    cssValue: String(n),
+  }),
+);
 
 const NUMBER_SCALE: FcssValueDefinition[] = [
-  0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95,
-  1,
+  0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85,
+  0.9, 0.95, 1,
 ].map((n) => ({ classValue: String(n), cssValue: String(n) }));
 
 function getNumericScale(behavior: FcssNumericBehavior): FcssValueDefinition[] {
@@ -105,7 +107,9 @@ function makeEntry(params: {
   });
 }
 
-export function generate(properties: readonly FcssPropertyDefinition[] = FCSS_PROPERTIES): GenerateResult {
+export function generate(
+  properties: readonly FcssPropertyDefinition[] = FCSS_PROPERTIES,
+): GenerateResult {
   const rules: GeneratedRule[] = [];
   const manifest: ManifestEntry[] = [];
   const seenSelectors = new Set<string>();
@@ -143,7 +147,11 @@ export function generate(properties: readonly FcssPropertyDefinition[] = FCSS_PR
       const baseClass = buildBaseClassName(prop.property, val.classValue);
       const baseSel = buildSelector(baseClass);
       addRule(
-        { selector: baseSel, declaration: buildDeclaration(prop.property, cssValue), category: prop.category },
+        {
+          selector: baseSel,
+          declaration: buildDeclaration(prop.property, cssValue),
+          category: prop.category,
+        },
         makeEntry({
           className: baseClass,
           selector: baseSel,
@@ -160,7 +168,11 @@ export function generate(properties: readonly FcssPropertyDefinition[] = FCSS_PR
         const cls = buildPseudoClassName(prop.property, val.classValue, pseudo);
         const sel = buildSelector(cls, pseudo);
         addRule(
-          { selector: sel, declaration: buildDeclaration(prop.property, cssValue), category: prop.category },
+          {
+            selector: sel,
+            declaration: buildDeclaration(prop.property, cssValue),
+            category: prop.category,
+          },
           makeEntry({
             className: cls,
             selector: sel,
@@ -182,7 +194,11 @@ export function generate(properties: readonly FcssPropertyDefinition[] = FCSS_PR
           const cls = buildAriaClassName(prop.property, val.classValue, ariaAttr, ariaValue);
           const sel = buildSelector(cls, undefined, ariaAttr, ariaValue);
           addRule(
-            { selector: sel, declaration: buildDeclaration(prop.property, cssValue), category: prop.category },
+            {
+              selector: sel,
+              declaration: buildDeclaration(prop.property, cssValue),
+              category: prop.category,
+            },
             makeEntry({
               className: cls,
               selector: sel,
@@ -225,7 +241,12 @@ export function generate(properties: readonly FcssPropertyDefinition[] = FCSS_PR
         );
 
         for (const pseudo of prop.supportedPseudoClasses) {
-          const cls = buildResponsivePseudoClassName(bp.name, prop.property, val.classValue, pseudo);
+          const cls = buildResponsivePseudoClassName(
+            bp.name,
+            prop.property,
+            val.classValue,
+            pseudo,
+          );
           const sel = buildSelector(cls, pseudo);
           addRule(
             {
@@ -252,7 +273,13 @@ export function generate(properties: readonly FcssPropertyDefinition[] = FCSS_PR
           const ariaValues = ARIA_VALUES_MAP.get(ariaAttr);
           if (!ariaValues) continue;
           for (const ariaValue of ariaValues) {
-            const cls = buildResponsiveAriaClassName(bp.name, prop.property, val.classValue, ariaAttr, ariaValue);
+            const cls = buildResponsiveAriaClassName(
+              bp.name,
+              prop.property,
+              val.classValue,
+              ariaAttr,
+              ariaValue,
+            );
             const sel = buildSelector(cls, undefined, ariaAttr, ariaValue);
             addRule(
               {
@@ -282,7 +309,10 @@ export function generate(properties: readonly FcssPropertyDefinition[] = FCSS_PR
   return { rules, manifest };
 }
 
-function resolveValue(val: FcssValueDefinition, numericBehavior: FcssNumericBehavior | undefined): string {
+function resolveValue(
+  val: FcssValueDefinition,
+  numericBehavior: FcssNumericBehavior | undefined,
+): string {
   if (!numericBehavior) return val.cssValue;
   // If cssValue is already a properly-formed CSS value (has a unit suffix or is a non-numeric string), use it.
   const isRawNumber = /^-?(\d+\.?\d*|\.\d+)$/.test(val.cssValue) && !val.cssValue.endsWith('%');

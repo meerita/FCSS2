@@ -5,7 +5,9 @@
 
 import type { FcssValueDefinition } from '../types.js';
 
-const SCALE_PX = [0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16, 18, 20, 24, 28, 32, 36, 40, 44, 48, 56, 64, 72, 80, 96];
+const SCALE_PX = [
+  0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16, 18, 20, 24, 28, 32, 36, 40, 44, 48, 56, 64, 72, 80, 96,
+];
 
 function makeLength(n: number): FcssValueDefinition {
   if (n === 0) {

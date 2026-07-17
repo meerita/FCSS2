@@ -64,14 +64,12 @@ export const COLOR_PROPERTIES: readonly FcssPropertyDefinition[] = [
     category: 'color',
     specification: 'CSS Basic User Interface Level 4',
     status: 'experimental',
-    values: [
-      { classValue: 'auto', cssValue: 'auto' },
-      ...FCSS_COLOR_VALUES,
-    ],
+    values: [{ classValue: 'auto', cssValue: 'auto' }, ...FCSS_COLOR_VALUES],
     supportsResponsive: false,
     supportedPseudoClasses: PC_NONE,
     supportedAriaStates: ARIA,
-    notes: 'CSS Basic UI Level 4 — outside the CSS3 profile; sets the accent color for form controls',
+    notes:
+      'CSS Basic UI Level 4 — outside the CSS3 profile; sets the accent color for form controls',
   },
   {
     property: 'mix-blend-mode',
@@ -106,13 +104,11 @@ export const COLOR_PROPERTIES: readonly FcssPropertyDefinition[] = [
     category: 'color',
     specification: 'SVG / CSS Fill and Stroke Level 3',
     status: 'experimental',
-    values: [
-      { classValue: 'none', cssValue: 'none' },
-      ...FCSS_COLOR_VALUES,
-    ],
+    values: [{ classValue: 'none', cssValue: 'none' }, ...FCSS_COLOR_VALUES],
     supportsResponsive: false,
     supportedPseudoClasses: PC_INTERACTION,
     supportedAriaStates: ARIA,
-    notes: 'SVG-specific property (also in CSS Fill and Stroke Level 3) — outside the CSS3 profile; primarily relevant for SVG elements',
+    notes:
+      'SVG-specific property (also in CSS Fill and Stroke Level 3) — outside the CSS3 profile; primarily relevant for SVG elements',
   },
 ];

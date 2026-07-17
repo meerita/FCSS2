@@ -16,10 +16,7 @@ const SIZE_KEYWORDS = [
   { classValue: 'fit-content', cssValue: 'fit-content' },
 ];
 
-const MAX_KEYWORDS = [
-  ...SIZE_KEYWORDS,
-  { classValue: 'none', cssValue: 'none' },
-];
+const MAX_KEYWORDS = [...SIZE_KEYWORDS, { classValue: 'none', cssValue: 'none' }];
 
 const MIN_KEYWORDS = [
   { classValue: 'max-content', cssValue: 'max-content' },

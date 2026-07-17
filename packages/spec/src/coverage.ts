@@ -41,7 +41,13 @@ for (const [status, count] of Object.entries(report.byStatus) as [FcssPropertySt
 console.log('');
 console.log('## Property list by status');
 console.log('');
-for (const status of ['supported', 'preset-only', 'custom-only', 'deprecated', 'experimental'] as FcssPropertyStatus[]) {
+for (const status of [
+  'supported',
+  'preset-only',
+  'custom-only',
+  'deprecated',
+  'experimental',
+] as FcssPropertyStatus[]) {
   const props = FCSS_PROPERTIES.filter((d) => d.status === status).map((d) => d.property);
   if (props.length > 0) {
     console.log(`### ${status} (${props.length})`);
