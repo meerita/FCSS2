@@ -1,49 +1,51 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FCSS Vanilla Example</title>
-  <link rel="stylesheet" href="node_modules/@fcss/core/dist/full.css" />
-</head>
-<body>
-  <div class="display--flex flex-direction--column align-items--center padding--24">
-    <h1 class="font-size--32 font-weight--700 color--blue margin-bottom--16">FCSS Works</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FCSS Vanilla Example</title>
+    <link rel="stylesheet" href="node_modules/@fcss/core/dist/full.css" />
+  </head>
+  <body>
+    <div class="display--flex flex-direction--column align-items--center padding--24">
+      <h1 class="font-size--32 font-weight--700 color--blue margin-bottom--16">FCSS Works</h1>
 
-    <p class="font-size--16 color--gray margin-bottom--24 text-align--center">
-      Functional CSS — one class, one declaration.
-    </p>
+      <p class="font-size--16 color--gray margin-bottom--24 text-align--center">
+        Functional CSS — one class, one declaration.
+      </p>
 
-    <div class="display--flex flex-wrap--wrap gap--16 justify-content--center">
-      <div class="background-color--blue color--white padding--16 border-radius--4
-                  display--block font-weight--600">
-        display--flex
+      <div class="display--flex flex-wrap--wrap gap--16 justify-content--center">
+        <div
+          class="background-color--blue color--white padding--16 border-radius--4 display--block font-weight--600"
+        >
+          display--flex
+        </div>
+
+        <div
+          class="background-color--green color--white padding--16 border-radius--4 display--block font-weight--600"
+        >
+          color--white
+        </div>
+
+        <div
+          class="background-color--red color--white padding--16 border-radius--4 display--block font-weight--600"
+        >
+          padding--16
+        </div>
       </div>
 
-      <div class="background-color--green color--white padding--16 border-radius--4
-                  display--block font-weight--600">
-        color--white
-      </div>
+      <!-- ARIA state demo -->
+      <button
+        class="margin-top--24 padding--12 background-color--purple color--white border-radius--4 cursor--pointer display--none:aria-hidden:true"
+        aria-hidden="false"
+      >
+        ARIA-aware button
+      </button>
 
-      <div class="background-color--red color--white padding--16 border-radius--4
-                  display--block font-weight--600">
-        padding--16
-      </div>
+      <!-- Responsive demo: hidden on mobile, visible on sm+ -->
+      <p class="display--none sm-display--block margin-top--16 color--dark-gray font-size--14">
+        Visible on sm+ breakpoint
+      </p>
     </div>
-
-    <!-- ARIA state demo -->
-    <button
-      class="margin-top--24 padding--12 background-color--purple color--white
-             border-radius--4 cursor--pointer display--none:aria-hidden:true"
-      aria-hidden="false"
-    >
-      ARIA-aware button
-    </button>
-
-    <!-- Responsive demo: hidden on mobile, visible on sm+ -->
-    <p class="display--none sm-display--block margin-top--16 color--dark-gray font-size--14">
-      Visible on sm+ breakpoint
-    </p>
-  </div>
-</body>
+  </body>
 </html>
