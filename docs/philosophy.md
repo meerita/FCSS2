@@ -7,9 +7,15 @@
 Every FCSS utility class maps to exactly one CSS declaration. No exceptions.
 
 ```css
-.display--flex    { display: flex; }
-.gap--16px        { gap: 16px; }
-.color--black     { color: black; }
+.display--flex {
+  display: flex;
+}
+.gap--16px {
+  gap: 16px;
+}
+.color--black {
+  color: black;
+}
 ```
 
 This constraint is intentional. When a class name tells you exactly what it does, you can read markup the same way you read CSS. There is nothing to memorize beyond the CSS properties you already know.
@@ -18,12 +24,12 @@ This constraint is intentional. When a class name tells you exactly what it does
 
 FCSS does not introduce abbreviations. `p` is not `padding`. `bg` is not `background-color`. The class name is the CSS property name.
 
-| Other frameworks | FCSS |
-| --- | --- |
-| `p-4` | `padding--1rem` |
-| `bg-gray-100` | `background-color--gray` |
-| `flex` | `display--flex` |
-| `font-bold` | `font-weight--700` |
+| Other frameworks | FCSS                     |
+| ---------------- | ------------------------ |
+| `p-4`            | `padding--1rem`          |
+| `bg-gray-100`    | `background-color--gray` |
+| `flex`           | `display--flex`          |
+| `font-bold`      | `font-weight--700`       |
 
 If you know the CSS property, you know the FCSS class. No lookup table required.
 
@@ -36,6 +42,7 @@ A class that sets `display: flex` sets only `display: flex`. It does not also se
 FCSS ships a complete pre-generated utility set covering the CSS3 property catalog. You import the full set during development for the best authoring experience, then run the purge step before production to strip every class your markup does not use.
 
 This means:
+
 - No waiting for a build to see a new class.
 - No configuration to enable a property.
 - Production output is only as large as the classes you actually used.

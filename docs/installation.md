@@ -51,9 +51,7 @@ npm install -D @fcss/postcss
 const { fcssPlugin } = require('@fcss/postcss');
 
 module.exports = {
-  plugins: [
-    fcssPlugin({ content: ['src/**/*.{ts,tsx}'] }),
-  ],
+  plugins: [fcssPlugin({ content: ['src/**/*.{ts,tsx}'] })],
 };
 ```
 
@@ -73,10 +71,7 @@ import react from '@vitejs/plugin-react';
 import { fcss } from '@fcss/vite';
 
 export default defineConfig({
-  plugins: [
-    react(),
-    fcss({ content: ['src/**/*.{ts,tsx}'] }),
-  ],
+  plugins: [react(), fcss({ content: ['src/**/*.{ts,tsx}'] })],
 });
 ```
 
@@ -140,10 +135,7 @@ npm install @fcss/core
 ```json
 // angular.json — inside your project's architect.build.options
 {
-  "styles": [
-    "node_modules/@fcss/core/fcss.css",
-    "src/styles.css"
-  ]
+  "styles": ["node_modules/@fcss/core/fcss.css", "src/styles.css"]
 }
 ```
 
@@ -184,16 +176,16 @@ npx fcss --help
 
 Available commands:
 
-| Command | Description |
-| --- | --- |
-| `fcss build` | Generate the CSS utility set from the spec |
-| `fcss purge` | Remove unused classes from output CSS |
-| `fcss init` | Create an `fcss.config.ts` file |
-| `fcss list` | List all available utility classes |
-| `fcss explain <class>` | Show the CSS declaration for a class |
-| `fcss audit` | Check for unused or invalid classes in source |
-| `fcss doctor` | Validate your FCSS configuration and environment |
-| `fcss migrate` | Assist with migrating from the legacy TFCSSF repository |
+| Command                | Description                                             |
+| ---------------------- | ------------------------------------------------------- |
+| `fcss build`           | Generate the CSS utility set from the spec              |
+| `fcss purge`           | Remove unused classes from output CSS                   |
+| `fcss init`            | Create an `fcss.config.ts` file                         |
+| `fcss list`            | List all available utility classes                      |
+| `fcss explain <class>` | Show the CSS declaration for a class                    |
+| `fcss audit`           | Check for unused or invalid classes in source           |
+| `fcss doctor`          | Validate your FCSS configuration and environment        |
+| `fcss migrate`         | Assist with migrating from the legacy TFCSSF repository |
 
 ### `fcss.config.ts`
 

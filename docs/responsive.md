@@ -4,14 +4,14 @@ FCSS uses a **mobile-first** breakpoint strategy. Unprefixed utility classes app
 
 ## Default breakpoints
 
-| Prefix | Min-width | Typical target |
-| --- | --- | --- |
-| *(none)* | all sizes | Mobile and all devices |
-| `sm-` | 576px | Small devices |
-| `md-` | 768px | Tablets |
-| `lg-` | 992px | Desktop |
-| `xl-` | 1200px | Large desktop |
-| `xxl-` | 1400px | Widescreen |
+| Prefix   | Min-width | Typical target         |
+| -------- | --------- | ---------------------- |
+| _(none)_ | all sizes | Mobile and all devices |
+| `sm-`    | 576px     | Small devices          |
+| `md-`    | 768px     | Tablets                |
+| `lg-`    | 992px     | Desktop                |
+| `xl-`    | 1200px    | Large desktop          |
+| `xxl-`   | 1400px    | Widescreen             |
 
 ## How to use
 
@@ -19,36 +19,36 @@ Start with the mobile (unprefixed) classes, then add breakpoint-prefixed overrid
 
 ```html
 <!-- Single column on mobile, two columns from tablet up, three from desktop -->
-<div class="
+<div
+  class="
   display--grid
   grid-template-columns--1fr
   md-grid-template-columns--1fr-1fr
   lg-grid-template-columns--1fr-1fr-1fr
-">
+"
+></div>
 ```
 
 ```html
 <!-- Hidden on mobile, shown from tablet up -->
-<nav class="display--none md-display--flex">
+<nav class="display--none md-display--flex"></nav>
 ```
 
 ```html
 <!-- Font size scales with viewport -->
-<h1 class="font-size--1-5rem md-font-size--2rem lg-font-size--3rem">
-  Headline
-</h1>
+<h1 class="font-size--1-5rem md-font-size--2rem lg-font-size--3rem">Headline</h1>
 ```
 
 ## Choosing which breakpoints to load
 
 You do not need to load all breakpoint files. Match what you import to what your design actually uses:
 
-| Design target | Import |
-| --- | --- |
-| Single layout (no responsive) | `generics.css` only |
-| Mobile + desktop | `generics.css`, `md.css` |
-| Mobile + tablet + desktop | `generics.css`, `sm.css`, `md.css`, `lg.css` |
-| Full responsive range | All files |
+| Design target                 | Import                                       |
+| ----------------------------- | -------------------------------------------- |
+| Single layout (no responsive) | `generics.css` only                          |
+| Mobile + desktop              | `generics.css`, `md.css`                     |
+| Mobile + tablet + desktop     | `generics.css`, `sm.css`, `md.css`, `lg.css` |
+| Full responsive range         | All files                                    |
 
 Unused breakpoint files contribute zero classes to the purged output, but omitting them at import time speeds up development builds.
 
@@ -85,5 +85,5 @@ Breakpoint prefixes compose with state suffixes:
 
 ```html
 <!-- Blue link that turns red on hover only from tablet up -->
-<a class="color--blue md-color--blue md-color--red:hover">
+<a class="color--blue md-color--blue md-color--red:hover"></a>
 ```

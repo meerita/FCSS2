@@ -10,39 +10,37 @@ property--value:pseudo-class
 
 ### Interaction states
 
-| Suffix | CSS selector | When it applies |
-| --- | --- | --- |
-| `:hover` | `:hover` | Pointer is over the element |
-| `:focus` | `:focus` | Element has keyboard focus |
-| `:focus-visible` | `:focus-visible` | Keyboard focus (not pointer) |
-| `:focus-within` | `:focus-within` | Element or descendant has focus |
-| `:active` | `:active` | Element is being activated (click/tap) |
-| `:visited` | `:visited` | Link has been visited |
+| Suffix           | CSS selector     | When it applies                        |
+| ---------------- | ---------------- | -------------------------------------- |
+| `:hover`         | `:hover`         | Pointer is over the element            |
+| `:focus`         | `:focus`         | Element has keyboard focus             |
+| `:focus-visible` | `:focus-visible` | Keyboard focus (not pointer)           |
+| `:focus-within`  | `:focus-within`  | Element or descendant has focus        |
+| `:active`        | `:active`        | Element is being activated (click/tap) |
+| `:visited`       | `:visited`       | Link has been visited                  |
 
 ```html
-<a class="color--blue color--purple:visited color--red:hover color--orange:active">
-  Link
-</a>
+<a class="color--blue color--purple:visited color--red:hover color--orange:active"> Link </a>
 ```
 
 > **Note:** Browser privacy restrictions limit which properties take effect on `:visited`. Color, background-color, border-color, and outline-color are permitted; layout and size properties are not.
 
 ### Form states
 
-| Suffix | CSS selector | When it applies |
-| --- | --- | --- |
-| `:disabled` | `:disabled` | Form element is disabled |
-| `:enabled` | `:enabled` | Form element is enabled |
-| `:checked` | `:checked` | Checkbox or radio is checked |
-| `:required` | `:required` | Input has the `required` attribute |
-| `:optional` | `:optional` | Input does not have `required` |
-| `:valid` | `:valid` | Input passes validation |
-| `:invalid` | `:invalid` | Input fails validation |
-| `:placeholder` | `::placeholder` | Placeholder text |
-| `:read-only` | `:read-only` | Input is not editable |
-| `:read-write` | `:read-write` | Input is editable |
-| `:in-range` | `:in-range` | Numeric input is within range |
-| `:out-of-range` | `:out-of-range` | Numeric input is outside range |
+| Suffix          | CSS selector    | When it applies                    |
+| --------------- | --------------- | ---------------------------------- |
+| `:disabled`     | `:disabled`     | Form element is disabled           |
+| `:enabled`      | `:enabled`      | Form element is enabled            |
+| `:checked`      | `:checked`      | Checkbox or radio is checked       |
+| `:required`     | `:required`     | Input has the `required` attribute |
+| `:optional`     | `:optional`     | Input does not have `required`     |
+| `:valid`        | `:valid`        | Input passes validation            |
+| `:invalid`      | `:invalid`      | Input fails validation             |
+| `:placeholder`  | `::placeholder` | Placeholder text                   |
+| `:read-only`    | `:read-only`    | Input is not editable              |
+| `:read-write`   | `:read-write`   | Input is editable                  |
+| `:in-range`     | `:in-range`     | Numeric input is within range      |
+| `:out-of-range` | `:out-of-range` | Numeric input is outside range     |
 
 ```html
 <input
@@ -61,14 +59,14 @@ property--value:pseudo-class
 
 ### Structural states
 
-| Suffix | CSS selector |
-| --- | --- |
-| `:first-child` | `:first-child` |
-| `:last-child` | `:last-child` |
-| `:only-child` | `:only-child` |
+| Suffix           | CSS selector     |
+| ---------------- | ---------------- |
+| `:first-child`   | `:first-child`   |
+| `:last-child`    | `:last-child`    |
+| `:only-child`    | `:only-child`    |
 | `:first-of-type` | `:first-of-type` |
-| `:last-of-type` | `:last-of-type` |
-| `:empty` | `:empty` |
+| `:last-of-type`  | `:last-of-type`  |
+| `:empty`         | `:empty`         |
 
 ```html
 <ul>
@@ -89,32 +87,26 @@ FCSS generates selectors that match ARIA attribute values directly. This lets yo
 
 ### Common ARIA states
 
-| Suffix | CSS attribute selector | When it applies |
-| --- | --- | --- |
-| `:aria-expanded:true` | `[aria-expanded="true"]` | Disclosure is open |
-| `:aria-expanded:false` | `[aria-expanded="false"]` | Disclosure is closed |
-| `:aria-selected:true` | `[aria-selected="true"]` | Tab or option is selected |
-| `:aria-checked:true` | `[aria-checked="true"]` | Custom checkbox is checked |
-| `:aria-disabled:true` | `[aria-disabled="true"]` | Element is semantically disabled |
-| `:aria-hidden:true` | `[aria-hidden="true"]` | Element is hidden from assistive tech |
-| `:aria-current:page` | `[aria-current="page"]` | Navigation item is current page |
-| `:aria-pressed:true` | `[aria-pressed="true"]` | Toggle button is pressed |
-| `:aria-busy:true` | `[aria-busy="true"]` | Element is loading |
-| `:aria-invalid:true` | `[aria-invalid="true"]` | Input has an error |
+| Suffix                 | CSS attribute selector    | When it applies                       |
+| ---------------------- | ------------------------- | ------------------------------------- |
+| `:aria-expanded:true`  | `[aria-expanded="true"]`  | Disclosure is open                    |
+| `:aria-expanded:false` | `[aria-expanded="false"]` | Disclosure is closed                  |
+| `:aria-selected:true`  | `[aria-selected="true"]`  | Tab or option is selected             |
+| `:aria-checked:true`   | `[aria-checked="true"]`   | Custom checkbox is checked            |
+| `:aria-disabled:true`  | `[aria-disabled="true"]`  | Element is semantically disabled      |
+| `:aria-hidden:true`    | `[aria-hidden="true"]`    | Element is hidden from assistive tech |
+| `:aria-current:page`   | `[aria-current="page"]`   | Navigation item is current page       |
+| `:aria-pressed:true`   | `[aria-pressed="true"]`   | Toggle button is pressed              |
+| `:aria-busy:true`      | `[aria-busy="true"]`      | Element is loading                    |
+| `:aria-invalid:true`   | `[aria-invalid="true"]`   | Input has an error                    |
 
 ### Examples
 
 **Dropdown panel:**
 
 ```html
-<button aria-expanded="false" aria-controls="menu">
-  Menu
-</button>
-<ul
-  id="menu"
-  class="display--none display--block:aria-expanded:true"
-  aria-expanded="false"
->
+<button aria-expanded="false" aria-controls="menu">Menu</button>
+<ul id="menu" class="display--none display--block:aria-expanded:true" aria-expanded="false">
   <!-- items -->
 </ul>
 ```
@@ -172,5 +164,5 @@ Run `fcss build` after adding data states.
 <a class="color--blue md-color--red:hover">Link</a>
 
 <!-- Show element when expanded, but only from desktop -->
-<div class="display--none lg-display--block:aria-expanded:true">
+<div class="display--none lg-display--block:aria-expanded:true"></div>
 ```

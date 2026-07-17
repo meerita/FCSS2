@@ -10,16 +10,16 @@ property--value
 
 The property name and value are separated by a double dash (`--`). Multi-word properties and values use single dashes, exactly as in CSS.
 
-| CSS declaration | FCSS class |
-| --- | --- |
-| `color: black` | `color--black` |
-| `display: flex` | `display--flex` |
-| `display: inline-block` | `display--inline-block` |
+| CSS declaration                 | FCSS class                      |
+| ------------------------------- | ------------------------------- |
+| `color: black`                  | `color--black`                  |
+| `display: flex`                 | `display--flex`                 |
+| `display: inline-block`         | `display--inline-block`         |
 | `background-color: transparent` | `background-color--transparent` |
-| `font-weight: 700` | `font-weight--700` |
-| `align-items: center` | `align-items--center` |
-| `flex-direction: column` | `flex-direction--column` |
-| `gap: 1rem` | `gap--1rem` |
+| `font-weight: 700`              | `font-weight--700`              |
+| `align-items: center`           | `align-items--center`           |
+| `flex-direction: column`        | `flex-direction--column`        |
+| `gap: 1rem`                     | `gap--1rem`                     |
 
 ## Responsive form
 
@@ -29,17 +29,17 @@ breakpoint-property--value
 
 Add a breakpoint prefix to apply a utility at a specific viewport width. FCSS is **mobile-first**: unprefixed classes apply at all sizes; prefixed classes apply at the breakpoint's minimum width and above.
 
-| Prefix | Min-width | Targets |
-| --- | --- | --- |
-| `sm-` | 576px | Small devices and up |
-| `md-` | 768px | Tablets and up |
-| `lg-` | 992px | Desktop and up |
-| `xl-` | 1200px | Large desktop and up |
-| `xxl-` | 1400px | Widescreen and up |
+| Prefix | Min-width | Targets              |
+| ------ | --------- | -------------------- |
+| `sm-`  | 576px     | Small devices and up |
+| `md-`  | 768px     | Tablets and up       |
+| `lg-`  | 992px     | Desktop and up       |
+| `xl-`  | 1200px    | Large desktop and up |
+| `xxl-` | 1400px    | Widescreen and up    |
 
 ```html
 <!-- Block on mobile, flex from tablet up -->
-<div class="display--block md-display--flex">
+<div class="display--block md-display--flex"></div>
 ```
 
 See [Responsive Design](./responsive.md) for the full strategy.
@@ -55,7 +55,7 @@ Append a colon and the pseudo-class name to apply a utility only in that state.
 ```html
 <a class="color--blue color--red:hover">Link</a>
 <button class="opacity--1 opacity--0-5:disabled">Submit</button>
-<input class="border-color--gray border-color--blue:focus">
+<input class="border-color--gray border-color--blue:focus" />
 ```
 
 Supported pseudo-classes include `hover`, `focus`, `focus-visible`, `focus-within`, `active`, `visited`, `disabled`, `checked`, `required`, `optional`, `valid`, `invalid`, `placeholder`, `first-child`, `last-child`, `nth-child`, and more.
@@ -79,7 +79,7 @@ FCSS generates utilities for ARIA attributes so component state is expressed dir
 
 ```html
 <!-- Dimmed when aria-disabled="true" -->
-<button class="opacity--1 opacity--0-5:aria-disabled:true">
+<button class="opacity--1 opacity--0-5:aria-disabled:true"></button>
 ```
 
 ## Responsive + state form
@@ -91,7 +91,7 @@ breakpoint-property--value:state
 Combine a breakpoint prefix with a state suffix:
 
 ```html
-<a class="color--blue md-color--green md-color--red:hover">
+<a class="color--blue md-color--green md-color--red:hover"></a>
 ```
 
 ## The `c-` prefix
@@ -113,6 +113,7 @@ Any class starting with `c-` is a custom class that lives in `custom.css`. Use i
 ```
 
 Custom classes must:
+
 - Start with `c-`
 - Be defined in `custom.css`
 - Not replicate what a utility class already does
@@ -125,11 +126,11 @@ See [Custom CSS](./custom-css.md) for the full guide.
 [breakpoint-]property--value[:state]
 ```
 
-| Pattern | Example |
-| --- | --- |
-| Base | `display--flex` |
-| Responsive | `md-display--flex` |
-| Pseudo state | `color--red:hover` |
-| ARIA state | `display--none:aria-hidden:true` |
-| Responsive + state | `md-color--red:hover` |
-| Custom | `c-hero-layout` |
+| Pattern            | Example                          |
+| ------------------ | -------------------------------- |
+| Base               | `display--flex`                  |
+| Responsive         | `md-display--flex`               |
+| Pseudo state       | `color--red:hover`               |
+| ARIA state         | `display--none:aria-hidden:true` |
+| Responsive + state | `md-color--red:hover`            |
+| Custom             | `c-hero-layout`                  |

@@ -70,16 +70,8 @@ To customize, create an `fcss.config.ts` at the project root:
 import { defineConfig } from '@fcss/cli';
 
 export default defineConfig({
-  content: [
-    'app/**/*.{ts,tsx}',
-    'components/**/*.{ts,tsx}',
-    'lib/**/*.{ts,tsx}',
-  ],
-  safelist: [
-    'display--none',
-    'display--block',
-    { pattern: /^color--/ },
-  ],
+  content: ['app/**/*.{ts,tsx}', 'components/**/*.{ts,tsx}', 'lib/**/*.{ts,tsx}'],
+  safelist: ['display--none', 'display--block', { pattern: /^color--/ }],
 });
 ```
 
@@ -136,11 +128,11 @@ Because Next.js renders on the server, class names must always be complete liter
 ```tsx
 // Safe
 const style = isError ? 'color--red' : 'color--black';
-<p className={style}>Message</p>
+<p className={style}>Message</p>;
 
 // Unsafe — purger cannot extract this
 const style = `color--${isError ? 'red' : 'black'}`;
-<p className={style}>Message</p>
+<p className={style}>Message</p>;
 ```
 
 Add dynamically constructed classes to the safelist in `fcss.config.ts`.

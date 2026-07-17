@@ -12,8 +12,16 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run --passWithNoTests"
   },
+  "dependencies": {
+    "@fcss/language-service": "workspace:*"
+  },
   "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/vscode": "^1.90.0",
     "typescript": "catalog:",
     "vitest": "catalog:"
+  },
+  "engines": {
+    "vscode": "^1.90.0"
   }
 }

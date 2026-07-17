@@ -12,18 +12,18 @@ FCSS (Functional CSS) is a utility-first CSS framework where every class maps to
 
 ## Contents
 
-| Document | Description |
-| --- | --- |
-| [Philosophy](./philosophy.md) | Why FCSS exists and how it differs from other approaches |
-| [Installation](./installation.md) | Setup for Vanilla, React, Vite, Next.js, and Angular |
-| [Syntax](./syntax.md) | Class naming rules, breakpoints, states, and the `c-` prefix |
-| [Responsive Design](./responsive.md) | Mobile-first breakpoints and cascade ordering |
-| [States](./states.md) | Pseudo-classes, ARIA states, form states, and data states |
-| [Custom CSS](./custom-css.md) | When and how to use the `c-` escape hatch |
-| [Purging](./purging.md) | Removing unused utilities for production |
-| [Reference](./reference.md) | CSS property coverage index |
-| [Framework Guides](./guides/) | Detailed React, Next.js, and Angular integration guides |
-| [Migration](./migration.md) | Moving from the legacy TFCSSF repository |
+| Document                             | Description                                                  |
+| ------------------------------------ | ------------------------------------------------------------ |
+| [Philosophy](./philosophy.md)        | Why FCSS exists and how it differs from other approaches     |
+| [Installation](./installation.md)    | Setup for Vanilla, React, Vite, Next.js, and Angular         |
+| [Syntax](./syntax.md)                | Class naming rules, breakpoints, states, and the `c-` prefix |
+| [Responsive Design](./responsive.md) | Mobile-first breakpoints and cascade ordering                |
+| [States](./states.md)                | Pseudo-classes, ARIA states, form states, and data states    |
+| [Custom CSS](./custom-css.md)        | When and how to use the `c-` escape hatch                    |
+| [Purging](./purging.md)              | Removing unused utilities for production                     |
+| [Reference](./reference.md)          | CSS property coverage index                                  |
+| [Framework Guides](./guides/)        | Detailed React, Next.js, and Angular integration guides      |
+| [Migration](./migration.md)          | Moving from the legacy TFCSSF repository                     |
 
 ## Quick start
 
@@ -44,14 +44,14 @@ import '@fcss/core/fcss.css';
 
 ## Packages
 
-| Package | Purpose |
-| --- | --- |
-| `@fcss/core` | Generated CSS utility set |
-| `@fcss/cli` | Build, purge, generate, and doctor commands |
-| `@fcss/next` | Next.js plugin (`withFcss`) for App Router and Pages Router |
-| `@fcss/angular` | Angular `ng-add` schematic |
-| `@fcss/vite` | Vite plugin |
-| `@fcss/postcss` | PostCSS purge pipeline |
-| `@fcss/scanner` | Static class extraction engine |
-| `@fcss/language-service` | IntelliSense and validation |
-| `@fcss/eslint-plugin` | ESLint rules for FCSS class validation |
+| Package                  | Purpose                                                     |
+| ------------------------ | ----------------------------------------------------------- |
+| `@fcss/core`             | Generated CSS utility set                                   |
+| `@fcss/cli`              | Build, purge, generate, and doctor commands                 |
+| `@fcss/next`             | Next.js plugin (`withFcss`) for App Router and Pages Router |
+| `@fcss/angular`          | Angular `ng-add` schematic                                  |
+| `@fcss/vite`             | Vite plugin                                                 |
+| `@fcss/postcss`          | PostCSS purge pipeline                                      |
+| `@fcss/scanner`          | Static class extraction engine                              |
+| `@fcss/language-service` | IntelliSense and validation                                 |
+| `@fcss/eslint-plugin`    | ESLint rules for FCSS class validation                      |

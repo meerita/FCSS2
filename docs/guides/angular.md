@@ -9,6 +9,7 @@ ng add @fcss/angular
 ```
 
 The schematic:
+
 1. Installs `@fcss/core` as a dependency
 2. Adds `@fcss/core/fcss.css` to `angular.json` styles
 3. Optionally generates an `fcss.config.ts`
@@ -28,10 +29,7 @@ Add the CSS to your `angular.json`:
       "architect": {
         "build": {
           "options": {
-            "styles": [
-              "node_modules/@fcss/core/fcss.css",
-              "src/styles.css"
-            ]
+            "styles": ["node_modules/@fcss/core/fcss.css", "src/styles.css"]
           }
         }
       }
@@ -80,7 +78,7 @@ Use Angular's `[class]` or `[ngClass]` binding with complete class name literals
 
 ```html
 <!-- Unsafe — class name assembled at runtime, purger will miss it -->
-<div [class]="property + '--' + value">
+<div [class]="property + '--' + value"></div>
 ```
 
 ## Angular class binding syntax note
@@ -100,8 +98,13 @@ For Angular class bindings, prefer static classes for state-based utilities and 
 ## Responsive classes
 
 ```html
-<div class="display--grid grid-template-columns--1fr md-grid-template-columns--1fr-1fr lg-grid-template-columns--repeat-3-1fr gap--1rem">
-  <div class="padding--1rem background-color--white border-radius--0-25rem" *ngFor="let item of items">
+<div
+  class="display--grid grid-template-columns--1fr md-grid-template-columns--1fr-1fr lg-grid-template-columns--repeat-3-1fr gap--1rem"
+>
+  <div
+    class="padding--1rem background-color--white border-radius--0-25rem"
+    *ngFor="let item of items"
+  >
     {{ item.title }}
   </div>
 </div>
@@ -120,10 +123,7 @@ FCSS ARIA state classes pair naturally with Angular's accessibility patterns:
 >
   Toggle
 </button>
-<div
-  class="display--none display--block:aria-expanded:true"
-  [attr.aria-expanded]="isOpen"
->
+<div class="display--none display--block:aria-expanded:true" [attr.aria-expanded]="isOpen">
   Content
 </div>
 ```
@@ -165,9 +165,10 @@ const { fcssPlugin } = require('@fcss/postcss');
 
 module.exports = {
   plugins: [
-    process.env.NODE_ENV === 'production' && fcssPlugin({
-      content: ['src/**/*.{ts,html}'],
-    }),
+    process.env.NODE_ENV === 'production' &&
+      fcssPlugin({
+        content: ['src/**/*.{ts,html}'],
+      }),
   ].filter(Boolean),
 };
 ```

@@ -1,7 +1,5 @@
 <div data-testid="app-root" class="display--flex flex-direction--column padding--24 gap--16">
-  <h1 data-testid="app-title" class="font-size--2rem font-weight--700 margin--0">
-    FCSS Angular
-  </h1>
+  <h1 data-testid="app-title" class="font-size--2rem font-weight--700 margin--0">FCSS Angular</h1>
 
   <div
     data-testid="card"
@@ -12,16 +10,14 @@
       FCSS Card
     </h2>
 
-    <p
-      data-testid="card-body"
-      [class.display--none]="!isExpanded"
-      class="margin--0"
-    >
+    <p data-testid="card-body" [class.display--none]="!isExpanded" class="margin--0">
       This content uses FCSS utility classes including ARIA state and ngClass bindings.
     </p>
 
-    <div [ngClass]="{'display--block': isExpanded, 'display--none': !isExpanded}">
-      <p class="color--var(--fcss-color-muted) margin--0 padding-top--8">Expanded content visible.</p>
+    <div [ngClass]="{ 'display--block': isExpanded, 'display--none': !isExpanded }">
+      <p class="color--var(--fcss-color-muted) margin--0 padding-top--8">
+        Expanded content visible.
+      </p>
     </div>
 
     <button

@@ -21,10 +21,7 @@ export function Card({ title, description }: CardProps) {
       aria-expanded={expanded}
       data-testid="card"
     >
-      <span
-        className="font-weight--700 display--none:aria-expanded:false"
-        data-testid="card-title"
-      >
+      <span className="font-weight--700 display--none:aria-expanded:false" data-testid="card-title">
         {title}
       </span>
       <p className="font-size--xs color--black" data-testid="card-description">

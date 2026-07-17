@@ -88,9 +88,7 @@ FCSS utility classes do not use `!important`. Because of cascade order, the last
 If you need to override a utility with another utility, use a `c-` class or restructure the component logic to apply the correct class conditionally:
 
 ```tsx
-<p className={`color--${isError ? 'red' : 'black'}`}>
-  Message
-</p>
+<p className={`color--${isError ? 'red' : 'black'}`}>Message</p>
 ```
 
 ## Keeping custom classes under control

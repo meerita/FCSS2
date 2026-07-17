@@ -22,7 +22,7 @@ import App from './App';
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>
+  </React.StrictMode>,
 );
 ```
 
@@ -59,9 +59,7 @@ Use standard JavaScript expressions. Avoid string interpolation that builds clas
 
 ```tsx
 // Also safe — conditional between two complete class strings
-<div className={isOpen ? 'display--block' : 'display--none'}>
-  Panel content
-</div>
+<div className={isOpen ? 'display--block' : 'display--none'}>Panel content</div>
 ```
 
 ```tsx
@@ -75,12 +73,8 @@ Use standard JavaScript expressions. Avoid string interpolation that builds clas
 function PageLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="display--grid grid-template-columns--1fr lg-grid-template-columns--240px-1fr gap--0 lg-gap--2rem">
-      <aside className="display--none lg-display--block padding--1-5rem">
-        Sidebar
-      </aside>
-      <main className="padding--1rem lg-padding--2rem">
-        {children}
-      </main>
+      <aside className="display--none lg-display--block padding--1-5rem">Sidebar</aside>
+      <main className="padding--1rem lg-padding--2rem">{children}</main>
     </div>
   );
 }
@@ -116,9 +110,10 @@ const { fcssPlugin } = require('@fcss/postcss');
 
 module.exports = {
   plugins: [
-    process.env.NODE_ENV === 'production' && fcssPlugin({
-      content: ['src/**/*.{ts,tsx}'],
-    }),
+    process.env.NODE_ENV === 'production' &&
+      fcssPlugin({
+        content: ['src/**/*.{ts,tsx}'],
+      }),
   ].filter(Boolean),
 };
 ```

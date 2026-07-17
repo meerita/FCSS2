@@ -1,6 +1,6 @@
 // @file packages/vscode/src/index.ts
-// @description FCSS VS Code extension entry point (stub).
+// @description FCSS VS Code extension re-export.
 // @layer tools
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 
-export {};
+export { activate, deactivate } from './extension';

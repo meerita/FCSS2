@@ -75,7 +75,11 @@ function isFcssBundle(source: string): boolean {
 
 type WebpackCompiler = Record<string, unknown>;
 type WebpackCompilation = Record<string, unknown>;
-type WebpackAsset = { source(): string | Buffer; size?(): number; updateHash?(hash: unknown): void };
+type WebpackAsset = {
+  source(): string | Buffer;
+  size?(): number;
+  updateHash?(hash: unknown): void;
+};
 type RawSourceCtor = new (content: string) => WebpackAsset;
 
 class FcssWebpackPlugin {
@@ -90,8 +94,7 @@ class FcssWebpackPlugin {
   apply(compiler: WebpackCompiler): void {
     // Access webpack's bundled sources API for cache-hash-compatible asset replacement.
     const webpackApi = (compiler as Record<string, unknown>)['webpack'] as
-      | { sources?: { RawSource?: RawSourceCtor } }
-      | undefined;
+      { sources?: { RawSource?: RawSourceCtor } } | undefined;
     this.RawSource = webpackApi?.sources?.RawSource ?? undefined;
 
     const hooks = compiler['hooks'] as Record<string, unknown>;
@@ -110,12 +113,9 @@ class FcssWebpackPlugin {
 
       // Stage 100 = PROCESS_ASSETS_STAGE_OPTIMIZE: runs after mini-css-extract-plugin
       // emits CSS assets (stage -2000) and before css-minimizer-webpack-plugin (stage 400).
-      processAssets.tapPromise(
-        { name: 'FcssWebpackPlugin', stage: 100 },
-        async (assets) => {
-          await this.purgeAssets(compilation, assets);
-        },
-      );
+      processAssets.tapPromise({ name: 'FcssWebpackPlugin', stage: 100 }, async (assets) => {
+        await this.purgeAssets(compilation, assets);
+      });
     });
   }
 
@@ -146,8 +146,7 @@ class FcssWebpackPlugin {
       import('@fcss/postcss'),
     ]);
 
-    const safelistExact =
-      config.safelist?.filter((s): s is string => typeof s === 'string') ?? [];
+    const safelistExact = config.safelist?.filter((s): s is string => typeof s === 'string') ?? [];
     const safelistPatterns =
       config.safelist
         ?.filter((s): s is FcssSafelistPattern => typeof s === 'object' && 'pattern' in s)
@@ -177,8 +176,7 @@ class FcssWebpackPlugin {
         const replacement = this.makeSource(result.css);
 
         const updateAsset = compilation['updateAsset'] as
-          | ((name: string, src: WebpackAsset) => void)
-          | undefined;
+          ((name: string, src: WebpackAsset) => void) | undefined;
 
         if (typeof updateAsset === 'function') {
           updateAsset.call(compilation, assetName, replacement);

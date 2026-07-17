@@ -44,6 +44,9 @@ importers:
 
   apps/docs:
     dependencies:
+      '@fcss/core':
+        specifier: workspace:*
+        version: link:../../packages/core
       '@types/node':
         specifier: 20.4.2
         version: 20.4.2
@@ -441,6 +444,9 @@ importers:
 
   packages/language-service:
     devDependencies:
+      '@types/node':
+        specifier: ^22.0.0
+        version: 22.20.1
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
@@ -589,7 +595,17 @@ importers:
         version: 4.1.10(@types/node@22.20.1)(vite@6.4.3(@types/node@22.20.1)(jiti@2.7.0)(less@4.2.0)(sass@1.77.6)(terser@5.31.6))
 
   packages/vscode:
+    dependencies:
+      '@fcss/language-service':
+        specifier: workspace:*
+        version: link:../language-service
     devDependencies:
+      '@types/node':
+        specifier: ^22.0.0
+        version: 22.20.1
+      '@types/vscode':
+        specifier: ^1.90.0
+        version: 1.125.0
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
@@ -3134,6 +3150,9 @@ packages:
 
   '@types/unist@2.0.11':
     resolution: {integrity: sha512-CmBKiL6NNo/OqgmMn95Fk9Whlp2mtvIv+KNpQKN2F4SjvrEesubTRWGYSg+BnWZOnlCaSTU1sMpsBOzgbYhnsA==}
+
+  '@types/vscode@1.125.0':
+    resolution: {integrity: sha512-0icm/ZQAaism87P0ekHqi4/Ju9du+Tm0RUW+y7vqRsxY2cY0FNRX1nAnaW7nT6npPt2tfHiheZ55Zm9UhqonFA==}
 
   '@types/wrap-ansi@3.0.0':
     resolution: {integrity: sha512-ltIpx+kM7g/MLRZfkbL7EsCEjfzCcScLpkg37eXEtx5kmrAKBkTJwd1GIAjDSL8wTpM6Hzn5YO4pSb91BEwu1g==}
@@ -9929,6 +9948,8 @@ snapshots:
       '@types/node': 22.20.1
 
   '@types/unist@2.0.11': {}
+
+  '@types/vscode@1.125.0': {}
 
   '@types/wrap-ansi@3.0.0': {}
 

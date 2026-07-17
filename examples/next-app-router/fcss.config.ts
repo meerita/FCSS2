@@ -6,11 +6,7 @@
 import type { FcssNextConfig } from '@fcss/next';
 
 const config: FcssNextConfig = {
-  content: [
-    'app/**/*.{ts,tsx}',
-    '../../packages/ui/src/**/*.{ts,tsx}',
-    '!node_modules/**',
-  ],
+  content: ['app/**/*.{ts,tsx}', '../../packages/ui/src/**/*.{ts,tsx}', '!node_modules/**'],
 };
 
 export default config;

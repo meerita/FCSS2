@@ -67,9 +67,7 @@ export function resolveProjectName(
   const first = Object.keys(workspace.projects)[0];
   if (first) return first;
 
-  throw new Error(
-    'No projects found in angular.json. Use --project <name> to specify one.',
-  );
+  throw new Error('No projects found in angular.json. Use --project <name> to specify one.');
 }
 
 function readJson<T>(tree: Tree, filePath: string): T {
@@ -159,9 +157,7 @@ function addGlobalStyles(schema: NgAddSchema): Rule {
 
     buildTarget.options['styles'] = [CORE_STYLES_ENTRY, ...styles];
     tree.overwrite('angular.json', JSON.stringify(workspace, null, 2) + '\n');
-    context.logger.info(
-      `[@fcss/angular] Added ${CORE_STYLES_ENTRY} to "${projectName}" styles.`,
-    );
+    context.logger.info(`[@fcss/angular] Added ${CORE_STYLES_ENTRY} to "${projectName}" styles.`);
   };
 }
 
@@ -204,7 +200,8 @@ function createPurgeScript(schema: NgAddSchema): Rule {
       ? resolveProjectName(workspace, schema.project)
       : (schema.project ?? 'app');
     const project = workspace?.projects[projectName];
-    const distDir = (project?.architect?.['build']?.options?.['outputPath'] as string | undefined) ?? 'dist/app';
+    const distDir =
+      (project?.architect?.['build']?.options?.['outputPath'] as string | undefined) ?? 'dist/app';
     const sourceRoot = project?.sourceRoot ?? 'src';
 
     const lines = [

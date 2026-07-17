@@ -103,9 +103,10 @@ const { fcssPlugin } = require('@fcss/postcss');
 
 module.exports = {
   plugins: [
-    process.env.NODE_ENV === 'production' && fcssPlugin({
-      content: ['src/**/*.{ts,tsx,html}'],
-    }),
+    process.env.NODE_ENV === 'production' &&
+      fcssPlugin({
+        content: ['src/**/*.{ts,tsx,html}'],
+      }),
   ].filter(Boolean),
 };
 ```
@@ -119,9 +120,7 @@ The `@fcss/vite` plugin runs the purge step automatically on `vite build`:
 import { fcss } from '@fcss/vite';
 
 export default defineConfig({
-  plugins: [
-    fcss({ content: ['src/**/*.{ts,tsx}'] }),
-  ],
+  plugins: [fcss({ content: ['src/**/*.{ts,tsx}'] })],
 });
 ```
 

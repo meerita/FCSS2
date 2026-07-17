@@ -86,9 +86,7 @@ import { existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const schematicBuilt = existsSync(
-  path.resolve(__dirname, '../dist-schematics/ng-add/index.js'),
-);
+const schematicBuilt = existsSync(path.resolve(__dirname, '../dist-schematics/ng-add/index.js'));
 
 describe.skipIf(!schematicBuilt)(
   'ng-add schematic (requires dist-schematics — run pnpm run build first)',
@@ -126,9 +124,7 @@ describe.skipIf(!schematicBuilt)(
 
     it('adds @fcss/core to dependencies', async () => {
       const { UnitTestTree } = await import('@angular-devkit/schematics/testing');
-      const host = new UnitTestTree(
-        (await import('@angular-devkit/schematics')).Tree.empty(),
-      );
+      const host = new UnitTestTree((await import('@angular-devkit/schematics')).Tree.empty());
       host.create('angular.json', baseAngularJson);
       host.create('package.json', basePackageJson);
 
@@ -139,9 +135,7 @@ describe.skipIf(!schematicBuilt)(
 
     it('adds @fcss/postcss to devDependencies', async () => {
       const { UnitTestTree } = await import('@angular-devkit/schematics/testing');
-      const host = new UnitTestTree(
-        (await import('@angular-devkit/schematics')).Tree.empty(),
-      );
+      const host = new UnitTestTree((await import('@angular-devkit/schematics')).Tree.empty());
       host.create('angular.json', baseAngularJson);
       host.create('package.json', basePackageJson);
 
@@ -152,9 +146,7 @@ describe.skipIf(!schematicBuilt)(
 
     it('prepends @fcss/core/full.css to the styles array', async () => {
       const { UnitTestTree } = await import('@angular-devkit/schematics/testing');
-      const host = new UnitTestTree(
-        (await import('@angular-devkit/schematics')).Tree.empty(),
-      );
+      const host = new UnitTestTree((await import('@angular-devkit/schematics')).Tree.empty());
       host.create('angular.json', baseAngularJson);
       host.create('package.json', basePackageJson);
 
@@ -167,9 +159,7 @@ describe.skipIf(!schematicBuilt)(
 
     it('creates fcss.config.ts', async () => {
       const { UnitTestTree } = await import('@angular-devkit/schematics/testing');
-      const host = new UnitTestTree(
-        (await import('@angular-devkit/schematics')).Tree.empty(),
-      );
+      const host = new UnitTestTree((await import('@angular-devkit/schematics')).Tree.empty());
       host.create('angular.json', baseAngularJson);
       host.create('package.json', basePackageJson);
 
@@ -180,9 +170,7 @@ describe.skipIf(!schematicBuilt)(
 
     it('creates fcss-purge.mjs post-build purge script', async () => {
       const { UnitTestTree } = await import('@angular-devkit/schematics/testing');
-      const host = new UnitTestTree(
-        (await import('@angular-devkit/schematics')).Tree.empty(),
-      );
+      const host = new UnitTestTree((await import('@angular-devkit/schematics')).Tree.empty());
       host.create('angular.json', baseAngularJson);
       host.create('package.json', basePackageJson);
 
@@ -193,9 +181,7 @@ describe.skipIf(!schematicBuilt)(
 
     it('is idempotent — running twice does not duplicate the styles entry or purge script', async () => {
       const { UnitTestTree } = await import('@angular-devkit/schematics/testing');
-      const host = new UnitTestTree(
-        (await import('@angular-devkit/schematics')).Tree.empty(),
-      );
+      const host = new UnitTestTree((await import('@angular-devkit/schematics')).Tree.empty());
       host.create('angular.json', baseAngularJson);
       host.create('package.json', basePackageJson);
 
@@ -235,9 +221,7 @@ describe.skipIf(!schematicBuilt)(
       });
 
       const { UnitTestTree } = await import('@angular-devkit/schematics/testing');
-      const host = new UnitTestTree(
-        (await import('@angular-devkit/schematics')).Tree.empty(),
-      );
+      const host = new UnitTestTree((await import('@angular-devkit/schematics')).Tree.empty());
       host.create('angular.json', multiProjectAngularJson);
       host.create('package.json', basePackageJson);
 

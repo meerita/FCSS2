@@ -36,13 +36,13 @@ ng add @fcss/angular --skip-install
 
 ## What the schematic does
 
-| Action | Detail |
-|--------|--------|
-| Adds `@fcss/core` to `dependencies` | Global CSS library |
-| Adds `@fcss/postcss` to `devDependencies` | PostCSS purge plugin |
-| Prepends `node_modules/@fcss/core/dist/full.css` to `styles` in `angular.json` | Global import |
-| Creates `fcss.config.ts` | Scanner configuration |
-| Creates `postcss.config.mjs` | Production purge configuration |
+| Action                                                                         | Detail                         |
+| ------------------------------------------------------------------------------ | ------------------------------ |
+| Adds `@fcss/core` to `dependencies`                                            | Global CSS library             |
+| Adds `@fcss/postcss` to `devDependencies`                                      | PostCSS purge plugin           |
+| Prepends `node_modules/@fcss/core/dist/full.css` to `styles` in `angular.json` | Global import                  |
+| Creates `fcss.config.ts`                                                       | Scanner configuration          |
+| Creates `postcss.config.mjs`                                                   | Production purge configuration |
 
 All steps are **idempotent** — running `ng add` twice makes no duplicate changes.
 
@@ -65,12 +65,7 @@ directly (not `[class.x]`) for ARIA class names that contain colons:
 
 ```html
 <!-- Safe: bind aria-expanded and use the ARIA utility class via plain class -->
-<button
-  [attr.aria-expanded]="isOpen"
-  class="display--block:aria-expanded:true"
->
-  Toggle
-</button>
+<button [attr.aria-expanded]="isOpen" class="display--block:aria-expanded:true">Toggle</button>
 ```
 
 ## `[class.x]` binding — safe form for special characters
@@ -145,10 +140,10 @@ utility classes at production build time.
 
 ### Angular version compatibility
 
-| Builder | Supported |
-|---------|-----------|
-| `@angular/build:application` (esbuild, Angular 17+) | ✅ |
-| `@angular-devkit/build-angular:browser` (webpack, Angular 15–17) | ✅ |
+| Builder                                                          | Supported |
+| ---------------------------------------------------------------- | --------- |
+| `@angular/build:application` (esbuild, Angular 17+)              | ✅        |
+| `@angular-devkit/build-angular:browser` (webpack, Angular 15–17) | ✅        |
 
 ## Multi-project workspace
 
