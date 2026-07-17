@@ -14,10 +14,18 @@
   "scripts": {
     "build": "tsc --build",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run --passWithNoTests",
+    "test": "vitest run && playwright test",
+    "test:unit": "vitest run",
+    "test:browser": "playwright test",
     "generate": "node dist/cli.js"
   },
+  "dependencies": {
+    "@fcss/spec": "workspace:*",
+    "postcss": "^8.4.0"
+  },
   "devDependencies": {
+    "@playwright/test": "^1.45.0",
+    "@types/node": "^22.0.0",
     "typescript": "catalog:",
     "vitest": "catalog:"
   }

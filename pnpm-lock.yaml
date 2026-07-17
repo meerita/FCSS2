@@ -19,7 +19,7 @@ importers:
     devDependencies:
       '@changesets/cli':
         specifier: ^2.27.0
-        version: 2.31.1(@types/node@20.4.2)
+        version: 2.31.1(@types/node@22.20.1)
       '@eslint/js':
         specifier: ^9.9.0
         version: 9.39.5
@@ -37,10 +37,10 @@ importers:
         version: 8.64.0(eslint@9.39.5)(typescript@5.9.3)
       vite:
         specifier: ^6.0.0
-        version: 6.4.3(@types/node@20.4.2)
+        version: 6.4.3(@types/node@22.20.1)
       vitest:
         specifier: ^4.0.0
-        version: 4.1.10(@types/node@20.4.2)(vite@6.4.3(@types/node@20.4.2))
+        version: 4.1.10(@types/node@22.20.1)(vite@6.4.3(@types/node@22.20.1))
 
   apps/docs:
     dependencies:
@@ -85,7 +85,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: 'catalog:'
-        version: 4.1.10(@types/node@20.4.2)(vite@6.4.3(@types/node@20.4.2))
+        version: 4.1.10(@types/node@22.20.1)(vite@6.4.3(@types/node@22.20.1))
 
   packages/cli:
     devDependencies:
@@ -94,7 +94,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: 'catalog:'
-        version: 4.1.10(@types/node@20.4.2)(vite@6.4.3(@types/node@20.4.2))
+        version: 4.1.10(@types/node@22.20.1)(vite@6.4.3(@types/node@22.20.1))
 
   packages/core:
     devDependencies:
@@ -103,7 +103,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: 'catalog:'
-        version: 4.1.10(@types/node@20.4.2)(vite@6.4.3(@types/node@20.4.2))
+        version: 4.1.10(@types/node@22.20.1)(vite@6.4.3(@types/node@22.20.1))
 
   packages/eslint-plugin:
     devDependencies:
@@ -112,16 +112,29 @@ importers:
         version: 5.9.3
       vitest:
         specifier: 'catalog:'
-        version: 4.1.10(@types/node@20.4.2)(vite@6.4.3(@types/node@20.4.2))
+        version: 4.1.10(@types/node@22.20.1)(vite@6.4.3(@types/node@22.20.1))
 
   packages/generator:
+    dependencies:
+      '@fcss/spec':
+        specifier: workspace:*
+        version: link:../spec
+      postcss:
+        specifier: ^8.4.0
+        version: 8.5.19
     devDependencies:
+      '@playwright/test':
+        specifier: ^1.45.0
+        version: 1.61.1
+      '@types/node':
+        specifier: ^22.0.0
+        version: 22.20.1
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
       vitest:
         specifier: 'catalog:'
-        version: 4.1.10(@types/node@20.4.2)(vite@6.4.3(@types/node@20.4.2))
+        version: 4.1.10(@types/node@22.20.1)(vite@6.4.3(@types/node@22.20.1))
 
   packages/language-service:
     devDependencies:
@@ -130,7 +143,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: 'catalog:'
-        version: 4.1.10(@types/node@20.4.2)(vite@6.4.3(@types/node@20.4.2))
+        version: 4.1.10(@types/node@22.20.1)(vite@6.4.3(@types/node@22.20.1))
 
   packages/next:
     devDependencies:
@@ -139,7 +152,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: 'catalog:'
-        version: 4.1.10(@types/node@20.4.2)(vite@6.4.3(@types/node@20.4.2))
+        version: 4.1.10(@types/node@22.20.1)(vite@6.4.3(@types/node@22.20.1))
 
   packages/postcss:
     devDependencies:
@@ -148,7 +161,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: 'catalog:'
-        version: 4.1.10(@types/node@20.4.2)(vite@6.4.3(@types/node@20.4.2))
+        version: 4.1.10(@types/node@22.20.1)(vite@6.4.3(@types/node@22.20.1))
 
   packages/scanner:
     devDependencies:
@@ -157,7 +170,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: 'catalog:'
-        version: 4.1.10(@types/node@20.4.2)(vite@6.4.3(@types/node@20.4.2))
+        version: 4.1.10(@types/node@22.20.1)(vite@6.4.3(@types/node@22.20.1))
 
   packages/spec:
     devDependencies:
@@ -166,7 +179,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: 'catalog:'
-        version: 4.1.10(@types/node@20.4.2)(vite@6.4.3(@types/node@20.4.2))
+        version: 4.1.10(@types/node@22.20.1)(vite@6.4.3(@types/node@22.20.1))
 
   packages/vite:
     devDependencies:
@@ -175,7 +188,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: 'catalog:'
-        version: 4.1.10(@types/node@20.4.2)(vite@6.4.3(@types/node@20.4.2))
+        version: 4.1.10(@types/node@22.20.1)(vite@6.4.3(@types/node@22.20.1))
 
   packages/vscode:
     devDependencies:
@@ -184,7 +197,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: 'catalog:'
-        version: 4.1.10(@types/node@20.4.2)(vite@6.4.3(@types/node@20.4.2))
+        version: 4.1.10(@types/node@22.20.1)(vite@6.4.3(@types/node@22.20.1))
 
 packages:
 
@@ -587,6 +600,11 @@ packages:
     resolution: {integrity: sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA==}
     engines: {node: '>=12.4.0'}
 
+  '@playwright/test@1.61.1':
+    resolution: {integrity: sha512-8nKv6+0RJSL9FE4jYOEGXnPeM/Hg12qZpmqzZjRh3qM0Y7c3z1mrOTfFLids72RDQYVh9WpLEfR5WdpNX4fkig==}
+    engines: {node: '>=18'}
+    hasBin: true
+
   '@rollup/rollup-android-arm-eabi@4.62.2':
     resolution: {integrity: sha512-6o7ZLZK+BeenkZCFNDXqpbjw9bD6nuWonvS/lwQJp7NoVVxm6p3qE7qQ5jGuBjiFsgvqjD8mZAU5oWxTmbOeOg==}
     cpu: [arm]
@@ -750,6 +768,9 @@ packages:
 
   '@types/node@20.4.2':
     resolution: {integrity: sha512-Dd0BYtWgnWJKwO1jkmTrzofjK2QXXcai0dmtzvIBhcA+RsG5h8R3xlyta0kGOZRNfL9GuRtb1knmPEhQrePCEw==}
+
+  '@types/node@22.20.1':
+    resolution: {integrity: sha512-EANqOCF9QFyra+4pfxUcX9STKJpCLjMbObVzljIJomAWSnuSIEAvyzEU53GaajbXJEgdh0iEcPL+DGvpUd4k1Q==}
 
   '@types/prop-types@15.7.15':
     resolution: {integrity: sha512-F6bEyamV9jKGAFBEmlQnesRPGOQqS2+Uwi0Em15xenOxHaf2hv6L8YCVn3rPdPJOiJfPiCnLIRyvwVaqMY3MIw==}
@@ -1528,6 +1549,11 @@ packages:
   fs.realpath@1.0.0:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
 
+  fsevents@2.3.2:
+    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
+    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
+    os: [darwin]
+
   fsevents@2.3.3:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
@@ -2081,6 +2107,16 @@ packages:
     resolution: {integrity: sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==}
     engines: {node: '>=6'}
 
+  playwright-core@1.61.1:
+    resolution: {integrity: sha512-h7Qlt6m4REp25qvIdvbDtVmD4LqVXfpRxhORv9L0jzETM05p4fuPJ3dKyuSXQxDSbXnmS79HAgi9589lGSpLkg==}
+    engines: {node: '>=18'}
+    hasBin: true
+
+  playwright@1.61.1:
+    resolution: {integrity: sha512-DWnY5o3YbLWK4GovuAVwpqL+1VwGNdUGrRr++8j8PtQQzvAVZUIMjKQ90fY689sEJZJBbZVw1rXaOKSTitkzPQ==}
+    engines: {node: '>=18'}
+    hasBin: true
+
   possible-typed-array-names@1.1.0:
     resolution: {integrity: sha512-/+5VFTchJDoVj3bhoqi6UeymcD00DAwb1nJwamzPvHEszJ4FpF6SNNbUbOS8yI56qHzdV8eK0qEfOSiodkTdxg==}
     engines: {node: '>= 0.4'}
@@ -2448,6 +2484,9 @@ packages:
     resolution: {integrity: sha512-nWJ91DjeOkej/TA8pXQ3myruKpKEYgqvpw9lz4OPHj/NWFNluYrjbz9j01CJ8yKQd2g4jFoOkINCTW2I5LEEyw==}
     engines: {node: '>= 0.4'}
 
+  undici-types@6.21.0:
+    resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
+
   universalify@0.1.2:
     resolution: {integrity: sha512-rBJeI5CXAlmy1pV+617WB9J63U6XcazHHF2f2dbJix4XzpUF0RS3Zbj0FGIOCAva5P/d/GBOYaACQ1w+0azUkg==}
     engines: {node: '>= 4.0.0'}
@@ -2620,7 +2659,7 @@ snapshots:
     dependencies:
       '@changesets/types': 6.1.0
 
-  '@changesets/cli@2.31.1(@types/node@20.4.2)':
+  '@changesets/cli@2.31.1(@types/node@22.20.1)':
     dependencies:
       '@changesets/apply-release-plan': 7.1.1
       '@changesets/assemble-release-plan': 6.0.10
@@ -2636,7 +2675,7 @@ snapshots:
       '@changesets/should-skip-package': 0.1.2
       '@changesets/types': 6.1.0
       '@changesets/write': 0.4.0
-      '@inquirer/external-editor': 1.0.3(@types/node@20.4.2)
+      '@inquirer/external-editor': 1.0.3(@types/node@22.20.1)
       '@manypkg/get-packages': 1.1.3
       ansi-colors: 4.1.3
       enquirer: 2.4.1
@@ -2921,12 +2960,12 @@ snapshots:
 
   '@humanwhocodes/retry@0.4.3': {}
 
-  '@inquirer/external-editor@1.0.3(@types/node@20.4.2)':
+  '@inquirer/external-editor@1.0.3(@types/node@22.20.1)':
     dependencies:
       chardet: 2.2.0
       iconv-lite: 0.7.3
     optionalDependencies:
-      '@types/node': 20.4.2
+      '@types/node': 22.20.1
 
   '@jridgewell/sourcemap-codec@1.5.5': {}
 
@@ -2999,6 +3038,10 @@ snapshots:
       fastq: 1.20.1
 
   '@nolyfill/is-core-module@1.0.39': {}
+
+  '@playwright/test@1.61.1':
+    dependencies:
+      playwright: 1.61.1
 
   '@rollup/rollup-android-arm-eabi@4.62.2':
     optional: true
@@ -3110,6 +3153,10 @@ snapshots:
   '@types/node@12.20.55': {}
 
   '@types/node@20.4.2': {}
+
+  '@types/node@22.20.1':
+    dependencies:
+      undici-types: 6.21.0
 
   '@types/prop-types@15.7.15': {}
 
@@ -3339,13 +3386,13 @@ snapshots:
       chai: 6.2.2
       tinyrainbow: 3.1.0
 
-  '@vitest/mocker@4.1.10(vite@6.4.3(@types/node@20.4.2))':
+  '@vitest/mocker@4.1.10(vite@6.4.3(@types/node@22.20.1))':
     dependencies:
       '@vitest/spy': 4.1.10
       estree-walker: 3.0.3
       magic-string: 0.30.21
     optionalDependencies:
-      vite: 6.4.3(@types/node@20.4.2)
+      vite: 6.4.3(@types/node@22.20.1)
 
   '@vitest/pretty-format@4.1.10':
     dependencies:
@@ -4118,6 +4165,9 @@ snapshots:
 
   fs.realpath@1.0.0: {}
 
+  fsevents@2.3.2:
+    optional: true
+
   fsevents@2.3.3:
     optional: true
 
@@ -4695,6 +4745,14 @@ snapshots:
 
   pify@4.0.1: {}
 
+  playwright-core@1.61.1: {}
+
+  playwright@1.61.1:
+    dependencies:
+      playwright-core: 1.61.1
+    optionalDependencies:
+      fsevents: 2.3.2
+
   possible-typed-array-names@1.1.0: {}
 
   postcss@8.4.14:
@@ -5131,6 +5189,8 @@ snapshots:
       has-symbols: 1.1.0
       which-boxed-primitive: 1.1.1
 
+  undici-types@6.21.0: {}
+
   universalify@0.1.2: {}
 
   unrs-resolver@1.12.2:
@@ -5164,7 +5224,7 @@ snapshots:
     dependencies:
       punycode: 2.3.1
 
-  vite@6.4.3(@types/node@20.4.2):
+  vite@6.4.3(@types/node@22.20.1):
     dependencies:
       esbuild: 0.25.12
       fdir: 6.5.0(picomatch@4.0.5)
@@ -5173,13 +5233,13 @@ snapshots:
       rollup: 4.62.2
       tinyglobby: 0.2.17
     optionalDependencies:
-      '@types/node': 20.4.2
+      '@types/node': 22.20.1
       fsevents: 2.3.3
 
-  vitest@4.1.10(@types/node@20.4.2)(vite@6.4.3(@types/node@20.4.2)):
+  vitest@4.1.10(@types/node@22.20.1)(vite@6.4.3(@types/node@22.20.1)):
     dependencies:
       '@vitest/expect': 4.1.10
-      '@vitest/mocker': 4.1.10(vite@6.4.3(@types/node@20.4.2))
+      '@vitest/mocker': 4.1.10(vite@6.4.3(@types/node@22.20.1))
       '@vitest/pretty-format': 4.1.10
       '@vitest/runner': 4.1.10
       '@vitest/snapshot': 4.1.10
@@ -5196,10 +5256,10 @@ snapshots:
       tinyexec: 1.2.4
       tinyglobby: 0.2.17
       tinyrainbow: 3.1.0
-      vite: 6.4.3(@types/node@20.4.2)
+      vite: 6.4.3(@types/node@22.20.1)
       why-is-node-running: 2.3.0
     optionalDependencies:
-      '@types/node': 20.4.2
+      '@types/node': 22.20.1
     transitivePeerDependencies:
       - msw
 
