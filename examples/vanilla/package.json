@@ -1,0 +1,16 @@
+{
+  "name": "@fcss/example-vanilla",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Vanilla HTML fixture for @fcss/core smoke testing",
+  "scripts": {
+    "build": "echo 'No build step needed for vanilla HTML'",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "@fcss/core": "workspace:*"
+  },
+  "devDependencies": {
+    "vitest": "catalog:"
+  }
+}

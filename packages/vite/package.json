@@ -1,0 +1,44 @@
+{
+  "name": "@fcss/vite",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "FCSS Vite plugin — source scanning, production purge, and dev diagnostics",
+  "keywords": [
+    "css",
+    "utility",
+    "fcss",
+    "vite",
+    "purge"
+  ],
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc --build",
+    "typecheck": "tsc -b --pretty false",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@fcss/postcss": "workspace:*",
+    "@fcss/scanner": "workspace:*",
+    "jiti": "^2.0.0",
+    "postcss": "^8.4.0"
+  },
+  "peerDependencies": {
+    "vite": "^5.0.0 || ^6.0.0"
+  },
+  "devDependencies": {
+    "@fcss/core": "workspace:*",
+    "@playwright/test": "^1.45.0",
+    "@types/node": "^22.0.0",
+    "typescript": "catalog:",
+    "vite": "^6.0.0",
+    "vitest": "catalog:"
+  }
+}

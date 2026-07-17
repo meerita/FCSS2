@@ -1,0 +1,68 @@
+{
+  "name": "@fcss/core",
+  "version": "0.0.0",
+  "private": false,
+  "type": "module",
+  "description": "Functional CSS utility library — full set, framework-agnostic, purge-ready",
+  "keywords": [
+    "css",
+    "utility",
+    "functional-css",
+    "fcss",
+    "purge"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cognativinc/fcss"
+  },
+  "bugs": {
+    "url": "https://github.com/cognativinc/fcss/issues"
+  },
+  "homepage": "https://github.com/cognativinc/fcss#readme",
+  "exports": {
+    ".": "./dist/full.css",
+    "./full.css": "./dist/full.css",
+    "./reset.css": "./dist/reset.css",
+    "./root.css": "./dist/root.css",
+    "./utilities.css": "./dist/utilities.css",
+    "./states.css": "./dist/states.css",
+    "./states/pseudo.css": "./dist/states/pseudo.css",
+    "./states/aria.css": "./dist/states/aria.css",
+    "./breakpoints.css": "./dist/breakpoints.css",
+    "./breakpoints/sm.css": "./dist/breakpoints/sm.css",
+    "./breakpoints/md.css": "./dist/breakpoints/md.css",
+    "./breakpoints/lg.css": "./dist/breakpoints/lg.css",
+    "./breakpoints/xl.css": "./dist/breakpoints/xl.css",
+    "./breakpoints/xxl.css": "./dist/breakpoints/xxl.css",
+    "./manifest.json": "./dist/manifest.json"
+  },
+  "files": [
+    "dist/*.css",
+    "dist/states/*.css",
+    "dist/breakpoints/*.css",
+    "dist/manifest.json",
+    "dist/statistics.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": [
+    "dist/**/*.css"
+  ],
+  "scripts": {
+    "generate": "tsc -p tsconfig.scripts.json && node dist/scripts/generate.js",
+    "build": "tsc --build && pnpm run generate",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@fcss/spec": "workspace:*"
+  },
+  "devDependencies": {
+    "@fcss/generator": "workspace:*",
+    "@types/node": "^22.0.0",
+    "postcss": "^8.4.0",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

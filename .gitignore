@@ -1,8 +1,10 @@
 # Temporary working files — never committed
 _temp/
 
-# Plans (work-in-progress, not official docs)
+# Agent/planning artifacts — not official docs
 docs/plans/
+docs/decisions/
+docs/migration/
 
 # OS
 .DS_Store
@@ -18,3 +20,20 @@ Thumbs.db
 .env
 .env.local
 .env.*.local
+
+# Node.js
+node_modules/
+*.tsbuildinfo
+
+# Build outputs
+dist/
+out/
+.next/
+next-env.d.ts
+dist-schematics/
+
+# Playwright test artifacts
+test-results/
+
+# pnpm store (local)
+.pnpm-store/

@@ -1,0 +1,29 @@
+# @file .prettierignore
+# @description Files and directories excluded from Prettier formatting.
+# @layer root
+# @created Diego Lafuente <diego.lafuente@cognativinc.com>
+
+# Build outputs
+dist/
+.next/
+out/
+
+# Package manager
+node_modules/
+pnpm-lock.yaml
+
+# Generated CSS (never touch generated files)
+packages/core/src/generated/
+
+# Lock files and changelogs managed by other tools
+CHANGELOG.md
+
+# Agent rules and Claude configuration (pre-existing, not reformatted)
+.agents/
+.claude/
+
+# Legacy docs app — moved without modification per Phase 1 constraints
+apps/docs/
+
+# Phase 0 deliverables — must not be modified
+docs/migration/
