@@ -4,7 +4,6 @@
 # @created Diego Lafuente <diego.lafuente@cognativinc.com>
 
 packages:
-  - 'apps/*'
   - 'packages/*'
   - 'examples/*'
   - 'examples/angular/*'
