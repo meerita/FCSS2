@@ -10,7 +10,12 @@ import {
   FCSS_PERCENTAGE_SCALE,
   FCSS_ARIA_STATES,
 } from '@fcss/spec';
-import type { FcssPropertyDefinition, FcssValueDefinition, FcssNumericBehavior } from '@fcss/spec';
+import type {
+  FcssPropertyDefinition,
+  FcssValueDefinition,
+  FcssNumericBehavior,
+  FcssAriaStateDefinition,
+} from '@fcss/spec';
 import {
   buildBaseClassName,
   buildPseudoClassName,
@@ -76,7 +81,7 @@ function getNumericScale(behavior: FcssNumericBehavior): FcssValueDefinition[] {
 
 // Build aria states lookup: attribute → values[]
 const ARIA_VALUES_MAP = new Map<string, readonly string[]>(
-  FCSS_ARIA_STATES.map((s) => [s.attribute, s.values]),
+  FCSS_ARIA_STATES.map((s: FcssAriaStateDefinition) => [s.attribute, s.values]),
 );
 
 // Builds a ManifestEntry without setting deprecated if it is undefined (exactOptionalPropertyTypes).
@@ -129,7 +134,7 @@ export function generate(
   for (const prop of properties) {
     if (prop.status !== 'supported' && prop.status !== 'preset-only') continue;
 
-    const explicitClassValues = new Set(prop.values.map((v) => v.classValue));
+    const explicitClassValues = new Set(prop.values.map((v: FcssValueDefinition) => v.classValue));
     const allValues: FcssValueDefinition[] = [...prop.values];
 
     if (prop.numericBehavior) {
