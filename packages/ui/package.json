@@ -1,0 +1,19 @@
+{
+  "name": "@fcss/ui",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Shared UI components for FCSS monorepo scanning tests",
+  "main": "src/index.tsx",
+  "scripts": {
+    "build": "echo 'no build step'",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "react": "^18.3.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.0",
+    "typescript": "catalog:"
+  }
+}

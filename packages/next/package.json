@@ -2,6 +2,15 @@
   "name": "@fcss/next",
   "version": "0.0.0",
   "type": "module",
+  "description": "FCSS Next.js plugin — source scanning, production purge via withFcss()",
+  "keywords": [
+    "css",
+    "utility",
+    "fcss",
+    "next",
+    "purge"
+  ],
+  "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
@@ -12,10 +21,27 @@
   },
   "scripts": {
     "build": "tsc --build",
-    "typecheck": "tsc --noEmit",
-    "test": "vitest run --passWithNoTests"
+    "typecheck": "tsc -b --pretty false",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@fcss/postcss": "workspace:*",
+    "@fcss/scanner": "workspace:*",
+    "jiti": "^2.0.0",
+    "postcss": "^8.4.0"
+  },
+  "peerDependencies": {
+    "next": "^14.0.0 || ^15.0.0"
   },
   "devDependencies": {
+    "@fcss/core": "workspace:*",
+    "@playwright/test": "^1.45.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "next": "^15.0.0",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
     "typescript": "catalog:",
     "vitest": "catalog:"
   }
