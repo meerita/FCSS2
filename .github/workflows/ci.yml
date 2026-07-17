@@ -47,7 +47,7 @@ jobs:
         run: pnpm -r run build
 
       - name: Install Playwright browsers
-        run: pnpm exec playwright install --with-deps
+        run: pnpm --filter @fcss/generator exec playwright install --with-deps
 
       - name: Test all packages
         run: pnpm -r run test
