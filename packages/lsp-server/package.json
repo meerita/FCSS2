@@ -1,0 +1,24 @@
+{
+  "name": "@fcss/lsp-server",
+  "version": "0.0.0",
+  "private": true,
+  "main": "dist/server.js",
+  "bin": {
+    "fcss-language-server": "dist/server.js"
+  },
+  "scripts": {
+    "build": "tsc --build",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "@fcss/language-service": "workspace:*",
+    "vscode-languageserver": "^9.0.1",
+    "vscode-languageserver-textdocument": "^1.0.12"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}
