@@ -18,5 +18,7 @@ export default tseslint.config(js.configs.recommended, ...tseslint.configs.recom
     '**/next-env.d.ts',
     // Legacy docs app — moved without modification per Phase 1 constraints
     'apps/docs/**',
+    // Rust crate — linted by cargo clippy, not ESLint
+    'packages/zed/**',
   ],
 });

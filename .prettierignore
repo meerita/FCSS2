@@ -27,3 +27,6 @@ apps/docs/
 
 # Phase 0 deliverables — must not be modified
 docs/migration/
+
+# Rust crate — formatting handled by cargo fmt, not Prettier
+packages/zed/
