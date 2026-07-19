@@ -9,6 +9,5 @@
     "rootDir": "src",
     "composite": true
   },
-  "include": ["src"],
-  "references": [{ "path": "../language-service" }]
+  "include": ["src"]
 }
