@@ -197,3 +197,24 @@ export default defineConfig({
   safelist: ['display--flex', 'display--none'],
 });
 ```
+
+---
+
+## Editor integrations
+
+### Zed
+
+FCSS IntelliSense is available in [Zed](https://zed.dev) via a Rust→WASM extension that
+launches `@fcss/lsp-server`. Provides completions, hover, diagnostics, and code actions in
+`class` and `className` attributes across HTML, JSX, TSX, and TypeScript.
+
+Install both packages in your project:
+
+```sh
+npm install @fcss/core @fcss/lsp-server
+```
+
+Then load `packages/zed/` as a dev extension in Zed (Cmd+Shift+X → Install Dev Extension).
+
+See the [Zed integration guide](./guides/zed.md) for prerequisites, build steps, supported
+file types, and known limitations.
