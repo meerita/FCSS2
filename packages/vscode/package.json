@@ -2,24 +2,56 @@
   "name": "@fcss/vscode",
   "version": "0.0.0",
   "private": true,
+  "publisher": "fcss",
+  "displayName": "FCSS IntelliSense",
+  "description": "Completions, hover, diagnostics, and code actions for FCSS utility classes",
+  "categories": [
+    "Linters",
+    "Other"
+  ],
   "type": "commonjs",
   "main": "dist/extension.js",
   "exports": {
     ".": "./dist/extension.js"
+  },
+  "activationEvents": [
+    "onLanguage:html",
+    "onLanguage:javascript",
+    "onLanguage:javascriptreact",
+    "onLanguage:typescript",
+    "onLanguage:typescriptreact"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "fcss.addToSafelist",
+        "title": "FCSS: Add to Safelist"
+      },
+      {
+        "command": "fcss.createCRule",
+        "title": "FCSS: Create c- Rule"
+      },
+      {
+        "command": "fcss.convertToStaticMap",
+        "title": "FCSS: Convert to Static Map"
+      },
+      {
+        "command": "fcss.openDocs",
+        "title": "FCSS: Open Docs"
+      }
+    ]
   },
   "scripts": {
     "build": "tsc --build",
     "typecheck": "tsc -b --pretty false",
     "test": "vitest run --passWithNoTests"
   },
-  "dependencies": {
-    "@fcss/language-service": "workspace:*"
-  },
   "devDependencies": {
     "@types/node": "^22.0.0",
     "@types/vscode": "^1.90.0",
     "typescript": "catalog:",
-    "vitest": "catalog:"
+    "vitest": "catalog:",
+    "vscode-languageclient": "^9.0.0"
   },
   "engines": {
     "vscode": "^1.90.0"
