@@ -1,0 +1,72 @@
+<!doctype html>
+<!--
+  @file examples/zed-validation/index.html
+  @description Zed extension validation fixture — HTML with FCSS class attributes exercising
+               completions, hover, and diagnostics (unknown-property, unknown-value, conflict,
+               duplicate). Load packages/zed as a dev extension in Zed, open this project.
+  @layer tests
+  @created Diego Lafuente <diego.lafuente@cognativinc.com>
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FCSS Zed Validation</title>
+    <link rel="stylesheet" href="node_modules/@fcss/core/dist/full.css" />
+  </head>
+  <body>
+    <!--
+      VALID CLASSES — hover any class to see generated CSS.
+      Type inside a class="" to trigger completions (-,:,.,%).
+    -->
+    <div class="display--flex flex-direction--column align-items--center padding--24">
+      <h1 class="font-size--32 font-weight--700 margin-bottom--16">FCSS Zed Validation</h1>
+
+      <p class="font-size--16 text-align--center margin-bottom--24">
+        Open this project in Zed with the FCSS dev extension loaded.
+      </p>
+
+      <!--
+        DIAGNOSTIC: fcss/conflict
+        display--flex and display--block both set the `display` property.
+        Expected: error diagnostic on one or both classes.
+      -->
+      <div class="display--flex display--block">Conflict diagnostic</div>
+
+      <!--
+        DIAGNOSTIC: fcss/duplicate
+        padding--16 appears twice in the same class attribute.
+        Expected: warning diagnostic on the duplicate.
+      -->
+      <div class="padding--16 padding--16">Duplicate diagnostic</div>
+
+      <!--
+        DIAGNOSTIC: fcss/unknown-property
+        `flux-capacitor` is not a known CSS property in @fcss/core.
+        Expected: error diagnostic on this class.
+      -->
+      <div class="flux-capacitor--88">Unknown property diagnostic</div>
+
+      <!--
+        DIAGNOSTIC: fcss/unknown-value
+        `display` is a known property but `superfluid` is not a known value.
+        Expected: error diagnostic on this class.
+      -->
+      <div class="display--superfluid">Unknown value diagnostic</div>
+
+      <!--
+        DIAGNOSTIC: fcss/invalid-condition-chain
+        Two pseudo-conditions are not allowed — only one condition per class.
+        Expected: error diagnostic on this class.
+      -->
+      <div class="display--flex:hover:focus-visible">Invalid condition chain diagnostic</div>
+
+      <!--
+        NOTE: fcss/deprecated-class — not triggerable with current @fcss/core manifest.
+        The current manifest contains no deprecated entries. This diagnostic code is fully
+        implemented in @fcss/language-service and tested with fixture manifests; it will
+        surface when @fcss/core introduces deprecated class aliases.
+      -->
+    </div>
+  </body>
+</html>

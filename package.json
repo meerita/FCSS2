@@ -25,5 +25,20 @@
     "typescript-eslint": "^8.3.0",
     "vite": "^6.0.0",
     "vitest": "^4.0.0"
+  },
+  "dependencies": {
+    "@fcss/core": "",
+    "@fcss/lsp-server": ""
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*",
+      "examples/*",
+      "examples/angular/*"
+    ],
+    "catalog": {
+      "typescript": "^5.5.0",
+      "vitest": "^4.0.0"
+    }
   }
 }
