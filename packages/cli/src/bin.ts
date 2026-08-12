@@ -7,7 +7,7 @@ import { Command } from 'commander';
 import { loadConfig } from './config/loader.js';
 import { runBuild } from './commands/build.js';
 import { runPurge } from './commands/purge.js';
-import { runInit } from './commands/init.js';
+import { runInit, type Framework } from './commands/init.js';
 import { runAudit } from './commands/audit.js';
 import { runDoctor } from './commands/doctor.js';
 import { runList } from './commands/list.js';
@@ -43,10 +43,10 @@ program
 program
   .command('init')
   .description('Scaffold fcss.config.ts and add CSS imports (idempotent)')
-  .option('-f, --framework <name>', 'Framework to configure (react, next, angular, none)')
+  .option('-f, --framework <name>', 'Framework to configure (react, next, angular, astro, none)')
   .option('-y, --yes', 'Skip confirmation prompts')
   .action(async (opts: { framework?: string; yes?: boolean }) => {
-    const framework = opts.framework as 'react' | 'next' | 'angular' | 'none' | undefined;
+    const framework = opts.framework as Framework | undefined;
     const initOpts =
       framework !== undefined
         ? { framework, ...(opts.yes ? { yes: true as const } : {}) }

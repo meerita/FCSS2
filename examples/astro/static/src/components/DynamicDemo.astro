@@ -1,0 +1,20 @@
+---
+// @file examples/astro/static/src/components/DynamicDemo.astro
+// @description Anti-pattern demonstration — a dynamic class:list entry triggers a dev-mode
+//   warning from @fcss/vite. This component is intentionally NOT rendered anywhere; it exists
+//   solely so the scanner can detect the warning on dev start.
+// @layer ui
+// @created Diego Lafuente <diego.lafuente@cognativinc.com>
+
+interface Props {
+  isActive: boolean;
+}
+
+const { isActive } = Astro.props;
+
+// WRONG: a computed/interpolated class fragment prevents static analysis.
+// Use a static class map (see Card.astro's opacity--0.5 usage) instead.
+const state = isActive ? 'active' : 'inactive';
+---
+
+<div class:list={[`opacity--${state}`]}>Dynamic demo (do not use)</div>

@@ -1,8 +1,16 @@
 {
   "name": "@fcss/generator",
   "version": "0.0.0",
-  "private": true,
+  "private": false,
   "type": "module",
+  "description": "FCSS CSS generator — builds the full utility set from the FCSS spec",
+  "keywords": [
+    "css",
+    "utility",
+    "fcss",
+    "generator"
+  ],
+  "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
@@ -11,6 +19,11 @@
       "types": "./dist/index.d.ts"
     }
   },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsc --build",
     "typecheck": "tsc -b --pretty false",

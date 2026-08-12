@@ -30,6 +30,7 @@ dist/
 out/
 .next/
 next-env.d.ts
+.astro/
 dist-schematics/
 
 # Playwright test artifacts

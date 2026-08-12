@@ -143,6 +143,44 @@ See the [Angular guide](./guides/angular.md) for purging and schematic options.
 
 ---
 
+## Astro
+
+```bash
+npm install @fcss/core @fcss/astro
+```
+
+Register the integration in `astro.config.mjs`:
+
+```js
+import { defineConfig } from 'astro/config';
+import fcss from '@fcss/astro';
+
+export default defineConfig({
+  integrations: [fcss()],
+});
+```
+
+`@fcss/astro` is a thin wrapper that registers `@fcss/vite`'s plugin into Astro's Vite
+config — no separate purge implementation to configure, and no FCSS runtime JS is added
+to the site.
+
+Import the CSS in a layout's frontmatter:
+
+```astro
+---
+import '@fcss/core/full.css';
+---
+```
+
+The plugin scans `.astro` template `class="..."` attributes and static
+`class:list={[...]}` entries by default. Both static (SSG) and server (SSR) output are
+supported.
+
+See the [Astro guide](./guides/astro.md) for `class:list` dynamic-vs-static patterns,
+content path configuration, and deploy-adapter notes.
+
+---
+
 ## Manual modular imports
 
 Instead of the full CSS bundle, you can import only the files you need:
