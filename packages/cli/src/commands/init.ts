@@ -7,7 +7,7 @@ import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { execSync } from 'node:child_process';
 
-export type Framework = 'react' | 'next' | 'angular' | 'none';
+export type Framework = 'react' | 'next' | 'angular' | 'astro' | 'none';
 export type PackageManager = 'pnpm' | 'yarn' | 'npm';
 
 const CONFIG_TEMPLATE = `import { defineConfig } from '@fcss/cli';
@@ -36,6 +36,7 @@ function detectFramework(cwd: string): Framework {
     };
     if ('next' in deps) return 'next';
     if ('@angular/core' in deps) return 'angular';
+    if ('astro' in deps) return 'astro';
     if ('react' in deps || 'react-dom' in deps) return 'react';
   } catch {
     // Unparseable package.json — default to none
@@ -84,6 +85,7 @@ export async function runInit(options: InitOptions = {}): Promise<InitResult> {
   if (framework === 'react' || framework === 'next') packages.push('@fcss/vite');
   if (framework === 'next') packages.push('@fcss/next');
   if (framework === 'angular') packages.push('@fcss/angular');
+  if (framework === 'astro') packages.push('@fcss/astro');
 
   if (!options.yes) {
     console.log(`[fcss] Will install: ${packages.join(', ')}`);

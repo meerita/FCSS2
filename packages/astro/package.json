@@ -1,0 +1,46 @@
+{
+  "name": "@fcss/astro",
+  "version": "0.0.0",
+  "private": false,
+  "type": "module",
+  "description": "FCSS Astro integration — registers @fcss/vite's plugin for production purge and dev diagnostics",
+  "keywords": [
+    "css",
+    "utility",
+    "fcss",
+    "astro",
+    "purge"
+  ],
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc --build",
+    "typecheck": "tsc -b --pretty false",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@fcss/vite": "workspace:*"
+  },
+  "peerDependencies": {
+    "astro": "^7.0.0"
+  },
+  "devDependencies": {
+    "@fcss/core": "workspace:*",
+    "@types/node": "^22.0.0",
+    "astro": "^7.0.0",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

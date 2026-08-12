@@ -9,6 +9,7 @@ import { discoverFiles } from './discover.js';
 import { extractFromHtml } from './extractors/html.js';
 import { extractFromJsx } from './extractors/jsx.js';
 import { extractFromAngular } from './extractors/angular.js';
+import { extractFromAstro } from './extractors/astro.js';
 import { applySafelist } from './safelist.js';
 import { buildReport } from './report.js';
 import type { DynamicWarning } from './extractors/types.js';
@@ -38,6 +39,7 @@ export interface ScanResult {
 const HTML_EXTS = new Set(['.html', '.htm']);
 const JSX_EXTS = new Set(['.js', '.jsx', '.ts', '.tsx', '.mjs', '.cjs']);
 const ANGULAR_COMPONENT_EXTS = new Set(['.ts']);
+const ASTRO_EXTS = new Set(['.astro']);
 
 function isAngularTemplate(filePath: string): boolean {
   return filePath.endsWith('.component.html');
@@ -58,6 +60,10 @@ function extractFromFile(
 
   if (isAngularTemplate(filePath) || (HTML_EXTS.has(ext) && !isAngularComponent(filePath))) {
     return extractFromAngular(source);
+  }
+
+  if (ASTRO_EXTS.has(ext)) {
+    return extractFromAstro(source, filePath);
   }
 
   if (JSX_EXTS.has(ext)) {

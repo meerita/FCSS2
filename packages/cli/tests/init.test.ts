@@ -3,7 +3,7 @@
 // @layer tests
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import * as os from 'node:os';
@@ -70,5 +70,59 @@ describe('runInit', () => {
     const importCount = (afterSecond.match(/@fcss\/core/g) ?? []).length;
     expect(importCount).toBe(1);
     expect(afterFirst).toBe(afterSecond);
+  });
+
+  it('detects astro and plans to install @fcss/core + @fcss/astro, not @fcss/vite', async () => {
+    fs.writeFileSync(
+      path.join(tmpDir, 'package.json'),
+      JSON.stringify({ name: 'test-project', dependencies: { astro: '^7.0.0' } }),
+      'utf8',
+    );
+    const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+
+    await runInit({ cwd: tmpDir });
+
+    const printedLines = logSpy.mock.calls.map((call) => call.join(' '));
+    const frameworkLine = printedLines.find((line) => line.includes('[fcss] Framework:'));
+    const installLine = printedLines.find((line) => line.includes('[fcss] Will install:'));
+    expect(frameworkLine).toContain('astro');
+    expect(installLine).toContain('@fcss/astro');
+    expect(installLine).not.toContain('@fcss/vite');
+
+    logSpy.mockRestore();
+  });
+
+  it('detects astro over the generic react check when both are present', async () => {
+    fs.writeFileSync(
+      path.join(tmpDir, 'package.json'),
+      JSON.stringify({
+        name: 'test-project',
+        dependencies: { astro: '^7.0.0', '@astrojs/react': '^4.0.0', react: '^18.0.0' },
+      }),
+      'utf8',
+    );
+    const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+
+    await runInit({ cwd: tmpDir });
+
+    const frameworkLine = logSpy.mock.calls
+      .map((call) => call.join(' '))
+      .find((line) => line.includes('[fcss] Framework:'));
+    expect(frameworkLine).toContain('astro');
+
+    logSpy.mockRestore();
+  });
+
+  it('explicit --framework astro installs @fcss/astro regardless of detected dependencies', async () => {
+    const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+
+    await runInit({ cwd: tmpDir, framework: 'astro' });
+
+    const installLine = logSpy.mock.calls
+      .map((call) => call.join(' '))
+      .find((line) => line.includes('[fcss] Will install:'));
+    expect(installLine).toContain('@fcss/astro');
+
+    logSpy.mockRestore();
   });
 });

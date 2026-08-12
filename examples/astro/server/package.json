@@ -1,0 +1,25 @@
+{
+  "name": "@fcss/example-astro-server",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Astro server (SSR, Node adapter) fixture for @fcss/astro smoke testing",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "start": "node ./dist/server/entry.mjs",
+    "test": "vitest run --passWithNoTests",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "@astrojs/node": "^11.0.0",
+    "@fcss/core": "workspace:*",
+    "astro": "^7.0.0"
+  },
+  "devDependencies": {
+    "@fcss/astro": "workspace:*",
+    "@playwright/test": "^1.45.0",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}
