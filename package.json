@@ -14,7 +14,10 @@
     "fmt": "prettier --write .",
     "fmt:check": "prettier --check .",
     "typecheck": "pnpm -r run typecheck",
-    "generate": "pnpm --filter @fcss/generator run generate"
+    "generate": "pnpm --filter @fcss/generator run generate",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "pnpm build && changeset publish"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.0",

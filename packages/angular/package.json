@@ -1,6 +1,7 @@
 {
   "name": "@fcss/angular",
   "version": "0.0.0",
+  "private": false,
   "type": "module",
   "description": "FCSS Angular integration — ng add schematic for standalone and workspace projects",
   "keywords": [
@@ -12,6 +13,17 @@
     "purge"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cognativinc/fcss"
+  },
+  "files": [
+    "dist",
+    "dist-schematics",
+    "collection.json",
+    "README.md",
+    "LICENSE"
+  ],
   "schematics": "./collection.json",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

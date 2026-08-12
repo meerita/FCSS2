@@ -1,7 +1,17 @@
 {
   "name": "@fcss/postcss",
   "version": "0.0.0",
+  "private": false,
   "type": "module",
+  "description": "FCSS PostCSS plugin — source scanning and production purge",
+  "keywords": [
+    "css",
+    "utility",
+    "fcss",
+    "postcss",
+    "purge"
+  ],
+  "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
@@ -10,6 +20,11 @@
       "types": "./dist/index.d.ts"
     }
   },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsc --build",
     "typecheck": "tsc -b --pretty false",
