@@ -14,7 +14,8 @@ import type { ManifestEntry, SafelistOptions, ScanReport } from '@functionalcss/
 const gzipAsync = util.promisify(zlib.gzip);
 
 export interface FcssPostcssOptions {
-  manifest: string;
+  /** Manifest path, or several whose entries are combined (e.g. core + `fcss build` output). */
+  manifest: string | string[];
   content: string[];
   cwd?: string;
   safelist?: SafelistOptions;
@@ -115,7 +116,8 @@ const fcssPostcss: PluginCreator<FcssPostcssOptions> = (options?: FcssPostcssOpt
         );
       }
 
-      const manifest = loadManifest(manifestPath);
+      const manifestPaths = Array.isArray(manifestPath) ? manifestPath : [manifestPath];
+      const manifest = manifestPaths.flatMap(loadManifest);
       const selectorMap = buildSelectorMap(manifest);
 
       const scanOptions = {
