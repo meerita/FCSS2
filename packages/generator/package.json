@@ -1,6 +1,6 @@
 {
   "name": "@functionalcss/generator",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": false,
   "type": "module",
   "description": "FCSS CSS generator — builds the full utility set from the FCSS spec",
