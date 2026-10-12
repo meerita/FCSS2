@@ -17,7 +17,7 @@ pnpm add @functionalcss/core @functionalcss/next
 
 ## App Router
 
-**`next.config.ts`** (Next.js 14+):
+**`next.config.ts`** (Next.js 14, 15 and 16):
 
 ```typescript
 import { withFcss } from '@functionalcss/next';
@@ -53,6 +53,24 @@ export default function App({ Component, pageProps }: AppProps) {
   return <Component {...pageProps} />;
 }
 ```
+
+## Next.js 16: build with webpack
+
+Next.js 16 builds with Turbopack by default. FCSS purges through webpack's asset pipeline, so
+build with the `--webpack` flag:
+
+```json
+{
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build --webpack"
+  }
+}
+```
+
+`next dev` works as usual (Turbopack or webpack). A Turbopack production build stops with a clear
+error instead of shipping the full, unpurged stylesheet. Next.js 14 and 15 build with webpack
+already and need no flag.
 
 ## Configuration
 

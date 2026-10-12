@@ -38,7 +38,8 @@
     "./breakpoints/lg.css": "./dist/breakpoints/lg.css",
     "./breakpoints/xl.css": "./dist/breakpoints/xl.css",
     "./breakpoints/xxl.css": "./dist/breakpoints/xxl.css",
-    "./manifest.json": "./dist/manifest.json"
+    "./manifest.json": "./dist/manifest.json",
+    "./package.json": "./package.json"
   },
   "files": [
     "dist/*.css",

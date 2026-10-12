@@ -141,6 +141,10 @@ Add dynamically constructed classes to the safelist in `fcss.config.ts`.
 
 `withFcss` runs the purge step automatically during `next build`. No additional configuration is needed if you use the default content paths or `fcss.config.ts`.
 
+**Next.js 16** builds with Turbopack by default, and FCSS purges through webpack. Use
+`next build --webpack` in your `build` script. Without the flag, the build stops with an error
+rather than shipping the full ~28 MB stylesheet. `next dev` needs no flag.
+
 To verify which classes will be kept:
 
 ```bash
