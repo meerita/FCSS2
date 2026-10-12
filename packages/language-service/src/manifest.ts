@@ -5,6 +5,7 @@
 
 import { readFileSync, watch as fsWatch } from 'node:fs';
 import type { FSWatcher } from 'node:fs';
+import { parseManifest } from './compact-manifest';
 
 export interface ManifestCondition {
   type: 'pseudo' | 'aria';
@@ -123,7 +124,7 @@ export function createManifestIndex(entries: ManifestEntry[]): ManifestIndex {
 
 export function loadManifestFromPath(manifestPath: string): ManifestEntry[] {
   const raw = readFileSync(manifestPath, 'utf8');
-  return JSON.parse(raw) as ManifestEntry[];
+  return parseManifest(JSON.parse(raw));
 }
 
 export function watchManifest(

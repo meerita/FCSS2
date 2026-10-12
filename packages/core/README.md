@@ -36,17 +36,15 @@ or `fcss purge` from `@functionalcss/cli` to ship only the classes you use.
 
 ## Entry points
 
-| Import                                   | Contents                                    |
-| ---------------------------------------- | ------------------------------------------- |
-| `@functionalcss/core` / `/full.css`      | Everything                                  |
-| `/reset.css`                             | Minimal reset                               |
-| `/root.css`                              | Custom properties                           |
-| `/utilities.css`                         | Base utilities                              |
-| `/states.css`                            | Pseudo-class and ARIA state variants        |
-| `/states/pseudo.css`, `/states/aria.css` | Each state family on its own                |
-| `/breakpoints.css`                       | All responsive variants                     |
-| `/breakpoints/{sm,md,lg,xl,xxl}.css`     | One breakpoint each                         |
-| `/manifest.json`                         | Machine-readable class list used by tooling |
+| Import                                   | Contents                              |
+| ---------------------------------------- | ------------------------------------- |
+| `@functionalcss/core` / `/full.css`      | Everything                            |
+| `/reset.css`                             | Minimal reset                         |
+| `/root.css`                              | Custom properties                     |
+| `/utilities.css`                         | Base utilities                        |
+| `/states/pseudo.css`, `/states/aria.css` | Pseudo-class / ARIA state variants    |
+| `/breakpoints/{sm,md,lg,xl,xxl}.css`     | One breakpoint each                   |
+| `/manifest.json`                         | Compact class catalog used by tooling |
 
 See the [installation guide](https://github.com/meerita/FCSS2/blob/master/docs/installation.md).
 

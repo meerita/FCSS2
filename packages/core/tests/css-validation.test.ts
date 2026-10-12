@@ -7,6 +7,7 @@ import { describe, it, expect } from 'vitest';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { isCompactManifest, parseManifest } from '@functionalcss/spec';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const distDir = path.resolve(__dirname, '../dist');
@@ -82,15 +83,18 @@ function assertNoImportant(css: string, label: string): void {
 }
 
 describe('dist/ files exist', () => {
+  it('does not ship the duplicate states.css / breakpoints.css bundles', () => {
+    expect(fs.existsSync(path.join(distDir, 'states.css'))).toBe(false);
+    expect(fs.existsSync(path.join(distDir, 'breakpoints.css'))).toBe(false);
+  });
+
   const required = [
     'utilities.css',
     'full.css',
     'reset.css',
     'root.css',
-    'states.css',
     'states/pseudo.css',
     'states/aria.css',
-    'breakpoints.css',
     'breakpoints/sm.css',
     'breakpoints/md.css',
     'breakpoints/lg.css',
@@ -162,16 +166,21 @@ describe('manifest.json', () => {
     expect(() => JSON.parse(raw)).not.toThrow();
   });
 
-  it('is a non-empty array', () => {
+  it('is in the compact format and stays small', () => {
     const raw = fs.readFileSync(path.join(distDir, 'manifest.json'), 'utf8');
-    const manifest = JSON.parse(raw) as unknown[];
-    expect(Array.isArray(manifest)).toBe(true);
+    expect(isCompactManifest(JSON.parse(raw))).toBe(true);
+    expect(raw.length).toBeLessThan(1024 * 1024);
+  });
+
+  it('expands to a non-empty entry list', () => {
+    const raw = fs.readFileSync(path.join(distDir, 'manifest.json'), 'utf8');
+    const manifest = parseManifest(JSON.parse(raw));
     expect(manifest.length).toBeGreaterThan(0);
   });
 
   it('entries have required fields', () => {
     const raw = fs.readFileSync(path.join(distDir, 'manifest.json'), 'utf8');
-    const manifest = JSON.parse(raw) as Record<string, unknown>[];
+    const manifest = parseManifest(JSON.parse(raw)) as unknown as Record<string, unknown>[];
     const sample = manifest.slice(0, 10);
     for (const entry of sample) {
       expect(typeof entry['className']).toBe('string');
@@ -184,7 +193,7 @@ describe('manifest.json', () => {
 
   it('first entry selector starts with .', () => {
     const raw = fs.readFileSync(path.join(distDir, 'manifest.json'), 'utf8');
-    const manifest = JSON.parse(raw) as Record<string, unknown>[];
+    const manifest = parseManifest(JSON.parse(raw)) as unknown as Record<string, unknown>[];
     const first = manifest[0];
     const selector = first?.['selector'];
     expect(typeof selector).toBe('string');
@@ -229,7 +238,7 @@ describe('full.css', () => {
 describe('generation determinism', () => {
   it('manifest.json is consistent with dist/utilities.css class names', () => {
     const raw = fs.readFileSync(path.join(distDir, 'manifest.json'), 'utf8');
-    const manifest = JSON.parse(raw) as Record<string, unknown>[];
+    const manifest = parseManifest(JSON.parse(raw)) as unknown as Record<string, unknown>[];
     const utilitiesCss = readDist('utilities.css');
 
     // Each manifest entry with no breakpoint/condition should appear in utilities.css

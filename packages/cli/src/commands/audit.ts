@@ -6,7 +6,7 @@
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { scan } from '@functionalcss/scanner';
-import { FCSS_PROPERTIES } from '@functionalcss/spec';
+import { FCSS_PROPERTIES, parseManifest } from '@functionalcss/spec';
 import type { FcssConfig } from '../config/schema.js';
 
 export interface AuditFinding {
@@ -37,10 +37,7 @@ export async function runAudit(config: FcssConfig, cwd = process.cwd()): Promise
     };
   }
 
-  const manifestRaw = JSON.parse(fs.readFileSync(manifestPath, 'utf8')) as Array<{
-    className: string;
-    selector: string;
-  }>;
+  const manifestRaw = parseManifest(JSON.parse(fs.readFileSync(manifestPath, 'utf8')));
   const content = config.content ?? [];
 
   if (content.length === 0) {

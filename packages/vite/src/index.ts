@@ -7,6 +7,7 @@ import type { Plugin, ResolvedConfig } from 'vite';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import * as url from 'node:url';
+import { parseManifest } from '@functionalcss/spec';
 
 export interface FcssSafelistPattern {
   pattern: RegExp;
@@ -153,10 +154,7 @@ export function fcss(pluginOptions?: FcssPluginOptions): Plugin {
         try {
           const { scan } = await import('@functionalcss/scanner');
           const manifestRaw = fs.readFileSync(currentManifestPath, 'utf8');
-          const manifest = JSON.parse(manifestRaw) as Array<{
-            className: string;
-            selector: string;
-          }>;
+          const manifest = parseManifest(JSON.parse(manifestRaw));
           const result = await scan({ content, manifest, cwd: root });
           for (const w of result.report.dynamicWarnings) {
             console.warn(

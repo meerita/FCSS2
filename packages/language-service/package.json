@@ -17,6 +17,8 @@
     "test": "vitest run --passWithNoTests"
   },
   "devDependencies": {
+    "@functionalcss/core": "workspace:*",
+    "@functionalcss/spec": "workspace:*",
     "@types/node": "^22.0.0",
     "typescript": "catalog:",
     "vitest": "catalog:"

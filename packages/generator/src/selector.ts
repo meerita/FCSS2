@@ -1,22 +1,6 @@
 // @file packages/generator/src/selector.ts
-// @description CSS selector builder for FCSS utility classes.
+// @description Re-exports the selector builder, which lives in @functionalcss/spec so manifest expansion shares it.
 // @layer tools
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 
-import { escapeClassName } from './escape.js';
-
-export function buildSelector(
-  className: string,
-  pseudo?: string,
-  ariaAttr?: string,
-  ariaValue?: string,
-): string {
-  const escaped = escapeClassName(className);
-  if (ariaAttr !== undefined && ariaValue !== undefined) {
-    return `.${escaped}[${ariaAttr}='${ariaValue}']`;
-  }
-  if (pseudo !== undefined) {
-    return `.${escaped}:${pseudo}`;
-  }
-  return `.${escaped}`;
-}
+export { buildSelector } from '@functionalcss/spec';

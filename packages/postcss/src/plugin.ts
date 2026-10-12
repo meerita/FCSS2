@@ -8,6 +8,7 @@ import * as fs from 'node:fs';
 import * as zlib from 'node:zlib';
 import * as util from 'node:util';
 import { scan } from '@functionalcss/scanner';
+import { parseManifest } from '@functionalcss/spec';
 import type { ManifestEntry, SafelistOptions, ScanReport } from '@functionalcss/scanner';
 
 const gzipAsync = util.promisify(zlib.gzip);
@@ -51,11 +52,13 @@ function loadManifest(manifestPath: string): ManifestEntry[] {
     );
   }
 
-  if (!Array.isArray(parsed)) {
-    throw new Error(`[@functionalcss/postcss] Manifest "${manifestPath}" must be a JSON array.`);
+  try {
+    return parseManifest(parsed);
+  } catch (err) {
+    throw new Error(
+      `[@functionalcss/postcss] Manifest "${manifestPath}": ${(err as Error).message}`,
+    );
   }
-
-  return parsed as ManifestEntry[];
 }
 
 // Minifiers often strip quotes from attribute selectors: [attr='val'] → [attr=val].

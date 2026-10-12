@@ -46,6 +46,7 @@
   "dependencies": {
     "@functionalcss/postcss": "workspace:*",
     "@functionalcss/scanner": "workspace:*",
+    "@functionalcss/spec": "workspace:*",
     "jiti": "^2.0.0",
     "postcss": "^8.4.0"
   },

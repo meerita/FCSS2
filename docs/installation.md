@@ -195,7 +195,8 @@ Instead of the full CSS bundle, you can import only the files you need:
 import '@functionalcss/core/reset.css';
 import '@functionalcss/core/root.css';
 import '@functionalcss/core/utilities.css';
-import '@functionalcss/core/states.css'; // or states/pseudo.css and states/aria.css separately
+import '@functionalcss/core/states/pseudo.css';
+import '@functionalcss/core/states/aria.css';
 import '@functionalcss/core/breakpoints/sm.css';
 import '@functionalcss/core/breakpoints/md.css';
 import '@functionalcss/core/breakpoints/lg.css';

@@ -21,9 +21,11 @@ npm install -D @functionalcss/scanner
 ```ts
 import { readFileSync } from 'node:fs';
 import { scan } from '@functionalcss/scanner';
+import { parseManifest } from '@functionalcss/spec';
 
-const manifest = JSON.parse(
-  readFileSync('node_modules/@functionalcss/core/dist/manifest.json', 'utf8'),
+// core ships a compact manifest; parseManifest() expands it to one entry per class.
+const manifest = parseManifest(
+  JSON.parse(readFileSync('node_modules/@functionalcss/core/dist/manifest.json', 'utf8')),
 );
 
 const { usedClasses, report } = await scan({

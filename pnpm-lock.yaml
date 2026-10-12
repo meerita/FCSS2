@@ -502,6 +502,12 @@ importers:
 
   packages/language-service:
     devDependencies:
+      '@functionalcss/core':
+        specifier: workspace:*
+        version: link:../core
+      '@functionalcss/spec':
+        specifier: workspace:*
+        version: link:../spec
       '@types/node':
         specifier: ^22.0.0
         version: 22.20.1
@@ -585,6 +591,9 @@ importers:
       '@functionalcss/scanner':
         specifier: workspace:*
         version: link:../scanner
+      '@functionalcss/spec':
+        specifier: workspace:*
+        version: link:../spec
       postcss:
         specifier: ^8.4.0
         version: 8.5.19
@@ -648,6 +657,9 @@ importers:
       '@functionalcss/scanner':
         specifier: workspace:*
         version: link:../scanner
+      '@functionalcss/spec':
+        specifier: workspace:*
+        version: link:../spec
       jiti:
         specifier: ^2.0.0
         version: 2.7.0
