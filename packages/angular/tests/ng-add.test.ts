@@ -4,7 +4,14 @@
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 
 import { describe, it, expect } from 'vitest';
+import { readFileSync } from 'node:fs';
 import { resolveProjectName } from '../schematics/ng-add/index.js';
+
+const ownVersion = (
+  JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8')) as {
+    version: string;
+  }
+).version;
 
 // ---------------------------------------------------------------------------
 // resolveProjectName — pure helper function tests
@@ -131,6 +138,7 @@ describe.skipIf(!schematicBuilt)(
       const tree = await runner.runSchematic('ng-add', { skipInstall: true }, host);
       const pkg = JSON.parse(tree.readContent('package.json'));
       expect(pkg.dependencies['@functionalcss/core']).toBeDefined();
+      expect(pkg.dependencies['@functionalcss/core']).toBe(`^${ownVersion}`);
     });
 
     it('adds @functionalcss/postcss to devDependencies', async () => {
@@ -168,7 +176,7 @@ describe.skipIf(!schematicBuilt)(
       expect(tree.readContent('fcss.config.ts')).toContain('@functionalcss/angular');
     });
 
-    it('creates fcss-purge.mjs post-build purge script', async () => {
+    it('creates fcss-purge.mjs pre-build purge script', async () => {
       const { UnitTestTree } = await import('@angular-devkit/schematics/testing');
       const host = new UnitTestTree((await import('@angular-devkit/schematics')).Tree.empty());
       host.create('angular.json', baseAngularJson);
@@ -176,7 +184,57 @@ describe.skipIf(!schematicBuilt)(
 
       const tree = await runner.runSchematic('ng-add', { skipInstall: true }, host);
       expect(tree.exists('fcss-purge.mjs')).toBe(true);
-      expect(tree.readContent('fcss-purge.mjs')).toContain('@functionalcss/postcss');
+      const script = tree.readContent('fcss-purge.mjs');
+      expect(script).toContain('@functionalcss/postcss');
+      expect(script).toContain("const outFile = 'src/fcss.purged.css';");
+    });
+
+    it('points production builds at the purged stylesheet', async () => {
+      const { UnitTestTree } = await import('@angular-devkit/schematics/testing');
+      const host = new UnitTestTree((await import('@angular-devkit/schematics')).Tree.empty());
+      const workspace = JSON.parse(baseAngularJson);
+      workspace.projects.myApp.architect.build.configurations = {
+        production: { outputHashing: 'all' },
+      };
+      host.create('angular.json', JSON.stringify(workspace));
+      host.create('package.json', basePackageJson);
+
+      const tree = await runner.runSchematic('ng-add', { skipInstall: true }, host);
+      const build = JSON.parse(tree.readContent('angular.json')).projects.myApp.architect.build;
+      expect(build.configurations.production.styles).toEqual([
+        'src/fcss.purged.css',
+        'src/styles.css',
+      ]);
+      expect(build.configurations.production.outputHashing).toBe('all');
+    });
+
+    it('runs the purge before ng build in the build script', async () => {
+      const { UnitTestTree } = await import('@angular-devkit/schematics/testing');
+      const host = new UnitTestTree((await import('@angular-devkit/schematics')).Tree.empty());
+      host.create('angular.json', baseAngularJson);
+      host.create(
+        'package.json',
+        JSON.stringify({ name: 'my-app', scripts: { build: 'ng build' } }),
+      );
+
+      const tree1 = await runner.runSchematic('ng-add', { skipInstall: true }, host);
+      const tree2 = await runner.runSchematic('ng-add', { skipInstall: true }, tree1);
+      const pkg = JSON.parse(tree2.readContent('package.json'));
+      expect(pkg.scripts.build).toBe('node fcss-purge.mjs && ng build');
+    });
+
+    it('git-ignores the generated stylesheet once', async () => {
+      const { UnitTestTree } = await import('@angular-devkit/schematics/testing');
+      const host = new UnitTestTree((await import('@angular-devkit/schematics')).Tree.empty());
+      host.create('angular.json', baseAngularJson);
+      host.create('package.json', basePackageJson);
+      host.create('.gitignore', '/dist\n');
+
+      const tree1 = await runner.runSchematic('ng-add', { skipInstall: true }, host);
+      const tree2 = await runner.runSchematic('ng-add', { skipInstall: true }, tree1);
+      const gitignore = tree2.readContent('.gitignore');
+      expect(gitignore.match(/\/src\/fcss\.purged\.css/g)).toHaveLength(1);
+      expect(gitignore.startsWith('/dist\n')).toBe(true);
     });
 
     it('is idempotent — running twice does not duplicate the styles entry or purge script', async () => {

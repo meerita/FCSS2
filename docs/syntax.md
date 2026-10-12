@@ -1,105 +1,86 @@
 # Syntax
 
-FCSS class names mirror the CSS declaration they produce. If you can write the CSS, you already know the class name.
-
-## Base form
+A class name is the declaration it produces, written so it fits in a `class` attribute.
 
 ```
-property--value
+[breakpoint-]property--value[:state]
 ```
 
-The property name and value are separated by a double dash (`--`). Multi-word properties and values use single dashes, exactly as in CSS.
+## Property and value
 
-| CSS declaration                 | FCSS class                      |
+Two dashes separate the property from the value. Everything else is spelled the way CSS
+spells it.
+
+| CSS                             | FCSS                            |
 | ------------------------------- | ------------------------------- |
-| `color: black`                  | `color--black`                  |
 | `display: flex`                 | `display--flex`                 |
 | `display: inline-block`         | `display--inline-block`         |
 | `background-color: transparent` | `background-color--transparent` |
 | `font-weight: 700`              | `font-weight--700`              |
 | `align-items: center`           | `align-items--center`           |
 | `flex-direction: column`        | `flex-direction--column`        |
-| `gap: 1rem`                     | `gap--1rem`                     |
+| `gap: 16px`                     | `gap--16`                       |
+| `opacity: 0.5`                  | `opacity--0.5`                  |
 
-## Responsive form
+Lengths are pixels, so `gap--16` is `16px`. Colors resolve to custom properties:
+`color--blue` sets `color: var(--fcss-color-blue)`. When you're not sure what a class does,
+`npx fcss explain <class>` (or `bunx fcss explain <class>`) prints it.
 
-```
-breakpoint-property--value
-```
+## Breakpoints
 
-Add a breakpoint prefix to apply a utility at a specific viewport width. FCSS is **mobile-first**: unprefixed classes apply at all sizes; prefixed classes apply at the breakpoint's minimum width and above.
-
-| Prefix | Min-width | Targets              |
-| ------ | --------- | -------------------- |
-| `sm-`  | 576px     | Small devices and up |
-| `md-`  | 768px     | Tablets and up       |
-| `lg-`  | 992px     | Desktop and up       |
-| `xl-`  | 1200px    | Large desktop and up |
-| `xxl-` | 1400px    | Widescreen and up    |
+Put a breakpoint in front to apply the class from that width up. Classes without a prefix
+apply at every width.
 
 ```html
-<!-- Block on mobile, flex from tablet up -->
+<!-- block on phones, flex from 768px -->
 <div class="display--block md-display--flex"></div>
 ```
 
-See [Responsive Design](./responsive.md) for the full strategy.
+The prefixes are `sm-` (576px), `md-` (768px), `lg-` (992px), `xl-` (1200px) and `xxl-`
+(1400px). [Responsive design](./responsive.md) has the details.
 
-## State suffix form
+## Pseudo-classes
 
-```
-property--value:pseudo-class
-```
-
-Append a colon and the pseudo-class name to apply a utility only in that state.
+Add a colon and the pseudo-class:
 
 ```html
 <a class="color--blue color--red:hover">Link</a>
-<button class="opacity--1 opacity--0-5:disabled">Submit</button>
 <input class="border-color--gray border-color--blue:focus" />
 ```
 
-Supported pseudo-classes include `hover`, `focus`, `focus-visible`, `focus-within`, `active`, `visited`, `disabled`, `checked`, `required`, `optional`, `valid`, `invalid`, `placeholder`, `first-child`, `last-child`, `nth-child`, and more.
+The generated pseudo-classes are `hover`, `focus`, `focus-within`, `active`, `visited`, `link`,
+`checked`, `disabled`, `enabled`, `required`, `optional`, `valid`, `invalid`, `in-range`,
+`out-of-range`, `read-only`, `read-write` and `indeterminate`. Not every property gets every
+one; `display` gets `hover`, `focus`, `focus-within` and `active`. [States](./states.md) lists
+which go where.
 
-See [States](./states.md) for the complete list.
+## ARIA states
 
-## ARIA state form
-
-```
-property--value:aria-attribute:value
-```
-
-FCSS generates utilities for ARIA attributes so component state is expressed directly in markup without JavaScript toggling class names.
+Add the ARIA attribute and its value. The style applies while the element carries that
+attribute, so your JavaScript sets `aria-expanded` and never touches the class list.
 
 ```html
-<!-- Collapsed by default, visible when aria-expanded="true" -->
 <div class="display--none display--block:aria-expanded:true" aria-expanded="false">
   Dropdown content
 </div>
+
+<button class="opacity--1 opacity--0.5:aria-disabled:true" aria-disabled="true">Save</button>
 ```
+
+## Breakpoint and state together
 
 ```html
-<!-- Dimmed when aria-disabled="true" -->
-<button class="opacity--1 opacity--0-5:aria-disabled:true"></button>
+<a class="color--blue md-color--red:hover"></a>
 ```
 
-## Responsive + state form
+From 768px up, the link turns red on hover.
 
-```
-breakpoint-property--value:state
-```
+## Custom classes
 
-Combine a breakpoint prefix with a state suffix:
-
-```html
-<a class="color--blue md-color--green md-color--red:hover"></a>
-```
-
-## The `c-` prefix
-
-Any class starting with `c-` is a custom class that lives in `custom.css`. Use it when no utility class can express what you need.
+A class starting with `c-` is yours. FCSS doesn't generate it; you write it in your own
+stylesheet when one declaration isn't enough.
 
 ```css
-/* custom.css */
 .c-card {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -108,29 +89,16 @@ Any class starting with `c-` is a custom class that lives in `custom.css`. Use i
 }
 ```
 
-```html
-<div class="c-card">...</div>
-```
+Don't use `c-` for something a utility already does. [Custom CSS](./custom-css.md) covers the
+rules.
 
-Custom classes must:
+## Cheat sheet
 
-- Start with `c-`
-- Be defined in `custom.css`
-- Not replicate what a utility class already does
-
-See [Custom CSS](./custom-css.md) for the full guide.
-
-## Complete pattern reference
-
-```
-[breakpoint-]property--value[:state]
-```
-
-| Pattern            | Example                          |
+| Form               | Example                          |
 | ------------------ | -------------------------------- |
 | Base               | `display--flex`                  |
-| Responsive         | `md-display--flex`               |
-| Pseudo state       | `color--red:hover`               |
+| Breakpoint         | `md-display--flex`               |
+| Pseudo-class       | `color--red:hover`               |
 | ARIA state         | `display--none:aria-hidden:true` |
-| Responsive + state | `md-color--red:hover`            |
+| Breakpoint + state | `md-color--red:hover`            |
 | Custom             | `c-hero-layout`                  |

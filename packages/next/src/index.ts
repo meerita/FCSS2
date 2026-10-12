@@ -202,6 +202,19 @@ type WebpackOptions = {
 type NextConfig = Record<string, any>;
 
 export function withFcss(nextConfig: NextConfig = {}): NextConfig {
+  // Purging only runs in production builds, so dev needs no webpack hook. Leaving it out keeps
+  // `next dev` working under Turbopack (the default in Next.js 16), which rejects webpack configs.
+  if (process.env['NODE_ENV'] !== 'production') return nextConfig;
+
+  // Next.js sets TURBOPACK before loading next.config. Purging hooks into webpack's asset
+  // pipeline, so a Turbopack production build would ship the full, unpurged stylesheet.
+  if (process.env['TURBOPACK']) {
+    throw new Error(
+      '[@functionalcss/next] Production purging requires webpack. ' +
+        'Build with `next build --webpack` (Next.js 16+ defaults to Turbopack).',
+    );
+  }
+
   return {
     ...nextConfig,
     webpack(config: WebpackConfig, options: WebpackOptions) {

@@ -1,17 +1,17 @@
 # Next.js Guide
 
-`@functionalcss/next` wraps your Next.js config to add automatic CSS generation and purging. It supports both the App Router and Pages Router.
+`@functionalcss/next` wraps your Next.js config so `next build` purges the classes you don't
+use. App Router and Pages Router both work. Supported: Next.js 14, 15 and 16.
 
-## Installation
+## Install
 
 ```bash
-npm install @functionalcss/core
-npm install -D @functionalcss/next
+npm install @functionalcss/core @functionalcss/next
+# or
+bun add @functionalcss/core @functionalcss/next
 ```
 
-## Configuration
-
-Wrap your Next.js config with `withFcss`:
+## Configure
 
 ```ts
 // next.config.ts
@@ -25,9 +25,9 @@ const nextConfig: NextConfig = {
 export default withFcss(nextConfig);
 ```
 
-## Importing CSS
+## Import the stylesheet
 
-### App Router
+App Router:
 
 ```tsx
 // app/layout.tsx
@@ -42,7 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 }
 ```
 
-### Pages Router
+Pages Router:
 
 ```tsx
 // pages/_app.tsx
@@ -54,16 +54,37 @@ export default function App({ Component, pageProps }: AppProps) {
 }
 ```
 
+## Build
+
+Next.js 16 builds with Turbopack by default. FCSS purges through webpack, so on 16 the build
+script needs the flag:
+
+```json
+{
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build --webpack"
+  }
+}
+```
+
+Then `npm run build` or `bun run build`. Next.js 14 and 15 already build with webpack and need
+nothing extra.
+
+Forget the flag on 16 and the build stops with an error telling you to add it. That's on
+purpose: the alternative is quietly shipping the full 28 MB stylesheet to every visitor.
+`next dev` works with either bundler.
+
 ## Content paths
 
-The plugin automatically scans the following paths by default:
+By default the plugin scans:
 
 - `app/**/*.{js,jsx,ts,tsx}`
 - `pages/**/*.{js,jsx,ts,tsx}`
 - `components/**/*.{js,jsx,ts,tsx}`
 - `src/**/*.{js,jsx,ts,tsx}`
 
-To customize, create an `fcss.config.ts` at the project root:
+Anything else goes in an `fcss.config.ts` at the project root:
 
 ```ts
 // fcss.config.ts
@@ -75,22 +96,25 @@ export default defineConfig({
 });
 ```
 
+`defineConfig` comes from `@functionalcss/cli` (`npm install -D @functionalcss/cli` or
+`bun add -d @functionalcss/cli`). A plain object export works too if you'd rather skip it.
+
 ## Using classes
 
 ```tsx
 // app/page.tsx
 export default function Home() {
   return (
-    <main className="display--flex flex-direction--column align-items--center gap--2rem padding--4rem">
-      <h1 className="font-size--3rem font-weight--700 color--black text-align--center">
+    <main className="display--flex flex-direction--column align-items--center gap--32 padding--64">
+      <h1 className="font-size--4xl font-weight--700 color--black text-align--center">
         Write CSS. Use classes.
       </h1>
-      <p className="font-size--1-25rem color--gray max-width--60ch text-align--center line-height--1-6">
-        Utility CSS using the property names you already know.
+      <p className="font-size--xl color--gray text-align--center line-height--relaxed">
+        Utility CSS with the property names you already know.
       </p>
       <a
         href="/docs/installation"
-        className="display--inline-flex align-items--center padding--0-75rem-2rem background-color--black color--white border-radius--0-5rem font-weight--500 text-decoration--none color--gray:hover background-color--gray-800:hover"
+        className="padding--12 background-color--black color--white border-radius--8 background-color--dark-gray:hover"
       >
         Get started
       </a>
@@ -99,50 +123,28 @@ export default function Home() {
 }
 ```
 
-## Server Components
-
-FCSS classes work in Server Components without any special handling. The generated CSS is static and requires no client-side JavaScript.
-
-```tsx
-// app/posts/[slug]/page.tsx
-export default async function PostPage({ params }: { params: { slug: string } }) {
-  const post = await getPost(params.slug);
-
-  return (
-    <article className="max-width--65ch margin--0-auto padding--2rem">
-      <h1 className="font-size--2-5rem font-weight--700 margin-bottom--1rem">{post.title}</h1>
-      <p className="color--gray font-size--0-875rem margin-bottom--2rem">{post.date}</p>
-      <div
-        className="font-size--1rem line-height--1-8 color--black"
-        dangerouslySetInnerHTML={{ __html: post.content }}
-      />
-    </article>
-  );
-}
-```
+Server Components need nothing special. The CSS is static and adds no client JavaScript.
 
 ## Dynamic class names
 
-Because Next.js renders on the server, class names must always be complete literal strings. Dynamic construction breaks the purger:
+The scanner reads source, so classes must appear as complete strings:
 
 ```tsx
-// Safe
+// Fine
 const style = isError ? 'color--red' : 'color--black';
-<p className={style}>Message</p>;
 
-// Unsafe — purger cannot extract this
+// Purged: the scanner never sees "color--red"
 const style = `color--${isError ? 'red' : 'black'}`;
-<p className={style}>Message</p>;
 ```
 
-Add dynamically constructed classes to the safelist in `fcss.config.ts`.
+Classes you can't write out in full go in the `safelist`.
 
-## Production build
-
-`withFcss` runs the purge step automatically during `next build`. No additional configuration is needed if you use the default content paths or `fcss.config.ts`.
-
-To verify which classes will be kept:
+## Check what survives
 
 ```bash
 npx fcss audit
+# or
+bunx fcss audit
 ```
+
+This needs `@functionalcss/cli` installed.

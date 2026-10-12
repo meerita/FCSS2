@@ -1,172 +1,122 @@
 # Zed Guide
 
-This guide covers using FCSS IntelliSense inside the [Zed](https://zed.dev) editor via the
-FCSS Zed extension — a Rust→WASM extension that launches `@functionalcss/lsp-server` and attaches it
-to HTML, JavaScript (JSX), TSX, and TypeScript files.
+FCSS IntelliSense in [Zed](https://zed.dev) comes from a small Rust extension compiled to WASM.
+It starts `@functionalcss/lsp-server` with Node.js and attaches it to HTML, JavaScript, TSX and
+TypeScript files.
 
-## Prerequisites
+## Status
 
-### In your project
+Neither the extension nor `@functionalcss/lsp-server` is published yet. The extension isn't in
+Zed's registry, and the server isn't on npm. Today it runs from a clone of this repo, against
+projects inside the workspace, such as `examples/zed-validation/`. The steps below are for that
+setup.
 
-Install `@functionalcss/core` and `@functionalcss/lsp-server`:
+## What you need
 
-```sh
-npm install @functionalcss/core @functionalcss/lsp-server
-```
-
-Both packages must be present in your project's `node_modules`. The manifest is discovered at
-`node_modules/@functionalcss/core/dist/manifest.json`; if it is missing, the server warns in the Zed
-output panel and IntelliSense stays inactive.
-
-Node.js must be on your `PATH`. The extension verifies this at startup and logs a clear error if
-Node is not found.
-
-### To build the extension
-
-- **Rust** — install via [rustup](https://rustup.rs)
-- **`wasm32-wasip2` target**:
+- Node.js on your `PATH`. The extension checks at startup and tells you if it's missing.
+- [Rust](https://rustup.rs) with the WASM target:
 
 ```sh
 rustup target add wasm32-wasip2
 ```
 
-## Build
+- A project with `@functionalcss/core` and `@functionalcss/lsp-server` in its `node_modules`.
+  The server reads the class list from `node_modules/@functionalcss/core/dist/manifest.json`.
+  Without it, the server logs a warning and stays quiet.
 
-Clone or download this repository, then from `packages/zed/`:
+## Build and install the extension
+
+From the repo root, build everything once so `lsp-server` has a `dist/`:
 
 ```sh
+pnpm install
+pnpm build
+```
+
+Then build the extension:
+
+```sh
+cd packages/zed
 cargo build --release --target wasm32-wasip2
 ```
 
-The compiled artifact is at `packages/zed/target/wasm32-wasip2/release/fcss_zed.wasm`.
+In Zed:
 
-## Install as a Dev Extension in Zed
+1. Open the Extensions view (**Cmd+Shift+X**, or `zed: extensions` in the command palette).
+2. Click **Install Dev Extension**.
+3. Pick the `packages/zed/` directory.
 
-1. Open Zed.
-2. Open the Extensions view: **Cmd+Shift+X** or `zed: extensions` in the command palette.
-3. Click **Install Dev Extension** (top right).
-4. Select the `packages/zed/` directory from this repository.
+Open `examples/zed-validation/` as a workspace, then `index.html` or `src/App.tsx`. Every
+example class there has a comment saying which diagnostic it should trigger.
 
-Zed compiles and loads the extension. Open a project that has `@functionalcss/core` and
-`@functionalcss/lsp-server` installed — IntelliSense activates automatically when you open a supported
-file.
+After changing the extension, rebuild it and hit **Reload Extension**.
 
-To reload after a code change, rebuild the crate and use **Reload Extension** in the Extensions
-view.
+## What you get
 
-## Supported file types
-
-| File type  | Language IDs registered |
-| ---------- | ----------------------- |
-| HTML       | `HTML`                  |
-| JavaScript | `JavaScript`            |
-| JSX        | `JavaScript` (JSX)      |
-| TSX        | `TSX`                   |
-| TypeScript | `TypeScript`            |
-
-IntelliSense activates on `class` and `className` attributes in these file types.
-
-## Features
+IntelliSense works inside `class` and `className` attributes in HTML, JavaScript (including
+JSX), TSX and TypeScript.
 
 ### Completions
 
-Typing inside a `class` or `className` attribute triggers FCSS class completions. The
-trigger characters are `-`, `:`, `.`, and `%`.
+Typing `-`, `:`, `.` or `%` triggers suggestions:
 
-Completion items include:
+- property names (`display`, `margin-bottom`)
+- values for the property you typed (`display--flex`, `display--block`)
+- pseudo states (`:hover`, `:focus`) and ARIA states (`:aria-expanded:true`)
+- breakpoint prefixes (`sm-`, `md-`, `lg-`, `xl-`, `xxl-`)
 
-- **Property completions** — CSS property names (e.g. `display`, `margin-bottom`)
-- **Value completions** — all values for the typed property (e.g. `display--flex`, `display--block`)
-- **Pseudo-condition completions** — appending `:hover`, `:focus`, etc.
-- **ARIA-condition completions** — appending `:aria-expanded:true`, etc.
-- **Breakpoint completions** — responsive variants (e.g. `display--flex@sm`)
-
-The documentation panel for each item shows the generated CSS declaration.
+Each item shows the CSS it generates.
 
 ### Hover
 
-Hovering a FCSS class inside a `class` or `className` attribute shows:
-
-- The generated CSS rule
-- The property category and source specification
-- A deprecation notice if the class is deprecated (and its canonical replacement)
-- The condition type (pseudo, ARIA, or breakpoint) when present
-
-Hovering an unknown word shows no information.
+Hovering a class shows the CSS rule, its category and source spec, the state or breakpoint it
+applies to, and a deprecation notice with the replacement when there is one.
 
 ### Diagnostics
 
-The server publishes diagnostics on document open and on every change (debounced 200 ms). All
-7 FCSS diagnostic codes are supported:
+Diagnostics run when a file opens and 200 ms after you stop typing:
 
-| Code                           | Severity | Description                                                                           |
-| ------------------------------ | -------- | ------------------------------------------------------------------------------------- |
-| `fcss/unknown-property`        | Error    | Class uses a CSS property not in the `@functionalcss/core` manifest                   |
-| `fcss/unknown-value`           | Error    | Property is known but value is not in the manifest                                    |
-| `fcss/conflict`                | Error    | Two classes in the same attribute set the same CSS property                           |
-| `fcss/duplicate`               | Warning  | Same class appears more than once in the same attribute                               |
-| `fcss/invalid-condition-chain` | Error    | Class has more than one condition (only one pseudo or ARIA allowed)                   |
-| `fcss/deprecated-class`        | Warning  | Class is marked deprecated in the manifest; canonical replacement shown               |
-| `fcss/dynamic-purge-risk`      | Info     | Dynamic class construction (template literals, concatenation) prevents static purging |
+| Code                           | Severity | Meaning                                                      |
+| ------------------------------ | -------- | ------------------------------------------------------------ |
+| `fcss/unknown-property`        | Error    | The property isn't in the manifest                           |
+| `fcss/unknown-value`           | Error    | Known property, unknown value                                |
+| `fcss/conflict`                | Error    | Two classes in one attribute set the same property           |
+| `fcss/duplicate`               | Warning  | Same class twice in one attribute                            |
+| `fcss/invalid-condition-chain` | Error    | More than one pseudo or ARIA condition on a class            |
+| `fcss/deprecated-class`        | Warning  | Deprecated class, with its replacement                       |
+| `fcss/dynamic-purge-risk`      | Info     | Class built at runtime that the purge can't see (JS/TS only) |
 
-Each diagnostic is anchored to the exact class-token range in the source. The
-`fcss/dynamic-purge-risk` diagnostic is only emitted for JavaScript and TypeScript files.
+When `@functionalcss/core` is rebuilt, the server reloads the manifest and refreshes them.
 
-Diagnostics refresh automatically when the document changes and when `@functionalcss/core` is rebuilt
-(the server watches the manifest file with `watchManifest`).
+`@functionalcss/core` has no deprecated classes yet, so you won't see
+`fcss/deprecated-class` in a real project. It's implemented and tested with fixture
+manifests.
 
 ### Code actions
 
-Placing the cursor on a diagnostic and invoking **Quick Fix** (or the Zed code action shortcut)
-shows available actions:
+| Action                 | What it does                                                       |
+| ---------------------- | ------------------------------------------------------------------ |
+| Replace with canonical | Rewrites a deprecated class to its replacement                     |
+| Add to safelist        | Shows the safelist snippet to paste into your config               |
+| Create c- rule         | Shows a skeleton for a custom `c-` class                           |
+| Convert to static map  | Shows the static class-map pattern for a dynamic class             |
+| Open documentation     | Asks Zed to open the docs; shows the URL if Zed doesn't support it |
 
-| Action                 | Kind       | Behavior                                                                                                                   |
-| ---------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------- |
-| Replace with canonical | `quickfix` | Applies a `WorkspaceEdit` that replaces the deprecated class in the source — works in Zed                                  |
-| Add to safelist        | `quickfix` | Shows an information message with the `fcss.config.js` safelist snippet                                                    |
-| Create c- rule         | `quickfix` | Shows an information message with the c- rule skeleton                                                                     |
-| Convert to static map  | `refactor` | Shows an information message with the static class-map pattern                                                             |
-| Open docs              | `source`   | Attempts `window/showDocument` to open the FCSS docs URL; falls back to an information message (see Zed limitations below) |
+## Zed limitations
 
-## Known Zed limitations
+**External links.** "Open documentation" sends `window/showDocument` with `external: true`.
+Whether Zed opens the browser depends on your Zed version. If it doesn't, you get the URL in a
+message instead.
 
-### `window/showDocument` — external URLs
-
-The `fcss.openDocs` command sends a `window/showDocument` LSP request with `external: true` to
-open the FCSS documentation URL in the system browser. Zed's support for this request depends on
-the exact Zed version. If Zed does not handle the request, the server falls back gracefully and
-shows the URL in an information message instead — no functionality is lost.
-
-### Status bar
-
-There is no FCSS status-bar item in Zed. The VS Code extension shows a manifest load indicator;
-Zed does not expose a matching API surface for extensions. Manifest load status is logged to
-the Zed output panel (via the LSP server console log).
-
-### `fcss/deprecated-class` diagnostic with current `@functionalcss/core`
-
-The current release of `@functionalcss/core` contains no deprecated class aliases. The
-`fcss/deprecated-class` diagnostic and its "Replace with canonical" quick-fix are fully
-implemented in `@functionalcss/language-service` and tested with fixture manifests, but they will not
-appear in a real project until `@functionalcss/core` introduces deprecated entries.
-
-## Validation project
-
-The `examples/zed-validation/` directory in this repository provides a minimal HTML + TSX
-project with `@functionalcss/core` and `@functionalcss/lsp-server` installed. Use it to verify each feature:
-
-1. Build the WASM extension: `cargo build --release --target wasm32-wasip2` from `packages/zed/`.
-2. In Zed, install it as a dev extension pointing to `packages/zed/`.
-3. Open `examples/zed-validation/` as your Zed workspace.
-4. Open `index.html` and `src/App.tsx` — IntelliSense activates automatically.
-
-Each diagnostic class is annotated with a comment explaining the expected diagnostic.
+**No status bar item.** Zed doesn't give extensions a status bar API. Manifest load messages
+go to the Zed log (the LSP server's console output).
 
 ## Troubleshooting
 
-| Symptom                    | Likely cause                                   | Fix                                                               |
-| -------------------------- | ---------------------------------------------- | ----------------------------------------------------------------- |
-| No completions or hover    | `@functionalcss/core` not installed in project | `npm install @functionalcss/core @functionalcss/lsp-server`       |
-| "Node.js not found" error  | Node not on `PATH`                             | Install Node.js and ensure it is on your `PATH`                   |
-| Extension does not appear  | WASM build not done                            | Run `cargo build --release --target wasm32-wasip2`                |
-| Diagnostics not refreshing | Manifest changed on disk                       | The server watches the manifest; save a file to trigger a refresh |
+| Symptom                       | Likely cause                                      | Fix                                                     |
+| ----------------------------- | ------------------------------------------------- | ------------------------------------------------------- |
+| No completions or hover       | `@functionalcss/core` missing in the project      | Install it, or open a project inside the workspace      |
+| "lsp-server is not installed" | `@functionalcss/lsp-server` not in `node_modules` | Use a project in this workspace (see [Status](#status)) |
+| "Node.js not found"           | Node isn't on your `PATH`                         | Install Node.js and restart Zed                         |
+| Extension doesn't show up     | WASM not built                                    | `cargo build --release --target wasm32-wasip2`          |
+| Server starts, then nothing   | `lsp-server` has no `dist/`                       | Run `pnpm build` at the repo root                       |

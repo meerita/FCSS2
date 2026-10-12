@@ -8,13 +8,13 @@
 # @functionalcss/angular
 
 Official Angular integration for [FCSS](../../README.md) — one `ng add` command installs
-FCSS, adds the global stylesheet, creates `fcss.config.ts`, and configures the production
-PostCSS purge pipeline.
+FCSS, adds the global stylesheet, creates `fcss.config.ts`, and wires a purge step into your
+production build.
 
 ## Requirements
 
-- Angular 17, 18, or 19
-- Node.js 18+
+- Angular 17 – 22 (verified with `ng new` + `ng add` + `npm run build` on 17, 20, 21 and 22)
+- The Node.js version your Angular release requires
 
 ## Installation
 
@@ -36,13 +36,16 @@ ng add @functionalcss/angular --skip-install
 
 ## What the schematic does
 
-| Action                                                                                  | Detail                         |
-| --------------------------------------------------------------------------------------- | ------------------------------ |
-| Adds `@functionalcss/core` to `dependencies`                                            | Global CSS library             |
-| Adds `@functionalcss/postcss` to `devDependencies`                                      | PostCSS purge plugin           |
-| Prepends `node_modules/@functionalcss/core/dist/full.css` to `styles` in `angular.json` | Global import                  |
-| Creates `fcss.config.ts`                                                                | Scanner configuration          |
-| Creates `postcss.config.mjs`                                                            | Production purge configuration |
+| Action                                                                                  | Detail                        |
+| --------------------------------------------------------------------------------------- | ----------------------------- |
+| Adds `@functionalcss/core` to `dependencies`                                            | Global CSS library            |
+| Adds `@functionalcss/postcss` to `devDependencies`                                      | PostCSS purge plugin          |
+| Prepends `node_modules/@functionalcss/core/dist/full.css` to `styles` in `angular.json` | Global import                 |
+| Sets the `production` configuration's `styles` to `src/fcss.purged.css`                 | Purged stylesheet for builds  |
+| Creates `fcss.config.ts`                                                                | Scanner configuration         |
+| Creates `fcss-purge.mjs`                                                                | Pre-build purge script        |
+| Changes the `build` script to `node fcss-purge.mjs && ng build`                         | Purge runs before every build |
+| Adds `/src/fcss.purged.css` to `.gitignore`                                             | Generated file                |
 
 All steps are **idempotent** — running `ng add` twice makes no duplicate changes.
 
@@ -113,37 +116,21 @@ const config: FcssAngularConfig = {
 export default config;
 ```
 
-## Purge configuration
+## Production builds
 
-The schematic creates `postcss.config.mjs` at the workspace root:
+`ng serve` and development builds use the full stylesheet, so every utility is available while
+you work. Production builds use a purged copy instead:
 
-```js
-import { createRequire } from 'module';
-import fcssPostcss from '@functionalcss/postcss';
-
-const require = createRequire(import.meta.url);
-
-export default {
-  plugins: [
-    fcssPostcss({
-      manifest: require.resolve('@functionalcss/core/dist/manifest.json'),
-      content: ['src/**/*.{ts,html}'],
-      report: true,
-    }),
-  ],
-};
+```bash
+npm run build   # = node fcss-purge.mjs && ng build
 ```
 
-Angular CLI reads this file automatically for both the webpack (`@angular-devkit/build-angular:browser`)
-and esbuild (`@angular/build:application`) builders. The FCSS PostCSS plugin purges unused
-utility classes at production build time.
+`fcss-purge.mjs` scans `src/**/*.{ts,html}`, keeps only the utilities you use, and writes them to
+`src/fcss.purged.css`, which the `production` configuration in `angular.json` points at. Purging
+happens _before_ `ng build`, so Angular's default bundle budgets stay as they are.
 
-### Angular version compatibility
-
-| Builder                                                          | Supported |
-| ---------------------------------------------------------------- | --------- |
-| `@angular/build:application` (esbuild, Angular 17+)              | ✅        |
-| `@angular-devkit/build-angular:browser` (webpack, Angular 15–17) | ✅        |
+Always build through `npm run build` (or `pnpm build`, `bun run build`, `yarn build`). Running
+`ng build` on its own skips the purge, and fails if `src/fcss.purged.css` does not exist yet.
 
 ## Multi-project workspace
 

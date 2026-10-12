@@ -5,6 +5,8 @@
 
 import type { Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 import { chain } from '@angular-devkit/schematics';
+import { readFileSync } from 'fs';
+import { join } from 'path';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 
 export interface NgAddSchema {
@@ -21,6 +23,7 @@ interface WorkspaceProject {
     {
       builder?: string;
       options?: Record<string, unknown>;
+      configurations?: Record<string, Record<string, unknown>>;
     }
   >;
 }
@@ -33,14 +36,27 @@ interface AngularWorkspace {
 interface PackageJson {
   dependencies?: Record<string, string>;
   devDependencies?: Record<string, string>;
+  scripts?: Record<string, string>;
   [key: string]: unknown;
 }
 
 const CORE_STYLES_ENTRY = 'node_modules/@functionalcss/core/dist/full.css';
+// Production builds use a stylesheet purged *before* `ng build`, so the full ~20 MB utility set
+// never reaches Angular's bundle budgets. Development keeps the full set for instant feedback.
+const PURGED_STYLES_FILE = 'fcss.purged.css';
+const PURGE_COMMAND = 'node fcss-purge.mjs';
 const CORE_PKG = '@functionalcss/core';
 const POSTCSS_PKG = '@functionalcss/postcss';
 const POSTCSS_PKG_UPSTREAM = 'postcss';
-const FCSS_VERSION = '^0.0.0';
+// Both schematics/ng-add/ (source) and dist-schematics/ng-add/ (published) sit two levels below
+// the package root. All public @functionalcss packages share one version (changesets "fixed").
+const FCSS_VERSION = `^${
+  (
+    JSON.parse(readFileSync(join(__dirname, '..', '..', 'package.json'), 'utf8')) as {
+      version: string;
+    }
+  ).version
+}`;
 const POSTCSS_VERSION = '^8.4.0';
 
 export function resolveProjectName(
@@ -164,9 +180,55 @@ function addGlobalStyles(schema: NgAddSchema): Rule {
     }
 
     buildTarget.options['styles'] = [CORE_STYLES_ENTRY, ...styles];
+
+    const production = buildTarget.configurations?.['production'];
+    if (production) {
+      const purgedEntry = `${project.sourceRoot ?? 'src'}/${PURGED_STYLES_FILE}`;
+      production['styles'] = [purgedEntry, ...styles];
+      context.logger.info(
+        `[@functionalcss/angular] Production builds of "${projectName}" use ${purgedEntry}.`,
+      );
+    }
+
     tree.overwrite('angular.json', JSON.stringify(workspace, null, 2) + '\n');
     context.logger.info(
       `[@functionalcss/angular] Added ${CORE_STYLES_ENTRY} to "${projectName}" styles.`,
+    );
+  };
+}
+
+function addBuildScript(): Rule {
+  return (tree: Tree, context: SchematicContext) => {
+    if (!tree.exists('package.json')) return;
+
+    const pkg = readJson<PackageJson>(tree, 'package.json');
+    const scripts = pkg.scripts ?? {};
+    const build = scripts['build'] ?? 'ng build';
+    if (build.includes(PURGE_COMMAND)) return;
+
+    scripts['build'] = `${PURGE_COMMAND} && ${build}`;
+    pkg.scripts = scripts;
+    tree.overwrite('package.json', JSON.stringify(pkg, null, 2) + '\n');
+    context.logger.info(`[@functionalcss/angular] "build" script now runs ${PURGE_COMMAND} first.`);
+  };
+}
+
+function ignorePurgedStyles(schema: NgAddSchema): Rule {
+  return (tree: Tree) => {
+    if (!tree.exists('.gitignore')) return;
+
+    const workspace = tree.exists('angular.json')
+      ? readJson<AngularWorkspace>(tree, 'angular.json')
+      : null;
+    const project = workspace?.projects[resolveProjectName(workspace, schema.project)];
+    const entry = `/${project?.sourceRoot ?? 'src'}/${PURGED_STYLES_FILE}`;
+
+    const current = tree.read('.gitignore')?.toString('utf8') ?? '';
+    if (current.split('\n').includes(entry)) return;
+    const separator = current === '' || current.endsWith('\n') ? '' : '\n';
+    tree.overwrite(
+      '.gitignore',
+      `${current}${separator}\n# FCSS purged stylesheet (generated)\n${entry}\n`,
     );
   };
 }
@@ -209,54 +271,36 @@ function createPurgeScript(schema: NgAddSchema): Rule {
     const projectName = workspace
       ? resolveProjectName(workspace, schema.project)
       : (schema.project ?? 'app');
-    const project = workspace?.projects[projectName];
-    const distDir =
-      (project?.architect?.['build']?.options?.['outputPath'] as string | undefined) ?? 'dist/app';
-    const sourceRoot = project?.sourceRoot ?? 'src';
+    const sourceRoot = workspace?.projects[projectName]?.sourceRoot ?? 'src';
 
     const lines = [
       '// @file fcss-purge.mjs',
-      '// @description Post-build FCSS purge — removes unused utility classes from the Angular production CSS bundle.',
+      '// @description Pre-build FCSS purge — writes only the utilities your templates use, for production builds.',
       '// @layer config',
-      '/* global process, console */',
+      '/* global console */',
       "import { createRequire } from 'module';",
-      "import { readFileSync, writeFileSync, readdirSync } from 'fs';",
-      "import { join } from 'path';",
+      "import { readFileSync, writeFileSync } from 'fs';",
       '',
       'const require = createRequire(import.meta.url);',
-      `const manifestPath = require.resolve('@functionalcss/core/manifest.json');`,
+      "const manifestPath = require.resolve('@functionalcss/core/manifest.json');",
+      "const fullCssPath = require.resolve('@functionalcss/core/full.css');",
       '',
       "const { default: postcss } = await import('postcss');",
       "const { default: fcssPostcss } = await import('@functionalcss/postcss');",
       '',
-      `const distDir = process.argv[2] ?? '${distDir}';`,
+      `const outFile = '${sourceRoot}/${PURGED_STYLES_FILE}';`,
       `const contentPatterns = ['${sourceRoot}/**/*.{ts,html}'];`,
       '',
-      "const cssFiles = readdirSync(distDir).filter((f) => f.endsWith('.css'));",
+      'const result = await postcss([',
+      '  fcssPostcss({ manifest: manifestPath, content: contentPatterns, report: true }),',
+      "]).process(readFileSync(fullCssPath, 'utf-8'), { from: fullCssPath, to: outFile });",
       '',
-      'if (cssFiles.length === 0) {',
-      `  console.warn('[@functionalcss/angular] No CSS files found in "' + distDir + '". Run ng build first.');`,
-      '  process.exit(1);',
-      '}',
-      '',
-      'for (const file of cssFiles) {',
-      '  const filePath = join(distDir, file);',
-      "  const css = readFileSync(filePath, 'utf-8');",
-      '',
-      '  const result = await postcss([',
-      '    fcssPostcss({',
-      '      manifest: manifestPath,',
-      '      content: contentPatterns,',
-      '      report: true,',
-      '    }),',
-      '  ]).process(css, { from: filePath, to: filePath });',
-      '',
-      "  writeFileSync(filePath, result.css, 'utf-8');",
-      '}',
+      "writeFileSync(outFile, result.css, 'utf-8');",
+      "console.log('[@functionalcss/angular] Wrote ' + outFile);",
       '',
     ];
     tree.create('fcss-purge.mjs', lines.join('\n'));
-    context.logger.info('[@functionalcss/angular] Created fcss-purge.mjs post-build purge script.');
+    context.logger.info('[@functionalcss/angular] Created fcss-purge.mjs pre-build purge script.');
   };
 }
 
@@ -274,6 +318,8 @@ export function ngAdd(schema: NgAddSchema): Rule {
     addGlobalStyles(schema),
     createFcssConfig(),
     createPurgeScript(schema),
+    addBuildScript(),
+    ignorePurgedStyles(schema),
     scheduleInstall(schema),
   ]);
 }

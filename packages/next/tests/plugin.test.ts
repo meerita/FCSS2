@@ -3,7 +3,7 @@
 // @layer tests
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import * as os from 'node:os';
@@ -20,6 +20,16 @@ afterEach(() => {
 });
 
 describe('withFcss plugin factory', () => {
+  // next build runs with NODE_ENV=production and, under webpack, no TURBOPACK variable.
+  beforeEach(() => {
+    vi.stubEnv('NODE_ENV', 'production');
+    vi.stubEnv('TURBOPACK', '');
+  });
+
+  afterEach(() => {
+    vi.unstubAllEnvs();
+  });
+
   it('returns a next config with webpack function', () => {
     const result = withFcss({});
     expect(typeof result.webpack).toBe('function');
@@ -68,6 +78,20 @@ describe('withFcss plugin factory', () => {
     expect(fakeConfig.plugins).toHaveLength(1);
     const plugin = fakeConfig.plugins[0] as Record<string, unknown>;
     expect(typeof plugin['apply']).toBe('function');
+  });
+
+  it('returns the config untouched outside production, so next dev works under Turbopack', () => {
+    vi.stubEnv('NODE_ENV', 'development');
+    vi.stubEnv('TURBOPACK', 'auto');
+    const config = { reactStrictMode: true };
+    const result = withFcss(config);
+    expect(result).toBe(config);
+    expect(result.webpack).toBeUndefined();
+  });
+
+  it('throws a clear error for Turbopack production builds', () => {
+    vi.stubEnv('TURBOPACK', 'auto');
+    expect(() => withFcss({})).toThrow(/next build --webpack/);
   });
 });
 
