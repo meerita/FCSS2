@@ -5,10 +5,27 @@
 @created Diego Lafuente <diego.lafuente@cognativinc.com>
 -->
 
+<div align="center">
+
 # FCSS
 
-[![npm](https://img.shields.io/npm/v/@functionalcss/core?label=%40functionalcss%2Fcore)](https://www.npmjs.com/package/@functionalcss/core)
+**Utility CSS that reads like CSS.**
+
+[![npm version](https://img.shields.io/npm/v/@functionalcss/core?label=npm&color=cb3837)](https://www.npmjs.com/package/@functionalcss/core)
+[![npm downloads](https://img.shields.io/npm/dm/@functionalcss/core?color=cb3837)](https://www.npmjs.com/package/@functionalcss/core)
+[![CI](https://github.com/meerita/FCSS2/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/meerita/FCSS2/actions/workflows/ci.yml)
+[![provenance](https://img.shields.io/badge/npm-provenance-2ea44f)](https://www.npmjs.com/package/@functionalcss/core#provenance)
 [![license](https://img.shields.io/npm/l/@functionalcss/core)](LICENSE)
+
+[![Vite](https://img.shields.io/badge/Vite-5--8-646cff?logo=vite&logoColor=white)](#vite-react-preact-solid-vanilla-js)
+[![Next.js](https://img.shields.io/badge/Next.js-14--16-000000?logo=nextdotjs&logoColor=white)](#nextjs)
+[![Astro](https://img.shields.io/badge/Astro-7-bc52ee?logo=astro&logoColor=white)](#astro)
+[![Angular](https://img.shields.io/badge/Angular-17--22-dd0031?logo=angular&logoColor=white)](#angular)
+[![Bun](https://img.shields.io/badge/Bun-supported-f9f1e1?logo=bun&logoColor=black)](#package-manager-equivalents)
+
+[Install](#installation) · [Usage](#usage) · [Docs](docs/README.md) · [npm](https://www.npmjs.com/org/functionalcss)
+
+</div>
 
 FCSS is a utility CSS library where every class name is a CSS property and a value. If you know
 CSS, you already know FCSS. It works with any framework, or none.
@@ -230,7 +247,15 @@ npm install @functionalcss/core
 npm install -D @functionalcss/cli
 npx fcss init --framework none   # creates fcss.config.ts; point `content` at your HTML
 npx fcss purge -i node_modules/@functionalcss/core/dist/full.css -o public/fcss.css
+
+# same with bun
+bun add @functionalcss/core
+bun add -d @functionalcss/cli
+bunx fcss init --framework none
+bunx fcss purge -i node_modules/@functionalcss/core/dist/full.css -o public/fcss.css
 ```
+
+Run the purge again whenever your HTML changes.
 
 ```html
 <link rel="stylesheet" href="/fcss.css" />
@@ -312,16 +337,16 @@ Multi-declaration, project-specific rules use the `c-` prefix and live in your o
 npm install -D @functionalcss/cli   # or: bun add -d @functionalcss/cli
 ```
 
-| Command                               | Description                                                         |
-| ------------------------------------- | ------------------------------------------------------------------- |
-| `fcss init [-f <framework>]`          | Create `fcss.config.ts` and add the CSS import                      |
-| `fcss purge -i <in.css> -o <out.css>` | Keep only the classes found in your `content` globs                 |
-| `fcss audit`                          | Report unknown or invalid classes in your source                    |
-| `fcss explain <class>`                | Show what a class compiles to                                       |
-| `fcss list`                           | List available classes (`-p` property, `-s` state, `-b` breakpoint) |
-| `fcss build`                          | Generate custom CSS (colors, data states) from your config          |
-| `fcss doctor`                         | Check your installation                                             |
-| `fcss migrate`                        | Migrate from legacy TFCSSF class names                              |
+| Command                               | Description                                                |
+| ------------------------------------- | ---------------------------------------------------------- |
+| `fcss init [-f <framework>]`          | Create `fcss.config.ts` and add the CSS import             |
+| `fcss purge -i <in.css> -o <out.css>` | Keep only the classes found in your `content` globs        |
+| `fcss audit`                          | Flag dynamic class fragments and deprecated classes        |
+| `fcss explain <class>`                | Show what a class compiles to                              |
+| `fcss list [-p <property>]`           | List classes for a property or category                    |
+| `fcss build`                          | Generate custom CSS (colors, data states) from your config |
+| `fcss doctor`                         | Check your installation                                    |
+| `fcss migrate`                        | Migrate from legacy TFCSSF class names                     |
 
 ## Packages
 

@@ -181,36 +181,20 @@ No bundler? Link the full stylesheet from a CDN:
 <link rel="stylesheet" href="https://unpkg.com/@functionalcss/core/dist/full.css" />
 ```
 
-Fine for a prototype. For anything real, generate a purged file. Install the packages:
+Fine for a prototype. For anything real, purge it with the CLI:
 
 ```bash
-npm install @functionalcss/core && npm install -D @functionalcss/postcss postcss   # npm
-bun add @functionalcss/core && bun add -d @functionalcss/postcss postcss           # bun
+npm install @functionalcss/core && npm install -D @functionalcss/cli   # npm
+bun add @functionalcss/core && bun add -d @functionalcss/cli           # bun
 ```
 
-Add this script next to your HTML:
-
-```js
-// purge.mjs
-import { readFileSync, writeFileSync } from 'node:fs';
-import { createRequire } from 'node:module';
-import postcss from 'postcss';
-import fcss from '@functionalcss/postcss';
-
-const require = createRequire(import.meta.url);
-const input = require.resolve('@functionalcss/core/full.css');
-
-const result = await postcss([
-  fcss({
-    manifest: require.resolve('@functionalcss/core/manifest.json'),
-    content: ['**/*.html', '!node_modules/**'],
-  }),
-]).process(readFileSync(input, 'utf8'), { from: input, to: 'fcss.css' });
-
-writeFileSync('fcss.css', result.css);
+```bash
+npx fcss init --framework none   # creates fcss.config.ts; set `content` to your HTML files
+npx fcss purge -i node_modules/@functionalcss/core/dist/full.css -o fcss.css
 ```
 
-Run it with `node purge.mjs` or `bun purge.mjs` whenever your HTML changes, and link the result:
+With bun, swap `npx` for `bunx`. Run the purge again whenever your HTML changes, and link the
+result:
 
 ```html
 <link rel="stylesheet" href="fcss.css" />
@@ -247,16 +231,15 @@ Run commands with `npx fcss <cmd>` or `bunx fcss <cmd>`.
 | ------------------------------------- | -------------------------------------------------------------- |
 | `fcss init [-f <framework>]`          | Creates `fcss.config.ts` and adds the CSS import               |
 | `fcss explain <class>`                | Prints the CSS a class produces                                |
-| `fcss list`                           | Lists classes; filter with `-p`, `-c`, `-s` or `-b`            |
-| `fcss audit`                          | Reports unknown or invalid classes in your source              |
+| `fcss list [-p <property>]`           | Lists classes for a property or category                       |
+| `fcss audit`                          | Flags dynamic class fragments and deprecated classes           |
 | `fcss doctor`                         | Checks that the packages and manifest are where they belong    |
 | `fcss build`                          | Generates CSS for custom colors and data states in your config |
-| `fcss purge -i <in.css> -o <out.css>` | Purges the CSS that `fcss build` generated                     |
+| `fcss purge -i <in.css> -o <out.css>` | Keeps only the classes your `content` files use                |
 | `fcss migrate`                        | Helps move off the legacy TFCSSF class names                   |
 
-`fcss purge` reads the manifest that `fcss build` writes, which only knows your custom classes.
-It won't shrink `@functionalcss/core`. For that, use a framework integration or the
-[plain HTML](#plain-html) script.
+`fcss purge` works on `@functionalcss/core` and on anything `fcss build` generated. It needs
+`@functionalcss/cli` 0.1.1 or later.
 
 ### `fcss.config.ts`
 
