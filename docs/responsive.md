@@ -1,89 +1,90 @@
-# Responsive Design
+# Responsive design
 
-FCSS uses a **mobile-first** breakpoint strategy. Unprefixed utility classes apply at all viewport widths. Prefixed classes apply from their breakpoint's minimum width upward.
+FCSS is mobile-first. A class without a prefix applies at every width. A prefixed class applies
+from its breakpoint up, using `min-width` media queries.
 
-## Default breakpoints
+| Prefix   | From   |
+| -------- | ------ |
+| _(none)_ | 0      |
+| `sm-`    | 576px  |
+| `md-`    | 768px  |
+| `lg-`    | 992px  |
+| `xl-`    | 1200px |
+| `xxl-`   | 1400px |
 
-| Prefix   | Min-width | Typical target         |
-| -------- | --------- | ---------------------- |
-| _(none)_ | all sizes | Mobile and all devices |
-| `sm-`    | 576px     | Small devices          |
-| `md-`    | 768px     | Tablets                |
-| `lg-`    | 992px     | Desktop                |
-| `xl-`    | 1200px    | Large desktop          |
-| `xxl-`   | 1400px    | Widescreen             |
+## Writing responsive markup
 
-## How to use
-
-Start with the mobile (unprefixed) classes, then add breakpoint-prefixed overrides for larger screens.
+Write the phone layout first, then add prefixed classes for the widths where it changes.
 
 ```html
-<!-- Single column on mobile, two columns from tablet up, three from desktop -->
+<!-- one column on phones, two from 768px, three from 992px -->
 <div
-  class="
-  display--grid
-  grid-template-columns--1fr
-  md-grid-template-columns--1fr-1fr
-  lg-grid-template-columns--1fr-1fr-1fr
-"
+  class="display--grid grid-template-columns--1 md-grid-template-columns--2 lg-grid-template-columns--3"
 ></div>
-```
 
-```html
-<!-- Hidden on mobile, shown from tablet up -->
+<!-- hidden on phones, shown from 768px -->
 <nav class="display--none md-display--flex"></nav>
+
+<!-- 24px, then 32px, then 48px -->
+<h1 class="font-size--24 md-font-size--32 lg-font-size--48">Headline</h1>
 ```
+
+`grid-template-columns--2` is `repeat(2, minmax(0, 1fr))`, which is usually what you want.
+
+Prefixes combine with states:
 
 ```html
-<!-- Font size scales with viewport -->
-<h1 class="font-size--1-5rem md-font-size--2rem lg-font-size--3rem">Headline</h1>
+<!-- turns red on hover, but only from 768px up -->
+<a class="color--blue md-color--red:hover"></a>
 ```
 
-## Choosing which breakpoints to load
+## Loading only some breakpoints
 
-You do not need to load all breakpoint files. Match what you import to what your design actually uses:
+`full.css` includes every breakpoint. If you import the files one by one instead, you can leave
+out the breakpoints you don't use:
 
-| Design target                 | Import                                       |
-| ----------------------------- | -------------------------------------------- |
-| Single layout (no responsive) | `generics.css` only                          |
-| Mobile + desktop              | `generics.css`, `md.css`                     |
-| Mobile + tablet + desktop     | `generics.css`, `sm.css`, `md.css`, `lg.css` |
-| Full responsive range         | All files                                    |
-
-Unused breakpoint files contribute zero classes to the purged output, but omitting them at import time speeds up development builds.
-
-## Cascade ordering
-
-Within the same property, breakpoint files override the generic file because they are imported later. The cascade order is:
-
-```
-root.css → normalizer.css → generics.css → sm.css → md.css → lg.css → xl.css → xxl.css → custom.css
+```js
+import '@functionalcss/core/reset.css';
+import '@functionalcss/core/root.css';
+import '@functionalcss/core/utilities.css';
+import '@functionalcss/core/states/pseudo.css';
+import '@functionalcss/core/states/aria.css';
+import '@functionalcss/core/breakpoints/md.css';
+import '@functionalcss/core/breakpoints/lg.css';
 ```
 
-A class like `md-display--flex` only takes effect when the viewport matches `min-width: 768px`. At smaller widths the browser ignores it, and the unprefixed class (if present) applies instead.
+Each breakpoint file is about 4.6 MB before purging, so dropping the ones you don't need makes
+development builds noticeably lighter. After purging it makes no difference: unused classes are
+gone either way.
+
+## Order matters
+
+A base class and its breakpoint variant have the same specificity, so the one loaded last
+wins. Keep this order, which is also the order inside `full.css`:
+
+```
+reset.css, root.css, utilities.css, states/pseudo.css, states/aria.css,
+breakpoints/sm.css, md.css, lg.css, xl.css, xxl.css
+```
+
+Breakpoints go last and in ascending order, so a wider breakpoint overrides a narrower one.
+Load your own `c-` classes after all of them.
 
 ## Custom breakpoints
 
-You can define additional breakpoints in `fcss.config.ts`:
+You can declare extra breakpoints in `fcss.config.ts`:
 
 ```ts
 import { defineConfig } from '@functionalcss/cli';
 
 export default defineConfig({
-  breakpoints: [
-    { name: 'xs', minWidth: 400 },
-    { name: 'wide', minWidth: 1600 },
-  ],
+  breakpoints: {
+    xs: { minWidth: 400 },
+    wide: { minWidth: 1600 },
+  },
 });
 ```
 
-Run `fcss build` after changing breakpoints to regenerate the CSS files.
-
-## Responsive + state combinations
-
-Breakpoint prefixes compose with state suffixes:
-
-```html
-<!-- Blue link that turns red on hover only from tablet up -->
-<a class="color--blue md-color--blue md-color--red:hover"></a>
-```
+Be aware of what this does today. `fcss build` writes an empty `@media` block for each one into
+`.fcss/generated.css`, for you to fill in. It does not generate `xs-` or `wide-` utility
+classes.

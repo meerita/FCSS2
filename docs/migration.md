@@ -1,82 +1,56 @@
-# Migration
+# Migrating from TFCSSF
 
-This guide covers moving a project from the legacy TFCSSF repository to FCSS 1.0.
+FCSS is the successor to the TFCSSF repository. The class syntax is the same, so most of the
+work is swapping copied files for a package, and checking one breakpoint.
 
 ## What changed
 
-| Area                  | Legacy (TFCSSF)                       | FCSS 1.0                                                               |
-| --------------------- | ------------------------------------- | ---------------------------------------------------------------------- |
-| Package name          | `tfcssf` / private package            | `@functionalcss/core` on npm                                           |
-| Installation          | Manual file copy                      | `npm install @functionalcss/core`                                      |
-| CSS import            | Copy files to project                 | `import '@functionalcss/core/full.css'`                                |
-| Breakpoints           | Mobile-first with `max-width` on `sm` | All breakpoints use `min-width`                                        |
-| Custom classes        | `c-` prefix in `custom.css`           | Same                                                                   |
-| Class syntax          | `property--value`                     | Same                                                                   |
-| Hover                 | `:hover` suffix                       | `:hover` suffix (unchanged)                                            |
-| ARIA states           | Not generated                         | `:aria-attribute:value` suffix                                         |
-| CLI                   | None                                  | `@functionalcss/cli`                                                   |
-| Purging               | Manual PurgeCSS config                | `@functionalcss/postcss` or `fcss purge`                               |
-| Framework integration | Manual                                | `@functionalcss/next`, `@functionalcss/angular`, `@functionalcss/vite` |
+| Area            | TFCSSF                           | FCSS                                              |
+| --------------- | -------------------------------- | ------------------------------------------------- |
+| Install         | Copy CSS files into your project | `npm install @functionalcss/core`                 |
+| Import          | Your copied files                | `import '@functionalcss/core/full.css'`           |
+| `sm` breakpoint | `max-width: 576px` (mobile only) | `min-width: 576px` (576px and up)                 |
+| Class syntax    | `property--value`                | Same                                              |
+| `:hover`        | Suffix                           | Same, plus more states                            |
+| ARIA states     | None                             | `property--value:aria-attribute:value`            |
+| `c-` classes    | In `custom.css`                  | Same; your own file                               |
+| Purging         | Your own PurgeCSS setup          | Built into the integrations, or `fcss purge`      |
+| Frameworks      | Manual                           | `@functionalcss/vite`, `next`, `astro`, `angular` |
 
-## Automated migration
+## The one that bites: `sm-`
 
-Run the migration command to get a report of changes needed in your project:
+In TFCSSF, `sm-` meant "small screens only" (`max-width`). In FCSS every breakpoint is
+`min-width`, so `sm-` now means "576px and wider". The other breakpoints did not change.
 
-```bash
-npx fcss migrate
+| Prefix | TFCSSF              | FCSS               |
+| ------ | ------------------- | ------------------ |
+| `sm`   | `max-width: 576px`  | `min-width: 576px` |
+| `md`   | `min-width: 768px`  | same               |
+| `lg`   | `min-width: 992px`  | same               |
+| `xl`   | `min-width: 1200px` | same               |
+| `xxl`  | `min-width: 1400px` | same               |
+
+Every `sm-` class you used for a mobile-only style now does roughly the opposite. Search for
+`sm-` and fix each one. A mobile-only style becomes the unprefixed class, undone at `sm`:
+
+```html
+<!-- TFCSSF: hidden on phones -->
+<nav class="sm-display--none">…</nav>
+
+<!-- FCSS: hidden by default, shown from 576px -->
+<nav class="display--none sm-display--block">…</nav>
 ```
 
-The command will:
+## Steps
 
-1. Scan your source files for legacy class names
-2. Report which classes map cleanly to FCSS 1.0
-3. Flag classes that have changed
-4. List classes from the legacy set that have no equivalent
-
-## Breakpoint changes
-
-The legacy framework used `max-width` for `sm` (mobile) and `min-width` for larger breakpoints. FCSS 1.0 uses `min-width` for all breakpoints (true mobile-first).
-
-| Breakpoint | Legacy              | FCSS 1.0                     |
-| ---------- | ------------------- | ---------------------------- |
-| `sm`       | `max-width: 576px`  | `min-width: 576px`           |
-| `md`       | `min-width: 768px`  | `min-width: 768px` _(same)_  |
-| `lg`       | `min-width: 992px`  | `min-width: 992px` _(same)_  |
-| `xl`       | `min-width: 1200px` | `min-width: 1200px` _(same)_ |
-| `xxl`      | `min-width: 1400px` | `min-width: 1400px` _(same)_ |
-
-If your project used `sm-` classes for mobile-only styles (assuming `max-width` behavior), review those usages. The semantics have changed — `sm-` now means "small viewport and up", not "small viewport only".
-
-## Class name compatibility
-
-Most class names are identical between the legacy framework and FCSS 1.0. The `property--value` convention is unchanged.
-
-### Classes to verify
-
-Some legacy classes used shortened or non-standard property names. Run `fcss audit` to identify them:
-
-```bash
-npx fcss audit
-```
-
-Any class flagged as unknown should be checked against:
-
-1. A typo in the original — fix it
-2. A legacy shorthand — find the full property name equivalent
-3. A class that was hand-written in the old `custom.css` — move it to `custom.css` in the new project
-
-## Step-by-step migration
-
-1. **Install FCSS 1.0**
+1. Install the packages.
 
    ```bash
    npm install @functionalcss/core
    npm install -D @functionalcss/cli
    ```
 
-2. **Replace the CSS import**
-
-   Remove manually copied CSS files. Import the package instead:
+2. Delete the copied CSS files and import the package instead.
 
    ```diff
    - import './styles/generics.css';
@@ -86,28 +60,39 @@ Any class flagged as unknown should be checked against:
    + import '@functionalcss/core/full.css';
    ```
 
-3. **Move custom classes**
+3. Keep your `custom.css`. Import it after FCSS. `c-` classes carry over unchanged. See
+   [Custom CSS](./custom-css.md).
 
-   Copy the contents of your legacy `custom.css` to the new project's `custom.css`. All `c-` classes should transfer without changes.
+4. Fix every `sm-` class, as above.
 
-4. **Run the audit**
+5. Set up purging through your framework integration: [Next.js](./guides/nextjs.md),
+   [Angular](./guides/angular.md), [Astro](./guides/astro.md), or
+   [Vite](./installation.md). Background in [Purging](./purging.md).
 
-   ```bash
-   npx fcss audit
-   ```
+6. Click through the app at a phone width and at a desktop width.
 
-   Fix any flagged classes.
+## Unknown classes
 
-5. **Review `sm-` breakpoint usage**
+A class that FCSS does not generate simply has no styles; nothing fails. Some TFCSSF classes
+used shortened or nonstandard names. Check anything that looks off:
 
-   If your project used `sm-` classes for mobile-only rules, test the layout at small viewports. The semantic change from `max-width` to `min-width` may require adjusting which breakpoint prefix you use.
+```bash
+npx fcss explain sm-display--none
+```
 
-6. **Set up purging**
+`explain` prints the CSS for a real class and `Unknown class` for anything else. `fcss audit`
+won't catch these: it reports dynamic class fragments and deprecated classes, not unknown names.
 
-   See the [Purging guide](./purging.md) to configure production build optimization.
+## `fcss migrate`
 
-7. **Set up the framework integration**
+`fcss migrate` looks for legacy class names in your HTML, JS and TS files. It needs an inventory
+of the TFCSSF classes in `legacy-classes.json` at the project root. That inventory is not
+published with FCSS yet. Without it, the command says there is nothing to migrate and exits.
 
-   - Next.js: see the [Next.js guide](./guides/nextjs.md)
-   - Angular: see the [Angular guide](./guides/angular.md)
-   - Vite + React: see the [Installation guide](./installation.md#react--vite)
+With an inventory in place:
+
+```bash
+npx fcss migrate             # report each match with file and line; exits 1 if any
+npx fcss migrate --dry-run   # report only
+npx fcss migrate --force     # apply replacements, writing a .fcss-backup copy of each file first
+```
