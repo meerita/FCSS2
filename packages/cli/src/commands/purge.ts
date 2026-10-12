@@ -17,15 +17,32 @@ export interface PurgeOptions {
   cwd?: string;
 }
 
+function findCoreManifest(from: string): string | undefined {
+  let dir = from;
+  for (;;) {
+    const candidate = path.join(dir, 'node_modules/@functionalcss/core/dist/manifest.json');
+    if (fs.existsSync(candidate)) return candidate;
+    const parent = path.dirname(dir);
+    if (parent === dir) return undefined;
+    dir = parent;
+  }
+}
+
 export async function runPurge(config: FcssConfig, options: PurgeOptions): Promise<void> {
   const cwd = options.cwd ?? process.cwd();
-  const manifestPath = path.resolve(cwd, '.fcss/manifest.json');
   const inputPath = path.resolve(cwd, options.input);
   const outputPath = path.resolve(cwd, options.output);
 
-  if (!fs.existsSync(manifestPath)) {
-    throw new Error(`[fcss] No manifest found at "${manifestPath}". Run "fcss build" first.`);
+  // The core manifest lists every utility; `fcss build` adds custom ones (colors) on top.
+  // Walks up node_modules like the Vite and Next.js plugins do, independent of NODE_PATH.
+  const coreManifest = findCoreManifest(cwd);
+  if (!coreManifest) {
+    throw new Error(
+      '[fcss] Cannot find @functionalcss/core. Install it in this project: npm install @functionalcss/core',
+    );
   }
+  const customManifest = path.resolve(cwd, '.fcss/manifest.json');
+  const manifests = fs.existsSync(customManifest) ? [coreManifest, customManifest] : [coreManifest];
   if (!fs.existsSync(inputPath)) {
     throw new Error(`[fcss] Input CSS not found: "${inputPath}"`);
   }
@@ -40,7 +57,7 @@ export async function runPurge(config: FcssConfig, options: PurgeOptions): Promi
       .map((s) => s.pattern) ?? [];
 
   const pluginOpts: FcssPostcssOptions = {
-    manifest: manifestPath,
+    manifest: manifests,
     content,
     cwd,
   };
