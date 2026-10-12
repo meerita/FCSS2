@@ -1,6 +1,6 @@
 {
   "name": "@functionalcss/example-react-vite",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "type": "module",
   "description": "React + Vite fixture for @functionalcss/vite smoke testing",
