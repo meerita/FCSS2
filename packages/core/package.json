@@ -1,6 +1,6 @@
 {
   "name": "@functionalcss/core",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": false,
   "type": "module",
   "description": "Functional CSS utility library — full set, framework-agnostic, purge-ready",

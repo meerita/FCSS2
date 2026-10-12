@@ -1,6 +1,6 @@
 {
   "name": "@functionalcss/example-angular-standalone",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "description": "Angular standalone fixture for @functionalcss/angular smoke testing",
   "scripts": {

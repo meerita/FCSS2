@@ -1,6 +1,6 @@
 {
   "name": "@functionalcss/postcss",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": false,
   "type": "module",
   "description": "FCSS PostCSS plugin — source scanning and production purge",

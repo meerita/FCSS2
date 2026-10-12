@@ -1,6 +1,6 @@
 {
   "name": "@functionalcss/example-angular-workspace",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "description": "Angular multi-project workspace fixture for @functionalcss/angular isolation testing",
   "scripts": {
