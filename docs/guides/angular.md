@@ -11,7 +11,7 @@ ng add @functionalcss/angular
 The schematic:
 
 1. Installs `@functionalcss/core` as a dependency
-2. Adds `@functionalcss/core/fcss.css` to `angular.json` styles
+2. Adds `@functionalcss/core/full.css` to `angular.json` styles
 3. Optionally generates an `fcss.config.ts`
 
 ## Manual setup
@@ -29,7 +29,7 @@ Add the CSS to your `angular.json`:
       "architect": {
         "build": {
           "options": {
-            "styles": ["node_modules/@functionalcss/core/fcss.css", "src/styles.css"]
+            "styles": ["node_modules/@functionalcss/core/dist/full.css", "src/styles.css"]
           }
         }
       }
@@ -161,12 +161,13 @@ Or integrate via a custom PostCSS configuration in your Angular project:
 
 ```js
 // postcss.config.js (at project root)
-const { fcssPlugin } = require('@functionalcss/postcss');
+const fcss = require('@functionalcss/postcss').default;
 
 module.exports = {
   plugins: [
     process.env.NODE_ENV === 'production' &&
-      fcssPlugin({
+      fcss({
+        manifest: require.resolve('@functionalcss/core/manifest.json'),
         content: ['src/**/*.{ts,html}'],
       }),
   ].filter(Boolean),

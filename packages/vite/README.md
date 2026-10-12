@@ -7,7 +7,7 @@
 
 # @functionalcss/vite
 
-Vite plugin for [FCSS](https://github.com/cognativinc/fcss) — adds production CSS purging and development dynamic-fragment warnings for React+Vite projects.
+Vite plugin for [FCSS](https://github.com/meerita/FCSS2) — adds production CSS purging and development dynamic-fragment warnings for React+Vite projects.
 
 ## Features
 

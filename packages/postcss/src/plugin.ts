@@ -46,7 +46,9 @@ function loadManifest(manifestPath: string): ManifestEntry[] {
   try {
     parsed = JSON.parse(raw);
   } catch (err) {
-    throw new Error(`[@functionalcss/postcss] Invalid JSON in manifest "${manifestPath}": ${String(err)}.`);
+    throw new Error(
+      `[@functionalcss/postcss] Invalid JSON in manifest "${manifestPath}": ${String(err)}.`,
+    );
   }
 
   if (!Array.isArray(parsed)) {

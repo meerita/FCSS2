@@ -20,7 +20,9 @@ const contentPatterns = ['projects/app1/src/**/*.{ts,html}'];
 const cssFiles = readdirSync(distDir).filter((f) => f.endsWith('.css'));
 
 if (cssFiles.length === 0) {
-  console.warn(`[@functionalcss/angular] No CSS files found in "${distDir}". Run ng build app1 first.`);
+  console.warn(
+    `[@functionalcss/angular] No CSS files found in "${distDir}". Run ng build app1 first.`,
+  );
   process.exit(1);
 }
 

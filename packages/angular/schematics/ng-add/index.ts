@@ -79,7 +79,9 @@ function readJson<T>(tree: Tree, filePath: string): T {
 function addPackageDependencies(schema: NgAddSchema): Rule {
   return (tree: Tree, context: SchematicContext) => {
     if (!tree.exists('package.json')) {
-      context.logger.warn('[@functionalcss/angular] package.json not found — skipping dependency update.');
+      context.logger.warn(
+        '[@functionalcss/angular] package.json not found — skipping dependency update.',
+      );
       return;
     }
 
@@ -110,7 +112,9 @@ function addPackageDependencies(schema: NgAddSchema): Rule {
     if (!devDeps[POSTCSS_PKG_UPSTREAM] && !deps[POSTCSS_PKG_UPSTREAM]) {
       devDeps[POSTCSS_PKG_UPSTREAM] = POSTCSS_VERSION;
       modified = true;
-      context.logger.info(`[@functionalcss/angular] Added ${POSTCSS_PKG_UPSTREAM} to devDependencies.`);
+      context.logger.info(
+        `[@functionalcss/angular] Added ${POSTCSS_PKG_UPSTREAM} to devDependencies.`,
+      );
     }
 
     if (modified) {
@@ -124,7 +128,9 @@ function addPackageDependencies(schema: NgAddSchema): Rule {
 function addGlobalStyles(schema: NgAddSchema): Rule {
   return (tree: Tree, context: SchematicContext) => {
     if (!tree.exists('angular.json')) {
-      context.logger.warn('[@functionalcss/angular] angular.json not found — skipping styles update.');
+      context.logger.warn(
+        '[@functionalcss/angular] angular.json not found — skipping styles update.',
+      );
       return;
     }
 
@@ -133,7 +139,9 @@ function addGlobalStyles(schema: NgAddSchema): Rule {
     const project = workspace.projects[projectName];
 
     if (!project) {
-      context.logger.warn(`[@functionalcss/angular] Project "${projectName}" not found — skipping.`);
+      context.logger.warn(
+        `[@functionalcss/angular] Project "${projectName}" not found — skipping.`,
+      );
       return;
     }
 
@@ -157,7 +165,9 @@ function addGlobalStyles(schema: NgAddSchema): Rule {
 
     buildTarget.options['styles'] = [CORE_STYLES_ENTRY, ...styles];
     tree.overwrite('angular.json', JSON.stringify(workspace, null, 2) + '\n');
-    context.logger.info(`[@functionalcss/angular] Added ${CORE_STYLES_ENTRY} to "${projectName}" styles.`);
+    context.logger.info(
+      `[@functionalcss/angular] Added ${CORE_STYLES_ENTRY} to "${projectName}" styles.`,
+    );
   };
 }
 

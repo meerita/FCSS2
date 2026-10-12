@@ -18,7 +18,7 @@ Thank you for contributing. Please read this guide before opening a PR.
 ## Setup
 
 ```sh
-git clone https://github.com/cognativinc/fcss-2.git
+git clone https://github.com/meerita/FCSS2.git
 cd fcss-2
 pnpm install
 ```

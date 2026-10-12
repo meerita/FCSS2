@@ -23,7 +23,10 @@
             "polyfills": ["zone.js"],
             "tsConfig": "projects/app1/tsconfig.app.json",
             "assets": [],
-            "styles": ["node_modules/@functionalcss/core/dist/full.css", "projects/app1/src/styles.css"],
+            "styles": [
+              "node_modules/@functionalcss/core/dist/full.css",
+              "projects/app1/src/styles.css"
+            ],
             "scripts": []
           },
           "configurations": {

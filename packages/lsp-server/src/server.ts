@@ -11,7 +11,11 @@ import {
   TextDocumentSyncKind,
 } from 'vscode-languageserver/node';
 import { TextDocument } from 'vscode-languageserver-textdocument';
-import { loadManifestFromPath, createManifestIndex, watchManifest } from '@functionalcss/language-service';
+import {
+  loadManifestFromPath,
+  createManifestIndex,
+  watchManifest,
+} from '@functionalcss/language-service';
 import type { ManifestIndex } from '@functionalcss/language-service';
 import { findManifestPath } from './manifest-locator';
 import { handleCompletion } from './handlers/completion';

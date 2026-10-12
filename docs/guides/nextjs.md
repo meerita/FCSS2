@@ -31,7 +31,7 @@ export default withFcss(nextConfig);
 
 ```tsx
 // app/layout.tsx
-import '@functionalcss/core/fcss.css';
+import '@functionalcss/core/full.css';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -47,7 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 ```tsx
 // pages/_app.tsx
 import type { AppProps } from 'next/app';
-import '@functionalcss/core/fcss.css';
+import '@functionalcss/core/full.css';
 
 export default function App({ Component, pageProps }: AppProps) {
   return <Component {...pageProps} />;
@@ -144,5 +144,5 @@ Add dynamically constructed classes to the safelist in `fcss.config.ts`.
 To verify which classes will be kept:
 
 ```bash
-npx fcss audit --content "app/**/*.{ts,tsx}"
+npx fcss audit
 ```

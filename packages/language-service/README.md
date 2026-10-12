@@ -24,9 +24,15 @@ const token = parseClass('md-display--flex:hover');
 ### Manifest
 
 ```ts
-import { loadManifestFromPath, createManifestIndex, watchManifest } from '@functionalcss/language-service';
+import {
+  loadManifestFromPath,
+  createManifestIndex,
+  watchManifest,
+} from '@functionalcss/language-service';
 
-const entries = loadManifestFromPath('/path/to/node_modules/@functionalcss/core/dist/manifest.json');
+const entries = loadManifestFromPath(
+  '/path/to/node_modules/@functionalcss/core/dist/manifest.json',
+);
 const index = createManifestIndex(entries);
 
 // Watch for changes (returns a disposer)

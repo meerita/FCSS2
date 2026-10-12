@@ -33,7 +33,7 @@ npm install @functionalcss/core
 
 ```js
 // Import in your entry point
-import '@functionalcss/core/fcss.css';
+import '@functionalcss/core/full.css';
 ```
 
 ```html
@@ -44,14 +44,14 @@ import '@functionalcss/core/fcss.css';
 
 ## Packages
 
-| Package                  | Purpose                                                     |
-| ------------------------ | ----------------------------------------------------------- |
+| Package                           | Purpose                                                     |
+| --------------------------------- | ----------------------------------------------------------- |
 | `@functionalcss/core`             | Generated CSS utility set                                   |
 | `@functionalcss/cli`              | Build, purge, generate, and doctor commands                 |
 | `@functionalcss/next`             | Next.js plugin (`withFcss`) for App Router and Pages Router |
 | `@functionalcss/angular`          | Angular `ng-add` schematic                                  |
 | `@functionalcss/vite`             | Vite plugin                                                 |
-| `@functionalcss/astro`            | Astro integration (wraps `@functionalcss/vite`)                      |
+| `@functionalcss/astro`            | Astro integration (wraps `@functionalcss/vite`)             |
 | `@functionalcss/postcss`          | PostCSS purge pipeline                                      |
 | `@functionalcss/scanner`          | Static class extraction engine                              |
 | `@functionalcss/language-service` | IntelliSense and validation                                 |

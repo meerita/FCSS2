@@ -80,7 +80,8 @@ function checkDuplicateInstalls(cwd: string): HealthCheck {
     return {
       name: 'Duplicate packages',
       status: 'ok',
-      message: 'No @functionalcss packages found in node_modules (install @functionalcss/core first)',
+      message:
+        'No @functionalcss packages found in node_modules (install @functionalcss/core first)',
     };
   }
   let duplicates: string[] = [];

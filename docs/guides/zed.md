@@ -101,7 +101,7 @@ The server publishes diagnostics on document open and on every change (debounced
 
 | Code                           | Severity | Description                                                                           |
 | ------------------------------ | -------- | ------------------------------------------------------------------------------------- |
-| `fcss/unknown-property`        | Error    | Class uses a CSS property not in the `@functionalcss/core` manifest                            |
+| `fcss/unknown-property`        | Error    | Class uses a CSS property not in the `@functionalcss/core` manifest                   |
 | `fcss/unknown-value`           | Error    | Property is known but value is not in the manifest                                    |
 | `fcss/conflict`                | Error    | Two classes in the same attribute set the same CSS property                           |
 | `fcss/duplicate`               | Warning  | Same class appears more than once in the same attribute                               |
@@ -164,9 +164,9 @@ Each diagnostic class is annotated with a comment explaining the expected diagno
 
 ## Troubleshooting
 
-| Symptom                    | Likely cause                          | Fix                                                               |
-| -------------------------- | ------------------------------------- | ----------------------------------------------------------------- |
-| No completions or hover    | `@functionalcss/core` not installed in project | `npm install @functionalcss/core @functionalcss/lsp-server`                         |
-| "Node.js not found" error  | Node not on `PATH`                    | Install Node.js and ensure it is on your `PATH`                   |
-| Extension does not appear  | WASM build not done                   | Run `cargo build --release --target wasm32-wasip2`                |
-| Diagnostics not refreshing | Manifest changed on disk              | The server watches the manifest; save a file to trigger a refresh |
+| Symptom                    | Likely cause                                   | Fix                                                               |
+| -------------------------- | ---------------------------------------------- | ----------------------------------------------------------------- |
+| No completions or hover    | `@functionalcss/core` not installed in project | `npm install @functionalcss/core @functionalcss/lsp-server`       |
+| "Node.js not found" error  | Node not on `PATH`                             | Install Node.js and ensure it is on your `PATH`                   |
+| Extension does not appear  | WASM build not done                            | Run `cargo build --release --target wasm32-wasip2`                |
+| Diagnostics not refreshing | Manifest changed on disk                       | The server watches the manifest; save a file to trigger a refresh |

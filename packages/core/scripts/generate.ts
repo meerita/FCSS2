@@ -3,7 +3,12 @@
 // @layer scripts
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 
-import { generate, buildBundles, buildStatistics, GENERATED_FILE_HEADER } from '@functionalcss/generator';
+import {
+  generate,
+  buildBundles,
+  buildStatistics,
+  GENERATED_FILE_HEADER,
+} from '@functionalcss/generator';
 import { FCSS_COLOR_VALUES } from '@functionalcss/spec';
 import * as fs from 'node:fs';
 import * as path from 'node:path';

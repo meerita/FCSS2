@@ -7,7 +7,7 @@
 
 # FCSS IntelliSense
 
-VS Code extension for [FCSS](https://github.com/cognativinc/fcss) — provides completions, hover, and diagnostics powered by the `@functionalcss/core` manifest.
+VS Code extension for [FCSS](https://github.com/meerita/FCSS2) — provides completions, hover, and diagnostics powered by the `@functionalcss/core` manifest.
 
 ## Features
 

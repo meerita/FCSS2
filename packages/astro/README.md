@@ -7,7 +7,7 @@
 
 # @functionalcss/astro
 
-Official Astro integration for [FCSS](https://github.com/cognativinc/fcss) — registers
+Official Astro integration for [FCSS](https://github.com/meerita/FCSS2) — registers
 [`@functionalcss/vite`](../vite/README.md)'s plugin into Astro's Vite config to enable production CSS
 purging and development dynamic-fragment warnings for Astro projects.
 

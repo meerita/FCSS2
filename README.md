@@ -75,8 +75,8 @@ npx fcss explain     # explain what a class name compiles to
 
 ## Packages
 
-| Package                  | Description                                            | Visibility  |
-| ------------------------ | ------------------------------------------------------ | ----------- |
+| Package                           | Description                                            | Visibility  |
+| --------------------------------- | ------------------------------------------------------ | ----------- |
 | `@functionalcss/core`             | Full generated CSS library + manifest                  | public      |
 | `@functionalcss/cli`              | `fcss` command-line tool                               | public      |
 | `@functionalcss/postcss`          | PostCSS purge plugin                                   | public      |

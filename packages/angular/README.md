@@ -36,13 +36,13 @@ ng add @functionalcss/angular --skip-install
 
 ## What the schematic does
 
-| Action                                                                         | Detail                         |
-| ------------------------------------------------------------------------------ | ------------------------------ |
+| Action                                                                                  | Detail                         |
+| --------------------------------------------------------------------------------------- | ------------------------------ |
 | Adds `@functionalcss/core` to `dependencies`                                            | Global CSS library             |
 | Adds `@functionalcss/postcss` to `devDependencies`                                      | PostCSS purge plugin           |
 | Prepends `node_modules/@functionalcss/core/dist/full.css` to `styles` in `angular.json` | Global import                  |
-| Creates `fcss.config.ts`                                                       | Scanner configuration          |
-| Creates `postcss.config.mjs`                                                   | Production purge configuration |
+| Creates `fcss.config.ts`                                                                | Scanner configuration          |
+| Creates `postcss.config.mjs`                                                            | Production purge configuration |
 
 All steps are **idempotent** — running `ng add` twice makes no duplicate changes.
 

@@ -16,7 +16,7 @@ Import the full CSS set in your root entry point:
 // src/index.tsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import '@functionalcss/core/fcss.css';
+import '@functionalcss/core/full.css';
 import App from './App';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -106,12 +106,13 @@ npm install -D @functionalcss/postcss
 
 ```js
 // postcss.config.js
-const { fcssPlugin } = require('@functionalcss/postcss');
+const fcss = require('@functionalcss/postcss').default;
 
 module.exports = {
   plugins: [
     process.env.NODE_ENV === 'production' &&
-      fcssPlugin({
+      fcss({
+        manifest: require.resolve('@functionalcss/core/manifest.json'),
         content: ['src/**/*.{ts,tsx}'],
       }),
   ].filter(Boolean),

@@ -11,19 +11,20 @@ npm install @functionalcss/core
 Import the full CSS set. If you are using a bundler (Vite, Parcel, webpack):
 
 ```js
-import '@functionalcss/core/fcss.css';
+import '@functionalcss/core/full.css';
 ```
 
 If you have no build step, use the CDN:
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/@functionalcss/core/fcss.css" />
+<link rel="stylesheet" href="https://unpkg.com/@functionalcss/core/dist/full.css" />
 ```
 
 For production, run the CLI purge step to strip unused classes:
 
 ```bash
-npx fcss purge --content "src/**/*.html"
+npx fcss init --framework none   # creates fcss.config.ts with your content globs
+npx fcss purge -i node_modules/@functionalcss/core/dist/full.css -o public/fcss.css
 ```
 
 ---
@@ -37,7 +38,7 @@ npm install @functionalcss/core
 Import in your root entry point (`src/index.tsx` or `src/main.tsx`):
 
 ```tsx
-import '@functionalcss/core/fcss.css';
+import '@functionalcss/core/full.css';
 ```
 
 Add purging via PostCSS:
@@ -48,10 +49,15 @@ npm install -D @functionalcss/postcss
 
 ```js
 // postcss.config.js
-const { fcssPlugin } = require('@functionalcss/postcss');
+const fcss = require('@functionalcss/postcss').default;
 
 module.exports = {
-  plugins: [fcssPlugin({ content: ['src/**/*.{ts,tsx}'] })],
+  plugins: [
+    fcss({
+      manifest: require.resolve('@functionalcss/core/manifest.json'),
+      content: ['src/**/*.{ts,tsx}'],
+    }),
+  ],
 };
 ```
 
@@ -71,7 +77,7 @@ import react from '@vitejs/plugin-react';
 import { fcss } from '@functionalcss/vite';
 
 export default defineConfig({
-  plugins: [react(), fcss({ content: ['src/**/*.{ts,tsx}'] })],
+  plugins: [react(), fcss({ config: { content: ['src/**/*.{ts,tsx}'] } })],
 });
 ```
 
@@ -79,7 +85,7 @@ Import CSS in your entry point:
 
 ```tsx
 // src/main.tsx
-import '@functionalcss/core/fcss.css';
+import '@functionalcss/core/full.css';
 ```
 
 ---
@@ -106,10 +112,10 @@ Import CSS globally:
 
 ```tsx
 // app/layout.tsx (App Router)
-import '@functionalcss/core/fcss.css';
+import '@functionalcss/core/full.css';
 
 // or _app.tsx (Pages Router)
-import '@functionalcss/core/fcss.css';
+import '@functionalcss/core/full.css';
 ```
 
 The plugin automatically reads content paths from `fcss.config.ts` if present, and defaults to scanning `app/**`, `pages/**`, `components/**`, and `src/**`.
@@ -135,7 +141,7 @@ npm install @functionalcss/core
 ```json
 // angular.json — inside your project's architect.build.options
 {
-  "styles": ["@functionalcss/core/fcss.css", "src/styles.css"]
+  "styles": ["@functionalcss/core/full.css", "src/styles.css"]
 }
 ```
 
@@ -186,19 +192,18 @@ content path configuration, and deploy-adapter notes.
 Instead of the full CSS bundle, you can import only the files you need:
 
 ```js
-import '@functionalcss/core/dist/root.css';
-import '@functionalcss/core/dist/normalizer.css';
-import '@functionalcss/core/dist/generics.css';
-import '@functionalcss/core/dist/states.css';
-import '@functionalcss/core/dist/sm.css';
-import '@functionalcss/core/dist/md.css';
-import '@functionalcss/core/dist/lg.css';
-import '@functionalcss/core/dist/xl.css';
-import '@functionalcss/core/dist/xxl.css';
-import '@functionalcss/core/dist/custom.css';
+import '@functionalcss/core/reset.css';
+import '@functionalcss/core/root.css';
+import '@functionalcss/core/utilities.css';
+import '@functionalcss/core/states.css'; // or states/pseudo.css and states/aria.css separately
+import '@functionalcss/core/breakpoints/sm.css';
+import '@functionalcss/core/breakpoints/md.css';
+import '@functionalcss/core/breakpoints/lg.css';
+import '@functionalcss/core/breakpoints/xl.css';
+import '@functionalcss/core/breakpoints/xxl.css';
 ```
 
-Import order matters. `root.css` and `normalizer.css` must come first. Breakpoint files (`sm`, `md`, `lg`, `xl`, `xxl`) must follow the generic file. `custom.css` must be last so that `c-` classes can override utilities when necessary.
+Import order matters. `reset.css` and `root.css` must come first, then `utilities.css`, then states. Breakpoint files must follow in ascending order (`sm`, `md`, `lg`, `xl`, `xxl`) so wider breakpoints win. Your own `c-` classes go last so they can override utilities when necessary.
 
 ---
 

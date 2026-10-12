@@ -81,14 +81,11 @@ export default withFcss({
 ## Purging with the CLI
 
 ```bash
-# Purge using config from fcss.config.ts
-npx fcss purge
+# Scans the content globs from fcss.config.ts
+npx fcss purge -i node_modules/@functionalcss/core/dist/full.css -o dist/fcss.purged.css
 
-# Purge with an explicit content glob
-npx fcss purge --content "src/**/*.{ts,tsx}"
-
-# Purge and write the output to a specific file
-npx fcss purge --output dist/fcss.purged.css
+# Also write a JSON report of kept and removed classes
+npx fcss purge -i node_modules/@functionalcss/core/dist/full.css -o dist/fcss.purged.css --report-json fcss-report.json
 ```
 
 ## Purging with PostCSS
@@ -99,12 +96,13 @@ npm install -D @functionalcss/postcss
 
 ```js
 // postcss.config.js
-const { fcssPlugin } = require('@functionalcss/postcss');
+const fcss = require('@functionalcss/postcss').default;
 
 module.exports = {
   plugins: [
     process.env.NODE_ENV === 'production' &&
-      fcssPlugin({
+      fcss({
+        manifest: require.resolve('@functionalcss/core/manifest.json'),
         content: ['src/**/*.{ts,tsx,html}'],
       }),
   ].filter(Boolean),
@@ -120,7 +118,7 @@ The `@functionalcss/vite` plugin runs the purge step automatically on `vite buil
 import { fcss } from '@functionalcss/vite';
 
 export default defineConfig({
-  plugins: [fcss({ content: ['src/**/*.{ts,tsx}'] })],
+  plugins: [fcss({ config: { content: ['src/**/*.{ts,tsx}'] } })],
 });
 ```
 
@@ -129,7 +127,7 @@ export default defineConfig({
 After purging, run `fcss audit` to see which classes were kept, which were removed, and which classes in your source files did not match any known utility:
 
 ```bash
-npx fcss audit --content "src/**/*.{ts,tsx}"
+npx fcss audit
 ```
 
 Output example:

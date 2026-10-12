@@ -38,7 +38,14 @@ describe('findManifestPath', () => {
   it('finds the manifest when it exists in the workspace', () => {
     const { dir, uri } = createWorkspace(true);
     const result = findManifestPath([uri]);
-    const expected = path.join(dir, 'node_modules', '@functionalcss', 'core', 'dist', 'manifest.json');
+    const expected = path.join(
+      dir,
+      'node_modules',
+      '@functionalcss',
+      'core',
+      'dist',
+      'manifest.json',
+    );
     expect(result).toBe(expected);
   });
 

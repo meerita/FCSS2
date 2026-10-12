@@ -12,14 +12,19 @@
     "purge"
   ],
   "license": "MIT",
+  "author": "Diego Lafuente <diego.lafuente@cognativinc.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cognativinc/fcss"
+    "url": "git+https://github.com/meerita/FCSS2.git",
+    "directory": "packages/core"
   },
   "bugs": {
-    "url": "https://github.com/cognativinc/fcss/issues"
+    "url": "https://github.com/meerita/FCSS2/issues"
   },
-  "homepage": "https://github.com/cognativinc/fcss#readme",
+  "homepage": "https://github.com/meerita/FCSS2/tree/master/packages/core#readme",
+  "publishConfig": {
+    "access": "public"
+  },
   "exports": {
     ".": "./dist/full.css",
     "./full.css": "./dist/full.css",

@@ -63,7 +63,7 @@ The process blocks waiting for LSP messages on stdin. Send `{"jsonrpc":"2.0","id
 
 | Code                           | Severity | Description                                                 |
 | ------------------------------ | -------- | ----------------------------------------------------------- |
-| `fcss/unknown-property`        | Error    | CSS property not in the `@functionalcss/core` manifest               |
+| `fcss/unknown-property`        | Error    | CSS property not in the `@functionalcss/core` manifest      |
 | `fcss/unknown-value`           | Error    | Property known but value not in manifest                    |
 | `fcss/conflict`                | Error    | Two classes in the same attribute set the same CSS property |
 | `fcss/duplicate`               | Warning  | Same class appears more than once                           |
