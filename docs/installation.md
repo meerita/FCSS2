@@ -130,7 +130,7 @@ See the [Next.js guide](./guides/nextjs.md) for advanced configuration.
 ng add @functionalcss/angular
 ```
 
-The schematic handles the rest: adds `@functionalcss/core` to `angular.json` styles, installs dependencies, and optionally generates a `fcss.config.ts`.
+The schematic (Angular 17 – 22) handles the rest: installs dependencies, adds the stylesheet to `angular.json`, and sets up a purge step so `npm run build` ships only the classes you use. See the [Angular guide](./guides/angular.md).
 
 For manual setup:
 

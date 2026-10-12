@@ -8,11 +8,15 @@
 ng add @functionalcss/angular
 ```
 
-The schematic:
+The schematic (Angular 17 – 22):
 
-1. Installs `@functionalcss/core` as a dependency
-2. Adds `@functionalcss/core/full.css` to `angular.json` styles
-3. Optionally generates an `fcss.config.ts`
+1. Adds `@functionalcss/core` and `@functionalcss/postcss` to `package.json`
+2. Adds the full stylesheet to `angular.json` styles, and points the `production` configuration
+   at a purged copy, `src/fcss.purged.css`
+3. Creates `fcss.config.ts` and `fcss-purge.mjs`
+4. Changes the `build` script to `node fcss-purge.mjs && ng build`
+
+Build for production with `npm run build` — see [Production purging](#production-purging).
 
 ## Manual setup
 
@@ -130,49 +134,17 @@ FCSS ARIA state classes pair naturally with Angular's accessibility patterns:
 
 ## Production purging
 
-Add PostCSS purging to your Angular build. The recommended approach is the CLI:
+With `ng add`, purging is already set up: `npm run build` runs `fcss-purge.mjs`, which writes only
+the utilities your templates use to `src/fcss.purged.css`, then runs `ng build` with the
+`production` configuration pointing at that file. Development (`ng serve`) keeps the full set.
 
-```bash
-npm install -D @functionalcss/cli @functionalcss/postcss
-```
+Purging runs before the build on purpose. The full stylesheet is about 20 MB, so adding it to a
+production build would exceed Angular's default `initial` bundle budget (1 MB) before any
+post-build step could shrink it.
 
-```ts
-// fcss.config.ts
-import { defineConfig } from '@functionalcss/cli';
-
-export default defineConfig({
-  content: ['src/**/*.{ts,html}'],
-  safelist: ['display--none', 'display--block'],
-});
-```
-
-Run purge as part of your build pipeline:
-
-```json
-// package.json
-{
-  "scripts": {
-    "build": "ng build && fcss purge"
-  }
-}
-```
-
-Or integrate via a custom PostCSS configuration in your Angular project:
-
-```js
-// postcss.config.js (at project root)
-const fcss = require('@functionalcss/postcss').default;
-
-module.exports = {
-  plugins: [
-    process.env.NODE_ENV === 'production' &&
-      fcss({
-        manifest: require.resolve('@functionalcss/core/manifest.json'),
-        content: ['src/**/*.{ts,html}'],
-      }),
-  ].filter(Boolean),
-};
-```
+For manual setups, copy the same arrangement: generate the purged file with
+[`@functionalcss/postcss`](../../packages/postcss/README.md) from
+`@functionalcss/core/full.css`, and reference it in your `production` configuration's `styles`.
 
 ## IntelliSense
 
