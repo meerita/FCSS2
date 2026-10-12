@@ -1,6 +1,6 @@
 {
   "name": "@functionalcss/angular",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": false,
   "type": "module",
   "description": "FCSS Angular integration — ng add schematic for standalone and workspace projects",

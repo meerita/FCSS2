@@ -1,6 +1,6 @@
 {
   "name": "@functionalcss/astro",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": false,
   "type": "module",
   "description": "FCSS Astro integration — registers @functionalcss/vite's plugin for production purge and dev diagnostics",

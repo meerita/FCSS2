@@ -1,6 +1,6 @@
 {
   "name": "@functionalcss/example-next-pages-router",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "type": "module",
   "description": "Next.js Pages Router fixture for @functionalcss/next smoke testing",
