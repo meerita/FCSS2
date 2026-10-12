@@ -1,55 +1,58 @@
 # Purging
 
-FCSS ships a complete pre-generated utility set. The full set is large — it covers every CSS property in the CSS3 profile across all breakpoints and states. You must remove unused classes before deploying to production.
+`@functionalcss/core/full.css` has every class, every state and every breakpoint: 326,313
+selectors, about 28 MB. Great for development. Not something you send to a phone.
 
-## Why the full set is large
-
-Every possible class is generated upfront so that authoring requires no build step. You write a class and it works immediately. The cost is that the unoptimized file contains thousands of classes you will never use in a given project.
-
-Purging solves this. After scanning your source files, the purge step produces a CSS file containing only the classes that appear in your markup.
-
-## Typical size reduction
-
-A realistic project uses a few hundred utility classes. The purged output is usually between 3 KB and 15 KB, compared to the multi-megabyte full set.
-
-Example output from a mid-size Vite project:
+Purging scans your source, finds the FCSS classes you actually use, and drops the rest. A typical
+app ends up with a few KB. The purge step prints what it did:
 
 ```
-Before purge:
-  dist/assets/index.css   847 kB │ gzip: 68 kB
-
-After purge:
-  dist/assets/index.css     6.1 kB │ gzip: 1.8 kB
+[@functionalcss/postcss] Purge: 342/326313 selectors retained (325971 removed, 99.9% reduction, 21.4 KB → 4.9 KB gz).
 ```
 
-## How purging works
+The framework integrations purge on production builds only. In development you get the full
+set, so a class works the moment you type it.
 
-The scanner reads your content files and extracts every string that matches the FCSS class pattern. It then filters the generated CSS to keep only the matched classes plus any safelisted classes.
+| Setup       | Purges when                      |
+| ----------- | -------------------------------- |
+| Vite, Astro | `vite build` / `astro build`     |
+| Next.js     | `next build` (`--webpack` on 16) |
+| Angular     | `npm run build`                  |
+| PostCSS     | every run, unless you gate it    |
+| CLI         | you run `fcss purge`             |
 
-FCSS uses static extraction — it reads source text, not a running application. This means classes must appear as complete literal strings in your source files.
+## Write class names in full
 
-## Static extraction requirement
+The scanner reads source text. It does not run your code, so it only finds class names written
+out in full.
 
-The purger can only find classes that appear as complete strings in source files.
+In HTML, Angular templates and `.astro` files it reads `class` attributes. In JS, TS, JSX and
+TSX it reads:
 
 ```tsx
-// Safe — literal class string
-<div class="display--flex align-items--center">
-
-// Safe — conditional between two literals
-<div class={isOpen ? 'display--block' : 'display--none'}>
-
-// Unsafe — class name assembled at runtime
-<div class={`${property}--${value}`}>
+<div className="display--flex align-items--center" />
+<div className={'display--flex'} />
+<div className={`display--flex align-items--center`} />    // no ${…} inside
+<div className={isOpen ? 'display--block' : 'display--none'} />
+<div className={clsx('display--flex', { 'display--none': hidden })} />  // also cn(), classnames()
 ```
 
-If you build class names dynamically, add those classes to the safelist.
+It does not find:
 
-## Safelisting
+```tsx
+<div className={`display--${mode}`} />; // built at runtime
+const row = 'display--flex'; // a string in a variable
+<div className={row} />;
+```
 
-Use a safelist to protect classes from being purged even if they do not appear as literals in your source.
+The Vite and Astro plugins warn about the first kind in dev, and `fcss audit` reports it. The
+second kind gets purged without a word, so keep class strings inside `className`, `clsx()` or
+`cn()`. Vue and Svelte files are not scanned yet.
 
-### In `fcss.config.ts`
+## Safelist
+
+For classes you can't write out in full, add them to `fcss.config.ts`. They survive the purge
+whether the scanner finds them or not.
 
 ```ts
 import { defineConfig } from '@functionalcss/cli';
@@ -59,46 +62,36 @@ export default defineConfig({
   safelist: [
     'display--none',
     'display--block',
-    // Pattern — all color utilities
-    { pattern: /^color--/ },
+    { pattern: /^color--/ }, // every color utility
   ],
 });
 ```
 
-### Via `@functionalcss/next`
+Vite, Astro, Next.js and `fcss purge` read this file. If you call the PostCSS plugin yourself,
+pass `safelist: { exact: [...], patterns: [...] }` to it instead. The Angular purge script does
+not read the safelist; edit `fcss-purge.mjs` if you need one there.
 
-```ts
-// next.config.ts
-import { withFcss } from '@functionalcss/next';
+## With the CLI
 
-export default withFcss({
-  fcss: {
-    safelist: ['display--none', 'display--block'],
-  },
-});
-```
-
-## Purging with the CLI
+`fcss purge` scans the `content` globs from `fcss.config.ts` and writes a purged copy:
 
 ```bash
-# Scans the content globs from fcss.config.ts
-npx fcss purge -i node_modules/@functionalcss/core/dist/full.css -o dist/fcss.purged.css
+npx fcss purge -i node_modules/@functionalcss/core/dist/full.css -o dist/fcss.css
 
-# Also write a JSON report of kept and removed classes
-npx fcss purge -i node_modules/@functionalcss/core/dist/full.css -o dist/fcss.purged.css --report-json fcss-report.json
+# Also write a JSON report: what was kept, what was removed
+npx fcss purge -i node_modules/@functionalcss/core/dist/full.css -o dist/fcss.css --report-json fcss-report.json
 ```
 
-## Purging with PostCSS
-
-```bash
-npm install -D @functionalcss/postcss
-```
+## With PostCSS
 
 ```js
-// postcss.config.js
-const fcss = require('@functionalcss/postcss').default;
+// postcss.config.mjs
+import { createRequire } from 'node:module';
+import fcss from '@functionalcss/postcss';
 
-module.exports = {
+const require = createRequire(import.meta.url);
+
+export default {
   plugins: [
     process.env.NODE_ENV === 'production' &&
       fcss({
@@ -109,34 +102,31 @@ module.exports = {
 };
 ```
 
-## Purging with Vite
+The plugin purges every time it runs. The `NODE_ENV` check keeps the full set in development.
 
-The `@functionalcss/vite` plugin runs the purge step automatically on `vite build`:
+## With Vite
+
+`@functionalcss/vite` purges on `vite build`. By default it scans
+`src/**/*.{html,js,jsx,ts,tsx}`; pass your own globs if your markup lives elsewhere:
 
 ```ts
 // vite.config.ts
+import { defineConfig } from 'vite';
 import { fcss } from '@functionalcss/vite';
 
 export default defineConfig({
-  plugins: [fcss({ config: { content: ['src/**/*.{ts,tsx}'] } })],
+  plugins: [fcss({ config: { content: ['index.html', 'src/**/*.{ts,tsx}'] } })],
 });
 ```
 
-## Build report
+## Checking your source
 
-After purging, run `fcss audit` to see which classes were kept, which were removed, and which classes in your source files did not match any known utility:
+`fcss audit` scans the same files and reports two things: dynamic class fragments the purge
+will miss, and deprecated classes.
 
 ```bash
 npx fcss audit
 ```
 
-Output example:
-
-```
-✓ Kept:    342 classes
-✗ Removed: 14,207 classes
-⚠ Unknown: 3 classes (possible typos)
-  → display--flx  (did you mean display--flex?)
-  → color--blck   (did you mean color--black?)
-  → c-unknwon     (not found in custom.css)
-```
+Each finding is one line with its type (`dynamic-fragment` or `deprecated-class`), the fragment
+or class, and the file. It exits with code 1 only when it reports an error, such as a missing `@functionalcss/core`.

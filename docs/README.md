@@ -1,58 +1,59 @@
-# FCSS Documentation
+# FCSS documentation
 
-> Utility CSS using the CSS syntax you already know.
-
-FCSS (Functional CSS) is a utility-first CSS framework where every class maps to exactly one CSS declaration. No abbreviations, no shorthand aliases, no proprietary syntax — just CSS property names and values as classes.
+FCSS is a utility CSS library. Each class sets one CSS declaration, and its name is that
+declaration: `display--flex` sets `display: flex`. There is no second vocabulary to learn.
 
 ```html
 <div class="display--flex align-items--center gap--16 padding--24">
-  <h1 class="font-size--2rem font-weight--700 color--black">Hello</h1>
+  <h1 class="font-size--32 font-weight--700 color--black">Hello</h1>
 </div>
 ```
 
-## Contents
-
-| Document                             | Description                                                    |
-| ------------------------------------ | -------------------------------------------------------------- |
-| [Philosophy](./philosophy.md)        | Why FCSS exists and how it differs from other approaches       |
-| [Installation](./installation.md)    | Setup for Vanilla, React, Vite, Next.js, Angular, and Astro    |
-| [Syntax](./syntax.md)                | Class naming rules, breakpoints, states, and the `c-` prefix   |
-| [Responsive Design](./responsive.md) | Mobile-first breakpoints and cascade ordering                  |
-| [States](./states.md)                | Pseudo-classes, ARIA states, form states, and data states      |
-| [Custom CSS](./custom-css.md)        | When and how to use the `c-` escape hatch                      |
-| [Purging](./purging.md)              | Removing unused utilities for production                       |
-| [Reference](./reference.md)          | CSS property coverage index                                    |
-| [Framework Guides](./guides/)        | Detailed React, Next.js, Angular, and Astro integration guides |
-| [Migration](./migration.md)          | Moving from the legacy TFCSSF repository                       |
-
-## Quick start
+## Start here
 
 ```bash
-npm install @functionalcss/core
+npm install @functionalcss/core   # npm
+bun add @functionalcss/core       # bun
 ```
 
 ```js
-// Import in your entry point
 import '@functionalcss/core/full.css';
 ```
 
-```html
-<div class="display--flex flex-direction--column gap--8">
-  <p class="color--black font-size--1rem">One class. One declaration.</p>
-</div>
-```
+That gives you every class. Before you ship, add the purge step for your framework so the
+browser only downloads the classes you use. [Installation](./installation.md) covers each setup.
+
+## Contents
+
+| Document                             | What it covers                                        |
+| ------------------------------------ | ----------------------------------------------------- |
+| [Philosophy](./philosophy.md)        | Why one class maps to one declaration                 |
+| [Installation](./installation.md)    | Vite, Next.js, Astro, Angular, PostCSS and plain HTML |
+| [Syntax](./syntax.md)                | How class names are built                             |
+| [Responsive design](./responsive.md) | Breakpoint prefixes and the order files load in       |
+| [States](./states.md)                | Pseudo-classes, ARIA states and data states           |
+| [Custom CSS](./custom-css.md)        | The `c-` prefix for rules a utility can't express     |
+| [Purging](./purging.md)              | Shipping only the classes you use                     |
+| [Reference](./reference.md)          | Which CSS properties are covered                      |
+| [Framework guides](./guides/)        | React, Next.js, Angular, Astro and Zed in more depth  |
+| [Migration](./migration.md)          | Moving from the legacy TFCSSF repository              |
 
 ## Packages
 
-| Package                           | Purpose                                                     |
-| --------------------------------- | ----------------------------------------------------------- |
-| `@functionalcss/core`             | Generated CSS utility set                                   |
-| `@functionalcss/cli`              | Build, purge, generate, and doctor commands                 |
-| `@functionalcss/next`             | Next.js plugin (`withFcss`) for App Router and Pages Router |
-| `@functionalcss/angular`          | Angular `ng-add` schematic                                  |
-| `@functionalcss/vite`             | Vite plugin                                                 |
-| `@functionalcss/astro`            | Astro integration (wraps `@functionalcss/vite`)             |
-| `@functionalcss/postcss`          | PostCSS purge pipeline                                      |
-| `@functionalcss/scanner`          | Static class extraction engine                              |
-| `@functionalcss/language-service` | IntelliSense and validation                                 |
-| `@functionalcss/eslint-plugin`    | ESLint rules for FCSS class validation                      |
+These are published on npm under [`@functionalcss`](https://www.npmjs.com/org/functionalcss):
+
+| Package                    | What it does                                           |
+| -------------------------- | ------------------------------------------------------ |
+| `@functionalcss/core`      | The generated CSS and the class manifest               |
+| `@functionalcss/vite`      | Vite plugin: purge on build, warnings in dev           |
+| `@functionalcss/next`      | Next.js plugin (`withFcss`)                            |
+| `@functionalcss/astro`     | Astro integration, built on the Vite plugin            |
+| `@functionalcss/angular`   | `ng add` schematic                                     |
+| `@functionalcss/postcss`   | The purge itself, as a PostCSS plugin                  |
+| `@functionalcss/cli`       | The `fcss` command                                     |
+| `@functionalcss/scanner`   | Finds class names in source files                      |
+| `@functionalcss/spec`      | The machine-readable spec everything is generated from |
+| `@functionalcss/generator` | Turns the spec into CSS                                |
+
+The language service, LSP server, VS Code and Zed extensions live in this repo but are not
+on npm yet.

@@ -1,16 +1,18 @@
 # React Guide
 
-This guide covers using FCSS in a React project with Create React App, a custom Webpack setup, or as a standalone integration.
-
-For Vite-based React projects, see the [Vite section of the Installation guide](../installation.md#react--vite).
+On Vite (most React projects today), use the Vite plugin: see the
+[`@functionalcss/vite` README](../../packages/vite/README.md). This guide is for React on
+anything else, such as webpack or an old Create React App, where purging goes through PostCSS.
 
 ## Setup
 
 ```bash
 npm install @functionalcss/core
+# or
+bun add @functionalcss/core
 ```
 
-Import the full CSS set in your root entry point:
+Import the stylesheet once, in your entry point:
 
 ```tsx
 // src/index.tsx
@@ -26,16 +28,16 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 );
 ```
 
-## Using classes in components
+## Classes in components
 
-Assign FCSS classes via the standard `className` prop:
+`className` takes FCSS classes like any other:
 
 ```tsx
 function Card({ title, body }: { title: string; body: string }) {
   return (
-    <article className="display--flex flex-direction--column gap--8px padding--1rem border-radius--0-5rem background-color--white">
-      <h2 className="font-size--1-25rem font-weight--600 color--black">{title}</h2>
-      <p className="font-size--1rem color--gray line-height--1-5">{body}</p>
+    <article className="display--flex flex-direction--column gap--8 padding--16 border-radius--8 background-color--white">
+      <h2 className="font-size--xl font-weight--600 color--black">{title}</h2>
+      <p className="font-size--base color--gray line-height--relaxed">{body}</p>
     </article>
   );
 }
@@ -43,52 +45,52 @@ function Card({ title, body }: { title: string; body: string }) {
 
 ## Conditional classes
 
-Use standard JavaScript expressions. Avoid string interpolation that builds class names dynamically — the purger cannot extract assembled strings.
+The purge step reads your source; it doesn't run it. Every class has to appear in full
+somewhere in the file.
 
 ```tsx
-// Safe — both class names are complete literals
+// Fine: both branches are complete class names
+<div className={isOpen ? 'display--block' : 'display--none'}>Panel</div>
+
 <button
-  className={`padding--0-75rem-1-5rem border-radius--0-25rem font-weight--500 ${
-    isLoading ? 'opacity--0-6 cursor--wait' : 'opacity--1 cursor--pointer'
+  className={`padding--12 border-radius--4 ${
+    isLoading ? 'opacity--0.6 cursor--wait' : 'cursor--pointer'
   }`}
   disabled={isLoading}
 >
   {isLoading ? 'Saving…' : 'Save'}
 </button>
+
+// Broken: assembled at runtime, so it gets purged
+<div className={`${property}--${value}`} />
 ```
 
-```tsx
-// Also safe — conditional between two complete class strings
-<div className={isOpen ? 'display--block' : 'display--none'}>Panel content</div>
-```
-
-```tsx
-// Unsafe — class name is assembled at runtime, purger will miss it
-<div className={`${property}--${value}`}>
-```
+If you really need a runtime-built class, add it to the `safelist`.
 
 ## Responsive layout
+
+Breakpoint prefixes are mobile-first. `lg-display--block` applies from 992 px up.
 
 ```tsx
 function PageLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="display--grid grid-template-columns--1fr lg-grid-template-columns--240px-1fr gap--0 lg-gap--2rem">
-      <aside className="display--none lg-display--block padding--1-5rem">Sidebar</aside>
-      <main className="padding--1rem lg-padding--2rem">{children}</main>
+    <div className="display--grid grid-template-columns--1 lg-grid-template-columns--2 lg-gap--32">
+      <aside className="display--none lg-display--block padding--24">Sidebar</aside>
+      <main className="padding--16 lg-padding--32">{children}</main>
     </div>
   );
 }
 ```
 
-## State classes
+## Hover and ARIA states
 
 ```tsx
 function NavLink({ href, label, current }: { href: string; label: string; current: boolean }) {
   return (
     <a
       href={href}
-      className="color--gray color--black:hover font-weight--400 font-weight--600:aria-current:page"
       aria-current={current ? 'page' : undefined}
+      className="color--gray color--black:hover font-weight--400 font-weight--600:aria-current:page"
     >
       {label}
     </a>
@@ -98,10 +100,10 @@ function NavLink({ href, label, current }: { href: string; label: string; curren
 
 ## Production purging
 
-Add the PostCSS plugin to strip unused classes:
-
 ```bash
 npm install -D @functionalcss/postcss
+# or
+bun add -d @functionalcss/postcss
 ```
 
 ```js
@@ -110,6 +112,7 @@ const fcss = require('@functionalcss/postcss').default;
 
 module.exports = {
   plugins: [
+    // Purge in production only, so development keeps every class.
     process.env.NODE_ENV === 'production' &&
       fcss({
         manifest: require.resolve('@functionalcss/core/manifest.json'),
@@ -119,18 +122,13 @@ module.exports = {
 };
 ```
 
-Or use `fcss.config.ts` for configuration shared across tools:
+Your bundler has to run PostCSS on CSS imported from `node_modules`, otherwise `full.css`
+never reaches the plugin. Check that before you trust the output size.
 
-```ts
-// fcss.config.ts
-import { defineConfig } from '@functionalcss/cli';
+`require()` of `@functionalcss/postcss` works on Node.js 20.19 and newer, which can load ES
+modules from CommonJS. On anything older, use a `postcss.config.mjs` instead (see the
+[PostCSS README](../../packages/postcss/README.md)).
 
-export default defineConfig({
-  content: ['src/**/*.{ts,tsx}'],
-  safelist: ['display--none', 'display--block'],
-});
-```
+## Editor support
 
-## IntelliSense
-
-Install `@functionalcss/vscode` from the VS Code marketplace for autocompletion of FCSS class names in JSX files.
+The VS Code extension lives in `packages/vscode` and isn't on the Marketplace yet.

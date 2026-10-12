@@ -1,6 +1,6 @@
 <!--
 @file README.md
-@description FCSS — Functional CSS utility library project readme: installation per platform, usage, and packages.
+@description FCSS project readme: what it is, how to install it on each platform, and how to use it.
 @layer root
 @created Diego Lafuente <diego.lafuente@cognativinc.com>
 -->
@@ -10,8 +10,8 @@
 [![npm](https://img.shields.io/npm/v/@functionalcss/core?label=%40functionalcss%2Fcore)](https://www.npmjs.com/package/@functionalcss/core)
 [![license](https://img.shields.io/npm/l/@functionalcss/core)](LICENSE)
 
-**Functional CSS** — a framework-agnostic utility CSS library where every class name is a valid
-CSS property–value pair. If you know CSS, you already know FCSS.
+FCSS is a utility CSS library where every class name is a CSS property and a value. If you know
+CSS, you already know FCSS. It works with any framework, or none.
 
 ```html
 <div class="display--flex align-items--center gap--16 padding--24">
@@ -19,15 +19,16 @@ CSS property–value pair. If you know CSS, you already know FCSS.
 </div>
 ```
 
-- **One class, one declaration** — `padding--24` is exactly `padding: 24px`.
-- **Real CSS names** — `background-color--blue`, not `bg-blue`. Nothing to memorise.
-- **States, ARIA and breakpoints** built in — `color--red:hover`, `display--block:aria-expanded:true`, `md-display--none`.
-- **Zero runtime** — plain CSS. Unused classes are purged at build time.
+One class is one declaration: `padding--24` is `padding: 24px` and nothing else. Names are the
+real CSS names, so it's `background-color--blue`, not `bg-blue`, and there is no cheat sheet to
+keep open. Hover, ARIA and breakpoint variants are part of the name (`color--red:hover`,
+`display--block:aria-expanded:true`, `md-display--none`). There is no runtime: the browser gets
+plain CSS, and your build removes the classes you don't use.
 
 ## Contents
 
 - [Requirements](#requirements)
-- [Installation](#installation) — [Vite](#vite-react-preact-solid-vanilla-js) · [Next.js](#nextjs) · [Astro](#astro) · [Angular](#angular) · [Other bundlers (PostCSS)](#other-bundlers-postcss) · [Plain HTML / CDN](#plain-html--cdn)
+- [Installation](#installation): [Vite](#vite-react-preact-solid-vanilla-js) · [Next.js](#nextjs) · [Astro](#astro) · [Angular](#angular) · [Other bundlers (PostCSS)](#other-bundlers-postcss) · [Plain HTML / CDN](#plain-html--cdn)
 - [Usage](#usage)
 - [CLI](#cli)
 - [Packages](#packages)
@@ -35,17 +36,17 @@ CSS property–value pair. If you know CSS, you already know FCSS.
 
 ## Requirements
 
-| You need                                                  | Notes                                                                                 |
-| --------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| **Node.js 20.19+** or **Bun**                             | Tested on Node.js 24 and Bun 1.4. Your framework may require a newer Node.js.         |
-| A package manager: **npm**, **pnpm**, **yarn** or **bun** | All work. The examples use npm — see the [equivalents](#package-manager-equivalents). |
-| A bundler or build step (recommended)                     | To purge unused classes. Without one you can still use the [CDN](#plain-html--cdn).   |
+| You need                                                  | Notes                                                                                          |
+| --------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| **Node.js 20.19+** or **Bun**                             | Tested on Node.js 24 and Bun 1.4. Your framework may require a newer Node.js.                  |
+| A package manager: **npm**, **pnpm**, **yarn** or **bun** | All four work. Examples show npm and bun; see the [equivalents](#package-manager-equivalents). |
+| A bundler or build step (recommended)                     | To purge unused classes. Without one you can still use the [CDN](#plain-html--cdn).            |
 
 Supported frameworks: **Vite 5 – 8**, **Next.js 14 – 16**, **Astro 7**, **Angular 17 – 22**.
 
 FCSS finds the classes you use by scanning **HTML, JS/TS, JSX/TSX, Angular templates and
-`.astro` files**. Vue (`.vue`) and Svelte (`.svelte`) single-file components are not scanned
-yet — classes used only there would be purged.
+`.astro` files**. Vue (`.vue`) and Svelte (`.svelte`) files are not scanned yet, so a class
+used only there gets purged. Support is on the list.
 
 ### Package manager equivalents
 
@@ -58,11 +59,10 @@ yet — classes used only there would be purged.
 
 ## Installation
 
-Every setup has two parts:
-
-1. **`@functionalcss/core`** — the CSS itself (about 28 MB unpurged, every class × state × breakpoint).
-2. **A purge step** for production — a framework integration that keeps only the classes your
-   source files use (typically a few KB).
+Every setup has two parts. `@functionalcss/core` is the CSS itself: every class in every state
+and breakpoint, about 28 MB. Then a purge step, usually a framework integration, cuts that down
+to the classes your source actually uses, which is typically a few KB. You want both. Nobody
+should ship 28 MB of CSS, however good the gzip ratio looks.
 
 | Platform                                   | Install                                                                     |
 | ------------------------------------------ | --------------------------------------------------------------------------- |
@@ -71,13 +71,17 @@ Every setup has two parts:
 | Astro                                      | `npm install @functionalcss/core @functionalcss/astro`                      |
 | Angular                                    | `ng add @functionalcss/angular`                                             |
 | Other bundlers (PostCSS)                   | `npm install @functionalcss/core` + `npm install -D @functionalcss/postcss` |
-| Plain HTML / CDN                           | Nothing — a `<link>` tag, or `@functionalcss/cli` to purge                  |
+| Plain HTML / CDN                           | Nothing for a `<link>` tag; `@functionalcss/cli` to purge                   |
 
 ### Vite (React, Preact, Solid, vanilla JS)
 
 ```bash
 npm install @functionalcss/core
 npm install -D @functionalcss/vite
+
+# or with bun
+bun add @functionalcss/core
+bun add -d @functionalcss/vite
 ```
 
 ```ts
@@ -104,6 +108,8 @@ Scan other paths with `fcss({ config: { content: ['index.html', 'src/**/*.tsx'] 
 
 ```bash
 npm install @functionalcss/core @functionalcss/next
+# or
+bun add @functionalcss/core @functionalcss/next
 ```
 
 ```ts
@@ -116,7 +122,7 @@ export default withFcss({
 ```
 
 ```tsx
-// app/layout.tsx (App Router) — or pages/_app.tsx (Pages Router)
+// app/layout.tsx (App Router), or pages/_app.tsx (Pages Router)
 import '@functionalcss/core/full.css';
 ```
 
@@ -130,6 +136,8 @@ Guide: [Next.js](docs/guides/nextjs.md) · [package README](packages/next/README
 
 ```bash
 npm install @functionalcss/core @functionalcss/astro
+# or
+bun add @functionalcss/core @functionalcss/astro
 ```
 
 ```js
@@ -156,14 +164,16 @@ Guide: [Astro](docs/guides/astro.md) · [package README](packages/astro/README.m
 
 ```bash
 ng add @functionalcss/angular
+# in a bun workspace
+bunx ng add @functionalcss/angular
 ```
 
 The schematic installs the packages, adds the stylesheet to `angular.json`, and wires a purge
 step into your `build` script. Then:
 
 ```bash
-ng serve        # development — every class available
-npm run build   # production — runs the purge, then ng build
+ng serve        # development, every class available
+npm run build   # production: purge first, then ng build (or: bun run build)
 ```
 
 Always build through `npm run build`; `ng build` on its own skips the purge.
@@ -174,6 +184,10 @@ Guide: [Angular](docs/guides/angular.md) · [package README](packages/angular/RE
 ```bash
 npm install @functionalcss/core
 npm install -D @functionalcss/postcss
+
+# or with bun
+bun add @functionalcss/core
+bun add -d @functionalcss/postcss
 ```
 
 ```js
@@ -202,7 +216,7 @@ and Astro integrations; other bundlers have not been tested yet. Options:
 
 ### Plain HTML / CDN
 
-No build step — link the full stylesheet:
+No build step? Link the full stylesheet:
 
 ```html
 <link rel="stylesheet" href="https://unpkg.com/@functionalcss/core/dist/full.css" />
@@ -214,7 +228,7 @@ ship only what you use, purge with the CLI:
 ```bash
 npm install @functionalcss/core
 npm install -D @functionalcss/cli
-npx fcss init --framework none   # creates fcss.config.ts — set `content` to your HTML files
+npx fcss init --framework none   # creates fcss.config.ts; point `content` at your HTML
 npx fcss purge -i node_modules/@functionalcss/core/dist/full.css -o public/fcss.css
 ```
 
@@ -260,7 +274,7 @@ The purge step reads your source files; it cannot run your code. Write full clas
 // ✅ found by the scanner
 <div className={isOpen ? 'display--block' : 'display--none'} />
 
-// ❌ assembled at runtime — will be purged
+// ❌ assembled at runtime, so it gets purged
 <div className={`display--${isOpen ? 'block' : 'none'}`} />
 ```
 
@@ -295,7 +309,7 @@ Multi-declaration, project-specific rules use the `c-` prefix and live in your o
 ## CLI
 
 ```bash
-npm install -D @functionalcss/cli
+npm install -D @functionalcss/cli   # or: bun add -d @functionalcss/cli
 ```
 
 | Command                               | Description                                                         |

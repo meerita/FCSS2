@@ -1,18 +1,18 @@
 # Astro Guide
 
-`@functionalcss/astro` registers `@functionalcss/vite`'s plugin into Astro's Vite config to add production
-CSS purging and dev-mode dynamic-fragment warnings. Astro's build pipeline is Vite, so
-`@functionalcss/astro` does not reimplement scanning or purging — it is a thin wrapper.
+`@functionalcss/astro` plugs `@functionalcss/vite` into Astro's Vite config. Astro builds with
+Vite, so there's nothing else to it: same scanner, same purge, plus `.astro` in the default
+content globs.
 
-## Installation
+## Install
 
 ```bash
 npm install @functionalcss/core @functionalcss/astro
+# or
+bun add @functionalcss/core @functionalcss/astro
 ```
 
-## Configuration
-
-Register the integration in `astro.config.mjs`:
+## Configure
 
 ```js
 // astro.config.mjs
@@ -24,8 +24,8 @@ export default defineConfig({
 });
 ```
 
-`fcss()` accepts the same options as `@functionalcss/vite`'s `fcss()` plugin (`content`,
-`safelist`). Configure them via `fcss.config.ts`:
+With no configuration, it scans `src/**/*.{html,js,jsx,ts,tsx,astro}`. To change that, pass
+`fcss({ config: { content, safelist } })` or create an `fcss.config.ts`:
 
 ```ts
 // fcss.config.ts
@@ -39,13 +39,10 @@ const config: FcssViteConfig = {
 export default config;
 ```
 
-If `fcss.config.ts` is omitted, or omits `content`, `@functionalcss/astro` supplies an Astro-aware
-default: `src/**/*.{html,js,jsx,ts,tsx,astro}`.
+## Import the stylesheet
 
-## Importing CSS
-
-Astro has no single shared entry point the way a Vite SPA has `src/main.ts` — import the
-CSS from a layout's frontmatter instead, so every page that uses the layout gets it:
+Astro has no single entry file, so import the CSS in a layout's frontmatter. Every page that
+uses the layout gets it.
 
 ```astro
 ---
@@ -69,64 +66,53 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout>
-  <main class="display--flex flex-direction--column align-items--center gap--2rem padding--4rem">
-    <h1 class="font-size--3rem font-weight--700 color--black text-align--center">
+  <main class="display--flex flex-direction--column align-items--center gap--32 padding--64">
+    <h1 class="font-size--4xl font-weight--700 color--black text-align--center">
       Write CSS. Use classes.
     </h1>
   </main>
 </Layout>
 ```
 
-## `class:list` — static vs. dynamic
+## `class:list`
 
-Astro's `class:list={[...]}` merge directive is scanned the same way `clsx`/`ngClass`
-usage is in the JSX and Angular extractors: static string, array, and object entries are
-extracted; anything that resolves a class name at runtime cannot be statically analyzed.
+Static entries in `class:list` are scanned: strings, arrays and object keys. Anything that
+builds a class name at runtime isn't.
 
 ```astro
-<!-- Safe — static array entries -->
+<!-- Fine -->
 <div class:list={['display--flex', 'padding--16']} />
 
-<!-- Safe — static object entries; both keys are visible regardless of which branch
-     `hidden` takes at runtime -->
+<!-- Fine: both keys are visible, whichever way `hidden` goes -->
 <div class:list={[{ 'display--none': hidden, 'display--flex': !hidden }]} />
 
-<!-- Unsafe — template literal interpolation prevents static analysis -->
+<!-- Purged: interpolated -->
 <div class:list={[`opacity--${state}`]} />
 ```
 
-Unsafe fragments log a dev-mode warning (file + line) and are purged in production unless
-added to the safelist.
+In dev, an interpolated entry logs a warning with the file and line. In production it's
+purged unless you safelist it.
 
-## Frontmatter is not scanned
+The frontmatter block (between the `---` lines) isn't scanned. A class you build there has
+to reach the template as a complete string or a static `class:list` entry.
 
-Only the `.astro` file's template markup is scanned for classes — the `---`-delimited
-frontmatter script block is not. A class name assembled in frontmatter and interpolated
-into the template still needs to reach the template as a complete literal or a
-`class:list` entry the extractor can statically resolve.
-
-## Static output vs. server output
-
-Both `output: 'static'` (SSG) and `output: 'server'` (SSR, including the `@astrojs/node`
-adapter) purge the same way, since purging happens in the underlying Vite plugin during
-`astro build`. Other deploy adapters (Vercel, Netlify, Cloudflare, etc.) are expected to
-work the same way — they run the same Vite build — but are not individually verified.
-
-## Production build
+## Build
 
 ```bash
-astro build
+npm run build   # or: bun run build
 ```
 
-`@functionalcss/postcss` logs a purge summary during the build:
+Both `output: 'static'` and `output: 'server'` purge the same way, because the purge happens
+in the Vite build. We've verified the `@astrojs/node` adapter. Vercel, Netlify and Cloudflare
+run the same Vite build and should behave the same, but nobody has checked them one by one.
 
-```
+The build log shows what was kept:
+
+```text
 [@functionalcss/postcss] Purge: 18/326313 selectors retained (326295 removed, 100.0% reduction, ...)
 ```
 
 ## Editor support
 
-Editor/IntelliSense support for `.astro` files (VS Code, Zed) is not yet available —
-`.astro` mixes a TypeScript frontmatter with an HTML-like template, which the current
-language-service integrations do not parse. This is planned as a future integration,
-independent of the build-time purging covered by this guide.
+Not for `.astro` files yet. They mix a TypeScript frontmatter with an HTML-like template, and
+the language service doesn't parse that today.
