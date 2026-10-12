@@ -1,0 +1,18 @@
+# @file packages/zed/Cargo.toml
+# @description Rust crate manifest for the FCSS Zed extension (Rust → wasm32-wasip2).
+# @layer adapters
+# @created Diego Lafuente <diego.lafuente@cognativinc.com>
+
+[package]
+name = "fcss_zed"
+version = "0.1.0"
+edition = "2021"
+description = "FCSS Zed extension — launches the FCSS language server for HTML/JSX/TSX/TS"
+repository = "https://github.com/meerita/FCSS2"
+license = "MIT"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+zed_extension_api = "0.7.0"

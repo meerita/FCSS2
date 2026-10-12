@@ -1,0 +1,128 @@
+// @file packages/cli/tests/init.test.ts
+// @description Integration tests for fcss init (idempotency and file creation).
+// @layer tests
+// @created Diego Lafuente <diego.lafuente@cognativinc.com>
+
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
+import * as os from 'node:os';
+import { runInit } from '../src/commands/init.js';
+
+describe('runInit', () => {
+  let tmpDir: string;
+
+  beforeEach(() => {
+    tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'fcss-init-test-'));
+    fs.writeFileSync(
+      path.join(tmpDir, 'package.json'),
+      JSON.stringify({ name: 'test-project', version: '1.0.0' }),
+      'utf8',
+    );
+  });
+
+  afterEach(() => {
+    fs.rmSync(tmpDir, { recursive: true, force: true });
+  });
+
+  it('creates fcss.config.ts when it does not exist', async () => {
+    await runInit({ cwd: tmpDir });
+    expect(fs.existsSync(path.join(tmpDir, 'fcss.config.ts'))).toBe(true);
+  });
+
+  it('does not overwrite existing fcss.config.ts', async () => {
+    const configPath = path.join(tmpDir, 'fcss.config.ts');
+    const original = '// existing config\nexport default {};';
+    fs.writeFileSync(configPath, original, 'utf8');
+
+    await runInit({ cwd: tmpDir });
+    expect(fs.readFileSync(configPath, 'utf8')).toBe(original);
+  });
+
+  it('is idempotent — second run does not duplicate config', async () => {
+    await runInit({ cwd: tmpDir });
+    const afterFirst = fs.readFileSync(path.join(tmpDir, 'fcss.config.ts'), 'utf8');
+    await runInit({ cwd: tmpDir });
+    const afterSecond = fs.readFileSync(path.join(tmpDir, 'fcss.config.ts'), 'utf8');
+    expect(afterFirst).toBe(afterSecond);
+  });
+
+  it('adds CSS import to entry file when present', async () => {
+    const srcDir = path.join(tmpDir, 'src');
+    fs.mkdirSync(srcDir);
+    fs.writeFileSync(path.join(srcDir, 'main.ts'), "console.log('hello');", 'utf8');
+
+    await runInit({ cwd: tmpDir });
+    const content = fs.readFileSync(path.join(srcDir, 'main.ts'), 'utf8');
+    expect(content).toContain('@functionalcss/core');
+  });
+
+  it('does not duplicate CSS import on second run', async () => {
+    const srcDir = path.join(tmpDir, 'src');
+    fs.mkdirSync(srcDir);
+    fs.writeFileSync(path.join(srcDir, 'main.ts'), "console.log('hello');", 'utf8');
+
+    await runInit({ cwd: tmpDir });
+    const afterFirst = fs.readFileSync(path.join(srcDir, 'main.ts'), 'utf8');
+    await runInit({ cwd: tmpDir });
+    const afterSecond = fs.readFileSync(path.join(srcDir, 'main.ts'), 'utf8');
+
+    const importCount = (afterSecond.match(/@functionalcss\/core/g) ?? []).length;
+    expect(importCount).toBe(1);
+    expect(afterFirst).toBe(afterSecond);
+  });
+
+  it('detects astro and plans to install @functionalcss/core + @functionalcss/astro, not @functionalcss/vite', async () => {
+    fs.writeFileSync(
+      path.join(tmpDir, 'package.json'),
+      JSON.stringify({ name: 'test-project', dependencies: { astro: '^7.0.0' } }),
+      'utf8',
+    );
+    const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+
+    await runInit({ cwd: tmpDir });
+
+    const printedLines = logSpy.mock.calls.map((call) => call.join(' '));
+    const frameworkLine = printedLines.find((line) => line.includes('[fcss] Framework:'));
+    const installLine = printedLines.find((line) => line.includes('[fcss] Will install:'));
+    expect(frameworkLine).toContain('astro');
+    expect(installLine).toContain('@functionalcss/astro');
+    expect(installLine).not.toContain('@functionalcss/vite');
+
+    logSpy.mockRestore();
+  });
+
+  it('detects astro over the generic react check when both are present', async () => {
+    fs.writeFileSync(
+      path.join(tmpDir, 'package.json'),
+      JSON.stringify({
+        name: 'test-project',
+        dependencies: { astro: '^7.0.0', '@astrojs/react': '^4.0.0', react: '^18.0.0' },
+      }),
+      'utf8',
+    );
+    const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+
+    await runInit({ cwd: tmpDir });
+
+    const frameworkLine = logSpy.mock.calls
+      .map((call) => call.join(' '))
+      .find((line) => line.includes('[fcss] Framework:'));
+    expect(frameworkLine).toContain('astro');
+
+    logSpy.mockRestore();
+  });
+
+  it('explicit --framework astro installs @functionalcss/astro regardless of detected dependencies', async () => {
+    const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+
+    await runInit({ cwd: tmpDir, framework: 'astro' });
+
+    const installLine = logSpy.mock.calls
+      .map((call) => call.join(' '))
+      .find((line) => line.includes('[fcss] Will install:'));
+    expect(installLine).toContain('@functionalcss/astro');
+
+    logSpy.mockRestore();
+  });
+});

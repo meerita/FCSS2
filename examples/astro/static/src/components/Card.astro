@@ -1,0 +1,50 @@
+---
+// @file examples/astro/static/src/components/Card.astro
+// @description Representative FCSS component — base, responsive, pseudo-state, ARIA,
+//   and a static class:list usage.
+// @layer ui
+// @created Diego Lafuente <diego.lafuente@cognativinc.com>
+
+interface Props {
+  title: string;
+  description: string;
+  expanded?: boolean;
+  hidden?: boolean;
+}
+
+const { title, description, expanded = false, hidden = false } = Astro.props;
+---
+
+<article
+  class="display--flex flex-direction--column gap--4 padding--16 background-color--white"
+  aria-hidden={hidden}
+  aria-expanded={expanded}
+>
+  <!-- ARIA-state class: hides the title badge when aria-hidden is true -->
+  <span
+    class="display--block font-weight--700 display--none:aria-hidden:true"
+    data-testid="card-title"
+  >
+    {title}
+  </span>
+
+  <!-- Responsive class: flex on mobile, grid at sm breakpoint -->
+  <div class="display--flex sm-display--grid gap--2" data-testid="card-body">
+    <!-- Static class:list usage — the correct FCSS pattern, statically resolvable -->
+    <p
+      class:list={['font-size--xs', 'color--black', { 'opacity--0.5': hidden }]}
+      data-testid="card-description"
+    >
+      {description}
+    </p>
+  </div>
+
+  <!-- Pseudo-state: hover dimming via opacity--0.5:hover -->
+  <button
+    class="cursor--pointer display--block padding--16 background-color--black color--white opacity--0.5:hover"
+    data-testid="card-button"
+    type="button"
+  >
+    Expand
+  </button>
+</article>

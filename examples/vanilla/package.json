@@ -1,0 +1,16 @@
+{
+  "name": "@functionalcss/example-vanilla",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Vanilla HTML fixture for @functionalcss/core smoke testing",
+  "scripts": {
+    "build": "echo 'No build step needed for vanilla HTML'",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "@functionalcss/core": "workspace:*"
+  },
+  "devDependencies": {
+    "vitest": "catalog:"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "name": "@functionalcss/postcss",
+  "version": "0.0.0",
+  "private": false,
+  "type": "module",
+  "description": "FCSS PostCSS plugin — source scanning and production purge",
+  "keywords": [
+    "css",
+    "utility",
+    "fcss",
+    "postcss",
+    "purge"
+  ],
+  "license": "MIT",
+  "author": "Diego Lafuente <diego.lafuente@cognativinc.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meerita/FCSS2.git",
+    "directory": "packages/postcss"
+  },
+  "bugs": {
+    "url": "https://github.com/meerita/FCSS2/issues"
+  },
+  "homepage": "https://github.com/meerita/FCSS2/tree/master/packages/postcss#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc --build",
+    "typecheck": "tsc -b --pretty false",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@functionalcss/scanner": "workspace:*",
+    "@functionalcss/spec": "workspace:*",
+    "postcss": "^8.4.0"
+  },
+  "devDependencies": {
+    "@functionalcss/core": "workspace:*",
+    "@types/node": "^22.0.0",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

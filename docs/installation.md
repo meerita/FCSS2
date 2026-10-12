@@ -1,0 +1,264 @@
+# Installation
+
+FCSS is framework-agnostic. The core package is plain generated CSS. Framework integrations add automatic purging and configuration support on top.
+
+## Vanilla HTML / CSS
+
+```bash
+npm install @functionalcss/core
+```
+
+Import the full CSS set. If you are using a bundler (Vite, Parcel, webpack):
+
+```js
+import '@functionalcss/core/full.css';
+```
+
+If you have no build step, use the CDN:
+
+```html
+<link rel="stylesheet" href="https://unpkg.com/@functionalcss/core/dist/full.css" />
+```
+
+For production, run the CLI purge step to strip unused classes:
+
+```bash
+npx fcss init --framework none   # creates fcss.config.ts with your content globs
+npx fcss purge -i node_modules/@functionalcss/core/dist/full.css -o public/fcss.css
+```
+
+---
+
+## React (Create React App / custom bundler)
+
+```bash
+npm install @functionalcss/core
+```
+
+Import in your root entry point (`src/index.tsx` or `src/main.tsx`):
+
+```tsx
+import '@functionalcss/core/full.css';
+```
+
+Add purging via PostCSS:
+
+```bash
+npm install -D @functionalcss/postcss
+```
+
+```js
+// postcss.config.js
+const fcss = require('@functionalcss/postcss').default;
+
+module.exports = {
+  plugins: [
+    fcss({
+      manifest: require.resolve('@functionalcss/core/manifest.json'),
+      content: ['src/**/*.{ts,tsx}'],
+    }),
+  ],
+};
+```
+
+---
+
+## React + Vite
+
+```bash
+npm install @functionalcss/core
+npm install -D @functionalcss/vite
+```
+
+```ts
+// vite.config.ts
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { fcss } from '@functionalcss/vite';
+
+export default defineConfig({
+  plugins: [react(), fcss({ config: { content: ['src/**/*.{ts,tsx}'] } })],
+});
+```
+
+Import CSS in your entry point:
+
+```tsx
+// src/main.tsx
+import '@functionalcss/core/full.css';
+```
+
+---
+
+## Next.js
+
+```bash
+npm install @functionalcss/core
+npm install -D @functionalcss/next
+```
+
+Wrap your Next.js config:
+
+```ts
+// next.config.ts
+import { withFcss } from '@functionalcss/next';
+
+export default withFcss({
+  // your existing Next.js config
+});
+```
+
+Import CSS globally:
+
+```tsx
+// app/layout.tsx (App Router)
+import '@functionalcss/core/full.css';
+
+// or _app.tsx (Pages Router)
+import '@functionalcss/core/full.css';
+```
+
+The plugin automatically reads content paths from `fcss.config.ts` if present, and defaults to scanning `app/**`, `pages/**`, `components/**`, and `src/**`.
+
+See the [Next.js guide](./guides/nextjs.md) for advanced configuration.
+
+---
+
+## Angular
+
+```bash
+ng add @functionalcss/angular
+```
+
+The schematic handles the rest: adds `@functionalcss/core` to `angular.json` styles, installs dependencies, and optionally generates a `fcss.config.ts`.
+
+For manual setup:
+
+```bash
+npm install @functionalcss/core
+```
+
+```json
+// angular.json — inside your project's architect.build.options
+{
+  "styles": ["@functionalcss/core/full.css", "src/styles.css"]
+}
+```
+
+See the [Angular guide](./guides/angular.md) for purging and schematic options.
+
+---
+
+## Astro
+
+```bash
+npm install @functionalcss/core @functionalcss/astro
+```
+
+Register the integration in `astro.config.mjs`:
+
+```js
+import { defineConfig } from 'astro/config';
+import fcss from '@functionalcss/astro';
+
+export default defineConfig({
+  integrations: [fcss()],
+});
+```
+
+`@functionalcss/astro` is a thin wrapper that registers `@functionalcss/vite`'s plugin into Astro's Vite
+config — no separate purge implementation to configure, and no FCSS runtime JS is added
+to the site.
+
+Import the CSS in a layout's frontmatter:
+
+```astro
+---
+import '@functionalcss/core/full.css';
+---
+```
+
+The plugin scans `.astro` template `class="..."` attributes and static
+`class:list={[...]}` entries by default. Both static (SSG) and server (SSR) output are
+supported.
+
+See the [Astro guide](./guides/astro.md) for `class:list` dynamic-vs-static patterns,
+content path configuration, and deploy-adapter notes.
+
+---
+
+## Manual modular imports
+
+Instead of the full CSS bundle, you can import only the files you need:
+
+```js
+import '@functionalcss/core/reset.css';
+import '@functionalcss/core/root.css';
+import '@functionalcss/core/utilities.css';
+import '@functionalcss/core/states/pseudo.css';
+import '@functionalcss/core/states/aria.css';
+import '@functionalcss/core/breakpoints/sm.css';
+import '@functionalcss/core/breakpoints/md.css';
+import '@functionalcss/core/breakpoints/lg.css';
+import '@functionalcss/core/breakpoints/xl.css';
+import '@functionalcss/core/breakpoints/xxl.css';
+```
+
+Import order matters. `reset.css` and `root.css` must come first, then `utilities.css`, then states. Breakpoint files must follow in ascending order (`sm`, `md`, `lg`, `xl`, `xxl`) so wider breakpoints win. Your own `c-` classes go last so they can override utilities when necessary.
+
+---
+
+## CLI
+
+The `@functionalcss/cli` package provides the `fcss` command for building, purging, and inspecting utilities:
+
+```bash
+npm install -D @functionalcss/cli
+
+npx fcss --help
+```
+
+Available commands:
+
+| Command                | Description                                             |
+| ---------------------- | ------------------------------------------------------- |
+| `fcss build`           | Generate the CSS utility set from the spec              |
+| `fcss purge`           | Remove unused classes from output CSS                   |
+| `fcss init`            | Create an `fcss.config.ts` file                         |
+| `fcss list`            | List all available utility classes                      |
+| `fcss explain <class>` | Show the CSS declaration for a class                    |
+| `fcss audit`           | Check for unused or invalid classes in source           |
+| `fcss doctor`          | Validate your FCSS configuration and environment        |
+| `fcss migrate`         | Assist with migrating from the legacy TFCSSF repository |
+
+### `fcss.config.ts`
+
+```ts
+import { defineConfig } from '@functionalcss/cli';
+
+export default defineConfig({
+  content: ['src/**/*.{html,ts,tsx,jsx}'],
+  safelist: ['display--flex', 'display--none'],
+});
+```
+
+---
+
+## Editor integrations
+
+### Zed
+
+FCSS IntelliSense is available in [Zed](https://zed.dev) via a Rust→WASM extension that
+launches `@functionalcss/lsp-server`. Provides completions, hover, diagnostics, and code actions in
+`class` and `className` attributes across HTML, JSX, TSX, and TypeScript.
+
+Install both packages in your project:
+
+```sh
+npm install @functionalcss/core @functionalcss/lsp-server
+```
+
+Then load `packages/zed/` as a dev extension in Zed (Cmd+Shift+X → Install Dev Extension).
+
+See the [Zed integration guide](./guides/zed.md) for prerequisites, build steps, supported
+file types, and known limitations.

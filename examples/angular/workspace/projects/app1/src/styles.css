@@ -1,0 +1,7 @@
+/* @file examples/angular/workspace/projects/app1/src/styles.css */
+/* @description Global styles for workspace app1. */
+
+:root {
+  --fcss-color-primary: #0057b8;
+  --fcss-color-muted: #6c757d;
+}

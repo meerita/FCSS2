@@ -1,0 +1,7 @@
+/* @file examples/angular/standalone/src/styles.css */
+/* @description Global styles for the FCSS Angular standalone fixture. */
+
+:root {
+  --fcss-color-primary: #0057b8;
+  --fcss-color-muted: #6c757d;
+}

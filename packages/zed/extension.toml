@@ -1,0 +1,16 @@
+# @file packages/zed/extension.toml
+# @description Zed extension manifest for the FCSS language server extension.
+# @layer adapters
+# @created Diego Lafuente <diego.lafuente@cognativinc.com>
+
+id = "fcss"
+name = "FCSS"
+description = "FCSS IntelliSense — completions, hover, diagnostics, and code actions for class attributes in HTML, JSX, TSX, and TypeScript"
+version = "0.1.0"
+schema_version = 1
+authors = ["Diego Lafuente <diego.lafuente@cognativinc.com>"]
+repository = "https://github.com/meerita/FCSS2"
+
+[language_servers.fcss]
+name = "fcss"
+languages = ["HTML", "JavaScript", "TSX", "TypeScript"]

@@ -1,0 +1,58 @@
+{
+  "name": "@functionalcss/generator",
+  "version": "0.0.0",
+  "private": false,
+  "type": "module",
+  "description": "FCSS CSS generator — builds the full utility set from the FCSS spec",
+  "keywords": [
+    "css",
+    "utility",
+    "fcss",
+    "generator"
+  ],
+  "license": "MIT",
+  "author": "Diego Lafuente <diego.lafuente@cognativinc.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meerita/FCSS2.git",
+    "directory": "packages/generator"
+  },
+  "bugs": {
+    "url": "https://github.com/meerita/FCSS2/issues"
+  },
+  "homepage": "https://github.com/meerita/FCSS2/tree/master/packages/generator#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc --build",
+    "typecheck": "tsc -b --pretty false",
+    "test": "vitest run && playwright test",
+    "test:unit": "vitest run",
+    "test:browser": "playwright test",
+    "generate": "node dist/cli.js"
+  },
+  "dependencies": {
+    "@functionalcss/spec": "workspace:*",
+    "postcss": "^8.4.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.45.0",
+    "@types/node": "^22.0.0",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "name": "@functionalcss/core",
+  "version": "0.0.0",
+  "private": false,
+  "type": "module",
+  "description": "Functional CSS utility library — full set, framework-agnostic, purge-ready",
+  "keywords": [
+    "css",
+    "utility",
+    "functional-css",
+    "fcss",
+    "purge"
+  ],
+  "license": "MIT",
+  "author": "Diego Lafuente <diego.lafuente@cognativinc.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meerita/FCSS2.git",
+    "directory": "packages/core"
+  },
+  "bugs": {
+    "url": "https://github.com/meerita/FCSS2/issues"
+  },
+  "homepage": "https://github.com/meerita/FCSS2/tree/master/packages/core#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    ".": "./dist/full.css",
+    "./full.css": "./dist/full.css",
+    "./reset.css": "./dist/reset.css",
+    "./root.css": "./dist/root.css",
+    "./utilities.css": "./dist/utilities.css",
+    "./states/pseudo.css": "./dist/states/pseudo.css",
+    "./states/aria.css": "./dist/states/aria.css",
+    "./breakpoints/sm.css": "./dist/breakpoints/sm.css",
+    "./breakpoints/md.css": "./dist/breakpoints/md.css",
+    "./breakpoints/lg.css": "./dist/breakpoints/lg.css",
+    "./breakpoints/xl.css": "./dist/breakpoints/xl.css",
+    "./breakpoints/xxl.css": "./dist/breakpoints/xxl.css",
+    "./manifest.json": "./dist/manifest.json"
+  },
+  "files": [
+    "dist/*.css",
+    "dist/states/*.css",
+    "dist/breakpoints/*.css",
+    "dist/manifest.json",
+    "dist/statistics.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": [
+    "dist/**/*.css"
+  ],
+  "scripts": {
+    "generate": "tsc -p tsconfig.scripts.json && node dist/scripts/generate.js",
+    "build": "tsc --build && pnpm run generate",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@functionalcss/spec": "workspace:*"
+  },
+  "devDependencies": {
+    "@functionalcss/generator": "workspace:*",
+    "@types/node": "^22.0.0",
+    "postcss": "^8.4.0",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

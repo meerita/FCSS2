@@ -1,0 +1,59 @@
+{
+  "name": "@functionalcss/astro",
+  "version": "0.0.0",
+  "private": false,
+  "type": "module",
+  "description": "FCSS Astro integration — registers @functionalcss/vite's plugin for production purge and dev diagnostics",
+  "keywords": [
+    "css",
+    "utility",
+    "fcss",
+    "astro",
+    "purge"
+  ],
+  "license": "MIT",
+  "author": "Diego Lafuente <diego.lafuente@cognativinc.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meerita/FCSS2.git",
+    "directory": "packages/astro"
+  },
+  "bugs": {
+    "url": "https://github.com/meerita/FCSS2/issues"
+  },
+  "homepage": "https://github.com/meerita/FCSS2/tree/master/packages/astro#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc --build",
+    "typecheck": "tsc -b --pretty false",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@functionalcss/vite": "workspace:*"
+  },
+  "peerDependencies": {
+    "astro": "^7.0.0"
+  },
+  "devDependencies": {
+    "@functionalcss/core": "workspace:*",
+    "@types/node": "^22.0.0",
+    "astro": "^7.0.0",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}
