@@ -1,5 +1,5 @@
 // @file packages/angular/tests/vitest.config.ts
-// @description Vitest configuration for @fcss/angular schematic tests.
+// @description Vitest configuration for @functionalcss/angular schematic tests.
 // @layer tools
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 

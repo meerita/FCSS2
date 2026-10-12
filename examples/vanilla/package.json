@@ -1,14 +1,14 @@
 {
-  "name": "@fcss/example-vanilla",
+  "name": "@functionalcss/example-vanilla",
   "version": "0.0.0",
   "private": true,
-  "description": "Vanilla HTML fixture for @fcss/core smoke testing",
+  "description": "Vanilla HTML fixture for @functionalcss/core smoke testing",
   "scripts": {
     "build": "echo 'No build step needed for vanilla HTML'",
     "test": "vitest run --passWithNoTests"
   },
   "dependencies": {
-    "@fcss/core": "workspace:*"
+    "@functionalcss/core": "workspace:*"
   },
   "devDependencies": {
     "vitest": "catalog:"

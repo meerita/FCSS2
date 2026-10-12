@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 // @file packages/cli/src/bin.ts
 // @description fcss CLI binary entry point — wires all commands via commander.
 // @layer tools

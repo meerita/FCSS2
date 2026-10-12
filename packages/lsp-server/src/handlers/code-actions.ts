@@ -4,8 +4,8 @@
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 
 import type { CodeActionParams, CodeAction, Command, Position, Range } from 'vscode-languageserver';
-import { getCodeActions } from '@fcss/language-service';
-import type { ManifestIndex } from '@fcss/language-service';
+import { getCodeActions } from '@functionalcss/language-service';
+import type { ManifestIndex } from '@functionalcss/language-service';
 import { mapCodeActionKind } from '../lsp-mapping';
 import type { StoredDiagnostic } from './diagnostics';
 

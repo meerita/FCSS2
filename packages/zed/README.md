@@ -12,14 +12,14 @@ documentation, diagnostics, and code actions for `class` and `className` attribu
 in HTML, JavaScript (JSX), TSX, and TypeScript files.
 
 The extension is a thin Rust→WASM wrapper. All language intelligence lives in
-`@fcss/lsp-server`, which the extension launches as a Node.js child process.
+`@functionalcss/lsp-server`, which the extension launches as a Node.js child process.
 
 ## Prerequisites
 
 ### In your project
 
 ```sh
-npm install @fcss/core @fcss/lsp-server
+npm install @functionalcss/core @functionalcss/lsp-server
 ```
 
 Both packages must be present in your project's `node_modules`. Node.js must be on
@@ -60,8 +60,8 @@ cargo clippy -- -D warnings
 3. Click **Install Dev Extension** (top right).
 4. Select the `packages/zed/` directory from this repository.
 
-Zed compiles and loads the extension. Open a project that has `@fcss/core` and
-`@fcss/lsp-server` in its `node_modules` — IntelliSense activates automatically.
+Zed compiles and loads the extension. Open a project that has `@functionalcss/core` and
+`@functionalcss/lsp-server` in its `node_modules` — IntelliSense activates automatically.
 
 To reload after a code change, run `cargo build --release --target wasm32-wasip2`
 again and use **Reload Extension** in the Extensions view.

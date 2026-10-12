@@ -1,5 +1,5 @@
 // @file packages/core/vitest.config.ts
-// @description Vitest configuration for @fcss/core tests.
+// @description Vitest configuration for @functionalcss/core tests.
 // @layer tools
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 

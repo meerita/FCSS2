@@ -6,8 +6,8 @@
 import { describe, it, expect } from 'vitest';
 import { MarkupKind } from 'vscode-languageserver';
 import { TextDocument } from 'vscode-languageserver-textdocument';
-import { createManifestIndex } from '@fcss/language-service';
-import type { ManifestEntry } from '@fcss/language-service';
+import { createManifestIndex } from '@functionalcss/language-service';
+import type { ManifestEntry } from '@functionalcss/language-service';
 import { handleHover } from '../src/handlers/hover';
 
 // Property names match the FCSS convention: className = `{property}--{value}`.

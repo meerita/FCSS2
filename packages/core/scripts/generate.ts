@@ -3,8 +3,13 @@
 // @layer scripts
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 
-import { generate, buildBundles, buildStatistics, GENERATED_FILE_HEADER } from '@fcss/generator';
-import { FCSS_COLOR_VALUES } from '@fcss/spec';
+import {
+  generate,
+  buildBundles,
+  buildStatistics,
+  GENERATED_FILE_HEADER,
+} from '@functionalcss/generator';
+import { FCSS_COLOR_VALUES } from '@functionalcss/spec';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -74,8 +79,15 @@ p, h1, h2, h3, h4, h5, h6 { overflow-wrap: break-word; }
 `;
 
 async function main(): Promise<void> {
-  console.log('Generating @fcss/core distribution…\n');
+  console.log('Generating @functionalcss/core distribution…\n');
   fs.mkdirSync(distDir, { recursive: true });
+
+  // Clear previously generated CSS so files dropped from the bundle set never linger in dist/.
+  for (const name of fs.readdirSync(distDir)) {
+    if (name.endsWith('.css') || name === 'states' || name === 'breakpoints') {
+      fs.rmSync(path.join(distDir, name), { recursive: true, force: true });
+    }
+  }
 
   const result = generate();
   const bundles = buildBundles(result);
@@ -83,26 +95,25 @@ async function main(): Promise<void> {
 
   const rootCss = buildRootCss();
 
-  const statesCss = bundles['states/pseudo.css'] + bundles['states/aria.css'];
-  const breakpointsCss = [
+  const fullCss = [
+    RESET_CSS,
+    rootCss,
+    bundles['utilities.css'],
+    bundles['states/pseudo.css'],
+    bundles['states/aria.css'],
     bundles['responsive/sm.css'],
     bundles['responsive/md.css'],
     bundles['responsive/lg.css'],
     bundles['responsive/xl.css'],
     bundles['responsive/xxl.css'],
   ].join('');
-  const fullCss = [RESET_CSS, rootCss, bundles['utilities.css'], statesCss, breakpointsCss].join(
-    '',
-  );
 
   const distFiles: Record<string, string> = {
     'reset.css': RESET_CSS,
     'root.css': rootCss,
     'utilities.css': bundles['utilities.css'],
-    'states.css': statesCss,
     'states/pseudo.css': bundles['states/pseudo.css'],
     'states/aria.css': bundles['states/aria.css'],
-    'breakpoints.css': breakpointsCss,
     'breakpoints/sm.css': bundles['responsive/sm.css'],
     'breakpoints/md.css': bundles['responsive/md.css'],
     'breakpoints/lg.css': bundles['responsive/lg.css'],
@@ -115,7 +126,7 @@ async function main(): Promise<void> {
     writeDistFile(name, content);
   }
 
-  writeDistFile('manifest.json', JSON.stringify(result.manifest, null, 2) + '\n');
+  writeDistFile('manifest.json', JSON.stringify(result.compactManifest) + '\n');
   writeDistFile('statistics.json', JSON.stringify(stats, null, 2) + '\n');
 
   console.log(`\nTotal utilities:   ${stats.utilities.toLocaleString()}`);

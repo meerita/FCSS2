@@ -3,8 +3,8 @@
 // @layer tools
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 
-import { FCSS_PROPERTIES } from '@fcss/spec';
-import { buildBaseClassName } from '@fcss/generator';
+import { FCSS_PROPERTIES } from '@functionalcss/spec';
+import { buildBaseClassName } from '@functionalcss/generator';
 
 export interface ListOptions {
   property?: string;

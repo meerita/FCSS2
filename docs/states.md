@@ -139,7 +139,7 @@ FCSS generates selectors that match ARIA attribute values directly. This lets yo
 You can configure custom data-attribute state classes in `fcss.config.ts`:
 
 ```ts
-import { defineConfig } from '@fcss/cli';
+import { defineConfig } from '@functionalcss/cli';
 
 export default defineConfig({
   dataStates: [

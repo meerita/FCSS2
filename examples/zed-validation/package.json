@@ -1,15 +1,15 @@
 {
-  "name": "@fcss/example-zed-validation",
+  "name": "@functionalcss/example-zed-validation",
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "Zed extension validation project — HTML + TSX fixtures with @fcss/core + @fcss/lsp-server installed",
+  "description": "Zed extension validation project — HTML + TSX fixtures with @functionalcss/core + @functionalcss/lsp-server installed",
   "scripts": {
     "test": "vitest run --passWithNoTests"
   },
   "dependencies": {
-    "@fcss/core": "workspace:*",
-    "@fcss/lsp-server": "workspace:*",
+    "@functionalcss/core": "workspace:*",
+    "@functionalcss/lsp-server": "workspace:*",
     "react": "^18.3.0",
     "react-dom": "^18.3.0"
   },

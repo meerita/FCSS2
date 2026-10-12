@@ -9,13 +9,16 @@ import {
   FCSS_LENGTH_SCALE,
   FCSS_PERCENTAGE_SCALE,
   FCSS_ARIA_STATES,
-} from '@fcss/spec';
+} from '@functionalcss/spec';
+import { COMPACT_MANIFEST_FORMAT } from '@functionalcss/spec';
 import type {
   FcssPropertyDefinition,
   FcssValueDefinition,
   FcssNumericBehavior,
   FcssAriaStateDefinition,
-} from '@fcss/spec';
+  CompactManifest,
+  CompactManifestValue,
+} from '@functionalcss/spec';
 import {
   buildBaseClassName,
   buildPseudoClassName,
@@ -41,6 +44,8 @@ export interface GeneratedRule {
 export interface GenerateResult {
   rules: GeneratedRule[];
   manifest: ManifestEntry[];
+  /** The same catalog as `manifest`, stored once per property; see expandManifest(). */
+  compactManifest: CompactManifest;
 }
 
 // Numeric scales for each behavior type
@@ -118,6 +123,15 @@ export function generate(
   const rules: GeneratedRule[] = [];
   const manifest: ManifestEntry[] = [];
   const seenSelectors = new Set<string>();
+  const compactManifest: CompactManifest = {
+    format: COMPACT_MANIFEST_FORMAT,
+    version: 1,
+    breakpoints: FCSS_BREAKPOINTS.map((bp) => bp.name),
+    ariaValues: Object.fromEntries(
+      [...ARIA_VALUES_MAP].map(([attr, values]) => [attr, [...values]]),
+    ),
+    properties: [],
+  };
 
   function addRule(rule: GeneratedRule, entry: ManifestEntry): void {
     if (seenSelectors.has(rule.selector)) {
@@ -145,8 +159,22 @@ export function generate(
       }
     }
 
+    const compactValues: CompactManifestValue[] = [];
+    compactManifest.properties.push({
+      property: prop.property,
+      category: prop.category,
+      source: prop.specification,
+      pseudo: [...prop.supportedPseudoClasses],
+      aria: prop.supportedAriaStates.filter((attr) => ARIA_VALUES_MAP.has(attr)),
+      responsive: prop.supportsResponsive,
+      values: compactValues,
+    });
+
     for (const val of allValues) {
       const cssValue = resolveValue(val, prop.numericBehavior);
+      compactValues.push(
+        val.deprecated === true ? [val.classValue, cssValue, 1] : [val.classValue, cssValue],
+      );
 
       // ── Base ──
       const baseClass = buildBaseClassName(prop.property, val.classValue);
@@ -311,7 +339,7 @@ export function generate(
     }
   }
 
-  return { rules, manifest };
+  return { rules, manifest, compactManifest };
 }
 
 function resolveValue(

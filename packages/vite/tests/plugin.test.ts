@@ -69,7 +69,7 @@ describe('loadFcssConfig', () => {
 
 describe('resolveManifestPath', () => {
   it('finds manifest in direct node_modules', () => {
-    const manifestDir = path.join(tmpDir, 'node_modules/@fcss/core/dist');
+    const manifestDir = path.join(tmpDir, 'node_modules/@functionalcss/core/dist');
     fs.mkdirSync(manifestDir, { recursive: true });
     const manifestFile = path.join(manifestDir, 'manifest.json');
     fs.writeFileSync(manifestFile, '[]', 'utf8');
@@ -83,7 +83,7 @@ describe('resolveManifestPath', () => {
     const childDir = path.join(parentDir, 'child');
     fs.mkdirSync(childDir, { recursive: true });
 
-    const manifestDir = path.join(parentDir, 'node_modules/@fcss/core/dist');
+    const manifestDir = path.join(parentDir, 'node_modules/@functionalcss/core/dist');
     fs.mkdirSync(manifestDir, { recursive: true });
     const manifestFile = path.join(manifestDir, 'manifest.json');
     fs.writeFileSync(manifestFile, '[]', 'utf8');
@@ -93,7 +93,7 @@ describe('resolveManifestPath', () => {
   });
 
   it('throws when manifest is not found', () => {
-    expect(() => resolveManifestPath(tmpDir)).toThrow('@fcss/vite');
+    expect(() => resolveManifestPath(tmpDir)).toThrow('@functionalcss/vite');
   });
 });
 
@@ -129,9 +129,9 @@ describe('collectDynamicWarnings', () => {
 });
 
 describe('transform — CSS purge (production)', () => {
-  it('purges unused FCSS classes from an @fcss/core CSS asset', async () => {
+  it('purges unused FCSS classes from an @functionalcss/core CSS asset', async () => {
     // Minimal manifest with two classes
-    const manifestDir = path.join(tmpDir, 'node_modules/@fcss/core/dist');
+    const manifestDir = path.join(tmpDir, 'node_modules/@functionalcss/core/dist');
     fs.mkdirSync(manifestDir, { recursive: true });
     const manifest = [
       { className: 'display--flex', selector: '.display--flex' },
@@ -146,7 +146,7 @@ describe('transform — CSS purge (production)', () => {
 
     // CSS containing both classes
     const css = `.display--flex { display: flex }\n.display--none { display: none }`;
-    const cssId = path.join(tmpDir, 'node_modules/@fcss/core/dist/full.css');
+    const cssId = path.join(tmpDir, 'node_modules/@functionalcss/core/dist/full.css');
     fs.writeFileSync(cssId, css, 'utf8');
 
     const plugin = fcss();

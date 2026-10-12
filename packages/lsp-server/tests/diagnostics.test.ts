@@ -5,8 +5,8 @@
 
 import { describe, it, expect } from 'vitest';
 import { DiagnosticSeverity as LspDiagnosticSeverity } from 'vscode-languageserver';
-import { createManifestIndex } from '@fcss/language-service';
-import type { ManifestEntry } from '@fcss/language-service';
+import { createManifestIndex } from '@functionalcss/language-service';
+import type { ManifestEntry } from '@functionalcss/language-service';
 import { computeDiagnostics } from '../src/handlers/diagnostics';
 import { extractClassOccurrences, occurrenceToRange } from '../src/class-extraction';
 

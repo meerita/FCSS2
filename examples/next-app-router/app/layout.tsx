@@ -3,7 +3,7 @@
 // @layer ui
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 
-import '@fcss/core/full.css';
+import '@functionalcss/core/full.css';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {

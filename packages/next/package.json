@@ -1,5 +1,5 @@
 {
-  "name": "@fcss/next",
+  "name": "@functionalcss/next",
   "version": "0.0.0",
   "private": false,
   "type": "module",
@@ -12,6 +12,19 @@
     "purge"
   ],
   "license": "MIT",
+  "author": "Diego Lafuente <diego.lafuente@cognativinc.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meerita/FCSS2.git",
+    "directory": "packages/next"
+  },
+  "bugs": {
+    "url": "https://github.com/meerita/FCSS2/issues"
+  },
+  "homepage": "https://github.com/meerita/FCSS2/tree/master/packages/next#readme",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
@@ -31,8 +44,8 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@fcss/postcss": "workspace:*",
-    "@fcss/scanner": "workspace:*",
+    "@functionalcss/postcss": "workspace:*",
+    "@functionalcss/scanner": "workspace:*",
     "jiti": "^2.0.0",
     "postcss": "^8.4.0"
   },
@@ -40,7 +53,7 @@
     "next": "^14.0.0 || ^15.0.0"
   },
   "devDependencies": {
-    "@fcss/core": "workspace:*",
+    "@functionalcss/core": "workspace:*",
     "@playwright/test": "^1.45.0",
     "@types/node": "^22.0.0",
     "@types/react": "^18.3.0",

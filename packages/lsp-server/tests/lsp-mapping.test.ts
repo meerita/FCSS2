@@ -9,7 +9,7 @@ import {
   DiagnosticSeverity as LspDiagnosticSeverity,
   CodeActionKind as LspCodeActionKind,
 } from 'vscode-languageserver';
-import { CompletionItemKind as FcssCompletionItemKind } from '@fcss/language-service';
+import { CompletionItemKind as FcssCompletionItemKind } from '@functionalcss/language-service';
 import { mapCompletionKind, mapDiagnosticSeverity, mapCodeActionKind } from '../src/lsp-mapping';
 
 describe('mapCompletionKind', () => {

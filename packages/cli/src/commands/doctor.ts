@@ -42,14 +42,14 @@ function checkPackageInstalled(cwd: string, pkg: string): HealthCheck {
 }
 
 function checkManifest(cwd: string): HealthCheck {
-  const manifestPath = path.join(cwd, 'node_modules/@fcss/core/dist/manifest.json');
+  const manifestPath = path.join(cwd, 'node_modules/@functionalcss/core/dist/manifest.json');
   const exists = fs.existsSync(manifestPath);
   return {
-    name: '@fcss/core manifest',
+    name: '@functionalcss/core manifest',
     status: exists ? 'ok' : 'warn',
     message: exists
       ? 'manifest.json found'
-      : 'manifest.json not found — @fcss/core may not be installed',
+      : 'manifest.json not found — @functionalcss/core may not be installed',
   };
 }
 
@@ -75,18 +75,19 @@ function checkContentPaths(config: FcssConfig): HealthCheck {
 }
 
 function checkDuplicateInstalls(cwd: string): HealthCheck {
-  const fcssDir = path.join(cwd, 'node_modules/@fcss');
+  const fcssDir = path.join(cwd, 'node_modules/@functionalcss');
   if (!fs.existsSync(fcssDir)) {
     return {
       name: 'Duplicate packages',
       status: 'ok',
-      message: 'No @fcss packages found in node_modules (install @fcss/core first)',
+      message:
+        'No @functionalcss packages found in node_modules (install @functionalcss/core first)',
     };
   }
   let duplicates: string[] = [];
   try {
-    const result = execSync('npm ls @fcss/core 2>&1', { cwd, encoding: 'utf8' });
-    const lines = result.split('\n').filter((l) => l.includes('@fcss/core'));
+    const result = execSync('npm ls @functionalcss/core 2>&1', { cwd, encoding: 'utf8' });
+    const lines = result.split('\n').filter((l) => l.includes('@functionalcss/core'));
     if (lines.length > 1) duplicates = lines;
   } catch {
     // npm ls may fail in non-npm projects — skip
@@ -96,15 +97,15 @@ function checkDuplicateInstalls(cwd: string): HealthCheck {
     status: duplicates.length > 1 ? 'warn' : 'ok',
     message:
       duplicates.length > 1
-        ? `Multiple @fcss/core installs detected — may cause purge inconsistencies`
-        : 'No duplicate @fcss/core installs',
+        ? `Multiple @functionalcss/core installs detected — may cause purge inconsistencies`
+        : 'No duplicate @functionalcss/core installs',
   };
 }
 
 export async function runDoctor(config: FcssConfig, cwd = process.cwd()): Promise<DoctorResult> {
   const checks: HealthCheck[] = [
     checkNodeVersion(),
-    checkPackageInstalled(cwd, '@fcss/core'),
+    checkPackageInstalled(cwd, '@functionalcss/core'),
     checkManifest(cwd),
     checkConfigPresent(cwd),
     checkContentPaths(config),

@@ -6,8 +6,8 @@
 import type { CompletionParams, CompletionList, CompletionItem } from 'vscode-languageserver';
 import { MarkupKind } from 'vscode-languageserver';
 import type { TextDocument } from 'vscode-languageserver-textdocument';
-import { getCompletions } from '@fcss/language-service';
-import type { ManifestIndex } from '@fcss/language-service';
+import { getCompletions } from '@functionalcss/language-service';
+import type { ManifestIndex } from '@functionalcss/language-service';
 import { mapCompletionKind } from '../lsp-mapping';
 import { isInsideClassAttribute, wordBeforeCursor } from '../class-extraction';
 

@@ -4,7 +4,7 @@
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 
 import { defineConfig } from 'astro/config';
-import fcss from '@fcss/astro';
+import fcss from '@functionalcss/astro';
 
 export default defineConfig({
   output: 'static',

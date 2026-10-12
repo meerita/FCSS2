@@ -1,11 +1,11 @@
 // @file packages/lsp-server/src/handlers/diagnostics.ts
-// @description Computes LSP Diagnostics from @fcss/language-service, mapping each item to its real occurrence range.
+// @description Computes LSP Diagnostics from @functionalcss/language-service, mapping each item to its real occurrence range.
 // @layer tools
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 
 import type { Diagnostic, Range } from 'vscode-languageserver';
-import { getDiagnostics, getSourceDiagnostics } from '@fcss/language-service';
-import type { DiagnosticItem, ManifestIndex } from '@fcss/language-service';
+import { getDiagnostics, getSourceDiagnostics } from '@functionalcss/language-service';
+import type { DiagnosticItem, ManifestIndex } from '@functionalcss/language-service';
 import { mapDiagnosticSeverity } from '../lsp-mapping';
 import { extractClassOccurrences, occurrenceToRange, offsetToPosition } from '../class-extraction';
 

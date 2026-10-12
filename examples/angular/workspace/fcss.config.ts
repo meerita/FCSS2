@@ -3,7 +3,7 @@
 // @layer config
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 
-import type { FcssAngularConfig } from '@fcss/angular';
+import type { FcssAngularConfig } from '@functionalcss/angular';
 
 const config: FcssAngularConfig = {
   content: ['projects/app1/src/**/*.{ts,html}'],

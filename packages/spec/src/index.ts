@@ -25,6 +25,29 @@ export {
 export type { FcssAriaStateDefinition, AriaStateType } from './states/aria.js';
 export { FCSS_ARIA_STATES, SUPPORTED_ARIA_STATES } from './states/aria.js';
 
+// Manifest
+export type {
+  ManifestCondition,
+  ManifestEntry,
+  CompactManifest,
+  CompactManifestProperty,
+  CompactManifestValue,
+} from './manifest.js';
+export {
+  escapeClassName,
+  buildBaseClassName,
+  buildResponsiveClassName,
+  buildPseudoClassName,
+  buildAriaClassName,
+  buildResponsivePseudoClassName,
+  buildResponsiveAriaClassName,
+  buildSelector,
+  COMPACT_MANIFEST_FORMAT,
+  isCompactManifest,
+  expandManifest,
+  parseManifest,
+} from './manifest.js';
+
 // Breakpoints
 export type { FcssBreakpoint } from './breakpoints.js';
 export { FCSS_BREAKPOINTS } from './breakpoints.js';

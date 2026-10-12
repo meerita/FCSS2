@@ -67,7 +67,7 @@ A class like `md-display--flex` only takes effect when the viewport matches `min
 You can define additional breakpoints in `fcss.config.ts`:
 
 ```ts
-import { defineConfig } from '@fcss/cli';
+import { defineConfig } from '@functionalcss/cli';
 
 export default defineConfig({
   breakpoints: [

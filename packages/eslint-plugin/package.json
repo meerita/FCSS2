@@ -1,7 +1,7 @@
 {
-  "name": "@fcss/eslint-plugin",
+  "name": "@functionalcss/eslint-plugin",
   "version": "0.0.0",
-  "private": false,
+  "private": true,
   "type": "module",
   "description": "FCSS ESLint plugin — lint class attributes against the FCSS manifest",
   "keywords": [
@@ -12,6 +12,19 @@
     "lint"
   ],
   "license": "MIT",
+  "author": "Diego Lafuente <diego.lafuente@cognativinc.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meerita/FCSS2.git",
+    "directory": "packages/eslint-plugin"
+  },
+  "bugs": {
+    "url": "https://github.com/meerita/FCSS2/issues"
+  },
+  "homepage": "https://github.com/meerita/FCSS2/tree/master/packages/eslint-plugin#readme",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {

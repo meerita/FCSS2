@@ -1,5 +1,5 @@
 // @file packages/astro/tests/integration.test.ts
-// @description Unit tests for the @fcss/astro integration factory.
+// @description Unit tests for the @functionalcss/astro integration factory.
 // @layer tests
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 
@@ -13,8 +13,8 @@ const { fcssPluginMock } = vi.hoisted(() => ({
   fcssPluginMock: vi.fn((opts?: unknown) => ({ name: 'vite-plugin-fcss', __opts: opts })),
 }));
 
-vi.mock('@fcss/vite', async () => {
-  const actual = await vi.importActual<typeof import('@fcss/vite')>('@fcss/vite');
+vi.mock('@functionalcss/vite', async () => {
+  const actual = await vi.importActual<typeof import('@functionalcss/vite')>('@functionalcss/vite');
   return { ...actual, fcss: fcssPluginMock };
 });
 
@@ -53,11 +53,11 @@ function fakeHookContext(overrides: { updateConfig: (cfg: unknown) => unknown })
 describe('fcss() integration factory', () => {
   it('returns an AstroIntegration with the correct name and hook shape', () => {
     const integration = fcss();
-    expect(integration.name).toBe('@fcss/astro');
+    expect(integration.name).toBe('@functionalcss/astro');
     expect(typeof integration.hooks['astro:config:setup']).toBe('function');
   });
 
-  it('calls updateConfig with the @fcss/vite plugin in astro:config:setup', async () => {
+  it('calls updateConfig with the @functionalcss/vite plugin in astro:config:setup', async () => {
     const updateConfig = vi.fn();
     const integration = fcss();
     const hook = integration.hooks['astro:config:setup'];

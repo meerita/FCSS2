@@ -1,13 +1,13 @@
 # Astro Guide
 
-`@fcss/astro` registers `@fcss/vite`'s plugin into Astro's Vite config to add production
+`@functionalcss/astro` registers `@functionalcss/vite`'s plugin into Astro's Vite config to add production
 CSS purging and dev-mode dynamic-fragment warnings. Astro's build pipeline is Vite, so
-`@fcss/astro` does not reimplement scanning or purging — it is a thin wrapper.
+`@functionalcss/astro` does not reimplement scanning or purging — it is a thin wrapper.
 
 ## Installation
 
 ```bash
-npm install @fcss/core @fcss/astro
+npm install @functionalcss/core @functionalcss/astro
 ```
 
 ## Configuration
@@ -17,19 +17,19 @@ Register the integration in `astro.config.mjs`:
 ```js
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
-import fcss from '@fcss/astro';
+import fcss from '@functionalcss/astro';
 
 export default defineConfig({
   integrations: [fcss()],
 });
 ```
 
-`fcss()` accepts the same options as `@fcss/vite`'s `fcss()` plugin (`content`,
+`fcss()` accepts the same options as `@functionalcss/vite`'s `fcss()` plugin (`content`,
 `safelist`). Configure them via `fcss.config.ts`:
 
 ```ts
 // fcss.config.ts
-import type { FcssViteConfig } from '@fcss/astro';
+import type { FcssViteConfig } from '@functionalcss/astro';
 
 const config: FcssViteConfig = {
   content: ['src/**/*.astro', '!node_modules/**'],
@@ -39,7 +39,7 @@ const config: FcssViteConfig = {
 export default config;
 ```
 
-If `fcss.config.ts` is omitted, or omits `content`, `@fcss/astro` supplies an Astro-aware
+If `fcss.config.ts` is omitted, or omits `content`, `@functionalcss/astro` supplies an Astro-aware
 default: `src/**/*.{html,js,jsx,ts,tsx,astro}`.
 
 ## Importing CSS
@@ -50,7 +50,7 @@ CSS from a layout's frontmatter instead, so every page that uses the layout gets
 ```astro
 ---
 // src/layouts/Layout.astro
-import '@fcss/core/full.css';
+import '@functionalcss/core/full.css';
 ---
 
 <html lang="en">
@@ -118,10 +118,10 @@ work the same way — they run the same Vite build — but are not individually 
 astro build
 ```
 
-`@fcss/postcss` logs a purge summary during the build:
+`@functionalcss/postcss` logs a purge summary during the build:
 
 ```
-[@fcss/postcss] Purge: 18/326313 selectors retained (326295 removed, 100.0% reduction, ...)
+[@functionalcss/postcss] Purge: 18/326313 selectors retained (326295 removed, 100.0% reduction, ...)
 ```
 
 ## Editor support

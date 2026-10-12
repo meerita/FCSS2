@@ -6,8 +6,8 @@
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import postcss from 'postcss';
-import fcssPostcss from '@fcss/postcss';
-import type { FcssPostcssOptions } from '@fcss/postcss';
+import fcssPostcss from '@functionalcss/postcss';
+import type { FcssPostcssOptions } from '@functionalcss/postcss';
 import type { FcssConfig } from '../config/schema.js';
 
 export interface PurgeOptions {

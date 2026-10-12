@@ -1,20 +1,20 @@
 <!--
 @file packages/language-service/README.md
-@description README for @fcss/language-service.
+@description README for @functionalcss/language-service.
 @layer docs
 @created Diego Lafuente <diego.lafuente@cognativinc.com>
 -->
 
-# @fcss/language-service
+# @functionalcss/language-service
 
-Manifest-driven language service engine for FCSS. Powers completions, hover, diagnostics, conflict detection, and code actions — all from the `@fcss/core` manifest. No separately maintained class list.
+Manifest-driven language service engine for FCSS. Powers completions, hover, diagnostics, conflict detection, and code actions — all from the `@functionalcss/core` manifest. No separately maintained class list.
 
 ## API
 
 ### Parser
 
 ```ts
-import { parseClass } from '@fcss/language-service';
+import { parseClass } from '@functionalcss/language-service';
 
 const token = parseClass('md-display--flex:hover');
 // { breakpoint: 'md', property: 'display', classValue: 'flex',
@@ -24,9 +24,15 @@ const token = parseClass('md-display--flex:hover');
 ### Manifest
 
 ```ts
-import { loadManifestFromPath, createManifestIndex, watchManifest } from '@fcss/language-service';
+import {
+  loadManifestFromPath,
+  createManifestIndex,
+  watchManifest,
+} from '@functionalcss/language-service';
 
-const entries = loadManifestFromPath('/path/to/node_modules/@fcss/core/dist/manifest.json');
+const entries = loadManifestFromPath(
+  '/path/to/node_modules/@functionalcss/core/dist/manifest.json',
+);
 const index = createManifestIndex(entries);
 
 // Watch for changes (returns a disposer)
@@ -39,7 +45,7 @@ stop(); // unwatch
 ### Completions
 
 ```ts
-import { getCompletions } from '@fcss/language-service';
+import { getCompletions } from '@functionalcss/language-service';
 
 const items = getCompletions('display--', index);
 // Returns completion items for all display values
@@ -56,7 +62,7 @@ Completion contexts:
 ### Hover
 
 ```ts
-import { getHover } from '@fcss/language-service';
+import { getHover } from '@functionalcss/language-service';
 
 const result = getHover('md-display--flex:hover', index);
 // result.contents — Markdown with CSS snippet, category, source, breakpoint, state info
@@ -65,7 +71,7 @@ const result = getHover('md-display--flex:hover', index);
 ### Diagnostics
 
 ```ts
-import { getDiagnostics, getSourceDiagnostics } from '@fcss/language-service';
+import { getDiagnostics, getSourceDiagnostics } from '@functionalcss/language-service';
 
 // Class-level diagnostics (from a class attribute)
 const diags = getDiagnostics(['display--flex', 'display--block'], index);
@@ -89,7 +95,7 @@ Diagnostic codes:
 ### Conflict detection
 
 ```ts
-import { detectConflicts } from '@fcss/language-service';
+import { detectConflicts } from '@functionalcss/language-service';
 
 const conflicts = detectConflicts(['margin--16', 'margin-left--8'], index);
 // [{ type: 'shorthand-overlap', classA: 'margin--16', classB: 'margin-left--8', property: 'margin' }]
@@ -98,7 +104,7 @@ const conflicts = detectConflicts(['margin--16', 'margin-left--8'], index);
 ### Code actions
 
 ```ts
-import { getCodeActions } from '@fcss/language-service';
+import { getCodeActions } from '@functionalcss/language-service';
 
 const actions = getCodeActions(diagnostic, index);
 // Returns up to 5 action types: replace-canonical, add-safelist, convert-dynamic, open-docs, create-c-rule

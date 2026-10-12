@@ -1,5 +1,5 @@
 {
-  "name": "@fcss/cli",
+  "name": "@functionalcss/cli",
   "version": "0.0.0",
   "private": false,
   "type": "module",
@@ -11,6 +11,19 @@
     "cli"
   ],
   "license": "MIT",
+  "author": "Diego Lafuente <diego.lafuente@cognativinc.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meerita/FCSS2.git",
+    "directory": "packages/cli"
+  },
+  "bugs": {
+    "url": "https://github.com/meerita/FCSS2/issues"
+  },
+  "homepage": "https://github.com/meerita/FCSS2/tree/master/packages/cli#readme",
+  "publishConfig": {
+    "access": "public"
+  },
   "bin": {
     "fcss": "dist/bin.js"
   },
@@ -33,15 +46,15 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@fcss/generator": "workspace:*",
-    "@fcss/scanner": "workspace:*",
-    "@fcss/spec": "workspace:*",
+    "@functionalcss/generator": "workspace:*",
+    "@functionalcss/scanner": "workspace:*",
+    "@functionalcss/spec": "workspace:*",
     "commander": "^12.0.0",
     "jiti": "^2.0.0",
     "postcss": "^8.4.0"
   },
   "devDependencies": {
-    "@fcss/postcss": "workspace:*",
+    "@functionalcss/postcss": "workspace:*",
     "@types/node": "^22.0.0",
     "typescript": "catalog:",
     "vitest": "catalog:"

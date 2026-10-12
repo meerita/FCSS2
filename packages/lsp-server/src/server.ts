@@ -11,8 +11,12 @@ import {
   TextDocumentSyncKind,
 } from 'vscode-languageserver/node';
 import { TextDocument } from 'vscode-languageserver-textdocument';
-import { loadManifestFromPath, createManifestIndex, watchManifest } from '@fcss/language-service';
-import type { ManifestIndex } from '@fcss/language-service';
+import {
+  loadManifestFromPath,
+  createManifestIndex,
+  watchManifest,
+} from '@functionalcss/language-service';
+import type { ManifestIndex } from '@functionalcss/language-service';
 import { findManifestPath } from './manifest-locator';
 import { handleCompletion } from './handlers/completion';
 import { handleHover } from './handlers/hover';
@@ -66,7 +70,7 @@ connection.onInitialize((params) => {
     manifestIndex = createManifestIndex(entries);
   } else {
     connection.console.warn(
-      'FCSS: @fcss/core manifest not found — install @fcss/core to activate IntelliSense.',
+      'FCSS: @functionalcss/core manifest not found — install @functionalcss/core to activate IntelliSense.',
     );
   }
 

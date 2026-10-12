@@ -3,7 +3,7 @@
 // @layer ui
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 
-import '@fcss/core/full.css';
+import '@functionalcss/core/full.css';
 import type { AppProps } from 'next/app';
 
 export default function App({ Component, pageProps }: AppProps) {

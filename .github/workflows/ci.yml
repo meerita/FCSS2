@@ -7,9 +7,9 @@ name: CI
 
 on:
   push:
-    branches: [main, dev]
+    branches: [master, dev]
   pull_request:
-    branches: [main, dev]
+    branches: [master, dev]
 
 jobs:
   ci:
@@ -47,7 +47,7 @@ jobs:
         run: pnpm -r run build
 
       - name: Install Playwright browsers
-        run: pnpm --filter @fcss/generator exec playwright install --with-deps
+        run: pnpm --filter @functionalcss/generator exec playwright install --with-deps
 
       - name: Test all packages
         run: pnpm -r run test

@@ -3,23 +3,9 @@
 // @layer tools
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 
-export interface ManifestCondition {
-  type: 'pseudo' | 'aria';
-  attribute?: string;
-  value?: string;
-}
+import type { ManifestCondition, ManifestEntry } from '@functionalcss/spec';
 
-export interface ManifestEntry {
-  className: string;
-  selector: string;
-  property: string;
-  value: string;
-  condition?: ManifestCondition;
-  breakpoint?: string;
-  category: string;
-  deprecated?: boolean;
-  source: string;
-}
+export type { ManifestCondition, ManifestEntry } from '@functionalcss/spec';
 
 export function buildManifestEntry(params: {
   className: string;

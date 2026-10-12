@@ -1,12 +1,12 @@
 # Next.js Guide
 
-`@fcss/next` wraps your Next.js config to add automatic CSS generation and purging. It supports both the App Router and Pages Router.
+`@functionalcss/next` wraps your Next.js config to add automatic CSS generation and purging. It supports both the App Router and Pages Router.
 
 ## Installation
 
 ```bash
-npm install @fcss/core
-npm install -D @fcss/next
+npm install @functionalcss/core
+npm install -D @functionalcss/next
 ```
 
 ## Configuration
@@ -16,7 +16,7 @@ Wrap your Next.js config with `withFcss`:
 ```ts
 // next.config.ts
 import type { NextConfig } from 'next';
-import { withFcss } from '@fcss/next';
+import { withFcss } from '@functionalcss/next';
 
 const nextConfig: NextConfig = {
   // your existing config
@@ -31,7 +31,7 @@ export default withFcss(nextConfig);
 
 ```tsx
 // app/layout.tsx
-import '@fcss/core/fcss.css';
+import '@functionalcss/core/full.css';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -47,7 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 ```tsx
 // pages/_app.tsx
 import type { AppProps } from 'next/app';
-import '@fcss/core/fcss.css';
+import '@functionalcss/core/full.css';
 
 export default function App({ Component, pageProps }: AppProps) {
   return <Component {...pageProps} />;
@@ -67,7 +67,7 @@ To customize, create an `fcss.config.ts` at the project root:
 
 ```ts
 // fcss.config.ts
-import { defineConfig } from '@fcss/cli';
+import { defineConfig } from '@functionalcss/cli';
 
 export default defineConfig({
   content: ['app/**/*.{ts,tsx}', 'components/**/*.{ts,tsx}', 'lib/**/*.{ts,tsx}'],
@@ -144,5 +144,5 @@ Add dynamically constructed classes to the safelist in `fcss.config.ts`.
 To verify which classes will be kept:
 
 ```bash
-npx fcss audit --content "app/**/*.{ts,tsx}"
+npx fcss audit
 ```

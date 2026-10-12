@@ -28,7 +28,7 @@ export function applySafelist(
   for (const exact of options.exact ?? []) {
     if (!knownClasses.has(exact)) {
       throw new Error(
-        `[@fcss/postcss] Exact safelist class "${exact}" is not in the manifest. ` +
+        `[@functionalcss/postcss] Exact safelist class "${exact}" is not in the manifest. ` +
           `Check the class name or remove it from the safelist.`,
       );
     }
@@ -47,7 +47,7 @@ export function applySafelist(
     }
     if (count > PATTERN_RETENTION_WARN_THRESHOLD) {
       warnings.push(
-        `[@fcss/scanner] Safelist pattern /${pattern.source}/ retains ${count} utilities. ` +
+        `[@functionalcss/scanner] Safelist pattern /${pattern.source}/ retains ${count} utilities. ` +
           `Consider narrowing the pattern to avoid over-retention.`,
       );
     }

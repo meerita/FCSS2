@@ -82,7 +82,7 @@ export async function scan(options: ScanOptions): Promise<ScanResult> {
 
   if (content.length === 0) {
     throw new Error(
-      '[@fcss/scanner] No content patterns provided. ' +
+      '[@functionalcss/scanner] No content patterns provided. ' +
         'Configure the "content" option with glob patterns pointing to your source files.',
     );
   }
@@ -91,7 +91,7 @@ export async function scan(options: ScanOptions): Promise<ScanResult> {
 
   if (files.length === 0) {
     throw new Error(
-      `[@fcss/scanner] No files matched the content patterns: ${content.join(', ')}. ` +
+      `[@functionalcss/scanner] No files matched the content patterns: ${content.join(', ')}. ` +
         'Verify the patterns are correct and point to your source files.',
     );
   }

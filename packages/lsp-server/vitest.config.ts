@@ -1,5 +1,5 @@
 // @file packages/lsp-server/vitest.config.ts
-// @description Vitest configuration for @fcss/lsp-server tests.
+// @description Vitest configuration for @functionalcss/lsp-server tests.
 // @layer tools
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 

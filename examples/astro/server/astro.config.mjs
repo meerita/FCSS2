@@ -5,7 +5,7 @@
 
 import { defineConfig } from 'astro/config';
 import node from '@astrojs/node';
-import fcss from '@fcss/astro';
+import fcss from '@functionalcss/astro';
 
 export default defineConfig({
   output: 'server',

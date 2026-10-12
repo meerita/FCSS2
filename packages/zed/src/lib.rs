@@ -20,23 +20,23 @@ impl zed::Extension for FcssExtension {
         let node = worktree.which("node").ok_or_else(|| {
             "Node.js not found on PATH. \
              Install Node.js (https://nodejs.org) and ensure it is on your PATH, \
-             then run `npm install @fcss/core @fcss/lsp-server` in your project."
+             then run `npm install @functionalcss/core @functionalcss/lsp-server` in your project."
                 .to_string()
         })?;
 
         // Verify the package is installed before constructing the full server path.
         // A missing package.json means `dist/server.js` won't exist either.
         worktree
-            .read_text_file("node_modules/@fcss/lsp-server/package.json")
+            .read_text_file("node_modules/@functionalcss/lsp-server/package.json")
             .map_err(|_| {
-                "@fcss/lsp-server is not installed in this project. \
-                 Run `npm install @fcss/core @fcss/lsp-server` (or the equivalent \
+                "@functionalcss/lsp-server is not installed in this project. \
+                 Run `npm install @functionalcss/core @functionalcss/lsp-server` (or the equivalent \
                  for your package manager) in your project root."
                     .to_string()
             })?;
 
         let server_path = format!(
-            "{}/node_modules/@fcss/lsp-server/dist/server.js",
+            "{}/node_modules/@functionalcss/lsp-server/dist/server.js",
             worktree.root_path()
         );
 

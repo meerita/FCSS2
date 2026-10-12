@@ -1,8 +1,8 @@
 {
-  "name": "@fcss/example-angular-standalone",
+  "name": "@functionalcss/example-angular-standalone",
   "version": "0.0.0",
   "private": true,
-  "description": "Angular standalone fixture for @fcss/angular smoke testing",
+  "description": "Angular standalone fixture for @functionalcss/angular smoke testing",
   "scripts": {
     "ng": "ng",
     "build": "ng build && node fcss-purge.mjs",
@@ -18,7 +18,7 @@
     "@angular/platform-browser": "^18.0.0",
     "@angular/platform-browser-dynamic": "^18.0.0",
     "@angular/router": "^18.0.0",
-    "@fcss/core": "workspace:*",
+    "@functionalcss/core": "workspace:*",
     "rxjs": "^7.8.0",
     "tslib": "^2.6.0",
     "zone.js": "^0.14.0"
@@ -27,7 +27,7 @@
     "@angular-devkit/build-angular": "^18.0.0",
     "@angular/cli": "^18.0.0",
     "@angular/compiler-cli": "^18.0.0",
-    "@fcss/postcss": "workspace:*",
+    "@functionalcss/postcss": "workspace:*",
     "@playwright/test": "^1.45.0",
     "postcss": "^8.4.0",
     "@types/node": "^22.0.0",

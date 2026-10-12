@@ -1,5 +1,5 @@
 // @file packages/postcss/tests/integration.test.ts
-// @description Integration tests for the @fcss/postcss plugin.
+// @description Integration tests for the @functionalcss/postcss plugin.
 // @layer tests
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 

@@ -1,5 +1,5 @@
 {
-  "name": "@fcss/language-service",
+  "name": "@functionalcss/language-service",
   "version": "0.0.0",
   "private": true,
   "main": "dist/index.js",
@@ -17,6 +17,8 @@
     "test": "vitest run --passWithNoTests"
   },
   "devDependencies": {
+    "@functionalcss/core": "workspace:*",
+    "@functionalcss/spec": "workspace:*",
     "@types/node": "^22.0.0",
     "typescript": "catalog:",
     "vitest": "catalog:"

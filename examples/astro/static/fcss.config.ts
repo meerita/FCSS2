@@ -3,7 +3,7 @@
 // @layer config
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 
-import type { FcssViteConfig } from '@fcss/astro';
+import type { FcssViteConfig } from '@functionalcss/astro';
 
 const config: FcssViteConfig = {
   content: ['src/**/*.astro', '!node_modules/**'],

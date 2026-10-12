@@ -1,5 +1,5 @@
 // @file packages/lsp-server/src/lsp-mapping.ts
-// @description Maps @fcss/language-service types to vscode-languageserver LSP types.
+// @description Maps @functionalcss/language-service types to vscode-languageserver LSP types.
 // @layer tools
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 
@@ -12,12 +12,12 @@ import type {
   CompletionItemKind,
   DiagnosticSeverity as LspDiagSeverityType,
 } from 'vscode-languageserver';
-import { CompletionItemKind as FcssCompletionItemKind } from '@fcss/language-service';
+import { CompletionItemKind as FcssCompletionItemKind } from '@functionalcss/language-service';
 import type {
   CompletionItemKindValue,
   DiagnosticSeverity,
   CodeActionKind,
-} from '@fcss/language-service';
+} from '@functionalcss/language-service';
 
 export function mapCompletionKind(kind: CompletionItemKindValue): CompletionItemKind {
   switch (kind) {

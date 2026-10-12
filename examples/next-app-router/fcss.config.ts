@@ -3,7 +3,7 @@
 // @layer config
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 
-import type { FcssNextConfig } from '@fcss/next';
+import type { FcssNextConfig } from '@functionalcss/next';
 
 const config: FcssNextConfig = {
   content: ['app/**/*.{ts,tsx}', '../../packages/ui/src/**/*.{ts,tsx}', '!node_modules/**'],

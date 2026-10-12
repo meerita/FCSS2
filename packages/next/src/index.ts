@@ -57,14 +57,14 @@ export async function loadFcssConfig(
 export function resolveManifestPath(root: string): string {
   let dir = root;
   for (let i = 0; i < 6; i++) {
-    const candidate = path.join(dir, 'node_modules/@fcss/core/dist/manifest.json');
+    const candidate = path.join(dir, 'node_modules/@functionalcss/core/dist/manifest.json');
     if (fs.existsSync(candidate)) return candidate;
     const parent = path.dirname(dir);
     if (parent === dir) break;
     dir = parent;
   }
   throw new Error(
-    '[@fcss/next] Cannot find FCSS manifest. Install @fcss/core as a project dependency.',
+    '[@functionalcss/next] Cannot find FCSS manifest. Install @functionalcss/core as a project dependency.',
   );
 }
 
@@ -143,7 +143,7 @@ class FcssWebpackPlugin {
     // (packages/next/dist/index.js) and its methods retain the ESM module scope.
     const [{ default: postcss }, { default: fcssPostcss }] = await Promise.all([
       import('postcss'),
-      import('@fcss/postcss'),
+      import('@functionalcss/postcss'),
     ]);
 
     const safelistExact = config.safelist?.filter((s): s is string => typeof s === 'string') ?? [];
@@ -184,7 +184,7 @@ class FcssWebpackPlugin {
           assets[assetName] = replacement;
         }
       } catch (err) {
-        console.warn(`[@fcss/next] Purge failed for "${assetName}": ${String(err)}`);
+        console.warn(`[@functionalcss/next] Purge failed for "${assetName}": ${String(err)}`);
       }
     }
   }
