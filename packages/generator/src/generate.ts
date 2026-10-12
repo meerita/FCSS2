@@ -9,13 +9,13 @@ import {
   FCSS_LENGTH_SCALE,
   FCSS_PERCENTAGE_SCALE,
   FCSS_ARIA_STATES,
-} from '@fcss/spec';
+} from '@functionalcss/spec';
 import type {
   FcssPropertyDefinition,
   FcssValueDefinition,
   FcssNumericBehavior,
   FcssAriaStateDefinition,
-} from '@fcss/spec';
+} from '@functionalcss/spec';
 import {
   buildBaseClassName,
   buildPseudoClassName,

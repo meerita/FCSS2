@@ -52,7 +52,7 @@ Use a safelist to protect classes from being purged even if they do not appear a
 ### In `fcss.config.ts`
 
 ```ts
-import { defineConfig } from '@fcss/cli';
+import { defineConfig } from '@functionalcss/cli';
 
 export default defineConfig({
   content: ['src/**/*.{ts,tsx,html}'],
@@ -65,11 +65,11 @@ export default defineConfig({
 });
 ```
 
-### Via `@fcss/next`
+### Via `@functionalcss/next`
 
 ```ts
 // next.config.ts
-import { withFcss } from '@fcss/next';
+import { withFcss } from '@functionalcss/next';
 
 export default withFcss({
   fcss: {
@@ -94,12 +94,12 @@ npx fcss purge --output dist/fcss.purged.css
 ## Purging with PostCSS
 
 ```bash
-npm install -D @fcss/postcss
+npm install -D @functionalcss/postcss
 ```
 
 ```js
 // postcss.config.js
-const { fcssPlugin } = require('@fcss/postcss');
+const { fcssPlugin } = require('@functionalcss/postcss');
 
 module.exports = {
   plugins: [
@@ -113,11 +113,11 @@ module.exports = {
 
 ## Purging with Vite
 
-The `@fcss/vite` plugin runs the purge step automatically on `vite build`:
+The `@functionalcss/vite` plugin runs the purge step automatically on `vite build`:
 
 ```ts
 // vite.config.ts
-import { fcss } from '@fcss/vite';
+import { fcss } from '@functionalcss/vite';
 
 export default defineConfig({
   plugins: [fcss({ content: ['src/**/*.{ts,tsx}'] })],

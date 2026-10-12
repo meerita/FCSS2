@@ -12,7 +12,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FCSS Zed Validation</title>
-    <link rel="stylesheet" href="node_modules/@fcss/core/dist/full.css" />
+    <link rel="stylesheet" href="node_modules/@functionalcss/core/dist/full.css" />
   </head>
   <body>
     <!--
@@ -42,7 +42,7 @@
 
       <!--
         DIAGNOSTIC: fcss/unknown-property
-        `flux-capacitor` is not a known CSS property in @fcss/core.
+        `flux-capacitor` is not a known CSS property in @functionalcss/core.
         Expected: error diagnostic on this class.
       -->
       <div class="flux-capacitor--88">Unknown property diagnostic</div>
@@ -62,10 +62,10 @@
       <div class="display--flex:hover:focus-visible">Invalid condition chain diagnostic</div>
 
       <!--
-        NOTE: fcss/deprecated-class — not triggerable with current @fcss/core manifest.
+        NOTE: fcss/deprecated-class — not triggerable with current @functionalcss/core manifest.
         The current manifest contains no deprecated entries. This diagnostic code is fully
-        implemented in @fcss/language-service and tested with fixture manifests; it will
-        surface when @fcss/core introduces deprecated class aliases.
+        implemented in @functionalcss/language-service and tested with fixture manifests; it will
+        surface when @functionalcss/core introduces deprecated class aliases.
       -->
     </div>
   </body>

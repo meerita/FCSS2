@@ -1,5 +1,5 @@
 {
-  "name": "@fcss/vite",
+  "name": "@functionalcss/vite",
   "version": "0.0.0",
   "private": false,
   "type": "module",
@@ -31,8 +31,8 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@fcss/postcss": "workspace:*",
-    "@fcss/scanner": "workspace:*",
+    "@functionalcss/postcss": "workspace:*",
+    "@functionalcss/scanner": "workspace:*",
     "jiti": "^2.0.0",
     "postcss": "^8.4.0"
   },
@@ -40,7 +40,7 @@
     "vite": "^5.0.0 || ^6.0.0"
   },
   "devDependencies": {
-    "@fcss/core": "workspace:*",
+    "@functionalcss/core": "workspace:*",
     "@playwright/test": "^1.45.0",
     "@types/node": "^22.0.0",
     "typescript": "catalog:",

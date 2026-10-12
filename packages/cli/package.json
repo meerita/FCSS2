@@ -1,5 +1,5 @@
 {
-  "name": "@fcss/cli",
+  "name": "@functionalcss/cli",
   "version": "0.0.0",
   "private": false,
   "type": "module",
@@ -33,15 +33,15 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@fcss/generator": "workspace:*",
-    "@fcss/scanner": "workspace:*",
-    "@fcss/spec": "workspace:*",
+    "@functionalcss/generator": "workspace:*",
+    "@functionalcss/scanner": "workspace:*",
+    "@functionalcss/spec": "workspace:*",
     "commander": "^12.0.0",
     "jiti": "^2.0.0",
     "postcss": "^8.4.0"
   },
   "devDependencies": {
-    "@fcss/postcss": "workspace:*",
+    "@functionalcss/postcss": "workspace:*",
     "@types/node": "^22.0.0",
     "typescript": "catalog:",
     "vitest": "catalog:"

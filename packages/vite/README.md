@@ -1,11 +1,11 @@
 <!--
 @file packages/vite/README.md
-@description @fcss/vite plugin documentation — installation, configuration, and usage guide.
+@description @functionalcss/vite plugin documentation — installation, configuration, and usage guide.
 @layer docs
 @created Diego Lafuente <diego.lafuente@cognativinc.com>
 -->
 
-# @fcss/vite
+# @functionalcss/vite
 
 Vite plugin for [FCSS](https://github.com/cognativinc/fcss) — adds production CSS purging and development dynamic-fragment warnings for React+Vite projects.
 
@@ -19,7 +19,7 @@ Vite plugin for [FCSS](https://github.com/cognativinc/fcss) — adds production 
 ## Installation
 
 ```bash
-npm install @fcss/core @fcss/vite -D
+npm install @functionalcss/core @functionalcss/vite -D
 ```
 
 ## Setup
@@ -29,7 +29,7 @@ npm install @fcss/core @fcss/vite -D
 ```ts
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import { fcss } from '@fcss/vite';
+import { fcss } from '@functionalcss/vite';
 
 export default defineConfig({
   plugins: [react(), fcss()],
@@ -39,7 +39,7 @@ export default defineConfig({
 ### `fcss.config.ts`
 
 ```ts
-import type { FcssViteConfig } from '@fcss/vite';
+import type { FcssViteConfig } from '@functionalcss/vite';
 
 const config: FcssViteConfig = {
   content: ['src/**/*.{ts,tsx}', '!node_modules/**'],
@@ -51,7 +51,7 @@ export default config;
 ### `src/main.tsx`
 
 ```tsx
-import '@fcss/core/full.css';
+import '@functionalcss/core/full.css';
 ```
 
 ## Options
@@ -100,10 +100,10 @@ const buttonVariant: Record<'primary' | 'ghost', string> = {
 When `vite build` runs, the plugin logs a purge summary:
 
 ```
-[@fcss/postcss] Purge: 17/326313 selectors retained (326296 removed, 100.0% reduction, ...)
+[@functionalcss/postcss] Purge: 17/326313 selectors retained (326296 removed, 100.0% reduction, ...)
 ```
 
 ## Peer dependencies
 
 - `vite ^5.0.0 || ^6.0.0`
-- `@fcss/core` (for the CSS and manifest)
+- `@functionalcss/core` (for the CSS and manifest)

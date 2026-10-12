@@ -6,17 +6,17 @@ This guide covers moving a project from the legacy TFCSSF repository to FCSS 1.0
 
 | Area                  | Legacy (TFCSSF)                       | FCSS 1.0                                    |
 | --------------------- | ------------------------------------- | ------------------------------------------- |
-| Package name          | `tfcssf` / private package            | `@fcss/core` on npm                         |
-| Installation          | Manual file copy                      | `npm install @fcss/core`                    |
-| CSS import            | Copy files to project                 | `import '@fcss/core/fcss.css'`              |
+| Package name          | `tfcssf` / private package            | `@functionalcss/core` on npm                         |
+| Installation          | Manual file copy                      | `npm install @functionalcss/core`                    |
+| CSS import            | Copy files to project                 | `import '@functionalcss/core/fcss.css'`              |
 | Breakpoints           | Mobile-first with `max-width` on `sm` | All breakpoints use `min-width`             |
 | Custom classes        | `c-` prefix in `custom.css`           | Same                                        |
 | Class syntax          | `property--value`                     | Same                                        |
 | Hover                 | `:hover` suffix                       | `:hover` suffix (unchanged)                 |
 | ARIA states           | Not generated                         | `:aria-attribute:value` suffix              |
-| CLI                   | None                                  | `@fcss/cli`                                 |
-| Purging               | Manual PurgeCSS config                | `@fcss/postcss` or `fcss purge`             |
-| Framework integration | Manual                                | `@fcss/next`, `@fcss/angular`, `@fcss/vite` |
+| CLI                   | None                                  | `@functionalcss/cli`                                 |
+| Purging               | Manual PurgeCSS config                | `@functionalcss/postcss` or `fcss purge`             |
+| Framework integration | Manual                                | `@functionalcss/next`, `@functionalcss/angular`, `@functionalcss/vite` |
 
 ## Automated migration
 
@@ -70,8 +70,8 @@ Any class flagged as unknown should be checked against:
 1. **Install FCSS 1.0**
 
    ```bash
-   npm install @fcss/core
-   npm install -D @fcss/cli
+   npm install @functionalcss/core
+   npm install -D @functionalcss/cli
    ```
 
 2. **Replace the CSS import**
@@ -83,7 +83,7 @@ Any class flagged as unknown should be checked against:
    - import './styles/hovers.css';
    - import './styles/focus.css';
    - import './styles/sm.css';
-   + import '@fcss/core/fcss.css';
+   + import '@functionalcss/core/fcss.css';
    ```
 
 3. **Move custom classes**

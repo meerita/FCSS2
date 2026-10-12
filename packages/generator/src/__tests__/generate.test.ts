@@ -5,7 +5,7 @@
 
 import { describe, it, expect } from 'vitest';
 import { generate } from '../generate.js';
-import type { FcssPropertyDefinition } from '@fcss/spec';
+import type { FcssPropertyDefinition } from '@functionalcss/spec';
 
 describe('generate() — basic output', () => {
   it('returns rules and manifest arrays', () => {

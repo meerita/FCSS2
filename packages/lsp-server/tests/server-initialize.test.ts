@@ -9,7 +9,7 @@ import * as os from 'node:os';
 import * as path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { findManifestPath } from '../src/manifest-locator';
-import { loadManifestFromPath, createManifestIndex } from '@fcss/language-service';
+import { loadManifestFromPath, createManifestIndex } from '@functionalcss/language-service';
 
 const FIXTURE_MANIFEST = [
   {
@@ -41,7 +41,7 @@ afterAll(() => {
 function createFixtureWorkspace(): { dir: string; uri: string; manifestPath: string } {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'fcss-init-test-'));
   tmpdirs.push(dir);
-  const manifestDir = path.join(dir, 'node_modules', '@fcss', 'core', 'dist');
+  const manifestDir = path.join(dir, 'node_modules', '@functionalcss', 'core', 'dist');
   fs.mkdirSync(manifestDir, { recursive: true });
   const manifestPath = path.join(manifestDir, 'manifest.json');
   fs.writeFileSync(manifestPath, JSON.stringify(FIXTURE_MANIFEST));

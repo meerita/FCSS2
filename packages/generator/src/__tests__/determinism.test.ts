@@ -5,7 +5,7 @@
 
 import { describe, it, expect } from 'vitest';
 import { generate } from '../generate.js';
-import { FCSS_PROPERTIES } from '@fcss/spec';
+import { FCSS_PROPERTIES } from '@functionalcss/spec';
 
 describe('generate() is deterministic', () => {
   it('produces byte-identical output on two successive calls', () => {

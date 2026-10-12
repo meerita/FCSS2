@@ -3,8 +3,8 @@
 // @layer scripts
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 
-import { generate, buildBundles, buildStatistics, GENERATED_FILE_HEADER } from '@fcss/generator';
-import { FCSS_COLOR_VALUES } from '@fcss/spec';
+import { generate, buildBundles, buildStatistics, GENERATED_FILE_HEADER } from '@functionalcss/generator';
+import { FCSS_COLOR_VALUES } from '@functionalcss/spec';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -74,7 +74,7 @@ p, h1, h2, h3, h4, h5, h6 { overflow-wrap: break-word; }
 `;
 
 async function main(): Promise<void> {
-  console.log('Generating @fcss/core distribution…\n');
+  console.log('Generating @functionalcss/core distribution…\n');
   fs.mkdirSync(distDir, { recursive: true });
 
   const result = generate();

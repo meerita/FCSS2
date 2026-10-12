@@ -1,9 +1,9 @@
 {
-  "name": "@fcss/astro",
+  "name": "@functionalcss/astro",
   "version": "0.0.0",
   "private": false,
   "type": "module",
-  "description": "FCSS Astro integration — registers @fcss/vite's plugin for production purge and dev diagnostics",
+  "description": "FCSS Astro integration — registers @functionalcss/vite's plugin for production purge and dev diagnostics",
   "keywords": [
     "css",
     "utility",
@@ -31,13 +31,13 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@fcss/vite": "workspace:*"
+    "@functionalcss/vite": "workspace:*"
   },
   "peerDependencies": {
     "astro": "^7.0.0"
   },
   "devDependencies": {
-    "@fcss/core": "workspace:*",
+    "@functionalcss/core": "workspace:*",
     "@types/node": "^22.0.0",
     "astro": "^7.0.0",
     "typescript": "catalog:",

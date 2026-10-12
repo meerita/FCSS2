@@ -14,7 +14,7 @@
     "fmt": "prettier --write .",
     "fmt:check": "prettier --check .",
     "typecheck": "pnpm -r run typecheck",
-    "generate": "pnpm --filter @fcss/generator run generate",
+    "generate": "pnpm --filter @functionalcss/generator run generate",
     "changeset": "changeset",
     "version": "changeset version",
     "release": "pnpm build && changeset publish"

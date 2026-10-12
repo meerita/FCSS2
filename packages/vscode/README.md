@@ -7,7 +7,7 @@
 
 # FCSS IntelliSense
 
-VS Code extension for [FCSS](https://github.com/cognativinc/fcss) — provides completions, hover, and diagnostics powered by the `@fcss/core` manifest.
+VS Code extension for [FCSS](https://github.com/cognativinc/fcss) — provides completions, hover, and diagnostics powered by the `@functionalcss/core` manifest.
 
 ## Features
 
@@ -18,13 +18,13 @@ VS Code extension for [FCSS](https://github.com/cognativinc/fcss) — provides c
 
 ## Requirements
 
-Install `@fcss/core` in your project:
+Install `@functionalcss/core` in your project:
 
 ```sh
-npm install @fcss/core
+npm install @functionalcss/core
 ```
 
-The extension automatically loads the manifest from `node_modules/@fcss/core/dist/manifest.json` in any workspace folder. No build step is required.
+The extension automatically loads the manifest from `node_modules/@functionalcss/core/dist/manifest.json` in any workspace folder. No build step is required.
 
 ## Supported file types
 
@@ -35,7 +35,7 @@ The extension automatically loads the manifest from `node_modules/@fcss/core/dis
 
 ## Usage
 
-Open any supported file in a workspace containing `@fcss/core`. The status bar shows "FCSS (N utilities)" when active.
+Open any supported file in a workspace containing `@functionalcss/core`. The status bar shows "FCSS (N utilities)" when active.
 
 Type a partial FCSS class name inside a `class` or `className` attribute to trigger completions.
 
@@ -54,4 +54,4 @@ Examples:
 
 ## Manifest watch
 
-The extension watches `manifest.json` for changes and reloads automatically when you rebuild `@fcss/core`.
+The extension watches `manifest.json` for changes and reloads automatically when you rebuild `@functionalcss/core`.

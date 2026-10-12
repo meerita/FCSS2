@@ -40,14 +40,14 @@ Mobile-first `min-width` strategy throughout.
 ## Installation
 
 ```sh
-npm install @fcss/core
+npm install @functionalcss/core
 ```
 
 Then import the full library and add the purge plugin to your build:
 
 ```js
 // vite.config.ts
-import { fcss } from '@fcss/vite';
+import { fcss } from '@functionalcss/vite';
 
 export default {
   plugins: [fcss()],
@@ -58,7 +58,7 @@ Or with Next.js:
 
 ```js
 // next.config.js
-const { withFcss } = require('@fcss/next');
+const { withFcss } = require('@functionalcss/next');
 module.exports = withFcss({});
 ```
 
@@ -77,18 +77,18 @@ npx fcss explain     # explain what a class name compiles to
 
 | Package                  | Description                                            | Visibility  |
 | ------------------------ | ------------------------------------------------------ | ----------- |
-| `@fcss/core`             | Full generated CSS library + manifest                  | public      |
-| `@fcss/cli`              | `fcss` command-line tool                               | public      |
-| `@fcss/postcss`          | PostCSS purge plugin                                   | public      |
-| `@fcss/vite`             | Vite integration                                       | public      |
-| `@fcss/next`             | Next.js integration                                    | public      |
-| `@fcss/angular`          | Angular integration                                    | public      |
-| `@fcss/eslint-plugin`    | ESLint rules for FCSS class names                      | public      |
-| `@fcss/spec`             | Machine-readable CSS property specification (internal) | private     |
-| `@fcss/generator`        | Deterministic CSS generator (internal)                 | private     |
-| `@fcss/scanner`          | Source code scanner for purge (internal)               | private     |
-| `@fcss/language-service` | IntelliSense and diagnostics (internal)                | private     |
-| `@fcss/vscode`           | VS Code extension                                      | Marketplace |
+| `@functionalcss/core`             | Full generated CSS library + manifest                  | public      |
+| `@functionalcss/cli`              | `fcss` command-line tool                               | public      |
+| `@functionalcss/postcss`          | PostCSS purge plugin                                   | public      |
+| `@functionalcss/vite`             | Vite integration                                       | public      |
+| `@functionalcss/next`             | Next.js integration                                    | public      |
+| `@functionalcss/angular`          | Angular integration                                    | public      |
+| `@functionalcss/eslint-plugin`    | ESLint rules for FCSS class names                      | public      |
+| `@functionalcss/spec`             | Machine-readable CSS property specification (internal) | private     |
+| `@functionalcss/generator`        | Deterministic CSS generator (internal)                 | private     |
+| `@functionalcss/scanner`          | Source code scanner for purge (internal)               | private     |
+| `@functionalcss/language-service` | IntelliSense and diagnostics (internal)                | private     |
+| `@functionalcss/vscode`           | VS Code extension                                      | Marketplace |
 
 ## Custom classes
 

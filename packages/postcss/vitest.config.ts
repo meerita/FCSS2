@@ -1,5 +1,5 @@
 // @file packages/postcss/vitest.config.ts
-// @description Vitest configuration for @fcss/postcss integration tests.
+// @description Vitest configuration for @functionalcss/postcss integration tests.
 // @layer tools
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 

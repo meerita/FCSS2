@@ -1,5 +1,5 @@
 // @file packages/language-service/vitest.config.ts
-// @description Vitest configuration for @fcss/language-service tests.
+// @description Vitest configuration for @functionalcss/language-service tests.
 // @layer tools
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 

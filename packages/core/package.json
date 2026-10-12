@@ -1,5 +1,5 @@
 {
-  "name": "@fcss/core",
+  "name": "@functionalcss/core",
   "version": "0.0.0",
   "private": false,
   "type": "module",
@@ -56,10 +56,10 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@fcss/spec": "workspace:*"
+    "@functionalcss/spec": "workspace:*"
   },
   "devDependencies": {
-    "@fcss/generator": "workspace:*",
+    "@functionalcss/generator": "workspace:*",
     "@types/node": "^22.0.0",
     "postcss": "^8.4.0",
     "typescript": "catalog:",

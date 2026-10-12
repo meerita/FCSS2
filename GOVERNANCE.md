@@ -16,7 +16,7 @@ Maintainer responsibilities:
 - Review and merge pull requests within a reasonable time (target: 5 business days).
 - Triage security reports per [SECURITY.md](SECURITY.md).
 - Tag and publish releases after consensus.
-- Keep the specification (`@fcss/spec`) authoritative — all breaking changes go through an ADR.
+- Keep the specification (`@functionalcss/spec`) authoritative — all breaking changes go through an ADR.
 - Enforce the code of conduct.
 
 ## Review requirements
@@ -39,7 +39,7 @@ Maintainer responsibilities:
 
 ## Specification changes
 
-The CSS property specification (`@fcss/spec`) defines the observable contract of the library.
+The CSS property specification (`@functionalcss/spec`) defines the observable contract of the library.
 Changes that alter the set of emitted classes or selector patterns are **breaking** regardless of
 their apparent scope and require:
 

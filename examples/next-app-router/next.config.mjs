@@ -3,7 +3,7 @@
 // @layer config
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 
-import { withFcss } from '@fcss/next';
+import { withFcss } from '@functionalcss/next';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {};

@@ -1,11 +1,11 @@
 <!--
 @file packages/angular/README.md
-@description @fcss/angular integration guide for Angular standalone and workspace projects.
+@description @functionalcss/angular integration guide for Angular standalone and workspace projects.
 @layer docs
 @created Diego Lafuente <diego.lafuente@cognativinc.com>
 -->
 
-# @fcss/angular
+# @functionalcss/angular
 
 Official Angular integration for [FCSS](../../README.md) — one `ng add` command installs
 FCSS, adds the global stylesheet, creates `fcss.config.ts`, and configures the production
@@ -19,28 +19,28 @@ PostCSS purge pipeline.
 ## Installation
 
 ```bash
-ng add @fcss/angular
+ng add @functionalcss/angular
 ```
 
 For a specific project in a multi-project workspace:
 
 ```bash
-ng add @fcss/angular --project my-app
+ng add @functionalcss/angular --project my-app
 ```
 
 Skip the package manager install step:
 
 ```bash
-ng add @fcss/angular --skip-install
+ng add @functionalcss/angular --skip-install
 ```
 
 ## What the schematic does
 
 | Action                                                                         | Detail                         |
 | ------------------------------------------------------------------------------ | ------------------------------ |
-| Adds `@fcss/core` to `dependencies`                                            | Global CSS library             |
-| Adds `@fcss/postcss` to `devDependencies`                                      | PostCSS purge plugin           |
-| Prepends `node_modules/@fcss/core/dist/full.css` to `styles` in `angular.json` | Global import                  |
+| Adds `@functionalcss/core` to `dependencies`                                            | Global CSS library             |
+| Adds `@functionalcss/postcss` to `devDependencies`                                      | PostCSS purge plugin           |
+| Prepends `node_modules/@functionalcss/core/dist/full.css` to `styles` in `angular.json` | Global import                  |
 | Creates `fcss.config.ts`                                                       | Scanner configuration          |
 | Creates `postcss.config.mjs`                                                   | Production purge configuration |
 
@@ -101,7 +101,7 @@ Use `[ngClass]` with a string key for FCSS classes that contain special characte
 Edit `fcss.config.ts` to customise which files the scanner analyses:
 
 ```typescript
-import type { FcssAngularConfig } from '@fcss/angular';
+import type { FcssAngularConfig } from '@functionalcss/angular';
 
 const config: FcssAngularConfig = {
   content: [
@@ -119,14 +119,14 @@ The schematic creates `postcss.config.mjs` at the workspace root:
 
 ```js
 import { createRequire } from 'module';
-import fcssPostcss from '@fcss/postcss';
+import fcssPostcss from '@functionalcss/postcss';
 
 const require = createRequire(import.meta.url);
 
 export default {
   plugins: [
     fcssPostcss({
-      manifest: require.resolve('@fcss/core/dist/manifest.json'),
+      manifest: require.resolve('@functionalcss/core/dist/manifest.json'),
       content: ['src/**/*.{ts,html}'],
       report: true,
     }),
@@ -152,7 +152,7 @@ specified with `--project`. Other projects are untouched:
 
 ```bash
 # Only app1 is configured; app2 is unmodified
-ng add @fcss/angular --project app1
+ng add @functionalcss/angular --project app1
 ```
 
 ## SSR

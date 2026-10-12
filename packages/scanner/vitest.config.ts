@@ -1,5 +1,5 @@
 // @file packages/scanner/vitest.config.ts
-// @description Vitest configuration for @fcss/scanner tests.
+// @description Vitest configuration for @functionalcss/scanner tests.
 // @layer tools
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 

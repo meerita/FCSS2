@@ -3,7 +3,7 @@
 // @layer tools
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 
-import type { FcssNumericBehavior } from '@fcss/spec';
+import type { FcssNumericBehavior } from '@functionalcss/spec';
 
 export function buildDeclaration(
   property: string,

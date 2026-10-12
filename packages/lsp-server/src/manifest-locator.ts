@@ -1,5 +1,5 @@
 // @file packages/lsp-server/src/manifest-locator.ts
-// @description Locates node_modules/@fcss/core/dist/manifest.json from LSP workspace root URIs.
+// @description Locates node_modules/@functionalcss/core/dist/manifest.json from LSP workspace root URIs.
 // @layer tools
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 
@@ -7,7 +7,7 @@ import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { URL } from 'node:url';
 
-const MANIFEST_REL = path.join('node_modules', '@fcss', 'core', 'dist', 'manifest.json');
+const MANIFEST_REL = path.join('node_modules', '@functionalcss', 'core', 'dist', 'manifest.json');
 
 export function findManifestPath(workspaceFolderUris: string[]): string | undefined {
   for (const uri of workspaceFolderUris) {

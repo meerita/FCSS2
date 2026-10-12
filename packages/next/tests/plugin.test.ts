@@ -100,7 +100,7 @@ describe('loadFcssConfig', () => {
 
 describe('resolveManifestPath', () => {
   it('finds manifest in direct node_modules', () => {
-    const manifestDir = path.join(tmpDir, 'node_modules/@fcss/core/dist');
+    const manifestDir = path.join(tmpDir, 'node_modules/@functionalcss/core/dist');
     fs.mkdirSync(manifestDir, { recursive: true });
     const manifestFile = path.join(manifestDir, 'manifest.json');
     fs.writeFileSync(manifestFile, '[]', 'utf8');
@@ -114,7 +114,7 @@ describe('resolveManifestPath', () => {
     const childDir = path.join(parentDir, 'child');
     fs.mkdirSync(childDir, { recursive: true });
 
-    const manifestDir = path.join(parentDir, 'node_modules/@fcss/core/dist');
+    const manifestDir = path.join(parentDir, 'node_modules/@functionalcss/core/dist');
     fs.mkdirSync(manifestDir, { recursive: true });
     const manifestFile = path.join(manifestDir, 'manifest.json');
     fs.writeFileSync(manifestFile, '[]', 'utf8');
@@ -124,6 +124,6 @@ describe('resolveManifestPath', () => {
   });
 
   it('throws when manifest is not found', () => {
-    expect(() => resolveManifestPath(tmpDir)).toThrow('@fcss/next');
+    expect(() => resolveManifestPath(tmpDir)).toThrow('@functionalcss/next');
   });
 });

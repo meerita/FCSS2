@@ -10,14 +10,14 @@ import { execSync } from 'node:child_process';
 export type Framework = 'react' | 'next' | 'angular' | 'astro' | 'none';
 export type PackageManager = 'pnpm' | 'yarn' | 'npm';
 
-const CONFIG_TEMPLATE = `import { defineConfig } from '@fcss/cli';
+const CONFIG_TEMPLATE = `import { defineConfig } from '@functionalcss/cli';
 
 export default defineConfig({
   content: ['./src/**/*.{html,js,jsx,ts,tsx}'],
 });
 `;
 
-const CSS_IMPORT = `@import '@fcss/core';`;
+const CSS_IMPORT = `@import '@functionalcss/core';`;
 
 function detectPackageManager(cwd: string): PackageManager {
   if (fs.existsSync(path.join(cwd, 'pnpm-lock.yaml'))) return 'pnpm';
@@ -81,11 +81,11 @@ export async function runInit(options: InitOptions = {}): Promise<InitResult> {
     result.skippedFiles.push('fcss.config.ts (already exists)');
   }
 
-  const packages = ['@fcss/core', '@fcss/cli'];
-  if (framework === 'react' || framework === 'next') packages.push('@fcss/vite');
-  if (framework === 'next') packages.push('@fcss/next');
-  if (framework === 'angular') packages.push('@fcss/angular');
-  if (framework === 'astro') packages.push('@fcss/astro');
+  const packages = ['@functionalcss/core', '@functionalcss/cli'];
+  if (framework === 'react' || framework === 'next') packages.push('@functionalcss/vite');
+  if (framework === 'next') packages.push('@functionalcss/next');
+  if (framework === 'angular') packages.push('@functionalcss/angular');
+  if (framework === 'astro') packages.push('@functionalcss/astro');
 
   if (!options.yes) {
     console.log(`[fcss] Will install: ${packages.join(', ')}`);
@@ -117,7 +117,7 @@ export async function runInit(options: InitOptions = {}): Promise<InitResult> {
     const entryPath = path.join(cwd, rel);
     if (!fs.existsSync(entryPath)) continue;
     const content = fs.readFileSync(entryPath, 'utf8');
-    if (content.includes('@fcss/core')) {
+    if (content.includes('@functionalcss/core')) {
       result.skippedFiles.push(`${rel} (FCSS import already present)`);
       break;
     }

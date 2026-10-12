@@ -1,5 +1,5 @@
 {
-  "name": "@fcss/generator",
+  "name": "@functionalcss/generator",
   "version": "0.0.0",
   "private": false,
   "type": "module",
@@ -33,7 +33,7 @@
     "generate": "node dist/cli.js"
   },
   "dependencies": {
-    "@fcss/spec": "workspace:*",
+    "@functionalcss/spec": "workspace:*",
     "postcss": "^8.4.0"
   },
   "devDependencies": {

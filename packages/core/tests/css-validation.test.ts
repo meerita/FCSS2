@@ -1,5 +1,5 @@
 // @file packages/core/tests/css-validation.test.ts
-// @description CSS validation tests for @fcss/core generated dist files.
+// @description CSS validation tests for @functionalcss/core generated dist files.
 // @layer tests
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 

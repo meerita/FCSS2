@@ -44,9 +44,9 @@ You will receive an acknowledgement within **48 hours** and a status update with
 
 In-scope:
 
-- All packages under the `@fcss` npm scope.
+- All packages under the `@functionalcss` npm scope.
 - The `fcss` CLI tool.
-- The VS Code extension (`@fcss/vscode`).
+- The VS Code extension (`@functionalcss/vscode`).
 
 Out-of-scope:
 

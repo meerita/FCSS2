@@ -1,5 +1,5 @@
 // @file packages/generator/vitest.config.ts
-// @description Vitest configuration for @fcss/generator unit tests.
+// @description Vitest configuration for @functionalcss/generator unit tests.
 // @layer tools
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 

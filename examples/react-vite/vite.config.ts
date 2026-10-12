@@ -5,7 +5,7 @@
 
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import { fcss } from '@fcss/vite';
+import { fcss } from '@functionalcss/vite';
 
 export default defineConfig({
   plugins: [react(), fcss()],

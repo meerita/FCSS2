@@ -68,7 +68,7 @@ importers:
       '@angular/router':
         specifier: ^18.0.0
         version: 18.2.14(@angular/common@18.2.14(@angular/core@18.2.14(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.14(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@18.2.14(@angular/animations@18.2.14(@angular/core@18.2.14(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.14(@angular/core@18.2.14(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.14(rxjs@7.8.1)(zone.js@0.14.10)))(rxjs@7.8.1)
-      '@fcss/core':
+      '@functionalcss/core':
         specifier: workspace:*
         version: link:../../../packages/core
       rxjs:
@@ -90,7 +90,7 @@ importers:
       '@angular/compiler-cli':
         specifier: ^18.0.0
         version: 18.2.14(@angular/compiler@18.2.14(@angular/core@18.2.14(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4)
-      '@fcss/postcss':
+      '@functionalcss/postcss':
         specifier: workspace:*
         version: link:../../../packages/postcss
       '@playwright/test':
@@ -132,7 +132,7 @@ importers:
       '@angular/router':
         specifier: ^18.0.0
         version: 18.2.14(@angular/common@18.2.14(@angular/core@18.2.14(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.14(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@18.2.14(@angular/animations@18.2.14(@angular/core@18.2.14(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.14(@angular/core@18.2.14(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.14(rxjs@7.8.1)(zone.js@0.14.10)))(rxjs@7.8.1)
-      '@fcss/core':
+      '@functionalcss/core':
         specifier: workspace:*
         version: link:../../../packages/core
       rxjs:
@@ -154,7 +154,7 @@ importers:
       '@angular/compiler-cli':
         specifier: ^18.0.0
         version: 18.2.14(@angular/compiler@18.2.14(@angular/core@18.2.14(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4)
-      '@fcss/postcss':
+      '@functionalcss/postcss':
         specifier: workspace:*
         version: link:../../../packages/postcss
       '@types/node':
@@ -172,14 +172,14 @@ importers:
       '@astrojs/node':
         specifier: ^11.0.0
         version: 11.1.1(astro@7.2.1(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@types/node@22.20.1)(jiti@2.7.0)(less@4.2.0)(sass@1.77.6)(terser@5.31.6))
-      '@fcss/core':
+      '@functionalcss/core':
         specifier: workspace:*
         version: link:../../../packages/core
       astro:
         specifier: ^7.0.0
         version: 7.2.1(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@types/node@22.20.1)(jiti@2.7.0)(less@4.2.0)(sass@1.77.6)(terser@5.31.6)
     devDependencies:
-      '@fcss/astro':
+      '@functionalcss/astro':
         specifier: workspace:*
         version: link:../../../packages/astro
       '@playwright/test':
@@ -194,11 +194,11 @@ importers:
 
   examples/astro/static:
     dependencies:
-      '@fcss/core':
+      '@functionalcss/core':
         specifier: workspace:*
         version: link:../../../packages/core
     devDependencies:
-      '@fcss/astro':
+      '@functionalcss/astro':
         specifier: workspace:*
         version: link:../../../packages/astro
       '@playwright/test':
@@ -216,10 +216,10 @@ importers:
 
   examples/next-app-router:
     dependencies:
-      '@fcss/core':
+      '@functionalcss/core':
         specifier: workspace:*
         version: link:../../packages/core
-      '@fcss/ui':
+      '@functionalcss/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       next:
@@ -232,7 +232,7 @@ importers:
         specifier: ^18.3.0
         version: 18.3.1(react@18.3.1)
     devDependencies:
-      '@fcss/next':
+      '@functionalcss/next':
         specifier: workspace:*
         version: link:../../packages/next
       '@playwright/test':
@@ -256,7 +256,7 @@ importers:
 
   examples/next-pages-router:
     dependencies:
-      '@fcss/core':
+      '@functionalcss/core':
         specifier: workspace:*
         version: link:../../packages/core
       next:
@@ -269,7 +269,7 @@ importers:
         specifier: ^18.3.0
         version: 18.3.1(react@18.3.1)
     devDependencies:
-      '@fcss/next':
+      '@functionalcss/next':
         specifier: workspace:*
         version: link:../../packages/next
       '@playwright/test':
@@ -293,7 +293,7 @@ importers:
 
   examples/react-vite:
     dependencies:
-      '@fcss/core':
+      '@functionalcss/core':
         specifier: workspace:*
         version: link:../../packages/core
       react:
@@ -303,7 +303,7 @@ importers:
         specifier: ^18.3.0
         version: 18.3.1(react@18.3.1)
     devDependencies:
-      '@fcss/vite':
+      '@functionalcss/vite':
         specifier: workspace:*
         version: link:../../packages/vite
       '@playwright/test':
@@ -330,7 +330,7 @@ importers:
 
   examples/vanilla:
     dependencies:
-      '@fcss/core':
+      '@functionalcss/core':
         specifier: workspace:*
         version: link:../../packages/core
     devDependencies:
@@ -340,10 +340,10 @@ importers:
 
   examples/zed-validation:
     dependencies:
-      '@fcss/core':
+      '@functionalcss/core':
         specifier: workspace:*
         version: link:../../packages/core
-      '@fcss/lsp-server':
+      '@functionalcss/lsp-server':
         specifier: workspace:*
         version: link:../../packages/lsp-server
       react:
@@ -393,11 +393,11 @@ importers:
 
   packages/astro:
     dependencies:
-      '@fcss/vite':
+      '@functionalcss/vite':
         specifier: workspace:*
         version: link:../vite
     devDependencies:
-      '@fcss/core':
+      '@functionalcss/core':
         specifier: workspace:*
         version: link:../core
       '@types/node':
@@ -415,13 +415,13 @@ importers:
 
   packages/cli:
     dependencies:
-      '@fcss/generator':
+      '@functionalcss/generator':
         specifier: workspace:*
         version: link:../generator
-      '@fcss/scanner':
+      '@functionalcss/scanner':
         specifier: workspace:*
         version: link:../scanner
-      '@fcss/spec':
+      '@functionalcss/spec':
         specifier: workspace:*
         version: link:../spec
       commander:
@@ -434,7 +434,7 @@ importers:
         specifier: ^8.4.0
         version: 8.5.19
     devDependencies:
-      '@fcss/postcss':
+      '@functionalcss/postcss':
         specifier: workspace:*
         version: link:../postcss
       '@types/node':
@@ -449,11 +449,11 @@ importers:
 
   packages/core:
     dependencies:
-      '@fcss/spec':
+      '@functionalcss/spec':
         specifier: workspace:*
         version: link:../spec
     devDependencies:
-      '@fcss/generator':
+      '@functionalcss/generator':
         specifier: workspace:*
         version: link:../generator
       '@types/node':
@@ -480,7 +480,7 @@ importers:
 
   packages/generator:
     dependencies:
-      '@fcss/spec':
+      '@functionalcss/spec':
         specifier: workspace:*
         version: link:../spec
       postcss:
@@ -514,7 +514,7 @@ importers:
 
   packages/lsp-server:
     dependencies:
-      '@fcss/language-service':
+      '@functionalcss/language-service':
         specifier: workspace:*
         version: link:../language-service
       vscode-languageserver:
@@ -536,10 +536,10 @@ importers:
 
   packages/next:
     dependencies:
-      '@fcss/postcss':
+      '@functionalcss/postcss':
         specifier: workspace:*
         version: link:../postcss
-      '@fcss/scanner':
+      '@functionalcss/scanner':
         specifier: workspace:*
         version: link:../scanner
       jiti:
@@ -549,7 +549,7 @@ importers:
         specifier: ^8.4.0
         version: 8.5.19
     devDependencies:
-      '@fcss/core':
+      '@functionalcss/core':
         specifier: workspace:*
         version: link:../core
       '@playwright/test':
@@ -582,14 +582,14 @@ importers:
 
   packages/postcss:
     dependencies:
-      '@fcss/scanner':
+      '@functionalcss/scanner':
         specifier: workspace:*
         version: link:../scanner
       postcss:
         specifier: ^8.4.0
         version: 8.5.19
     devDependencies:
-      '@fcss/core':
+      '@functionalcss/core':
         specifier: workspace:*
         version: link:../core
       '@types/node':
@@ -642,10 +642,10 @@ importers:
 
   packages/vite:
     dependencies:
-      '@fcss/postcss':
+      '@functionalcss/postcss':
         specifier: workspace:*
         version: link:../postcss
-      '@fcss/scanner':
+      '@functionalcss/scanner':
         specifier: workspace:*
         version: link:../scanner
       jiti:
@@ -655,7 +655,7 @@ importers:
         specifier: ^8.4.0
         version: 8.5.19
     devDependencies:
-      '@fcss/core':
+      '@functionalcss/core':
         specifier: workspace:*
         version: link:../core
       '@playwright/test':

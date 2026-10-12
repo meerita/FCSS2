@@ -1,5 +1,5 @@
 // @file packages/vscode/vitest.config.ts
-// @description Vitest configuration for @fcss/vscode tests.
+// @description Vitest configuration for @functionalcss/vscode tests.
 // @layer tools
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 

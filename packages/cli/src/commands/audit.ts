@@ -5,8 +5,8 @@
 
 import * as fs from 'node:fs';
 import * as path from 'node:path';
-import { scan } from '@fcss/scanner';
-import { FCSS_PROPERTIES } from '@fcss/spec';
+import { scan } from '@functionalcss/scanner';
+import { FCSS_PROPERTIES } from '@functionalcss/spec';
 import type { FcssConfig } from '../config/schema.js';
 
 export interface AuditFinding {
@@ -22,7 +22,7 @@ export interface AuditResult {
 }
 
 export async function runAudit(config: FcssConfig, cwd = process.cwd()): Promise<AuditResult> {
-  const manifestPath = path.resolve(cwd, 'node_modules/@fcss/core/dist/manifest.json');
+  const manifestPath = path.resolve(cwd, 'node_modules/@functionalcss/core/dist/manifest.json');
   if (!fs.existsSync(manifestPath)) {
     return {
       findings: [
@@ -30,7 +30,7 @@ export async function runAudit(config: FcssConfig, cwd = process.cwd()): Promise
           type: 'missing-config',
           severity: 'error',
           message:
-            'Cannot audit: @fcss/core manifest not found. Run "npm install @fcss/core" first.',
+            'Cannot audit: @functionalcss/core manifest not found. Run "npm install @functionalcss/core" first.',
         },
       ],
       scannedFiles: 0,

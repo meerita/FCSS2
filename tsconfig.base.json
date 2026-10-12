@@ -19,8 +19,8 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@fcss/spec": ["packages/spec/src/index.ts"],
-      "@fcss/language-service": ["packages/language-service/src/index.ts"]
+      "@functionalcss/spec": ["packages/spec/src/index.ts"],
+      "@functionalcss/language-service": ["packages/language-service/src/index.ts"]
     }
   }
 }

@@ -1,23 +1,23 @@
 # Angular Guide
 
-`@fcss/angular` provides an `ng-add` schematic that configures FCSS in an Angular project automatically.
+`@functionalcss/angular` provides an `ng-add` schematic that configures FCSS in an Angular project automatically.
 
 ## Automatic setup (recommended)
 
 ```bash
-ng add @fcss/angular
+ng add @functionalcss/angular
 ```
 
 The schematic:
 
-1. Installs `@fcss/core` as a dependency
-2. Adds `@fcss/core/fcss.css` to `angular.json` styles
+1. Installs `@functionalcss/core` as a dependency
+2. Adds `@functionalcss/core/fcss.css` to `angular.json` styles
 3. Optionally generates an `fcss.config.ts`
 
 ## Manual setup
 
 ```bash
-npm install @fcss/core
+npm install @functionalcss/core
 ```
 
 Add the CSS to your `angular.json`:
@@ -29,7 +29,7 @@ Add the CSS to your `angular.json`:
       "architect": {
         "build": {
           "options": {
-            "styles": ["node_modules/@fcss/core/fcss.css", "src/styles.css"]
+            "styles": ["node_modules/@functionalcss/core/fcss.css", "src/styles.css"]
           }
         }
       }
@@ -133,12 +133,12 @@ FCSS ARIA state classes pair naturally with Angular's accessibility patterns:
 Add PostCSS purging to your Angular build. The recommended approach is the CLI:
 
 ```bash
-npm install -D @fcss/cli @fcss/postcss
+npm install -D @functionalcss/cli @functionalcss/postcss
 ```
 
 ```ts
 // fcss.config.ts
-import { defineConfig } from '@fcss/cli';
+import { defineConfig } from '@functionalcss/cli';
 
 export default defineConfig({
   content: ['src/**/*.{ts,html}'],
@@ -161,7 +161,7 @@ Or integrate via a custom PostCSS configuration in your Angular project:
 
 ```js
 // postcss.config.js (at project root)
-const { fcssPlugin } = require('@fcss/postcss');
+const { fcssPlugin } = require('@functionalcss/postcss');
 
 module.exports = {
   plugins: [
@@ -175,4 +175,4 @@ module.exports = {
 
 ## IntelliSense
 
-Install `@fcss/vscode` from the VS Code marketplace for autocompletion in Angular template files (`.html`).
+Install `@functionalcss/vscode` from the VS Code marketplace for autocompletion in Angular template files (`.html`).

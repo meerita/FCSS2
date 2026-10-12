@@ -54,7 +54,7 @@ describe('runInit', () => {
 
     await runInit({ cwd: tmpDir });
     const content = fs.readFileSync(path.join(srcDir, 'main.ts'), 'utf8');
-    expect(content).toContain('@fcss/core');
+    expect(content).toContain('@functionalcss/core');
   });
 
   it('does not duplicate CSS import on second run', async () => {
@@ -67,12 +67,12 @@ describe('runInit', () => {
     await runInit({ cwd: tmpDir });
     const afterSecond = fs.readFileSync(path.join(srcDir, 'main.ts'), 'utf8');
 
-    const importCount = (afterSecond.match(/@fcss\/core/g) ?? []).length;
+    const importCount = (afterSecond.match(/@functionalcss\/core/g) ?? []).length;
     expect(importCount).toBe(1);
     expect(afterFirst).toBe(afterSecond);
   });
 
-  it('detects astro and plans to install @fcss/core + @fcss/astro, not @fcss/vite', async () => {
+  it('detects astro and plans to install @functionalcss/core + @functionalcss/astro, not @functionalcss/vite', async () => {
     fs.writeFileSync(
       path.join(tmpDir, 'package.json'),
       JSON.stringify({ name: 'test-project', dependencies: { astro: '^7.0.0' } }),
@@ -86,8 +86,8 @@ describe('runInit', () => {
     const frameworkLine = printedLines.find((line) => line.includes('[fcss] Framework:'));
     const installLine = printedLines.find((line) => line.includes('[fcss] Will install:'));
     expect(frameworkLine).toContain('astro');
-    expect(installLine).toContain('@fcss/astro');
-    expect(installLine).not.toContain('@fcss/vite');
+    expect(installLine).toContain('@functionalcss/astro');
+    expect(installLine).not.toContain('@functionalcss/vite');
 
     logSpy.mockRestore();
   });
@@ -113,7 +113,7 @@ describe('runInit', () => {
     logSpy.mockRestore();
   });
 
-  it('explicit --framework astro installs @fcss/astro regardless of detected dependencies', async () => {
+  it('explicit --framework astro installs @functionalcss/astro regardless of detected dependencies', async () => {
     const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
 
     await runInit({ cwd: tmpDir, framework: 'astro' });
@@ -121,7 +121,7 @@ describe('runInit', () => {
     const installLine = logSpy.mock.calls
       .map((call) => call.join(' '))
       .find((line) => line.includes('[fcss] Will install:'));
-    expect(installLine).toContain('@fcss/astro');
+    expect(installLine).toContain('@functionalcss/astro');
 
     logSpy.mockRestore();
   });

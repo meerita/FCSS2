@@ -28,12 +28,12 @@ FCSS (Functional CSS) is a utility-first CSS framework where every class maps to
 ## Quick start
 
 ```bash
-npm install @fcss/core
+npm install @functionalcss/core
 ```
 
 ```js
 // Import in your entry point
-import '@fcss/core/fcss.css';
+import '@functionalcss/core/fcss.css';
 ```
 
 ```html
@@ -46,13 +46,13 @@ import '@fcss/core/fcss.css';
 
 | Package                  | Purpose                                                     |
 | ------------------------ | ----------------------------------------------------------- |
-| `@fcss/core`             | Generated CSS utility set                                   |
-| `@fcss/cli`              | Build, purge, generate, and doctor commands                 |
-| `@fcss/next`             | Next.js plugin (`withFcss`) for App Router and Pages Router |
-| `@fcss/angular`          | Angular `ng-add` schematic                                  |
-| `@fcss/vite`             | Vite plugin                                                 |
-| `@fcss/astro`            | Astro integration (wraps `@fcss/vite`)                      |
-| `@fcss/postcss`          | PostCSS purge pipeline                                      |
-| `@fcss/scanner`          | Static class extraction engine                              |
-| `@fcss/language-service` | IntelliSense and validation                                 |
-| `@fcss/eslint-plugin`    | ESLint rules for FCSS class validation                      |
+| `@functionalcss/core`             | Generated CSS utility set                                   |
+| `@functionalcss/cli`              | Build, purge, generate, and doctor commands                 |
+| `@functionalcss/next`             | Next.js plugin (`withFcss`) for App Router and Pages Router |
+| `@functionalcss/angular`          | Angular `ng-add` schematic                                  |
+| `@functionalcss/vite`             | Vite plugin                                                 |
+| `@functionalcss/astro`            | Astro integration (wraps `@functionalcss/vite`)                      |
+| `@functionalcss/postcss`          | PostCSS purge pipeline                                      |
+| `@functionalcss/scanner`          | Static class extraction engine                              |
+| `@functionalcss/language-service` | IntelliSense and validation                                 |
+| `@functionalcss/eslint-plugin`    | ESLint rules for FCSS class validation                      |

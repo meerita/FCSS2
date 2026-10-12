@@ -32,7 +32,7 @@ export function App({ variant }: Props) {
       <div className={`display--${variant ?? 'flex'}`}>Dynamic purge risk</div>
 
       {/*
-       * NOTE: fcss/deprecated-class is not triggerable with the current @fcss/core manifest.
+       * NOTE: fcss/deprecated-class is not triggerable with the current @functionalcss/core manifest.
        * See index.html comment for details.
        */}
     </main>

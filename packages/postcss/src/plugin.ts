@@ -7,8 +7,8 @@ import type { PluginCreator, Rule, Declaration, AtRule } from 'postcss';
 import * as fs from 'node:fs';
 import * as zlib from 'node:zlib';
 import * as util from 'node:util';
-import { scan } from '@fcss/scanner';
-import type { ManifestEntry, SafelistOptions, ScanReport } from '@fcss/scanner';
+import { scan } from '@functionalcss/scanner';
+import type { ManifestEntry, SafelistOptions, ScanReport } from '@functionalcss/scanner';
 
 const gzipAsync = util.promisify(zlib.gzip);
 
@@ -37,8 +37,8 @@ function loadManifest(manifestPath: string): ManifestEntry[] {
     raw = fs.readFileSync(manifestPath, 'utf8');
   } catch (err) {
     throw new Error(
-      `[@fcss/postcss] Cannot load manifest from "${manifestPath}": ${String(err)}. ` +
-        `Run the @fcss/core build step first.`,
+      `[@functionalcss/postcss] Cannot load manifest from "${manifestPath}": ${String(err)}. ` +
+        `Run the @functionalcss/core build step first.`,
     );
   }
 
@@ -46,11 +46,11 @@ function loadManifest(manifestPath: string): ManifestEntry[] {
   try {
     parsed = JSON.parse(raw);
   } catch (err) {
-    throw new Error(`[@fcss/postcss] Invalid JSON in manifest "${manifestPath}": ${String(err)}.`);
+    throw new Error(`[@functionalcss/postcss] Invalid JSON in manifest "${manifestPath}": ${String(err)}.`);
   }
 
   if (!Array.isArray(parsed)) {
-    throw new Error(`[@fcss/postcss] Manifest "${manifestPath}" must be a JSON array.`);
+    throw new Error(`[@functionalcss/postcss] Manifest "${manifestPath}" must be a JSON array.`);
   }
 
   return parsed as ManifestEntry[];
@@ -94,7 +94,7 @@ function collectVarReferences(decl: Declaration): string[] {
 
 const fcssPostcss: PluginCreator<FcssPostcssOptions> = (options?: FcssPostcssOptions) => {
   if (!options) {
-    throw new Error('[@fcss/postcss] Options are required.');
+    throw new Error('[@functionalcss/postcss] Options are required.');
   }
 
   const { manifest: manifestPath, content, cwd, safelist, report } = options;
@@ -105,7 +105,7 @@ const fcssPostcss: PluginCreator<FcssPostcssOptions> = (options?: FcssPostcssOpt
     async OnceExit(root) {
       if (!content || content.length === 0) {
         throw root.error(
-          '[@fcss/postcss] No content paths configured. ' +
+          '[@functionalcss/postcss] No content paths configured. ' +
             'Provide the "content" option with glob patterns pointing to your source files.',
         );
       }
@@ -224,7 +224,7 @@ const fcssPostcss: PluginCreator<FcssPostcssOptions> = (options?: FcssPostcssOpt
               ? (((sourceSizeBytes - finalSizeBytes) / sourceSizeBytes) * 100).toFixed(1)
               : '0';
           console.log(
-            `[@fcss/postcss] Purge: ${retainedSelectors}/${totalSelectors} selectors retained ` +
+            `[@functionalcss/postcss] Purge: ${retainedSelectors}/${totalSelectors} selectors retained ` +
               `(${removedSelectors} removed, ${reductionPct}% reduction, ` +
               `${(finalSizeBytes / 1024).toFixed(1)} KB → ${(gzipBytes / 1024).toFixed(1)} KB gz).`,
           );

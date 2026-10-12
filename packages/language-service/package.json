@@ -1,5 +1,5 @@
 {
-  "name": "@fcss/language-service",
+  "name": "@functionalcss/language-service",
   "version": "0.0.0",
   "private": true,
   "main": "dist/index.js",

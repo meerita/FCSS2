@@ -3,7 +3,7 @@
 // @layer config
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 
-import type { FcssViteConfig } from '@fcss/vite';
+import type { FcssViteConfig } from '@functionalcss/vite';
 
 const config: FcssViteConfig = {
   content: ['src/**/*.{ts,tsx}', '!node_modules/**'],

@@ -29,18 +29,18 @@ pnpm install
 apps/
   docs/             Legacy Next.js documentation site
 packages/
-  spec/             @fcss/spec — machine-readable CSS property specification (private)
-  generator/        @fcss/generator — deterministic CSS generator (private)
-  core/             @fcss/core — full generated CSS library (public)
-  scanner/          @fcss/scanner — source code class name scanner (private)
-  postcss/          @fcss/postcss — PostCSS purge plugin (public)
-  vite/             @fcss/vite — Vite integration (public)
-  next/             @fcss/next — Next.js integration (public)
-  angular/          @fcss/angular — Angular integration (public)
-  cli/              @fcss/cli — fcss command-line tool (public)
-  language-service/ @fcss/language-service — IntelliSense engine (private)
-  eslint-plugin/    @fcss/eslint-plugin — ESLint rules (public)
-  vscode/           @fcss/vscode — VS Code extension (Marketplace)
+  spec/             @functionalcss/spec — machine-readable CSS property specification (private)
+  generator/        @functionalcss/generator — deterministic CSS generator (private)
+  core/             @functionalcss/core — full generated CSS library (public)
+  scanner/          @functionalcss/scanner — source code class name scanner (private)
+  postcss/          @functionalcss/postcss — PostCSS purge plugin (public)
+  vite/             @functionalcss/vite — Vite integration (public)
+  next/             @functionalcss/next — Next.js integration (public)
+  angular/          @functionalcss/angular — Angular integration (public)
+  cli/              @functionalcss/cli — fcss command-line tool (public)
+  language-service/ @functionalcss/language-service — IntelliSense engine (private)
+  eslint-plugin/    @functionalcss/eslint-plugin — ESLint rules (public)
+  vscode/           @functionalcss/vscode — VS Code extension (Marketplace)
 examples/           Runnable integration examples (stub)
 docs/decisions/     Architecture Decision Records (ADR-001 – ADR-010)
 ```
@@ -56,7 +56,7 @@ scanner → postcss → vite / next / angular
 cli → spec + generator + scanner
 ```
 
-`@fcss/core` must not depend on any framework package.
+`@functionalcss/core` must not depend on any framework package.
 
 ## Development workflow
 
@@ -79,19 +79,19 @@ pnpm run fmt:check    # check formatting (CI gate)
 
 ## Adding a new value
 
-1. Add the value to the relevant property descriptor in `@fcss/spec`.
+1. Add the value to the relevant property descriptor in `@functionalcss/spec`.
 2. Regenerate and verify the output.
 3. Add a test for the new class.
 
 ## Adding a pseudo-state or ARIA condition
 
-1. Update the condition model in `@fcss/spec`.
-2. Update the selector renderer in `@fcss/generator`.
+1. Update the condition model in `@functionalcss/spec`.
+2. Update the selector renderer in `@functionalcss/generator`.
 3. Regenerate, verify selector syntax in a browser.
 
 ## Generated files
 
-Files emitted by `@fcss/generator` are **read-only**. Never edit them manually.
+Files emitted by `@functionalcss/generator` are **read-only**. Never edit them manually.
 Every generated CSS file begins with a read-only header comment. If you need to
 change generated output, change the spec or the generator and re-run `pnpm run generate`.
 

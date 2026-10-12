@@ -1,5 +1,5 @@
 // @file packages/vscode/src/extension.ts
-// @description FCSS IntelliSense VS Code extension — LSP client that spawns @fcss/lsp-server.
+// @description FCSS IntelliSense VS Code extension — LSP client that spawns @functionalcss/lsp-server.
 // @layer tools
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 
@@ -14,7 +14,7 @@ import {
 let client: LanguageClient | undefined;
 
 export function activate(context: ExtensionContext): void {
-  const serverModule = require.resolve('@fcss/lsp-server/dist/server.js');
+  const serverModule = require.resolve('@functionalcss/lsp-server/dist/server.js');
   const serverOptions: ServerOptions = {
     run: { module: serverModule, transport: TransportKind.ipc },
     debug: { module: serverModule, transport: TransportKind.ipc },

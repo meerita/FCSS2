@@ -1,5 +1,5 @@
 // @file packages/generator/src/index.ts
-// @description Public API entry point for @fcss/generator.
+// @description Public API entry point for @functionalcss/generator.
 // @layer tools
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 

@@ -56,14 +56,14 @@ export function resolveManifestPath(root: string): string {
   // Walk up up to 5 levels to handle hoisted node_modules in pnpm workspaces.
   let dir = root;
   for (let i = 0; i < 6; i++) {
-    const candidate = path.join(dir, 'node_modules/@fcss/core/dist/manifest.json');
+    const candidate = path.join(dir, 'node_modules/@functionalcss/core/dist/manifest.json');
     if (fs.existsSync(candidate)) return candidate;
     const parent = path.dirname(dir);
     if (parent === dir) break;
     dir = parent;
   }
   throw new Error(
-    '[@fcss/vite] Cannot find FCSS manifest. Install @fcss/core as a project dependency.',
+    '[@functionalcss/vite] Cannot find FCSS manifest. Install @functionalcss/core as a project dependency.',
   );
 }
 
@@ -92,7 +92,7 @@ function isFcssCssId(id: string, code?: string): boolean {
   // Path-based: workspace resolution puts the file under packages/core or pnpm store.
   if (
     cleanId.includes('/packages/core/dist/') ||
-    cleanId.includes('@fcss/core/') ||
+    cleanId.includes('@functionalcss/core/') ||
     cleanId.includes('/fcss/core/')
   ) {
     return true;
@@ -139,7 +139,7 @@ export function fcss(pluginOptions?: FcssPluginOptions): Plugin {
     async buildStart() {
       if (!manifestPath) {
         this.warn(
-          '[@fcss/vite] No FCSS manifest found. Install @fcss/core as a project dependency.',
+          '[@functionalcss/vite] No FCSS manifest found. Install @functionalcss/core as a project dependency.',
         );
         return;
       }
@@ -151,7 +151,7 @@ export function fcss(pluginOptions?: FcssPluginOptions): Plugin {
       if (resolvedViteConfig.command !== 'build') {
         // Dev mode: scan once and emit dynamic-fragment warnings.
         try {
-          const { scan } = await import('@fcss/scanner');
+          const { scan } = await import('@functionalcss/scanner');
           const manifestRaw = fs.readFileSync(currentManifestPath, 'utf8');
           const manifest = JSON.parse(manifestRaw) as Array<{
             className: string;
@@ -160,14 +160,14 @@ export function fcss(pluginOptions?: FcssPluginOptions): Plugin {
           const result = await scan({ content, manifest, cwd: root });
           for (const w of result.report.dynamicWarnings) {
             console.warn(
-              `[@fcss/vite] Dynamic class fragment — FCSS cannot statically analyse this; it will be purged in production.\n` +
+              `[@functionalcss/vite] Dynamic class fragment — FCSS cannot statically analyse this; it will be purged in production.\n` +
                 `  File: ${w.file}:${w.line}\n` +
                 `  Fragment: \`${w.fragment}\`\n` +
                 `  Fix: use a static class map instead of template literals.`,
             );
           }
         } catch (err) {
-          this.warn(`[@fcss/vite] Dev scan failed: ${String(err)}`);
+          this.warn(`[@functionalcss/vite] Dev scan failed: ${String(err)}`);
         }
         return;
       }
@@ -177,7 +177,7 @@ export function fcss(pluginOptions?: FcssPluginOptions): Plugin {
       scanPromise = (async () => {
         const [{ default: postcss }, { default: fcssPostcss }] = await Promise.all([
           import('postcss'),
-          import('@fcss/postcss'),
+          import('@functionalcss/postcss'),
         ]);
 
         const safelistExact =
@@ -202,7 +202,7 @@ export function fcss(pluginOptions?: FcssPluginOptions): Plugin {
             const result = await postcss([fcssPostcss(pluginOpts)]).process(css, { from: id });
             return result.css;
           } catch (err) {
-            console.warn(`[@fcss/vite] Purge failed for "${id}": ${String(err)}`);
+            console.warn(`[@functionalcss/vite] Purge failed for "${id}": ${String(err)}`);
             return css;
           }
         };
@@ -225,7 +225,7 @@ export function fcss(pluginOptions?: FcssPluginOptions): Plugin {
 
     handleHotUpdate({ file, server }) {
       if (fcssConfigPath && path.resolve(file) === path.resolve(fcssConfigPath)) {
-        console.log('[@fcss/vite] fcss.config.ts changed — triggering full reload.');
+        console.log('[@functionalcss/vite] fcss.config.ts changed — triggering full reload.');
         server.ws.send({ type: 'full-reload' });
         return [];
       }
@@ -238,7 +238,7 @@ export function fcss(pluginOptions?: FcssPluginOptions): Plugin {
         const warnings = collectDynamicWarnings(source, file);
         for (const w of warnings) {
           console.warn(
-            `[@fcss/vite] Dynamic class fragment — will be purged in production.\n` +
+            `[@functionalcss/vite] Dynamic class fragment — will be purged in production.\n` +
               `  File: ${w.file}:${w.line}\n` +
               `  Fragment: ${w.fragment}\n` +
               `  Fix: use a static class map instead of template literals.`,

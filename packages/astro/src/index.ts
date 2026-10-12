@@ -1,15 +1,15 @@
 // @file packages/astro/src/index.ts
-// @description FCSS Astro integration — registers @fcss/vite's plugin into Astro's Vite config.
+// @description FCSS Astro integration — registers @functionalcss/vite's plugin into Astro's Vite config.
 // @layer adapters
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 
 import * as url from 'node:url';
-import { fcss as viteFcss, loadFcssConfig, type FcssPluginOptions } from '@fcss/vite';
+import { fcss as viteFcss, loadFcssConfig, type FcssPluginOptions } from '@functionalcss/vite';
 import type { AstroIntegration } from 'astro';
 
-export type { FcssPluginOptions, FcssViteConfig, FcssSafelistPattern } from '@fcss/vite';
+export type { FcssPluginOptions, FcssViteConfig, FcssSafelistPattern } from '@functionalcss/vite';
 
-// Mirrors @fcss/vite's own default content glob, with .astro added so Astro
+// Mirrors @functionalcss/vite's own default content glob, with .astro added so Astro
 // projects get purge coverage out of the box without hand-writing fcss.config.ts.
 const ASTRO_DEFAULT_CONTENT = [
   'src/**/*.{html,js,jsx,ts,tsx,astro}',
@@ -19,7 +19,7 @@ const ASTRO_DEFAULT_CONTENT = [
 
 export function fcss(options?: FcssPluginOptions): AstroIntegration {
   return {
-    name: '@fcss/astro',
+    name: '@functionalcss/astro',
     hooks: {
       'astro:config:setup': async ({ config, updateConfig }) => {
         const root = url.fileURLToPath(config.root);

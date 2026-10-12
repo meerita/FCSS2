@@ -6,8 +6,8 @@
 import type { HoverParams, Hover } from 'vscode-languageserver';
 import { MarkupKind } from 'vscode-languageserver';
 import type { TextDocument } from 'vscode-languageserver-textdocument';
-import { getHover } from '@fcss/language-service';
-import type { ManifestIndex } from '@fcss/language-service';
+import { getHover } from '@functionalcss/language-service';
+import type { ManifestIndex } from '@functionalcss/language-service';
 import { wordAtCursor } from '../class-extraction';
 
 export function handleHover(

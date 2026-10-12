@@ -1,18 +1,18 @@
 <!--
 @file packages/astro/README.md
-@description @fcss/astro integration guide — installation, configuration, and usage.
+@description @functionalcss/astro integration guide — installation, configuration, and usage.
 @layer docs
 @created Diego Lafuente <diego.lafuente@cognativinc.com>
 -->
 
-# @fcss/astro
+# @functionalcss/astro
 
 Official Astro integration for [FCSS](https://github.com/cognativinc/fcss) — registers
-[`@fcss/vite`](../vite/README.md)'s plugin into Astro's Vite config to enable production CSS
+[`@functionalcss/vite`](../vite/README.md)'s plugin into Astro's Vite config to enable production CSS
 purging and development dynamic-fragment warnings for Astro projects.
 
-`@fcss/astro` is a thin wrapper: it does not reimplement scanning or purging, it delegates
-directly to `@fcss/vite`'s `fcss()` plugin (Astro's build pipeline _is_ Vite), adding only
+`@functionalcss/astro` is a thin wrapper: it does not reimplement scanning or purging, it delegates
+directly to `@functionalcss/vite`'s `fcss()` plugin (Astro's build pipeline _is_ Vite), adding only
 Astro-aware default content globs.
 
 ## Features
@@ -27,7 +27,7 @@ Astro-aware default content globs.
 ## Installation
 
 ```bash
-npm install @fcss/core @fcss/astro
+npm install @functionalcss/core @functionalcss/astro
 ```
 
 ## Setup
@@ -36,7 +36,7 @@ npm install @fcss/core @fcss/astro
 
 ```js
 import { defineConfig } from 'astro/config';
-import fcss from '@fcss/astro';
+import fcss from '@functionalcss/astro';
 
 export default defineConfig({
   integrations: [fcss()],
@@ -46,7 +46,7 @@ export default defineConfig({
 ### `fcss.config.ts`
 
 ```ts
-import type { FcssViteConfig } from '@fcss/astro';
+import type { FcssViteConfig } from '@functionalcss/astro';
 
 const config: FcssViteConfig = {
   content: ['src/**/*.astro', '!node_modules/**'],
@@ -55,9 +55,9 @@ const config: FcssViteConfig = {
 export default config;
 ```
 
-If you omit `fcss.config.ts` (or omit `content` from it), `@fcss/astro` supplies an
+If you omit `fcss.config.ts` (or omit `content` from it), `@functionalcss/astro` supplies an
 Astro-aware default —
-`src/**/*.{html,js,jsx,ts,tsx,astro}` — instead of `@fcss/vite`'s own HTML/JS/TS/JSX/TSX-only
+`src/**/*.{html,js,jsx,ts,tsx,astro}` — instead of `@functionalcss/vite`'s own HTML/JS/TS/JSX/TSX-only
 default. An explicit `content` in your `fcss.config.ts`, or passed directly to `fcss()`, is
 always respected and never overridden.
 
@@ -65,13 +65,13 @@ always respected and never overridden.
 
 ```astro
 ---
-import '@fcss/core/full.css';
+import '@functionalcss/core/full.css';
 ---
 ```
 
 ## Options
 
-`fcss()` accepts the same options as `@fcss/vite`'s `fcss()` plugin:
+`fcss()` accepts the same options as `@functionalcss/vite`'s `fcss()` plugin:
 
 | Option            | Type                                   | Description                                                          |
 | ----------------- | -------------------------------------- | -------------------------------------------------------------------- |
@@ -114,7 +114,7 @@ const state = isActive ? 'active' : 'inactive';
 <div class:list={[{ 'display--none': hidden, 'display--flex': !hidden }]} />
 
 <!-- ✅ Correct: static class map keyed by a variable, mirroring the dynamic-class-map
-     pattern in @fcss/vite's README — the class *names* are static, only the lookup is dynamic -->
+     pattern in @functionalcss/vite's README — the class *names* are static, only the lookup is dynamic -->
 <div class:list={[opacityByState[state]]} />
 
 <!-- ❌ Wrong: template literal interpolation prevents static analysis -->
@@ -125,10 +125,10 @@ The plugin warns about dynamic fragments in dev mode and purges those classes in
 
 ## Production purge report
 
-When `astro build` runs, the underlying `@fcss/postcss` plugin logs a purge summary:
+When `astro build` runs, the underlying `@functionalcss/postcss` plugin logs a purge summary:
 
 ```
-[@fcss/postcss] Purge: 18/326313 selectors retained (326295 removed, 100.0% reduction, ...)
+[@functionalcss/postcss] Purge: 18/326313 selectors retained (326295 removed, 100.0% reduction, ...)
 ```
 
 ## Static output vs. server output
@@ -142,4 +142,4 @@ way — they run the same Vite build — but are not individually verified here.
 ## Peer dependencies
 
 - `astro ^7.0.0`
-- `@fcss/core` (for the CSS and manifest)
+- `@functionalcss/core` (for the CSS and manifest)

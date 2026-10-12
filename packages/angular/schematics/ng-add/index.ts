@@ -36,9 +36,9 @@ interface PackageJson {
   [key: string]: unknown;
 }
 
-const CORE_STYLES_ENTRY = 'node_modules/@fcss/core/dist/full.css';
-const CORE_PKG = '@fcss/core';
-const POSTCSS_PKG = '@fcss/postcss';
+const CORE_STYLES_ENTRY = 'node_modules/@functionalcss/core/dist/full.css';
+const CORE_PKG = '@functionalcss/core';
+const POSTCSS_PKG = '@functionalcss/postcss';
 const POSTCSS_PKG_UPSTREAM = 'postcss';
 const FCSS_VERSION = '^0.0.0';
 const POSTCSS_VERSION = '^8.4.0';
@@ -79,7 +79,7 @@ function readJson<T>(tree: Tree, filePath: string): T {
 function addPackageDependencies(schema: NgAddSchema): Rule {
   return (tree: Tree, context: SchematicContext) => {
     if (!tree.exists('package.json')) {
-      context.logger.warn('[@fcss/angular] package.json not found — skipping dependency update.');
+      context.logger.warn('[@functionalcss/angular] package.json not found — skipping dependency update.');
       return;
     }
 
@@ -94,23 +94,23 @@ function addPackageDependencies(schema: NgAddSchema): Rule {
       deps[CORE_PKG] = FCSS_VERSION;
       pkg['dependencies'] = deps;
       modified = true;
-      context.logger.info(`[@fcss/angular] Added ${CORE_PKG} to dependencies.`);
+      context.logger.info(`[@functionalcss/angular] Added ${CORE_PKG} to dependencies.`);
     } else {
-      context.logger.info(`[@fcss/angular] ${CORE_PKG} already present — skipping.`);
+      context.logger.info(`[@functionalcss/angular] ${CORE_PKG} already present — skipping.`);
     }
 
     if (!devDeps[POSTCSS_PKG]) {
       devDeps[POSTCSS_PKG] = FCSS_VERSION;
       modified = true;
-      context.logger.info(`[@fcss/angular] Added ${POSTCSS_PKG} to devDependencies.`);
+      context.logger.info(`[@functionalcss/angular] Added ${POSTCSS_PKG} to devDependencies.`);
     } else {
-      context.logger.info(`[@fcss/angular] ${POSTCSS_PKG} already present — skipping.`);
+      context.logger.info(`[@functionalcss/angular] ${POSTCSS_PKG} already present — skipping.`);
     }
 
     if (!devDeps[POSTCSS_PKG_UPSTREAM] && !deps[POSTCSS_PKG_UPSTREAM]) {
       devDeps[POSTCSS_PKG_UPSTREAM] = POSTCSS_VERSION;
       modified = true;
-      context.logger.info(`[@fcss/angular] Added ${POSTCSS_PKG_UPSTREAM} to devDependencies.`);
+      context.logger.info(`[@functionalcss/angular] Added ${POSTCSS_PKG_UPSTREAM} to devDependencies.`);
     }
 
     if (modified) {
@@ -124,7 +124,7 @@ function addPackageDependencies(schema: NgAddSchema): Rule {
 function addGlobalStyles(schema: NgAddSchema): Rule {
   return (tree: Tree, context: SchematicContext) => {
     if (!tree.exists('angular.json')) {
-      context.logger.warn('[@fcss/angular] angular.json not found — skipping styles update.');
+      context.logger.warn('[@functionalcss/angular] angular.json not found — skipping styles update.');
       return;
     }
 
@@ -133,14 +133,14 @@ function addGlobalStyles(schema: NgAddSchema): Rule {
     const project = workspace.projects[projectName];
 
     if (!project) {
-      context.logger.warn(`[@fcss/angular] Project "${projectName}" not found — skipping.`);
+      context.logger.warn(`[@functionalcss/angular] Project "${projectName}" not found — skipping.`);
       return;
     }
 
     const buildTarget = project.architect?.['build'];
     if (!buildTarget?.options) {
       context.logger.warn(
-        `[@fcss/angular] No build options found for "${projectName}" — skipping styles.`,
+        `[@functionalcss/angular] No build options found for "${projectName}" — skipping styles.`,
       );
       return;
     }
@@ -150,21 +150,21 @@ function addGlobalStyles(schema: NgAddSchema): Rule {
 
     if (styles.includes(CORE_STYLES_ENTRY)) {
       context.logger.info(
-        `[@fcss/angular] @fcss/core already in styles for "${projectName}" — skipping.`,
+        `[@functionalcss/angular] @functionalcss/core already in styles for "${projectName}" — skipping.`,
       );
       return;
     }
 
     buildTarget.options['styles'] = [CORE_STYLES_ENTRY, ...styles];
     tree.overwrite('angular.json', JSON.stringify(workspace, null, 2) + '\n');
-    context.logger.info(`[@fcss/angular] Added ${CORE_STYLES_ENTRY} to "${projectName}" styles.`);
+    context.logger.info(`[@functionalcss/angular] Added ${CORE_STYLES_ENTRY} to "${projectName}" styles.`);
   };
 }
 
 function createFcssConfig(): Rule {
   return (tree: Tree, context: SchematicContext) => {
     if (tree.exists('fcss.config.ts')) {
-      context.logger.info('[@fcss/angular] fcss.config.ts already exists — skipping.');
+      context.logger.info('[@functionalcss/angular] fcss.config.ts already exists — skipping.');
       return;
     }
 
@@ -172,7 +172,7 @@ function createFcssConfig(): Rule {
       '// @file fcss.config.ts',
       '// @description FCSS configuration for this Angular project.',
       '// @layer config',
-      "import type { FcssAngularConfig } from '@fcss/angular';",
+      "import type { FcssAngularConfig } from '@functionalcss/angular';",
       '',
       'const config: FcssAngularConfig = {',
       "  content: ['src/**/*.{ts,html}'],",
@@ -182,14 +182,14 @@ function createFcssConfig(): Rule {
       '',
     ];
     tree.create('fcss.config.ts', lines.join('\n'));
-    context.logger.info('[@fcss/angular] Created fcss.config.ts.');
+    context.logger.info('[@functionalcss/angular] Created fcss.config.ts.');
   };
 }
 
 function createPurgeScript(schema: NgAddSchema): Rule {
   return (tree: Tree, context: SchematicContext) => {
     if (tree.exists('fcss-purge.mjs')) {
-      context.logger.info('[@fcss/angular] fcss-purge.mjs already exists — skipping.');
+      context.logger.info('[@functionalcss/angular] fcss-purge.mjs already exists — skipping.');
       return;
     }
 
@@ -214,10 +214,10 @@ function createPurgeScript(schema: NgAddSchema): Rule {
       "import { join } from 'path';",
       '',
       'const require = createRequire(import.meta.url);',
-      `const manifestPath = require.resolve('@fcss/core/manifest.json');`,
+      `const manifestPath = require.resolve('@functionalcss/core/manifest.json');`,
       '',
       "const { default: postcss } = await import('postcss');",
-      "const { default: fcssPostcss } = await import('@fcss/postcss');",
+      "const { default: fcssPostcss } = await import('@functionalcss/postcss');",
       '',
       `const distDir = process.argv[2] ?? '${distDir}';`,
       `const contentPatterns = ['${sourceRoot}/**/*.{ts,html}'];`,
@@ -225,7 +225,7 @@ function createPurgeScript(schema: NgAddSchema): Rule {
       "const cssFiles = readdirSync(distDir).filter((f) => f.endsWith('.css'));",
       '',
       'if (cssFiles.length === 0) {',
-      `  console.warn('[@fcss/angular] No CSS files found in "' + distDir + '". Run ng build first.');`,
+      `  console.warn('[@functionalcss/angular] No CSS files found in "' + distDir + '". Run ng build first.');`,
       '  process.exit(1);',
       '}',
       '',
@@ -246,7 +246,7 @@ function createPurgeScript(schema: NgAddSchema): Rule {
       '',
     ];
     tree.create('fcss-purge.mjs', lines.join('\n'));
-    context.logger.info('[@fcss/angular] Created fcss-purge.mjs post-build purge script.');
+    context.logger.info('[@functionalcss/angular] Created fcss-purge.mjs post-build purge script.');
   };
 }
 
@@ -254,7 +254,7 @@ function scheduleInstall(schema: NgAddSchema): Rule {
   return (_tree: Tree, context: SchematicContext) => {
     if (schema.skipInstall) return;
     context.addTask(new NodePackageInstallTask());
-    context.logger.info('[@fcss/angular] Scheduled package install.');
+    context.logger.info('[@functionalcss/angular] Scheduled package install.');
   };
 }
 

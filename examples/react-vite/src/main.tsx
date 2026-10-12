@@ -5,7 +5,7 @@
 
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import '@fcss/core/full.css';
+import '@functionalcss/core/full.css';
 import App from './App.js';
 
 const rootEl = document.getElementById('root');

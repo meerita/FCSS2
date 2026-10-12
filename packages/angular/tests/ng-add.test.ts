@@ -1,5 +1,5 @@
 // @file packages/angular/tests/ng-add.test.ts
-// @description Unit tests for the @fcss/angular ng-add schematic.
+// @description Unit tests for the @functionalcss/angular ng-add schematic.
 // @layer tests
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 
@@ -95,7 +95,7 @@ describe.skipIf(!schematicBuilt)(
     const { SchematicTestRunner } = await import('@angular-devkit/schematics/testing');
 
     const collectionPath = path.resolve(__dirname, '../collection.json');
-    const runner = new SchematicTestRunner('@fcss/angular', collectionPath);
+    const runner = new SchematicTestRunner('@functionalcss/angular', collectionPath);
 
     const baseAngularJson = JSON.stringify({
       version: 1,
@@ -122,7 +122,7 @@ describe.skipIf(!schematicBuilt)(
       devDependencies: {},
     });
 
-    it('adds @fcss/core to dependencies', async () => {
+    it('adds @functionalcss/core to dependencies', async () => {
       const { UnitTestTree } = await import('@angular-devkit/schematics/testing');
       const host = new UnitTestTree((await import('@angular-devkit/schematics')).Tree.empty());
       host.create('angular.json', baseAngularJson);
@@ -130,10 +130,10 @@ describe.skipIf(!schematicBuilt)(
 
       const tree = await runner.runSchematic('ng-add', { skipInstall: true }, host);
       const pkg = JSON.parse(tree.readContent('package.json'));
-      expect(pkg.dependencies['@fcss/core']).toBeDefined();
+      expect(pkg.dependencies['@functionalcss/core']).toBeDefined();
     });
 
-    it('adds @fcss/postcss to devDependencies', async () => {
+    it('adds @functionalcss/postcss to devDependencies', async () => {
       const { UnitTestTree } = await import('@angular-devkit/schematics/testing');
       const host = new UnitTestTree((await import('@angular-devkit/schematics')).Tree.empty());
       host.create('angular.json', baseAngularJson);
@@ -141,10 +141,10 @@ describe.skipIf(!schematicBuilt)(
 
       const tree = await runner.runSchematic('ng-add', { skipInstall: true }, host);
       const pkg = JSON.parse(tree.readContent('package.json'));
-      expect(pkg.devDependencies['@fcss/postcss']).toBeDefined();
+      expect(pkg.devDependencies['@functionalcss/postcss']).toBeDefined();
     });
 
-    it('prepends @fcss/core/full.css to the styles array', async () => {
+    it('prepends @functionalcss/core/full.css to the styles array', async () => {
       const { UnitTestTree } = await import('@angular-devkit/schematics/testing');
       const host = new UnitTestTree((await import('@angular-devkit/schematics')).Tree.empty());
       host.create('angular.json', baseAngularJson);
@@ -153,7 +153,7 @@ describe.skipIf(!schematicBuilt)(
       const tree = await runner.runSchematic('ng-add', { skipInstall: true }, host);
       const angular = JSON.parse(tree.readContent('angular.json'));
       const styles = angular.projects.myApp.architect.build.options.styles;
-      expect(styles[0]).toBe('node_modules/@fcss/core/dist/full.css');
+      expect(styles[0]).toBe('node_modules/@functionalcss/core/dist/full.css');
       expect(styles[1]).toBe('src/styles.css');
     });
 
@@ -165,7 +165,7 @@ describe.skipIf(!schematicBuilt)(
 
       const tree = await runner.runSchematic('ng-add', { skipInstall: true }, host);
       expect(tree.exists('fcss.config.ts')).toBe(true);
-      expect(tree.readContent('fcss.config.ts')).toContain('@fcss/angular');
+      expect(tree.readContent('fcss.config.ts')).toContain('@functionalcss/angular');
     });
 
     it('creates fcss-purge.mjs post-build purge script', async () => {
@@ -176,7 +176,7 @@ describe.skipIf(!schematicBuilt)(
 
       const tree = await runner.runSchematic('ng-add', { skipInstall: true }, host);
       expect(tree.exists('fcss-purge.mjs')).toBe(true);
-      expect(tree.readContent('fcss-purge.mjs')).toContain('@fcss/postcss');
+      expect(tree.readContent('fcss-purge.mjs')).toContain('@functionalcss/postcss');
     });
 
     it('is idempotent — running twice does not duplicate the styles entry or purge script', async () => {
@@ -189,7 +189,7 @@ describe.skipIf(!schematicBuilt)(
       const tree2 = await runner.runSchematic('ng-add', { skipInstall: true }, tree1);
       const angular = JSON.parse(tree2.readContent('angular.json'));
       const styles: string[] = angular.projects.myApp.architect.build.options.styles;
-      const fcssEntries = styles.filter((s) => s.includes('@fcss/core'));
+      const fcssEntries = styles.filter((s) => s.includes('@functionalcss/core'));
       expect(fcssEntries).toHaveLength(1);
     });
 
@@ -235,8 +235,8 @@ describe.skipIf(!schematicBuilt)(
       const app1Styles: string[] = angular.projects.app1.architect.build.options.styles;
       const app2Styles: string[] = angular.projects.app2.architect.build.options.styles;
 
-      expect(app1Styles.some((s) => s.includes('@fcss/core'))).toBe(true);
-      expect(app2Styles.some((s) => s.includes('@fcss/core'))).toBe(false);
+      expect(app1Styles.some((s) => s.includes('@functionalcss/core'))).toBe(true);
+      expect(app2Styles.some((s) => s.includes('@functionalcss/core'))).toBe(false);
     });
   },
 );

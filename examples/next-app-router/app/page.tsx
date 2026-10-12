@@ -3,7 +3,7 @@
 // @layer ui
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 
-import { Banner } from '@fcss/ui';
+import { Banner } from '@functionalcss/ui';
 import { Card } from './components/Card';
 
 export default function HomePage() {

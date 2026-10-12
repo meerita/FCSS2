@@ -1,5 +1,5 @@
 {
-  "name": "@fcss/postcss",
+  "name": "@functionalcss/postcss",
   "version": "0.0.0",
   "private": false,
   "type": "module",
@@ -31,11 +31,11 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@fcss/scanner": "workspace:*",
+    "@functionalcss/scanner": "workspace:*",
     "postcss": "^8.4.0"
   },
   "devDependencies": {
-    "@fcss/core": "workspace:*",
+    "@functionalcss/core": "workspace:*",
     "@types/node": "^22.0.0",
     "typescript": "catalog:",
     "vitest": "catalog:"

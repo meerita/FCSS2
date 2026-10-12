@@ -1,18 +1,18 @@
 <!--
 @file packages/next/README.md
-@description @fcss/next integration guide for App Router and Pages Router.
+@description @functionalcss/next integration guide for App Router and Pages Router.
 @layer docs
 @created Diego Lafuente <diego.lafuente@cognativinc.com>
 -->
 
-# @fcss/next
+# @functionalcss/next
 
 Official Next.js integration for [FCSS](../../README.md) — wraps your Next.js config with `withFcss()` to enable production CSS purging without hydration mismatches.
 
 ## Installation
 
 ```bash
-pnpm add @fcss/core @fcss/next
+pnpm add @functionalcss/core @functionalcss/next
 ```
 
 ## App Router
@@ -20,7 +20,7 @@ pnpm add @fcss/core @fcss/next
 **`next.config.ts`** (Next.js 14+):
 
 ```typescript
-import { withFcss } from '@fcss/next';
+import { withFcss } from '@functionalcss/next';
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {};
@@ -30,7 +30,7 @@ export default withFcss(nextConfig);
 **`app/layout.tsx`**:
 
 ```tsx
-import '@fcss/core/full.css';
+import '@functionalcss/core/full.css';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -46,7 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 **`pages/_app.tsx`**:
 
 ```tsx
-import '@fcss/core/full.css';
+import '@functionalcss/core/full.css';
 import type { AppProps } from 'next/app';
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -59,7 +59,7 @@ export default function App({ Component, pageProps }: AppProps) {
 Create `fcss.config.ts` in your project root to customise scanning paths:
 
 ```typescript
-import type { FcssNextConfig } from '@fcss/next';
+import type { FcssNextConfig } from '@functionalcss/next';
 
 const config: FcssNextConfig = {
   content: ['app/**/*.{ts,tsx}', 'components/**/*.{ts,tsx}', '!node_modules/**'],
@@ -87,7 +87,7 @@ const config: FcssNextConfig = {
 
 ## CSS Modules
 
-FCSS global utilities and CSS Modules coexist without conflict. Import `@fcss/core/full.css` once globally and use CSS Modules normally for component-scoped styles.
+FCSS global utilities and CSS Modules coexist without conflict. Import `@functionalcss/core/full.css` once globally and use CSS Modules normally for component-scoped styles.
 
 ## Notes
 

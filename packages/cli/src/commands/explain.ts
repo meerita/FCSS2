@@ -3,8 +3,8 @@
 // @layer tools
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 
-import { FCSS_PROPERTIES, FCSS_BREAKPOINTS } from '@fcss/spec';
-import { buildSelector } from '@fcss/generator';
+import { FCSS_PROPERTIES, FCSS_BREAKPOINTS } from '@functionalcss/spec';
+import { buildSelector } from '@functionalcss/generator';
 
 export interface ExplainResult {
   className: string;

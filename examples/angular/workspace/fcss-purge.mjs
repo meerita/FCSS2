@@ -9,10 +9,10 @@ import { readFileSync, writeFileSync, readdirSync } from 'fs';
 import { join } from 'path';
 
 const require = createRequire(import.meta.url);
-const manifestPath = require.resolve('@fcss/core/manifest.json');
+const manifestPath = require.resolve('@functionalcss/core/manifest.json');
 
 const { default: postcss } = await import('postcss');
-const { default: fcssPostcss } = await import('@fcss/postcss');
+const { default: fcssPostcss } = await import('@functionalcss/postcss');
 
 const distDir = process.argv[2] ?? 'dist/app1';
 const contentPatterns = ['projects/app1/src/**/*.{ts,html}'];
@@ -20,7 +20,7 @@ const contentPatterns = ['projects/app1/src/**/*.{ts,html}'];
 const cssFiles = readdirSync(distDir).filter((f) => f.endsWith('.css'));
 
 if (cssFiles.length === 0) {
-  console.warn(`[@fcss/angular] No CSS files found in "${distDir}". Run ng build app1 first.`);
+  console.warn(`[@functionalcss/angular] No CSS files found in "${distDir}". Run ng build app1 first.`);
   process.exit(1);
 }
 

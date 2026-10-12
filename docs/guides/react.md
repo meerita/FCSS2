@@ -7,7 +7,7 @@ For Vite-based React projects, see the [Vite section of the Installation guide](
 ## Setup
 
 ```bash
-npm install @fcss/core
+npm install @functionalcss/core
 ```
 
 Import the full CSS set in your root entry point:
@@ -16,7 +16,7 @@ Import the full CSS set in your root entry point:
 // src/index.tsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import '@fcss/core/fcss.css';
+import '@functionalcss/core/fcss.css';
 import App from './App';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -101,12 +101,12 @@ function NavLink({ href, label, current }: { href: string; label: string; curren
 Add the PostCSS plugin to strip unused classes:
 
 ```bash
-npm install -D @fcss/postcss
+npm install -D @functionalcss/postcss
 ```
 
 ```js
 // postcss.config.js
-const { fcssPlugin } = require('@fcss/postcss');
+const { fcssPlugin } = require('@functionalcss/postcss');
 
 module.exports = {
   plugins: [
@@ -122,7 +122,7 @@ Or use `fcss.config.ts` for configuration shared across tools:
 
 ```ts
 // fcss.config.ts
-import { defineConfig } from '@fcss/cli';
+import { defineConfig } from '@functionalcss/cli';
 
 export default defineConfig({
   content: ['src/**/*.{ts,tsx}'],
@@ -132,4 +132,4 @@ export default defineConfig({
 
 ## IntelliSense
 
-Install `@fcss/vscode` from the VS Code marketplace for autocompletion of FCSS class names in JSX files.
+Install `@functionalcss/vscode` from the VS Code marketplace for autocompletion of FCSS class names in JSX files.

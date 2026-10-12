@@ -1,5 +1,5 @@
 // @file packages/cli/src/index.ts
-// @description @fcss/cli public API — exports defineConfig and command runners.
+// @description @functionalcss/cli public API — exports defineConfig and command runners.
 // @layer tools
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 

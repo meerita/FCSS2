@@ -5,7 +5,7 @@
 
 import * as fs from 'node:fs';
 import * as path from 'node:path';
-import { GENERATED_FILE_HEADER } from '@fcss/generator';
+import { GENERATED_FILE_HEADER } from '@functionalcss/generator';
 import type { FcssConfig, FcssDataState } from '../config/schema.js';
 
 const OUTPUT_DIR = '.fcss';

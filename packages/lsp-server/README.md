@@ -5,29 +5,29 @@
 @created Diego Lafuente <diego.lafuente@cognativinc.com>
 -->
 
-# @fcss/lsp-server
+# @functionalcss/lsp-server
 
-A Node.js Language Server Protocol (LSP) server that wraps `@fcss/language-service` and speaks
+A Node.js Language Server Protocol (LSP) server that wraps `@functionalcss/language-service` and speaks
 LSP over stdio. It is consumed by editor extensions — the [FCSS Zed extension](../zed/README.md)
 is the primary host.
 
 All language intelligence (completions, hover, diagnostics, code actions) lives in
-`@fcss/language-service`. This package is a thin LSP adapter: it manages document
-synchronization, discovers and watches the `@fcss/core` manifest, extracts class occurrences
+`@functionalcss/language-service`. This package is a thin LSP adapter: it manages document
+synchronization, discovers and watches the `@functionalcss/core` manifest, extracts class occurrences
 from document text, and translates library output into LSP protocol types.
 
 ## Prerequisites
 
 - **Node.js** — the server is launched as `node dist/server.js`.
-- **`@fcss/core` installed in your project** — the manifest is discovered at
-  `node_modules/@fcss/core/dist/manifest.json` relative to the workspace root.
+- **`@functionalcss/core` installed in your project** — the manifest is discovered at
+  `node_modules/@functionalcss/core/dist/manifest.json` relative to the workspace root.
 
 ## Build
 
 From the monorepo root:
 
 ```sh
-pnpm --filter @fcss/lsp-server run build
+pnpm --filter @functionalcss/lsp-server run build
 ```
 
 Or from this directory:
@@ -63,7 +63,7 @@ The process blocks waiting for LSP messages on stdin. Send `{"jsonrpc":"2.0","id
 
 | Code                           | Severity | Description                                                 |
 | ------------------------------ | -------- | ----------------------------------------------------------- |
-| `fcss/unknown-property`        | Error    | CSS property not in the `@fcss/core` manifest               |
+| `fcss/unknown-property`        | Error    | CSS property not in the `@functionalcss/core` manifest               |
 | `fcss/unknown-value`           | Error    | Property known but value not in manifest                    |
 | `fcss/conflict`                | Error    | Two classes in the same attribute set the same CSS property |
 | `fcss/duplicate`               | Warning  | Same class appears more than once                           |
@@ -88,7 +88,7 @@ Two shapes are produced depending on the diagnostic:
 ## Manifest watch
 
 On initialize, the server locates the manifest and loads it. On initialized, it calls
-`watchManifest` to watch the file for changes. When `@fcss/core` is rebuilt and the manifest
+`watchManifest` to watch the file for changes. When `@functionalcss/core` is rebuilt and the manifest
 changes on disk, all open documents are re-diagnosed automatically.
 
 ## Security
