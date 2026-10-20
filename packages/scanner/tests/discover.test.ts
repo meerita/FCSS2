@@ -115,7 +115,10 @@ describe('discoverFiles', () => {
 
   it('keeps an absolute pattern through a symlinked directory in its written form', async () => {
     const files = await discoverFiles({
-      patterns: [`${linkedRoot}/packages/ui/src/**/*.{ts,tsx}`, `!${linkedRoot}/packages/ui/src/deep/**`],
+      patterns: [
+        `${linkedRoot}/packages/ui/src/**/*.{ts,tsx}`,
+        `!${linkedRoot}/packages/ui/src/deep/**`,
+      ],
       cwd,
     });
     expect(files).toEqual([`${linkedRoot}/packages/ui/src/c.tsx`]);
