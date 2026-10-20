@@ -1,6 +1,6 @@
 {
   "name": "@functionalcss/vite",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": false,
   "type": "module",
   "description": "FCSS Vite plugin — source scanning, production purge, and dev diagnostics",

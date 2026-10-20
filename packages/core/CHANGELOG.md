@@ -1,5 +1,11 @@
 # @functionalcss/core
 
+## 0.1.2
+
+### Patch Changes
+
+- @functionalcss/spec@0.1.2
+
 ## 0.1.1
 
 ### Patch Changes

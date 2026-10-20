@@ -1,5 +1,11 @@
 # @functionalcss/example-vanilla
 
+## 0.0.3
+
+### Patch Changes
+
+- @functionalcss/core@0.1.2
+
 ## 0.0.2
 
 ### Patch Changes
