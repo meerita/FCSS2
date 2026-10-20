@@ -1,6 +1,6 @@
 {
   "name": "@functionalcss/example-zed-validation",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": true,
   "type": "module",
   "description": "Zed extension validation project — HTML + TSX fixtures with @functionalcss/core + @functionalcss/lsp-server installed",
