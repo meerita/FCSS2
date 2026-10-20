@@ -4,6 +4,7 @@
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 
 import { Banner } from '@functionalcss/ui';
+import { Box } from './components/Box';
 import { Card } from './components/Card';
 
 export default function HomePage() {
@@ -17,6 +18,7 @@ export default function HomePage() {
       </h1>
       <Banner message="Shared UI component via monorepo scanning" />
       <Card title="Server-rendered card" description="Uses FCSS classes in a Server Component." />
+      <Box padding={24}>Classes picked from a typed map</Box>
     </main>
   );
 }

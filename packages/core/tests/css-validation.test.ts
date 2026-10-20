@@ -141,6 +141,33 @@ describe('root.css', () => {
   it('contains deprecated legacy aliases', () => expect(css).toContain('@deprecated'));
   it('legacy --black alias present', () =>
     expect(css).toContain('--black: var(--fcss-color-black)'));
+
+  it('declares the font-family stacks', () => {
+    expect(css).toMatch(/--fcss-font-family-sans-serif: system-ui,[^;]*sans-serif;/);
+    expect(css).toMatch(/--fcss-font-family-serif: [^;]*serif;/);
+    expect(css).toMatch(/--fcss-font-family-mono: ui-monospace,[^;]*monospace;/);
+  });
+
+  it('defines every --fcss-* custom property a generated utility reads', () => {
+    const defined = new Set([...css.matchAll(/(--fcss-[\w-]+)\s*:/g)].map((m) => m[1]));
+    const utilityFiles = [
+      'utilities.css',
+      'states/pseudo.css',
+      'states/aria.css',
+      'breakpoints/sm.css',
+      'breakpoints/md.css',
+      'breakpoints/lg.css',
+      'breakpoints/xl.css',
+      'breakpoints/xxl.css',
+    ];
+    const read = new Set<string>();
+    for (const file of utilityFiles) {
+      for (const m of readDist(file).matchAll(/var\(\s*(--fcss-[\w-]+)/g)) read.add(m[1] ?? '');
+    }
+    expect(read.size).toBeGreaterThan(0);
+    const missing = [...read].filter((name) => !defined.has(name)).sort();
+    expect(missing, 'custom properties read by utilities but not defined in root.css').toEqual([]);
+  });
 });
 
 describe('states/pseudo.css', () => {
