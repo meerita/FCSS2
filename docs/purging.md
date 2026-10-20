@@ -26,28 +26,41 @@ set, so a class works the moment you type it.
 The scanner reads source text. It does not run your code, so it only finds class names written
 out in full.
 
-In HTML, Angular templates and `.astro` files it reads `class` attributes. In JS, TS, JSX and
-TSX it reads:
+In HTML, Angular templates and `.astro` files it reads `class` attributes.
+
+In `.js`, `.jsx`, `.ts`, `.tsx`, `.mjs` and `.cjs` files it reads every string literal, wherever
+it sits: `'...'`, `"..."`, and the static text of a template literal (the parts between the
+`${…}` expressions). It splits each one on whitespace, and every token that matches an FCSS
+class counts as used. All of these work:
 
 ```tsx
 <div className="display--flex align-items--center" />
-<div className={'display--flex'} />
-<div className={`display--flex align-items--center`} />    // no ${…} inside
 <div className={isOpen ? 'display--block' : 'display--none'} />
-<div className={clsx('display--flex', { 'display--none': hidden })} />  // also cn(), classnames()
+<div className={clsx('display--flex', { 'display--none': hidden })} />
+
+const PADDING_CLASSES = { 16: 'padding--16', 24: 'padding--24' } as const; // a typed map
+export const BUTTON_BASE = 'display--inline-flex ' + 'gap--8';               // a constant
+const row = `display--flex ${gap} md-display--none`;                        // static parts
+<div className={joinClassNames(PADDING_CLASSES[padding], BUTTON_BASE)} />;  // any function
 ```
 
-It does not find:
+A word that is not an FCSS class, such as `'hello world'`, is ignored. A string that happens to
+hold an FCSS class name but is never used as a class keeps that one class in the CSS. That costs
+a few bytes; it never drops a class you use.
+
+Comments are skipped: a class that appears only in a comment is purged. Regex literals are skipped
+too.
+
+It does not find a class built from parts at runtime:
 
 ```tsx
-<div className={`display--${mode}`} />; // built at runtime
-const row = 'display--flex'; // a string in a variable
-<div className={row} />;
+<div className={`display--${mode}`} />; // "display--" + mode is not a class name
+const size = 'padding--' + 16; // neither is this
 ```
 
-The Vite and Astro plugins warn about the first kind in dev, and `fcss audit` reports it. The
-second kind gets purged without a word, so keep class strings inside `className`, `clsx()` or
-`cn()`. Vue and Svelte files are not scanned yet.
+Write each class name in full and pick between them instead, with a map or a ternary. The Vite
+and Astro plugins warn about a dynamic fragment inside `className`, `clsx()`, `cn()` or
+`classnames()` in dev, and `fcss audit` reports it. Vue and Svelte files are not scanned yet.
 
 ## Safelist
 

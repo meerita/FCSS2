@@ -44,6 +44,15 @@ const COLOR_HEX: Record<string, string> = {
   'darkest-gray': '#212529',
 };
 
+// System font stacks read by the font-family--* utilities. A consumer :root rule
+// loaded after this file overrides any of them.
+const FONT_FAMILY_STACKS: Record<string, string> = {
+  'sans-serif':
+    'system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif',
+  serif: 'ui-serif, Georgia, Cambria, "Times New Roman", Times, serif',
+  mono: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+};
+
 function buildRootCss(): string {
   const lines: string[] = [GENERATED_FILE_HEADER, ':root {'];
 
@@ -51,6 +60,11 @@ function buildRootCss(): string {
     if (v.classValue === 'transparent' || v.classValue === 'currentColor') continue;
     const hex = COLOR_HEX[v.classValue] ?? '#000000';
     lines.push(`  --fcss-color-${v.classValue}: ${hex};`);
+  }
+
+  lines.push('');
+  for (const [name, stack] of Object.entries(FONT_FAMILY_STACKS)) {
+    lines.push(`  --fcss-font-family-${name}: ${stack};`);
   }
 
   const withAliases = FCSS_COLOR_VALUES.filter(

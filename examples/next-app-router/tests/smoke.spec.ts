@@ -37,6 +37,19 @@ test('dynamic route renders', async ({ page }) => {
   await expect(page.getByTestId('slug-title')).toHaveText('about');
 });
 
+test('a class picked from a typed map survives the purge', async ({ page }) => {
+  await page.goto('http://localhost:3001/');
+  const box = page.getByTestId('map-box');
+  const style = await box.evaluate((el) => {
+    const s = getComputedStyle(el);
+    return { padding: s.paddingTop, borderRadius: s.borderTopLeftRadius, fontFamily: s.fontFamily };
+  });
+  expect(style.padding).toBe('24px');
+  expect(style.borderRadius).toBe('4px');
+  // --fcss-font-family-mono is defined in root.css, so this is not the browser default.
+  expect(style.fontFamily).toMatch(/^ui-monospace/);
+});
+
 test('purged CSS retains used selectors and removes unused ones', async ({ page }) => {
   await page.goto('http://localhost:3001/');
 
@@ -57,6 +70,10 @@ test('purged CSS retains used selectors and removes unused ones', async ({ page 
   // Used in fixture — must be retained
   expect(cssText).toContain('display--flex');
   expect(cssText).toContain('font-weight--700');
+  // Picked from a typed map in app/components/Box.tsx, never written in className
+  expect(cssText).toContain('padding--24');
+  expect(cssText).toContain('padding--40');
+  expect(cssText).toContain('border-radius--4');
 
   // Never used in fixture — must be purged
   expect(cssText).not.toContain('display--inline-table');

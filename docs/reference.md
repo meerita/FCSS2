@@ -40,6 +40,26 @@ Some properties add named steps on top: `font-size--xs` to `font-size--5xl`,
 `line-height--tight`, `border-radius--full`, `box-shadow--md`. The examples column below shows
 the first few values of each property; `fcss explain` confirms any guess.
 
+### Font families
+
+The three `font-family` utilities read custom properties that `root.css` defines with system
+font stacks:
+
+| Class                     | Custom property                 | Default                                                                                                             |
+| ------------------------- | ------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `font-family--sans-serif` | `--fcss-font-family-sans-serif` | `system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif` |
+| `font-family--serif`      | `--fcss-font-family-serif`      | `ui-serif, Georgia, Cambria, "Times New Roman", Times, serif`                                                       |
+| `font-family--mono`       | `--fcss-font-family-mono`       | `ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace`                |
+
+To use your own fonts, set the property in a `:root` rule that loads after FCSS:
+
+```css
+/* custom.css, imported after @functionalcss/core */
+:root {
+  --fcss-font-family-sans-serif: 'Inter', system-ui, sans-serif;
+}
+```
+
 ## Coverage
 
 ### Display and overflow (`display`)

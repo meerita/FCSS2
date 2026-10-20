@@ -4,6 +4,7 @@
 // @created Diego Lafuente <diego.lafuente@cognativinc.com>
 
 import { splitClassString } from '../normalize.js';
+import { collectStringLiterals } from './string-literals.js';
 import type { DynamicWarning, ExtractionResult } from './types.js';
 
 function lineAt(source: string, index: number): number {
@@ -42,6 +43,19 @@ function extractFromCallArgs(args: string): string[] {
 export function extractFromJsx(source: string, filePath: string): ExtractionResult {
   const classes = new Set<string>();
   const warnings: DynamicWarning[] = [];
+
+  // 0. Every string literal and every static template part, wherever it sits:
+  // a typed map, an exported constant, a function argument. Each
+  // whitespace-separated token is a candidate; scan() keeps only the ones in
+  // the manifest, so a word that is not an FCSS class costs nothing.
+  for (const literal of collectStringLiterals(source)) {
+    for (const cls of extractFromStringValue(literal)) classes.add(cls);
+  }
+
+  // Passes 1-5 match className and clsx/cn/classnames by pattern. The literal
+  // pass above already covers what they find; they stay as a safety net for a
+  // line where JSX text throws the lexer off, and they emit the
+  // dynamic-fragment warnings.
 
   // 1. className="..." or className='...'
   const staticDoubleRe = /className\s*=\s*"([^"\\]*)"/g;
