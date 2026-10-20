@@ -1,6 +1,6 @@
 {
   "name": "@functionalcss/example-astro-server",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": true,
   "type": "module",
   "description": "Astro server (SSR, Node adapter) fixture for @functionalcss/astro smoke testing",

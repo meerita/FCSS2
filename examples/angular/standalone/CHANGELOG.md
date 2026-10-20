@@ -1,5 +1,12 @@
 # @functionalcss/example-angular-standalone
 
+## 0.0.4
+
+### Patch Changes
+
+- Updated dependencies [73fe5a1]
+  - @functionalcss/core@0.1.3
+
 ## 0.0.3
 
 ### Patch Changes

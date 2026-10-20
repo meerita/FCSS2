@@ -1,6 +1,6 @@
 {
   "name": "@functionalcss/cli",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "private": false,
   "type": "module",
   "description": "FCSS command-line tool — build, purge, init, audit, and more",

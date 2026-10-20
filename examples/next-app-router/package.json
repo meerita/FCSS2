@@ -1,6 +1,6 @@
 {
   "name": "@functionalcss/example-next-app-router",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": true,
   "type": "module",
   "description": "Next.js App Router fixture for @functionalcss/next smoke testing",
